@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>T-6C Landing Gear Indicators Summary</title>
+<style>
+  :root{
+    --bg:#0b1020; --card:#121a2f; --muted:#9fb0d0; --text:#eef4ff;
+    --green:#31d158; --red:#ff453a; --amber:#ffd60a; --line:#2a3554;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;background:linear-gradient(180deg,#0b1020,#10172a);color:var(--text);line-height:1.55}
+  .wrap{max-width:1100px;margin:0 auto;padding:28px 16px 60px}
+  h1{font-size:clamp(26px,4vw,42px);margin:0 0 8px;letter-spacing:.2px}
+  h2{margin:28px 0 12px;font-size:24px}
+  h3{margin:0 0 8px;font-size:18px}
+  p{margin:8px 0;color:#dce8ff}
+  .sub{color:var(--muted);margin-bottom:20px}
+  .note{border:1px solid var(--line);background:rgba(255,214,10,.08);padding:14px;border-radius:14px;color:#fff2b8}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:18px 0}
+  .card{background:rgba(18,26,47,.92);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+  .pill{display:inline-block;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:700;margin-bottom:10px}
+  .green{background:rgba(49,209,88,.15);color:#9ff6b6;border:1px solid rgba(49,209,88,.35)}
+  .red{background:rgba(255,69,58,.15);color:#ffb1ad;border:1px solid rgba(255,69,58,.35)}
+  .dark{background:rgba(159,176,208,.12);color:#c9d6ee;border:1px solid rgba(159,176,208,.24)}
+  .lamp{width:18px;height:18px;border-radius:50%;display:inline-block;vertical-align:-3px;margin-right:6px;box-shadow:0 0 12px currentColor}
+  .lamp.redlamp{background:var(--red);color:var(--red)}
+  .lamp.greenlamp{background:var(--green);color:var(--green)}
+  .lamp.offlamp{background:#3b445a;color:#3b445a;box-shadow:none}
+  table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:#0f172b}
+  th,td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{background:#17213b;color:#c8d7f7;font-size:14px}
+  tr:last-child td{border-bottom:0}
+  .phase{font-weight:800;color:#fff}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .flow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+  .step{border:1px solid var(--line);background:#101a31;border-radius:14px;padding:10px 12px;min-width:150px;flex:1}
+  .arrow{align-self:center;color:var(--muted);font-weight:900}
+  .small{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>T-6C Landing Gear Indicators & Gear Handle Light</h1>
+  <p class="sub">สรุปเพื่อทำความเข้าใจ: ไฟเขียว/แดงของล้อ และไฟแดงใน gear handle ระหว่างการกาง/เก็บล้อ</p>
+
+  <div class="note">
+    <b>หลักจำเร็ว:</b> <span class="lamp greenlamp"></span>เขียว = ล้อนั้น DOWN & LOCKED. 
+    <span class="lamp redlamp"></span>แดง = ยังไม่ safe / กำลัง transit / main gear doors ยังไม่ closed. 
+    <span class="lamp redlamp"></span>ไฟแดงใน gear handle จะติดเมื่อมี red indicator ใด ๆ ติด.
+  </div>
+
+  <h2>1) ไฟแต่ละแบบแปลว่าอะไร</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="pill green">GREEN INDICATOR</span>
+      <h3>Down & Locked</h3>
+      <p>ไฟเขียวของล้อแต่ละตัวติดเมื่อ <b>ล้อนั้นกางสุดและ lock แล้ว</b></p>
+    </div>
+    <div class="card">
+      <span class="pill red">RED INDICATOR</span>
+      <h3>Unsafe / In transit</h3>
+      <p>ไฟแดงของล้อบอกว่า gear/door ยังอยู่ในช่วงไม่ safe เช่น nose gear in transit หรือ main gear doors ยังไม่ปิด</p>
+    </div>
+    <div class="card">
+      <span class="pill red">GEAR HANDLE LIGHT</span>
+      <h3>Red handle light</h3>
+      <p>ไฟแดงใน gear handle จะติดเมื่อมี red indicator ใด ๆ ติด หรือเมื่อ PCL ใกล้ IDLE แต่ gear handle ยัง UP</p>
+    </div>
+    <div class="card">
+      <span class="pill dark">OFF / NONE</span>
+      <h3>Clean indication</h3>
+      <p>ถ้า gear UP สุดและ doors ปิด หรือ gear DOWN & LOCKED ครบ 3 และ doors ปิด ไฟแดงควรดับ</p>
+    </div>
+  </div>
+
+  <h2>2) Normal Extension: กางล้อ</h2>
+  <table>
+    <thead>
+      <tr><th>ช่วง</th><th>Handle</th><th>Gear</th><th>Doors</th><th>Gear Lights</th><th>Handle Light</th><th>ความหมาย</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="phase">ก่อนกาง</td><td>UP</td><td>UP</td><td>CLOSED</td><td>NONE</td><td><span class="lamp offlamp"></span>OFF</td><td>ล้อเก็บสุด ประตูปิด ไม่มี unsafe indication</td></tr>
+      <tr><td class="phase">เริ่มกาง</td><td>DOWN</td><td>UP</td><td>OPENING</td><td><span class="lamp redlamp"></span>2 RED (MAINS)</td><td><span class="lamp redlamp"></span>RED</td><td>main gear doors กำลังเปิด ยังไม่ safe</td></tr>
+      <tr><td class="phase">กำลังกาง</td><td>DOWN</td><td>EXTENDING</td><td>OPEN</td><td><span class="lamp redlamp"></span>3 RED</td><td><span class="lamp redlamp"></span>RED</td><td>ล้อทั้ง 3 กำลัง transit</td></tr>
+      <tr><td class="phase">ล้อลงแล้ว/ประตูกำลังปิด</td><td>DOWN</td><td>DOWN</td><td>CLOSING</td><td><span class="lamp greenlamp"></span>3 GREEN + <span class="lamp redlamp"></span>2 RED (MAINS)</td><td><span class="lamp redlamp"></span>RED</td><td>ล้อลง lock แล้ว แต่ main gear doors ยังไม่ปิด จึงยังแดง</td></tr>
+      <tr><td class="phase">กางสมบูรณ์</td><td>DOWN</td><td>DOWN</td><td>CLOSED</td><td><span class="lamp greenlamp"></span>3 GREEN</td><td><span class="lamp offlamp"></span>OFF</td><td>safe down indication: 3 green, handle light off</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3) Normal Retraction: เก็บล้อ</h2>
+  <table>
+    <thead>
+      <tr><th>ช่วง</th><th>Handle</th><th>Gear</th><th>Doors</th><th>Gear Lights</th><th>Handle Light</th><th>ความหมาย</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="phase">ก่อนเก็บ</td><td>DOWN</td><td>DOWN</td><td>CLOSED</td><td><span class="lamp greenlamp"></span>3 GREEN</td><td><span class="lamp offlamp"></span>OFF</td><td>ล้อกางและ lock ครบ</td></tr>
+      <tr><td class="phase">เริ่มเก็บ</td><td>UP</td><td>DOWN</td><td>OPENING</td><td><span class="lamp greenlamp"></span>3 GREEN + <span class="lamp redlamp"></span>2 RED (MAINS)</td><td><span class="lamp redlamp"></span>RED</td><td>doors เริ่มเปิด มี red เพราะ doors ยังไม่ closed</td></tr>
+      <tr><td class="phase">กำลังเก็บ</td><td>UP</td><td>RETRACTING</td><td>OPEN</td><td><span class="lamp redlamp"></span>3 RED</td><td><span class="lamp redlamp"></span>RED</td><td>ล้อทั้ง 3 กำลัง transit</td></tr>
+      <tr><td class="phase">ล้อเก็บแล้ว/ประตูกำลังปิด</td><td>UP</td><td>UP</td><td>CLOSING</td><td><span class="lamp redlamp"></span>2 RED (MAINS)</td><td><span class="lamp redlamp"></span>RED</td><td>gear ขึ้นแล้ว แต่ main gear doors ยังไม่ปิด</td></tr>
+      <tr><td class="phase">เก็บสมบูรณ์</td><td>UP</td><td>UP</td><td>CLOSED</td><td>NONE</td><td><span class="lamp offlamp"></span>OFF</td><td>clean up indication: ไม่มี gear lights, handle light off</td></tr>
+    </tbody>
+  </table>
+
+  <h2>4) Pattern ที่ควรจำตอนบิน</h2>
+  <div class="flow">
+    <div class="step"><b>กางล้อเสร็จ</b><br><span class="small">ต้องได้ 3 GREEN + handle light OFF</span></div>
+    <div class="arrow">→</div>
+    <div class="step"><b>เก็บล้อเสร็จ</b><br><span class="small">ต้องไม่มี gear lights + handle light OFF</span></div>
+    <div class="arrow">→</div>
+    <div class="step"><b>เห็น RED ค้าง</b><br><span class="small">ยังไม่ safe หรือ doors/gear ไม่ complete</span></div>
+  </div>
+
+  <h2>5) ข้อควรระวัง</h2>
+  <div class="card">
+    <p><b>อย่าดูแค่ handle position.</b> Handle อยู่ DOWN ไม่ได้แปลว่าล้อ safe จนกว่าจะเห็น <b>3 GREEN</b> และไฟแดงที่ handle ดับ</p>
+    <p><b>อย่าดูแค่ 3 GREEN ระหว่าง transition.</b> ช่วงหนึ่งอาจเห็น 3 GREEN พร้อม 2 RED เพราะล้อลงแล้วแต่ main gear doors ยัง closing อยู่ ต้องรอ handle light ดับ</p>
+    <p><b>ถ้า PCL เข้าใกล้ IDLE แต่ gear handle ยัง UP</b> ไฟแดงที่ handle/landing gear warning จะช่วยเตือนว่า gear ยังไม่ได้ลง</p>
+  </div>
+
+  <p class="small">Study aid only. Use the current official T-6C manual/checklist/PCL, local SOP, and instructor guidance as controlling sources.</p>
+</div>
+</body>
+</html>
