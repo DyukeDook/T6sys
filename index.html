@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>T-6C Systems Study Hub</title>
+  <meta name="description" content="ศูนย์รวมสรุประบบ T-6C แบบ static HTML สำหรับรวมหน้าสรุประบบต่าง ๆ" />
+  <style>
+    :root{
+      --bg:#070b16;
+      --bg2:#0e1730;
+      --card:#121b31;
+      --card2:#17233e;
+      --line:#2b395d;
+      --text:#eef4ff;
+      --muted:#aab8d6;
+      --accent:#60a5fa;
+      --accent2:#22c55e;
+      --warn:#facc15;
+      --danger:#fb7185;
+      --shadow:0 20px 70px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;
+      line-height:1.55;
+      background:
+        radial-gradient(circle at 20% 0%,rgba(96,165,250,.25),transparent 34%),
+        radial-gradient(circle at 80% 12%,rgba(34,197,94,.14),transparent 30%),
+        linear-gradient(180deg,var(--bg),var(--bg2));
+      min-height:100vh;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1180px;margin:0 auto;padding:28px 16px 68px}
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      padding:12px 0 26px;
+    }
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.3px}
+    .roundel{
+      width:42px;height:42px;border-radius:999px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,#1d4ed8,#38bdf8);
+      box-shadow:0 0 30px rgba(96,165,250,.45);
+      font-size:13px;font-weight:900;
+    }
+    .navlinks{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .navlinks a{
+      color:#cfe0ff;border:1px solid rgba(170,184,214,.22);
+      padding:8px 12px;border-radius:999px;background:rgba(18,27,49,.55);
+      font-size:14px;
+    }
+    .hero{
+      border:1px solid rgba(96,165,250,.24);
+      background:linear-gradient(135deg,rgba(18,27,49,.88),rgba(15,23,42,.72));
+      border-radius:28px;padding:30px;box-shadow:var(--shadow);overflow:hidden;position:relative;
+    }
+    .hero:after{
+      content:"";position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:999px;
+      background:radial-gradient(circle,rgba(96,165,250,.28),transparent 62%);
+      pointer-events:none;
+    }
+    .kicker{color:#93c5fd;font-weight:900;text-transform:uppercase;letter-spacing:.14em;font-size:12px;margin-bottom:10px}
+    h1{font-size:clamp(32px,5vw,58px);line-height:1.05;margin:0 0 14px;letter-spacing:-.04em}
+    .lead{font-size:clamp(16px,2vw,20px);color:#dce8ff;max-width:760px;margin:0 0 22px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;border-radius:16px;padding:12px 16px;font-weight:800;
+      background:#eaf2ff;color:#0b1020;border:1px solid transparent;
+    }
+    .btn.secondary{background:rgba(18,27,49,.65);color:#d9e7ff;border-color:rgba(170,184,214,.25)}
+    .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:24px;max-width:720px}
+    .stat{border:1px solid var(--line);background:rgba(8,13,26,.36);border-radius:18px;padding:14px}
+    .stat b{display:block;font-size:22px}.stat span{color:var(--muted);font-size:13px}
+    section{margin-top:34px}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:14px}
+    h2{margin:0;font-size:clamp(22px,3vw,32px);letter-spacing:-.02em}
+    .hint{color:var(--muted);font-size:14px;margin:4px 0 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+    .card{
+      border:1px solid var(--line);background:linear-gradient(180deg,rgba(23,35,62,.95),rgba(13,20,38,.95));
+      border-radius:22px;padding:18px;box-shadow:0 12px 36px rgba(0,0,0,.22);
+      transition:transform .18s ease,border-color .18s ease,background .18s ease;
+    }
+    .card:hover{transform:translateY(-3px);border-color:rgba(96,165,250,.56);background:linear-gradient(180deg,rgba(30,45,78,.98),rgba(14,23,42,.98))}
+    .tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    .tag{font-size:12px;font-weight:900;border-radius:999px;padding:4px 9px;background:rgba(96,165,250,.13);color:#bfdbfe;border:1px solid rgba(96,165,250,.26)}
+    .tag.green{background:rgba(34,197,94,.13);color:#bbf7d0;border-color:rgba(34,197,94,.28)}
+    .tag.amber{background:rgba(250,204,21,.13);color:#fef08a;border-color:rgba(250,204,21,.28)}
+    .card h3{font-size:20px;margin:0 0 8px}.card p{color:#d9e6ff;margin:0 0 14px}
+    .card-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#9fb0d0;font-size:13px;border-top:1px solid rgba(170,184,214,.15);padding-top:12px;margin-top:14px}
+    .open{font-weight:900;color:#93c5fd}
+    .panel{border:1px solid var(--line);background:rgba(18,27,49,.72);border-radius:22px;padding:18px}
+    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+    .step{border:1px dashed rgba(170,184,214,.28);border-radius:18px;padding:14px;background:rgba(7,11,22,.3)}
+    .step b{display:block;margin-bottom:4px}.step code{color:#bfdbfe;background:rgba(96,165,250,.1);padding:2px 6px;border-radius:7px}
+    .warn{border-color:rgba(250,204,21,.35);background:rgba(250,204,21,.08);color:#fff7ca}
+    .footer{margin-top:38px;color:#92a4c8;font-size:13px;text-align:center}
+    @media (max-width:720px){.nav{align-items:flex-start;flex-direction:column}.stats{grid-template-columns:1fr}.hero{padding:22px}.section-head{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="./index.html" aria-label="T-6C Systems Study Hub home">
+        <span class="roundel">T-6C</span>
+        <span>Systems Study Hub</span>
+      </a>
+      <div class="navlinks">
+        <a href="#library">Library</a>
+        <a href="#how-to-add">Add pages</a>
+        <a href="./pages/t6c_gear_indicators_summary.html">First summary</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="kicker">T-6C Courseware / Thai Study Notes</div>
+      <h1>รวมสรุประบบ T-6C ไว้ที่เดียว</h1>
+      <p class="lead">หน้าหลักนี้ออกแบบไว้เป็นศูนย์กลางสำหรับรวม HTML สรุประบบต่าง ๆ เช่น Landing Gear, Electrical, Fuel, Propeller, Environmental Control, Flight Controls และระบบอื่น ๆ ที่จะเพิ่มเข้ามาภายหลัง</p>
+      <div class="actions">
+        <a class="btn" href="./pages/t6c_gear_indicators_summary.html">เปิดหน้าแรก: Gear Indicators →</a>
+        <a class="btn secondary" href="#how-to-add">ดูวิธีเพิ่มหน้าใหม่</a>
+      </div>
+      <div class="stats" aria-label="Site status">
+        <div class="stat"><b id="pageCount">1</b><span>หน้าสรุปในคลัง</span></div>
+        <div class="stat"><b>HTML</b><span>เปิดได้ด้วย GitHub Pages</span></div>
+        <div class="stat"><b>Ready</b><span>พร้อมเพิ่มระบบถัดไป</span></div>
+      </div>
+    </header>
+
+    <section class="panel warn" aria-label="Study disclaimer">
+      <b>หมายเหตุสำคัญ:</b> เว็บนี้เป็น study aid เพื่อช่วยจำและทบทวนเท่านั้น เวลาบินจริงให้ยึดเอกสาร T-6C Manual/Checklist/PCL ฉบับปัจจุบัน, SOP หน่วย และคำแนะนำครูการบินเป็นหลัก
+    </section>
+
+    <section id="library">
+      <div class="section-head">
+        <div>
+          <h2>คลังสรุประบบ</h2>
+          <p class="hint">เพิ่มหน้าใหม่ได้โดยวางไฟล์ HTML ใน <code>pages/</code> แล้วเพิ่มรายการใน <code>data/pages.json</code></p>
+        </div>
+      </div>
+      <div class="grid" id="cards" aria-live="polite"></div>
+    </section>
+
+    <section id="how-to-add" class="panel">
+      <h2>วิธีเพิ่มหน้า HTML ถัดไป</h2>
+      <p class="hint">ส่งไฟล์ HTML ระบบถัดไปมาให้ แล้วเพิ่มเข้าโครงนี้ได้เลย โดยใช้ pattern เดิม</p>
+      <div class="steps">
+        <div class="step"><b>1) วางไฟล์</b>นำไฟล์ไปไว้ใน <code>pages/ชื่อไฟล์.html</code></div>
+        <div class="step"><b>2) เพิ่ม metadata</b>แก้ <code>data/pages.json</code> ใส่ title, description, path, category, status, updated</div>
+        <div class="step"><b>3) เปิดหน้าหลัก</b><code>index.html</code> จะดึงรายการมาแสดงเป็นการ์ดอัตโนมัติ</div>
+        <div class="step"><b>4) Deploy</b>เปิด GitHub Pages จาก branch <code>main</code> และ folder <code>/root</code></div>
+      </div>
+    </section>
+
+    <p class="footer">T6sys · Built for T-6C systems study · Static HTML/CSS/JS</p>
+  </div>
+
+  <script>
+    const fallbackPages = [
+      {
+        title: "T-6C Landing Gear Indicators & Gear Handle Light",
+        description: "สรุปไฟเขียว/แดงของล้อ และไฟแดงใน gear handle ระหว่างการกาง/เก็บล้อ",
+        path: "pages/t6c_gear_indicators_summary.html",
+        category: "Landing Gear",
+        status: "Ready",
+        updated: "2026-05-31",
+        tags: ["Gear", "Indicators", "Warning"]
+      }
+    ];
+
+    function renderCards(pages){
+      const cards = document.getElementById('cards');
+      const pageCount = document.getElementById('pageCount');
+      pageCount.textContent = pages.length;
+      cards.innerHTML = pages.map(page => {
+        const tags = [page.category, page.status, ...(page.tags || [])]
+          .filter(Boolean)
+          .slice(0,5)
+          .map((tag, i) => `<span class="tag ${i===1?'green':''}">${tag}</span>`)
+          .join('');
+        return `
+          <a class="card" href="${page.path}">
+            <div class="tagrow">${tags}</div>
+            <h3>${page.title}</h3>
+            <p>${page.description || ''}</p>
+            <div class="card-foot">
+              <span>Updated: ${page.updated || 'N/A'}</span>
+              <span class="open">Open →</span>
+            </div>
+          </a>`;
+      }).join('');
+    }
+
+    async function loadPages(){
+      try{
+        const res = await fetch('./data/pages.json', {cache:'no-store'});
+        if(!res.ok) throw new Error('Cannot load data/pages.json');
+        const pages = await res.json();
+        renderCards(Array.isArray(pages) && pages.length ? pages : fallbackPages);
+      }catch(error){
+        renderCards(fallbackPages);
+      }
+    }
+
+    loadPages();
+  </script>
+</body>
+</html>
