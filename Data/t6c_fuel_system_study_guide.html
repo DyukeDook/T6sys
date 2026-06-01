@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>T-6C Fuel System Study Guide</title>
+  <style>
+    :root{
+      --bg:#07111f;
+      --panel:#0d1b2e;
+      --panel2:#10243d;
+      --text:#eaf2ff;
+      --muted:#9fb3ca;
+      --line:#25476b;
+      --accent:#38bdf8;
+      --accent2:#fbbf24;
+      --danger:#fb7185;
+      --ok:#34d399;
+      --warn:#f59e0b;
+      --chip:#142b49;
+      --shadow:0 18px 45px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Thai", "Noto Sans", sans-serif;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(56,189,248,.18), transparent 34%),
+        radial-gradient(circle at 85% 10%, rgba(251,191,36,.12), transparent 28%),
+        linear-gradient(180deg, #06101d 0%, var(--bg) 45%, #040b13 100%);
+      color:var(--text);
+      line-height:1.72;
+    }
+    a{color:inherit}
+    .wrap{max-width:1180px;margin:0 auto;padding:28px 18px 64px}
+    .hero{
+      border:1px solid rgba(56,189,248,.22);
+      background:linear-gradient(135deg, rgba(13,27,46,.96), rgba(16,36,61,.86));
+      border-radius:28px;
+      padding:34px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;right:-80px;top:-80px;width:260px;height:260px;
+      background:radial-gradient(circle, rgba(56,189,248,.26), transparent 68%);
+      border-radius:50%;
+    }
+    h1{font-size:clamp(2rem,4vw,4.2rem);line-height:1.05;margin:0 0 12px;letter-spacing:-.035em}
+    .subtitle{color:var(--muted);font-size:1.05rem;max-width:820px;margin:0}
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+    .badge{
+      background:rgba(56,189,248,.1);
+      border:1px solid rgba(56,189,248,.22);
+      color:#dff6ff;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:.92rem;
+    }
+    nav{
+      position:sticky;top:0;z-index:10;
+      backdrop-filter:blur(16px);
+      background:rgba(5,13,24,.72);
+      border-bottom:1px solid rgba(37,71,107,.55);
+      margin:22px -18px 30px;
+      padding:10px 18px;
+    }
+    .nav-inner{
+      max-width:1180px;margin:0 auto;display:flex;gap:8px;overflow:auto;padding-bottom:2px;
+    }
+    .nav-inner a{
+      white-space:nowrap;text-decoration:none;
+      background:rgba(20,43,73,.85);
+      border:1px solid rgba(56,189,248,.16);
+      border-radius:999px;
+      padding:9px 13px;
+      color:#dbeafe;
+      font-size:.9rem;
+    }
+    .nav-inner a:hover{background:rgba(56,189,248,.18)}
+    section{
+      background:rgba(13,27,46,.84);
+      border:1px solid rgba(37,71,107,.72);
+      border-radius:var(--radius);
+      padding:26px;
+      margin:18px 0;
+      box-shadow:0 12px 30px rgba(0,0,0,.2);
+    }
+    h2{
+      font-size:clamp(1.35rem,2.4vw,2.05rem);
+      line-height:1.2;
+      margin:0 0 14px;
+      letter-spacing:-.02em;
+      display:flex;gap:10px;align-items:center;
+    }
+    h3{font-size:1.18rem;margin:22px 0 8px;color:#dff6ff}
+    p{margin:9px 0}
+    .muted{color:var(--muted)}
+    .grid{display:grid;gap:14px}
+    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media(max-width:850px){.grid.two,.grid.three{grid-template-columns:1fr}.hero{padding:24px}section{padding:20px}}
+    .card{
+      background:linear-gradient(180deg, rgba(16,36,61,.86), rgba(10,23,39,.86));
+      border:1px solid rgba(56,189,248,.14);
+      border-radius:16px;
+      padding:16px;
+    }
+    .card h3{margin-top:0}
+    .mini-title{font-weight:800;color:#e0f2fe}
+    .flow{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      background:#07111f;
+      color:#d7ecff;
+      border:1px solid rgba(56,189,248,.22);
+      border-radius:16px;
+      padding:16px;
+      overflow:auto;
+      line-height:1.8;
+      white-space:pre;
+    }
+    .chip{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:3px 9px;border-radius:999px;
+      background:var(--chip);border:1px solid rgba(56,189,248,.17);
+      color:#dff6ff;font-size:.86rem;font-weight:700;
+    }
+    .red{color:var(--danger)}
+    .amber{color:var(--warn)}
+    .green{color:var(--ok)}
+    .blue{color:var(--accent)}
+    .yellow{color:var(--accent2)}
+    .callout{
+      border-left:4px solid var(--accent);
+      background:rgba(56,189,248,.08);
+      padding:14px 16px;
+      border-radius:14px;
+      margin:14px 0;
+    }
+    .warnbox{border-left-color:var(--warn);background:rgba(245,158,11,.08)}
+    .dangerbox{border-left-color:var(--danger);background:rgba(251,113,133,.08)}
+    .okbox{border-left-color:var(--ok);background:rgba(52,211,153,.08)}
+    table{width:100%;border-collapse:collapse;margin:14px 0;overflow:hidden;border-radius:14px}
+    th,td{padding:12px;border-bottom:1px solid rgba(37,71,107,.75);vertical-align:top}
+    th{text-align:left;background:rgba(56,189,248,.1);color:#e0f2fe}
+    tr:last-child td{border-bottom:0}
+    .timeline{display:grid;gap:10px;margin:12px 0}
+    .step{
+      display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:start;
+      background:rgba(16,36,61,.6);border:1px solid rgba(37,71,107,.55);border-radius:14px;padding:12px;
+    }
+    .num{
+      width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+      background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.24);font-weight:900;color:#bae6fd;
+    }
+    details{
+      background:rgba(7,17,31,.72);
+      border:1px solid rgba(37,71,107,.72);
+      border-radius:14px;
+      padding:12px 14px;
+      margin:10px 0;
+    }
+    summary{cursor:pointer;font-weight:800;color:#e0f2fe}
+    .toc-note{font-size:.9rem;color:var(--muted);margin-top:10px}
+    .footer{color:var(--muted);font-size:.9rem;text-align:center;margin-top:28px}
+    .tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background:#07111f;border:1px solid rgba(56,189,248,.25);
+      padding:2px 7px;border-radius:8px;color:#dff6ff;font-size:.9em;
+    }
+    .toplink{float:right;font-size:.85rem;color:var(--muted);text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="wrap" id="top">
+    <header class="hero">
+      <h1>T-6C Fuel System<br>Study Guide</h1>
+      <p class="subtitle">
+        สรุปรวมเรื่อง Fuel System ที่คุยกันทั้งหมด โดยจัดหัวข้อใหม่ให้ไม่ซ้ำซ้อน:
+        storage, refuel/defuel, engine feed, jet pump/motive flow, controls & indicators, venting และ fuel balance
+      </p>
+      <div class="badges">
+        <span class="badge">อ่านง่ายแบบนักบิน</span>
+        <span class="badge">รวมคำตอบซ้ำไว้ที่เดียว</span>
+        <span class="badge">Flow + ตารางจำสอบ</span>
+        <span class="badge">ใช้เพื่อการศึกษา — ยึด checklist จริงเสมอ</span>
+      </div>
+    </header>
+
+    <nav>
+      <div class="nav-inner">
+        <a href="#big-picture">ภาพรวม</a>
+        <a href="#storage">Storage</a>
+        <a href="#refuel-defuel">Refuel / Defuel</a>
+        <a href="#engine-feed">Engine Feed</a>
+        <a href="#jet-pumps">Jet Pumps</a>
+        <a href="#controls">Controls & Indicators</a>
+        <a href="#venting-balance">Venting & Balance</a>
+        <a href="#abnormal">Abnormal / Memory</a>
+        <a href="#quick-review">Quick Review</a>
+      </div>
+    </nav>
+
+    <section id="big-picture">
+      <a class="toplink" href="#top">↑ top</a>
+      <h2>1. ภาพรวม Fuel System</h2>
+      <p>
+        Fuel system ของ T-6C ทำหน้าที่หลักคือ <b>เก็บเชื้อเพลิงในปีก</b>,
+        <b>ย้าย fuel เข้า collector tank</b>, <b>feed เข้าเครื่องยนต์</b>,
+        <b>รักษาสมดุลซ้าย-ขวา</b> และ <b>เตือนนักบินเมื่อ pressure / quantity / balance ผิดปกติ</b>
+      </p>
+      <div class="flow">Wing tanks
+   ↓ gravity drain
+Inboard wing cavities
+   ↓ transfer jet pumps
+Collector tank
+   ↓ fuel pickup / flip-flop valve
+Primary jet pump หรือ Electric boost pump
+   ↓
+Engine-driven low pressure fuel pump
+   ↓
+Engine-driven high pressure fuel pump
+   ↓
+FMU
+   ↓
+Fuel flow transmitter
+   ↓
+Flow divider
+   ↓
+Fuel nozzles
+   ↓
+Combustion chamber</div>
+
+      <div class="grid three">
+        <div class="card">
+          <h3>Storage</h3>
+          <p>เก็บ fuel ใน left/right wing tank และมี collector tank เป็นถังรวมสำหรับ feed engine ต่อเนื่อง</p>
+        </div>
+        <div class="card">
+          <h3>Transfer</h3>
+          <p>ย้าย fuel จากปีกเข้า collector tank ด้วย transfer jet pumps ที่ใช้ motive flow สร้างแรงดูด</p>
+        </div>
+        <div class="card">
+          <h3>Engine Feed</h3>
+          <p>ส่ง fuel จาก collector tank เข้า engine ผ่าน primary jet pump/boost pump, engine pumps, FMU และ nozzles</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="storage">
+      <a class="toplink" href="#top">↑ top</a>
+      <h2>2. Fuel Storage และ Collector Tank</h2>
+      <p>
+        เชื้อเพลิงหลักอยู่ใน <b>integral wing tanks</b> ซ้ายและขวา แล้วถูกส่งเข้ามารวมที่
+        <b>collector tank</b> ก่อน feed engine
+      </p>
+      <div class="grid two">
+        <div class="card">
+          <h3>Fuel Capacity ที่ควรจำ</h3>
+          <p><span class="chip">SPR</span> ประมาณ <b>1100 lb usable fuel</b></p>
+          <p><span class="chip">Gravity full</span> เติมได้เพิ่มประมาณ <b>100 lb</b> หรือราว <b>15 gallons</b></p>
+          <p class="muted">ค่าจริงให้ยึดคู่มือ/ข้อมูลของเครื่องและ procedure หน่วย</p>
+        </div>
+        <div class="card">
+          <h3>Collector Tank สำคัญอย่างไร</h3>
+          <p>
+            เป็นถังรวมที่ช่วยให้เครื่องยนต์ได้รับ fuel ต่อเนื่อง แม้ aircraft attitude เปลี่ยน เช่น climb, descent, bank หรือ maneuver
+          </p>
+          <p>
+            มี <b>fuel pickup / flip-flop valve</b> ช่วยเลือกจุดดูด fuel ให้เหมาะกับ orientation รวมถึง inverted flight
+          </p>
+        </div>
+      </div>
+
+      <div class="callout okbox">
+        <b>จำเร็ว:</b> Collector tank = ถังกัน fuel starvation / Flip-flop valve = เลือก pickup ให้ถูกด้านตอนท่าทางเครื่องเปลี่ยน
+      </div>
+    </section>
+
+    <section id="refuel-defuel">
+      <a class="toplink" href="#top">↑ top</a>
+      <h2>3. Refueling และ Defueling</h2>
+      <p>
+        หัวข้อนี้รวม refueling/defueling ไว้ด้วยกัน เพราะใช้แนวคิดและ hardware ใกล้กัน โดยเฉพาะ
+        <b>pressure refueling/defueling adapter</b> และ <b>refuel/defuel valve</b>
+      </p>
+
+      <div class="grid two">
+        <div class="card">
+          <h3>Single-Point Pressure Refueling — SPR</h3>
+          <div class="flow">Fuel truck / hydrant
+   ↓
+Pressure refueling adapter
+   ↓
+Refuel / defuel valve
+   ↓
+Manifold
+   ↓
+Level control valves
+   ↓
+Wing tanks</div>
+          <p>
+            เป็นการเติมจากจุดเดียว แล้วระบบกระจาย fuel ไปยังถังซ้าย/ขวาเอง
+          </p>
+          <p><b>Pressure limit สำคัญ:</b> supply pressure ไม่เกินประมาณ <b>50 psi</b></p>
+        </div>
+        <div class="card">
+          <h3>Over-the-Wing / Gravity Refueling</h3>
+          <p>
+            เปิด filler cap บนปีกแล้วเติมลงถังโดยตรง ใช้แรงโน้มถ่วง ไม่ใช่แรงดันจาก single-point system
+          </p>
+          <p>
+            ระวังพื้นเอียง เพราะ fuel level ซ้าย/ขวาอาจไม่เท่ากัน และอาจเกิด spillage ได้
+          </p>
+          <p class="muted">
+            แนวคิดที่คุยกัน: fueling บน slope ต้องระวังมาก โดยเฉพาะการเปิด cap ฝั่งต่ำเมื่อ fuel มาก
+          </p>
+        </div>
+      </div>
+
+      <h3>Precheck คืออะไร</h3>
+      <p>
+        Precheck ใช้ตรวจว่า <b>ระบบ shutoff ตอนเติมเต็ม</b> ปิดได้จริงหรือไม่ ก่อนเติมด้วยแรงดันจริง
+        เพื่อป้องกัน overfill / spill / venting
+      </p>
+      <div class="callout">
+        <b>Precheck = ทดสอบระบบ “ตัดน้ำมันเมื่อเต็ม” ก่อนเติมจริง</b>
+      </div>
+
+      <h3>Defueling</h3>
+      <p>
+        Defueling คือการถ่าย fuel ออกจาก aircraft โดยใช้เส้นทาง single-point เช่นเดียวกับ refueling แต่ flow กลับทิศ
+      </p>
+      <div class="flow">Wing tanks
+   ↓
+Defuel-only shutoff / manifold path
+   ↓
+Refuel / defuel valve
+   ↓
+Pressure refueling/defueling adapter
+   ↓
+Fuel truck / recovery tank</div>
+      <p>
+        โดย concept ไม่ใช่การดูดออกผ่าน engine feed line และไม่ใช่ fuel sump drain
+        แต่เป็นการใช้ ground defueling equipment ต่อที่ adapter
+      </p>
+
+      <table>
+        <thead><tr><th>หัวข้อ</th><th>Refueling</th><th>Defueling</th></tr></thead>
+        <tbody>
+          <tr><td>ทิศทาง fuel</td><td>เข้า aircraft</td><td>ออกจาก aircraft</td></tr>
+          <tr><td>จุดต่อหลัก</td><td>Pressure refueling adapter</td><td>Pressure refueling/defueling adapter</td></tr>
+          <tr><td>วาล์วสำคัญ</td><td>Refuel/defuel valve, level control shutoff</td><td>Refuel/defuel valve, defuel path valves</td></tr>
+          <tr><td>ความเสี่ยงหลัก</td><td>Overfill, pressure สูง, spill</td><td>Static, contamination, imbalance, เอาออกไม่เท่ากัน</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout warnbox">
+        <b>ภาคสนาม:</b> ก่อน refuel/defuel ต้อง ground/bond aircraft กับ fuel source เพื่อลดความเสี่ยง static electricity และ fire hazard
+      </div>
+    </section>
+
+    <section id="engine-feed">
+      <a class="toplink" href="#top">↑ top</a>
+      <h2>4. Engine Feed System</h2>
+      <p>
+        <b>Engine feed</b> คือเส้นทาง fuel ที่ใช้เลี้ยงเครื่องยนต์จริง ๆ เริ่มจาก collector tank แล้วไปถึง fuel nozzles ใน combustion chamber
+      </p>
+
+      <div class="flow">Collector tank
+   ↓
+Fuel pickup / flip-flop valve
+   ↓
+Primary jet pump หรือ Electric boost pump
+   ↓
+Engine-driven low pressure fuel pump
+   ↓
+Engine-driven high pressure fuel pump
+   ↓
+Fuel Management Unit (FMU)
+   ↓
+Fuel flow transmitter
+   ↓
+Flow divider
+   ↓
+Fuel nozzles
+   ↓
+Combustion chamber</div>
+
+      <div class="grid two">
+        <div class="card">
+          <h3>Electric Boost Pump</h3>
+          <p>ช่วยตอน engine start และเป็น backup ให้ engine-driven low pressure fuel pump</p>
+          <p>เมื่อทำงานจะมี <b class="green">BOOST PUMP</b> advisory สีเขียว</p>
+        </div>
+        <div class="card">
+          <h3>Engine Pumps</h3>
+          <p><b>Low pressure pump</b> รับ fuel จาก aircraft system แล้วส่งต่อ</p>
+          <p><b>High pressure pump</b> สร้างแรงดันให้ FMU ถ้าล้มเหลวอาจนำไปสู่ flameout และ restart ไม่ได้</p>
+        </div>
+      </div>
+
+      <h3>FMU, Flow Divider, Nozzles</h3>
+      <p>
+        <b>FMU = Fuel Management Unit</b> เป็นตัวควบคุมปริมาณ fuel ที่จ่ายเข้าเครื่องตาม engine demand/PCL/ระบบควบคุม
+        จากนั้น fuel ไปที่ <b>flow divider</b> เพื่อกระจายไปยัง fuel nozzles และฉีดเข้า combustion chamber
+      </p>
+
+      <div class="callout okbox">
+        <b>จำเร็ว:</b> Pump สร้างแรงดัน → FMU คุมปริมาณ → Flow divider กระจาย → Nozzle ฉีด
+      </div>
+
+      <h3>Shutoff / Filter ที่เกี่ยวกับ Engine Feed</h3>
+      <ul>
+        <li><b>Fuel filter</b> กรองสิ่งสกปรกก่อน fuel เข้า engine system</li>
+        <li><b>Maintenance shutoff valve</b> ใช้ isolate ระบบเพื่อ maintenance</li>
+        <li><b>Firewall shutoff valve</b> ตัด fuel ไป engine เมื่อดึง firewall shutoff handle</li>
+      </ul>
+    </section>
+
+    <section id="jet-pumps">
+      <a class="toplink" href="#top">↑ top</a>
+      <h2>5. Primary Jet Pump, Transfer Jet Pump และ Motive/Venturi Flow</h2>
+      <p>
+        Jet pump เป็นปั๊มที่ใช้ <b>fuel แรงดันสูง</b> เป็นตัวขับ ไม่ได้มีใบพัดหมุนเหมือน electric pump
+        หลักการคือ fuel พุ่งเร็วผ่าน nozzle ทำให้ pressure บริเวณนั้นต่ำลง แล้วดูด fuel รอบ ๆ เข้ามา
+      </p>
+
+      <div class="callout">
+        <b>หมายเหตุเรื่องคำว่า “century flow”:</b> จากที่คุยกัน น่าจะหมายถึง <b>Venturi flow / motive flow</b>
+        เพราะ jet pump ใช้หลัก Venturi/ejector effect ในการสร้าง suction
+      </div>
+
+      <div class="grid two">
+        <div class="card">
+          <h3>Transfer Jet Pump</h3>
+          <p><b>หน้าที่:</b> ย้าย fuel จาก wing tanks / inboard cavities เข้า collector tank</p>
+          <p><b>จำสั้น:</b> Transfer = ปีก → Collector</p>
+        </div>
+        <div class="card">
+          <h3>Primary Jet Pump</h3>
+          <p><b>หน้าที่:</b> feed fuel จาก collector tank ไป engine-driven low pressure pump</p>
+          <p><b>จำสั้น:</b> Primary = Collector → Engine</p>
+        </div>
+      </div>
+
+      <h3>Motive Flow คืออะไร</h3>
+      <p>
+        <b>Motive flow</b> คือ fuel แรงดันสูงที่นำไปใช้ “ขับ” jet pump เพื่อสร้าง suction และดึง fuel ออกจากบริเวณที่ต้องการ
+      </p>
+      <div class="flow">Motive fuel แรงดันสูง
+   ↓
+พุ่งผ่าน nozzle เล็ก
+   ↓
+ความเร็วสูงขึ้น / pressure ต่ำลง
+   ↓
+เกิด suction
+   ↓
+ดูด fuel รอบ ๆ เข้ามา
+   ↓
+fuel ทั้งหมดถูกส่งต่อไป</div>
+
+      <table>
+        <thead><tr><th>หัวข้อ</th><th>Transfer Jet Pump</th><th>Primary Jet Pump</th></tr></thead>
+        <tbody>
+          <tr><td>ดูด fuel จาก</td><td>Wing tank / inboard cavities</td><td>Collector tank</td></tr>
+          <tr><td>ส่ง fuel ไป</td><td>Collector tank</td><td>Engine-driven LP pump</td></tr>
+          <tr><td>เกี่ยวกับ engine feed</td><td>ทางอ้อม — เติม collector</td><td>ทางตรง — feed engine</td></tr>
+          <tr><td>หลักการ</td><td colspan="2">ใช้ motive flow สร้าง Venturi/ejector suction</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout okbox">
+        <b>ประโยคจำสอบ:</b> Transfer jet pump เติม collector tank ให้พร้อม ส่วน primary jet pump ส่ง fuel จาก collector tank ไปเลี้ยง engine
+      </div>
+    </section>
+
+    <section id="controls">
+      <a class="toplink" href="#top">↑ top</a>
+      <h2>6. Fuel Controls and Indicators</h2>
+      <p>
+        ส่วนนี้คือสิ่งที่นักบินใช้ <b>ควบคุม</b> และ <b>monitor</b> fuel system ผ่าน switch, EICAS indication, caution, warning และ aural alert
+      </p>
+
+      <h3>Fuel Quantity</h3>
+      <p>
+        EICAS แสดง fuel quantity ซ้าย/ขวา/total โดยอาศัย fuel probes หลายตัวใน wing tanks และ collector tank
+      </p>
+
+      <h3>Low Fuel Warning</h3>
+      <p>
+        <b class="amber">L FUEL LO</b> / <b class="amber">R FUEL LO</b> เป็น caution สีเหลือง เมื่อ fuel ใน wing tank ฝั่งนั้นต่ำประมาณ <b>110 lb usable fuel</b>
+        โดยใช้ optical sensor แยกจาก fuel probe
+      </p>
+
+      <h3>Fuel Balance Controls</h3>
+      <p>
+        ปกติใช้ <span class="kbd">FUEL BAL AUTO</span> ให้ระบบรักษา balance เอง
+        ถ้าต้อง reset/manual จะใช้ <span class="kbd">MAN/RESET</span> และ manual fuel balance switch <span class="kbd">L / OFF / R</span>
+      </p>
+      <div class="callout dangerbox">
+        <b>ข้อควรจำ:</b> ถ้ามี <b>FP FAIL</b> อย่า manual balance เพราะ fuel quantity/balance indication อาจไม่น่าเชื่อถือ
+      </div>
+
+      <h3>Boost Pump Control</h3>
+      <p>
+        <span class="kbd">BOOST PUMP</span> มีแนวคิดหลักคือ ARM/ON โดย <b class="green">BOOST PUMP</b> advisory สีเขียวหมายถึง pump กำลังทำงาน
+        ไม่ได้แปลว่าเสียเสมอไป
+      </p>
+
+      <h3>Fuel Flow</h3>
+      <p>
+        Fuel flow ที่แสดงบน EICAS คืออัตรา fuel ที่ถูกจ่ายไป engine หลังผ่าน FMU ก่อนเข้าสู่ flow divider
+      </p>
+
+      <h3>Bingo Fuel</h3>
+      <p>
+        ตั้งค่า bingo fuel ได้บน EICAS/UFCP เมื่อ total fuel ต่ำกว่าหรือเท่ากับค่าที่ตั้ง จะมีเสียง <b>“BINGO, BINGO”</b>
+        ค่า default ที่คุยกันคือประมาณ <b>400 lb</b>
+      </p>
+
+      <table>
+        <thead><tr><th>สิ่งที่เห็น/ควบคุม</th><th>สี/ชนิด</th><th>ความหมาย</th></tr></thead>
+        <tbody>
+          <tr><td>Fuel Quantity</td><td>Indication</td><td>ปริมาณ fuel ซ้าย/ขวา/total</td></tr>
+          <tr><td>FP FAIL</td><td><span class="amber">Amber caution</span></td><td>Fuel probe fail / quantity indication อาจไม่น่าเชื่อถือ</td></tr>
+          <tr><td>L/R FUEL LO</td><td><span class="amber">Amber caution</span></td><td>Fuel ฝั่งนั้นต่ำประมาณ 110 lb usable</td></tr>
+          <tr><td>FUEL BAL</td><td><span class="amber">Amber caution</span></td><td>Imbalance / probe fail / sensing fault</td></tr>
+          <tr><td>M FUEL BAL</td><td><span class="green">Green advisory</span></td><td>ระบบอยู่ manual/reset mode</td></tr>
+          <tr><td>BOOST PUMP</td><td><span class="green">Green advisory</span></td><td>Electric boost pump ทำงาน</td></tr>
+          <tr><td>FUEL PX</td><td><span class="red">Red warning</span></td><td>Fuel pressure ต่ำกว่า 10 psi ใน motive/return flow supply line</td></tr>
+          <tr><td>Fuel Flow</td><td>Indication</td><td>เครื่องกิน fuel เท่าไหร่</td></tr>
+          <tr><td>Bingo Fuel</td><td>Aural / setting</td><td>Fuel ถึงค่าที่ตั้งไว้ใน fuel planning</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="venting-balance">
+      <a class="toplink" href="#top">↑ top</a>
+      <h2>7. Venting and Balance</h2>
+      <p>
+        สองเรื่องนี้ทำงานคนละหน้าที่ แต่เกี่ยวกันทางอ้อม เพราะทั้งคู่ช่วยให้ fuel ใน wing tanks ไหล/ใช้งานได้ปกติ
+      </p>
+
+      <div class="grid two">
+        <div class="card">
+          <h3>Venting</h3>
+          <p>
+            คือระบบระบาย/ปรับความดันในถัง fuel ให้ถัง “หายใจได้”
+            ป้องกัน positive pressure และ vacuum ที่อาจขัดขวาง fuel flow
+          </p>
+          <ul>
+            <li><b>Cross vent line</b> ช่วย equalize pressure ซ้าย-ขวา</li>
+            <li><b>Pressure relief</b> ระบาย pressure สูงเกิน</li>
+            <li><b>Vacuum relief</b> ให้อากาศเข้าแทน fuel ที่ถูกใช้ไป</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Fuel Balance</h3>
+          <p>
+            ระบบรักษา fuel ซ้าย/ขวาให้ใกล้กัน โดยไม่ได้ปั๊ม fuel จากซ้ายไปขวาโดยตรง
+            แต่ควบคุมการ transfer fuel ผ่าน motive flow และ transfer jet pump
+          </p>
+          <p><b>Auto balance:</b> ถ้า imbalance ≥ 20 lb นานกว่า 30 วินาที ระบบจะปิด motive flow ไปถังที่เบากว่า</p>
+        </div>
+      </div>
+
+      <h3>Auto Balance Logic</h3>
+      <div class="flow">ถังฝั่งเบา
+   ↓
+ปิด motive flow ไปฝั่งนั้น
+   ↓
+transfer jet pump ฝั่งเบาหยุด/ลดการส่ง fuel
+
+ถังฝั่งหนัก
+   ↓
+ยังมี motive flow
+   ↓
+transfer jet pump ยังส่ง fuel เข้า collector tank
+   ↓
+fuel ฝั่งหนักลดลง
+   ↓
+ซ้าย-ขวากลับมา balance</div>
+
+      <div class="callout warnbox">
+        <b>Ramp slope:</b> ถ้าจอดเอียง fuel อาจไหลไปกองฝั่งต่ำ ทำให้ level/pressure/venting ผิดปกติ
+        และอาจเกิด fuel vent overboard ผ่าน pressure relief ได้
+      </div>
+
+      <h3>FUEL BAL Caution</h3>
+      <p>
+        ถ้า imbalance มากกว่า 30 lb นานประมาณ 2 นาที หรือเกิด sensing/probe fault จะขึ้น
+        <b class="amber">FUEL BAL</b> caution และ auto balance อาจ shut off ต้อง reset ตาม procedure
+      </p>
+    </section>
+
+    <section id="abnormal">
+      <a class="toplink" href="#top">↑ top</a>
+      <h2>8. Abnormal / Memory Items แบบเข้าใจระบบ</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Fuel Pressure ต่ำ</h3>
+          <p><b class="red">FUEL PX</b> = fuel pressure ต่ำกว่า 10 psi</p>
+          <p>ให้คิดถึงปัญหาที่เกี่ยวกับ motive/return flow, jet pump support, fuel delivery pressure</p>
+        </div>
+        <div class="card">
+          <h3>Boost Pump ทำงาน</h3>
+          <p><b class="green">BOOST PUMP</b> ขึ้นไม่ได้แปลว่า pump fail เสมอไป แต่แปลว่าปั๊มกำลังทำงาน</p>
+          <p>อาจทำงานตอน start, low pressure condition หรือเลือก ON เอง</p>
+        </div>
+        <div class="card">
+          <h3>LP + Boost Pump Fail</h3>
+          <p>Engine-driven high pressure pump อาจ suction feed ให้เครื่องยังเดินต่อได้ แต่ concept สำคัญคือ <b>restart ไม่ได้</b></p>
+        </div>
+        <div class="card">
+          <h3>High Pressure Pump Fail</h3>
+          <p>เป็นจุด critical เพราะอาจทำให้ <b>flameout</b> และ <b>restart ไม่ได้</b></p>
+        </div>
+        <div class="card">
+          <h3>FP FAIL</h3>
+          <p>Fuel quantity/balance indication อาจไม่น่าเชื่อถือ และไม่ควร manual balance เอง</p>
+        </div>
+        <div class="card">
+          <h3>Low Fuel</h3>
+          <p>L/R FUEL LO ใช้ optical sensor แยกจาก quantity probe จึงเป็น warning path คนละชุดกับ fuel quantity probe</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="quick-review">
+      <a class="toplink" href="#top">↑ top</a>
+      <h2>9. Quick Review — จำสอบแบบเร็ว</h2>
+
+      <details open>
+        <summary>Flow หลักของ fuel system</summary>
+        <p><b>Wing tanks → transfer jet pumps → collector tank → primary jet pump/boost pump → engine pumps → FMU → flow divider → nozzles</b></p>
+      </details>
+
+      <details>
+        <summary>Primary vs Transfer Jet Pump</summary>
+        <p><b>Transfer</b> = ปีก → Collector</p>
+        <p><b>Primary</b> = Collector → Engine</p>
+      </details>
+
+      <details>
+        <summary>Motive / Venturi Flow</summary>
+        <p><b>Motive flow</b> คือ fuel แรงดันสูงที่ใช้ขับ jet pump ให้เกิด suction ตามหลัก Venturi/ejector effect</p>
+      </details>
+
+      <details>
+        <summary>Refuel vs Defuel</summary>
+        <p>Refuel = fuel เข้า aircraft ผ่าน adapter / Defuel = fuel ออกจาก aircraft ผ่าน adapter เดิม แต่ flow กลับทิศ</p>
+      </details>
+
+      <details>
+        <summary>Balance System</summary>
+        <p>ระบบไม่ได้ transfer ซ้ายไปขวาโดยตรง แต่ปิด motive flow ไปถังที่เบากว่า เพื่อให้ถังหนักกว่าถูกใช้ต่อจนกลับมา balance</p>
+      </details>
+
+      <details>
+        <summary>Venting</summary>
+        <p>Venting ทำให้ถัง fuel หายใจได้ ป้องกัน pressure/vacuum ผิดปกติ และช่วยให้ fuel flow/transfer เป็นปกติ</p>
+      </details>
+
+      <details>
+        <summary>Indicators ที่ต้องจำ</summary>
+        <p><b>FUEL PX</b> = red warning pressure ต่ำ / <b>FUEL BAL</b> = imbalance หรือ sensing fault / <b>FP FAIL</b> = probe fail / <b>BOOST PUMP</b> = boost pump ทำงาน</p>
+      </details>
+
+      <div class="callout okbox">
+        <b>ประโยคเดียวจบ:</b>
+        Fuel อยู่ในปีก → transfer เข้า collector tank → feed engine ผ่าน primary/boost pump → engine pumps/FMU/nozzles
+        โดยมี venting คุมความดันถัง, balance คุมซ้าย-ขวา, EICAS คอยบอก quantity/pressure/flow/warning
+      </div>
+    </section>
+
+    <p class="footer">
+      จัดทำจากเนื้อหาที่คุยกันเรื่อง T-6C Fuel System เพื่อใช้ทบทวนการเรียนระบบ ไม่ใช้แทน Flight Manual / Checklist / Local Procedure
+    </p>
+  </div>
+</body>
+</html>

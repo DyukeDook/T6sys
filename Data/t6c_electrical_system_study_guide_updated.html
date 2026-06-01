@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>T-6C Electrical System Study Guide</title>
+  <style>
+    :root{
+      --bg:#07111f;
+      --panel:#0d1b2e;
+      --panel2:#10243d;
+      --line:#2d72ff;
+      --accent:#00d4ff;
+      --accent2:#ffd166;
+      --danger:#ff4d6d;
+      --ok:#56f39a;
+      --text:#eaf2ff;
+      --muted:#a8bddb;
+      --soft:#173253;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius: 22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Thai", "Noto Sans", Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(0,212,255,.18), transparent 35%),
+        radial-gradient(circle at 90% 0%, rgba(45,114,255,.25), transparent 32%),
+        linear-gradient(135deg, #050a13 0%, var(--bg) 48%, #030711 100%);
+      line-height:1.65;
+    }
+    .wrap{max-width:1160px;margin:0 auto;padding:34px 20px 70px}
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:34px;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:calc(var(--radius) + 8px);
+      background:linear-gradient(135deg, rgba(13,27,46,.9), rgba(16,36,61,.74));
+      box-shadow:var(--shadow);
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        linear-gradient(90deg, transparent 0 30%, rgba(0,212,255,.08) 30% 31%, transparent 31% 100%),
+        repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 1px, transparent 1px 18px);
+      pointer-events:none;
+    }
+    .hero > *{position:relative}
+    .badge{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      color:#06111f;
+      background:linear-gradient(90deg, var(--accent), #8bf5ff);
+      padding:7px 12px;
+      border-radius:999px;
+      font-weight:800;
+      font-size:13px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    h1{
+      margin:18px 0 8px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.05;
+      letter-spacing:-.04em;
+    }
+    .subtitle{
+      max-width:850px;
+      color:var(--muted);
+      font-size:18px;
+      margin:0 0 22px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap:14px;
+      margin-top:24px;
+    }
+    .stat{
+      background:rgba(255,255,255,.055);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;
+      padding:15px;
+      min-height:112px;
+    }
+    .stat b{display:block;font-size:20px;color:#fff}
+    .stat span{display:block;color:var(--muted);font-size:14px;margin-top:5px}
+    .toolbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:18px 0 0;
+    }
+    button,.ghost-link{
+      appearance:none;
+      border:0;
+      cursor:pointer;
+      color:#07111f;
+      background:var(--accent2);
+      font-weight:800;
+      border-radius:14px;
+      padding:10px 14px;
+      text-decoration:none;
+      font-size:14px;
+    }
+    button.secondary{
+      background:rgba(255,255,255,.08);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,.12);
+    }
+    section{
+      margin-top:26px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:var(--radius);
+      background:rgba(13,27,46,.82);
+      box-shadow:0 12px 40px rgba(0,0,0,.18);
+      overflow:hidden;
+    }
+    .section-head{
+      padding:22px 24px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(90deg, rgba(0,212,255,.08), transparent);
+    }
+    h2{margin:0;font-size:26px;letter-spacing:-.02em}
+    .section-head p{margin:7px 0 0;color:var(--muted)}
+    .content{padding:24px}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.035));
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;
+      padding:18px;
+    }
+    .card h3{margin:0 0 10px;font-size:19px;color:#fff}
+    .card p{margin:0;color:var(--muted)}
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:5px 10px;
+      border-radius:999px;
+      background:rgba(0,212,255,.12);
+      color:#aef7ff;
+      border:1px solid rgba(0,212,255,.25);
+      font-size:12px;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+    .tag.warn{background:rgba(255,209,102,.13);color:#ffe19a;border-color:rgba(255,209,102,.28)}
+    .tag.danger{background:rgba(255,77,109,.13);color:#ffb4c0;border-color:rgba(255,77,109,.30)}
+    .tag.ok{background:rgba(86,243,154,.12);color:#a6ffc9;border-color:rgba(86,243,154,.28)}
+    .flow{
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      gap:12px;
+      align-items:center;
+      margin:8px 0 22px;
+    }
+    .flowbox{
+      min-height:94px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:16px;
+      border-radius:18px;
+      background:#0b1d33;
+      border:1px solid rgba(0,212,255,.25);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+    }
+    .flowbox strong{font-size:20px}
+    .flowbox small{color:var(--muted)}
+    .arrow{
+      color:var(--accent);
+      font-size:36px;
+      font-weight:900;
+      text-shadow:0 0 24px rgba(0,212,255,.45);
+    }
+    .bus-diagram{
+      margin-top:18px;
+      border-radius:20px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02)),
+        #071425;
+      border:1px solid rgba(255,255,255,.10);
+      padding:18px;
+      overflow:auto;
+    }
+    svg{width:100%;min-width:760px;height:auto}
+    .note{
+      border-left:4px solid var(--accent2);
+      background:rgba(255,209,102,.10);
+      border-radius:14px;
+      padding:14px 16px;
+      color:#ffeac0;
+    }
+    .dangerbox{
+      border-left:4px solid var(--danger);
+      background:rgba(255,77,109,.10);
+      border-radius:14px;
+      padding:14px 16px;
+      color:#ffd3da;
+    }
+    .okbox{
+      border-left:4px solid var(--ok);
+      background:rgba(86,243,154,.10);
+      border-radius:14px;
+      padding:14px 16px;
+      color:#d8ffe7;
+    }
+    .checklist{
+      display:grid;
+      gap:12px;
+      counter-reset:item;
+    }
+    .step{
+      position:relative;
+      padding:14px 14px 14px 52px;
+      border-radius:16px;
+      background:rgba(255,255,255,.055);
+      border:1px solid rgba(255,255,255,.09);
+      color:var(--muted);
+    }
+    .step:before{
+      counter-increment:item;
+      content:counter(item);
+      position:absolute;
+      left:14px;
+      top:14px;
+      width:26px;
+      height:26px;
+      border-radius:50%;
+      background:var(--accent);
+      color:#06111f;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+    }
+    .step b{color:#fff}
+    .table-wrap{overflow:auto;border-radius:18px;border:1px solid rgba(255,255,255,.10)}
+    table{width:100%;border-collapse:collapse;min-width:720px;background:rgba(255,255,255,.035)}
+    th,td{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);vertical-align:top}
+    th{text-align:left;color:#fff;background:rgba(0,212,255,.10)}
+    td{color:var(--muted)}
+    tr:last-child td{border-bottom:0}
+    code{
+      background:rgba(0,0,0,.25);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:8px;
+      padding:2px 7px;
+      color:#b9f7ff;
+      font-family:"SFMono-Regular", Consolas, monospace;
+    }
+    .memory{
+      display:grid;
+      gap:12px;
+    }
+    .memory .line{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:14px;
+      border-radius:16px;
+      background:rgba(0,212,255,.06);
+      border:1px solid rgba(0,212,255,.13);
+    }
+    .emoji{font-size:22px;line-height:1}
+    footer{
+      margin-top:26px;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+    }
+    .toc{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .toc a{
+      color:#c8efff;
+      text-decoration:none;
+      padding:8px 11px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      font-size:13px;
+    }
+    @media (max-width:860px){
+      .hero-grid,.grid-2,.grid-3{grid-template-columns:1fr}
+      .flow{grid-template-columns:1fr}
+      .arrow{transform:rotate(90deg);justify-self:center}
+      .hero{padding:24px}
+      .content{padding:18px}
+    }
+    @media print{
+      body{background:#fff;color:#111}
+      .wrap{max-width:none;padding:0}
+      .hero,section,.card,.stat,.bus-diagram{box-shadow:none;background:#fff;color:#111;border-color:#bbb}
+      .subtitle,.stat span,.card p,td,footer,.section-head p{color:#333}
+      h1,h2,h3,.stat b,th{color:#111}
+      button,.toolbar,.toc{display:none}
+      section{break-inside:avoid}
+      .note,.dangerbox,.okbox{color:#111;background:#f4f4f4}
+      code{color:#111}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="badge">T-6C Study Card</div>
+      <h1>Electrical System</h1>
+      <p class="subtitle">
+        สรุประบบไฟฟ้า T-6C แบบอ่านง่าย: แหล่งจ่ายไฟ, Battery Bus, Generator Bus, Bus Tie,
+        External Power และ warning ที่นักบินควรเข้าใจ
+      </p>
+
+      <div class="toolbar">
+        <button onclick="window.print()">พิมพ์ / Save as PDF</button>
+        <button class="secondary" onclick="document.querySelector('#memory').scrollIntoView({behavior:'smooth'})">ไปที่สรุปจำสอบ</button>
+      </div>
+
+      <div class="toc">
+        <a href="#overview">ภาพรวม</a>
+        <a href="#sources">แหล่งจ่ายไฟ</a>
+        <a href="#bus">Bus & Flow</a>
+        <a href="#warnings">Warnings</a>
+        <a href="#hotbat">Hot Bat Bus</a>
+        <a href="#auxbat">Aux Bat</a>
+        <a href="#memory">จำแบบนักบิน</a>
+      </div>
+
+      <div class="hero-grid">
+        <div class="stat">
+          <b>28 VDC / 300 A</b>
+          <span>Starter/Generator เป็นไฟหลักเมื่อเครื่องติด</span>
+        </div>
+        <div class="stat">
+          <b>24 VDC / 42 Ah</b>
+          <span>Main Battery ใช้ start และ backup ระบบส่วนใหญ่</span>
+        </div>
+        <div class="stat">
+          <b>24 VDC / 5 Ah</b>
+          <span>Aux Battery สำหรับ emergency essential items</span>
+        </div>
+        <div class="stat">
+          <b>Bus Tie</b>
+          <span>สะพานเชื่อม Battery Bus กับ Generator Bus</span>
+        </div>
+      </div>
+    </header>
+
+    <section id="overview">
+      <div class="section-head">
+        <h2>1) ภาพรวมระบบ</h2>
+        <p>ให้มองระบบนี้เป็น “โรงไฟฟ้า + แบตสำรอง + รางจ่ายไฟ 2 ฝั่ง + สะพานเชื่อม”</p>
+      </div>
+      <div class="content">
+        <div class="flow">
+          <div class="flowbox">
+            <strong>Generator</strong>
+            <small>ไฟหลักตอนเครื่องยนต์ทำงาน</small>
+          </div>
+          <div class="arrow">→</div>
+          <div class="flowbox">
+            <strong>Generator Bus</strong>
+            <small>ระบบหลายตัวที่ใช้ไฟจากฝั่ง generator</small>
+          </div>
+        </div>
+
+        <div class="flow">
+          <div class="flowbox">
+            <strong>Main Battery</strong>
+            <small>start engine + backup</small>
+          </div>
+          <div class="arrow">→</div>
+          <div class="flowbox">
+            <strong>Battery Bus</strong>
+            <small>ระบบสำคัญจำนวนมากอยู่ฝั่งนี้</small>
+          </div>
+        </div>
+
+        <div class="bus-diagram" aria-label="Electrical system flow diagram">
+          <svg viewBox="0 0 980 440" role="img">
+            <defs>
+              <linearGradient id="blue" x1="0" x2="1">
+                <stop offset="0" stop-color="#00d4ff"/>
+                <stop offset="1" stop-color="#2d72ff"/>
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+              <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#00d4ff"/>
+              </marker>
+            </defs>
+
+            <rect x="30" y="40" width="230" height="92" rx="18" fill="#0d2542" stroke="#00d4ff" stroke-opacity=".55"/>
+            <text x="145" y="78" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="800">Starter / Generator</text>
+            <text x="145" y="106" text-anchor="middle" fill="#a8bddb" font-size="17">28 VDC / 300 A</text>
+
+            <rect x="30" y="305" width="230" height="92" rx="18" fill="#2d1f0b" stroke="#ffd166" stroke-opacity=".7"/>
+            <text x="145" y="343" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="800">Main Battery</text>
+            <text x="145" y="371" text-anchor="middle" fill="#ffe19a" font-size="17">24 VDC / 42 Ah</text>
+
+            <rect x="720" y="305" width="220" height="92" rx="18" fill="#18200f" stroke="#56f39a" stroke-opacity=".65"/>
+            <text x="830" y="343" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="800">Aux Battery</text>
+            <text x="830" y="371" text-anchor="middle" fill="#a6ffc9" font-size="17">24 VDC / 5 Ah</text>
+
+            <rect x="385" y="55" width="250" height="78" rx="18" fill="#10243d" stroke="#00d4ff" stroke-opacity=".65"/>
+            <text x="510" y="88" text-anchor="middle" fill="#ffffff" font-size="25" font-weight="800">Generator Bus</text>
+            <text x="510" y="115" text-anchor="middle" fill="#a8bddb" font-size="16">Right console CB</text>
+
+            <rect x="385" y="305" width="250" height="78" rx="18" fill="#10243d" stroke="#ffd166" stroke-opacity=".72"/>
+            <text x="510" y="338" text-anchor="middle" fill="#ffffff" font-size="25" font-weight="800">Battery Bus</text>
+            <text x="510" y="365" text-anchor="middle" fill="#ffe19a" font-size="16">Left console CB</text>
+
+            <rect x="415" y="180" width="190" height="70" rx="18" fill="#151b2d" stroke="#ffffff" stroke-opacity=".35"/>
+            <text x="510" y="210" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="800">BUS TIE</text>
+            <text x="510" y="235" text-anchor="middle" fill="#a8bddb" font-size="16">NORM = Connect</text>
+
+            <line x1="260" y1="86" x2="385" y2="94" stroke="url(#blue)" stroke-width="5" marker-end="url(#arrow)" filter="url(#glow)"/>
+            <line x1="510" y1="133" x2="510" y2="180" stroke="#00d4ff" stroke-width="5" marker-end="url(#arrow)" filter="url(#glow)"/>
+            <line x1="510" y1="250" x2="510" y2="305" stroke="#ffd166" stroke-width="5" marker-end="url(#arrow)"/>
+            <line x1="260" y1="350" x2="385" y2="344" stroke="#ffd166" stroke-width="5" marker-end="url(#arrow)"/>
+            <line x1="720" y1="350" x2="635" y2="344" stroke="#56f39a" stroke-width="5" marker-end="url(#arrow)"/>
+
+            <rect x="720" y="58" width="220" height="82" rx="18" fill="#291016" stroke="#ff4d6d" stroke-opacity=".62"/>
+            <text x="830" y="91" text-anchor="middle" fill="#ffffff" font-size="22" font-weight="800">External Power</text>
+            <text x="830" y="118" text-anchor="middle" fill="#ffb4c0" font-size="16">Distributed on Battery Bus</text>
+            <path d="M830 140 C830 220, 675 250, 610 306" fill="none" stroke="#ff4d6d" stroke-width="4" marker-end="url(#arrow)"/>
+          </svg>
+        </div>
+
+        <div class="note">
+          <b>จำสั้น ๆ:</b> หลังเครื่องติดแล้ว generator เป็นแหล่งไฟหลัก ส่วน battery เป็น backup และถูกชาร์จไว้ผ่านระบบ bus tie เมื่ออยู่ในสภาวะปกติ
+        </div>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="section-head">
+        <h2>2) แหล่งจ่ายไฟหลัก</h2>
+        <p>แต่ละแหล่งจ่ายไฟมีบทบาทต่างกัน ไม่ใช่ทุก battery จะเลี้ยงทั้งเครื่องบินได้เหมือนกัน</p>
+      </div>
+      <div class="content grid-3">
+        <div class="card">
+          <div class="tag ok">PRIMARY</div>
+          <h3>Starter / Generator</h3>
+          <p>
+            ตอน start ทำหน้าที่เป็น starter และหลังเครื่องยนต์ทำงานจะทำหน้าที่เป็น generator
+            เพื่อจ่ายไฟ 28 VDC ให้ระบบไฟฟ้าและชาร์จ battery
+          </p>
+        </div>
+        <div class="card">
+          <div class="tag warn">BACKUP</div>
+          <h3>Main Battery</h3>
+          <p>
+            Battery หลัก 24 VDC ใช้จ่ายไฟตอน start และเป็นแหล่งสำรองเมื่อ generator ไม่สามารถจ่ายไฟได้
+            สามารถเลี้ยงระบบส่วนใหญ่ได้ ยกเว้นบางระบบที่กินไฟสูง เช่น air conditioning
+          </p>
+        </div>
+        <div class="card">
+          <div class="tag danger">EMERGENCY</div>
+          <h3>Auxiliary Battery</h3>
+          <p>
+            Aux battery 24 VDC ขนาดเล็กกว่า ใช้สำหรับ emergency essential items เช่น backup flight instrument,
+            radio relays, IRU, standby VHF control และ FIRE 1 fire warning system โดยเวลาจะลดลงหาก transmit วิทยุบ่อย
+          </p>
+        </div>
+      </div>
+      <div class="content" style="padding-top:0">
+        <div class="grid-2">
+          <div class="okbox">
+            <b>Generator charging logic:</b> generator ต้องจ่ายไฟได้อย่างน้อยประมาณ <code>25 V</code>
+            เพื่อให้ชาร์จ battery ได้
+          </div>
+          <div class="dangerbox">
+            <b>External power caution:</b> ไม่ควรต่อ external power ถ้า battery voltage ต่ำกว่า <code>22.0 V</code>
+            เพราะอาจทำให้ aircraft battery เสียหาย
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="bus">
+      <div class="section-head">
+        <h2>3) Battery Bus, Generator Bus และ Bus Tie</h2>
+        <p>หัวใจของระบบคือการเข้าใจว่าไฟอยู่ฝั่งไหน และสะพาน Bus Tie ยังเชื่อมอยู่หรือไม่</p>
+      </div>
+      <div class="content">
+        <div class="grid-2">
+          <div class="card">
+            <div class="tag warn">LEFT CB PANEL</div>
+            <h3>Battery Bus</h3>
+            <p>
+              อยู่ฝั่ง left console circuit breaker panel เป็นฝั่งที่มีระบบสำคัญหลายรายการ เช่น battery-related items,
+              ignition, flap/gear control บางส่วน, AOA, boost pump และ backup/avionics บางส่วน
+            </p>
+          </div>
+          <div class="card">
+            <div class="tag ok">RIGHT CB PANEL</div>
+            <h3>Generator Bus</h3>
+            <p>
+              อยู่ฝั่ง right console circuit breaker panel เป็นฝั่งที่มีอุปกรณ์จำนวนมาก เช่น air conditioning,
+              probe anti-ice, NWS, speed brake, COM1, transponder, ADC และ lights บางส่วน
+            </p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:26px">Normal Flow</h3>
+        <div class="checklist">
+          <div class="step"><b>BAT ON</b> → Main Battery จ่ายไฟให้ Battery Bus เพื่อเตรียม start</div>
+          <div class="step"><b>Engine start</b> → Starter/generator ใช้บทบาท starter</div>
+          <div class="step"><b>GEN ON</b> → หลังเครื่องติด generator กลายเป็นแหล่งไฟหลัก</div>
+          <div class="step"><b>BUS TIE NORM</b> → Generator เลี้ยงทั้ง Generator Bus และ Battery Bus พร้อมชาร์จ battery</div>
+        </div>
+
+        <div class="note" style="margin-top:18px">
+          <b>BUS TIE = สะพานไฟ</b> ถ้าอยู่ <code>NORM</code> จะเชื่อมสอง bus เข้าด้วยกัน
+          แต่ถ้า <code>OPEN</code> หรือ fail จะเกิด BUS TIE caution และสอง bus ถูกแยกออกจากกัน
+        </div>
+      </div>
+    </section>
+
+    <section id="warnings">
+      <div class="section-head">
+        <h2>4) Warning / Caution ที่ควรเข้าใจ</h2>
+        <p>ตารางนี้เป็นแนวคิดเพื่อเรียน ไม่ใช้แทน checklist จริง</p>
+      </div>
+      <div class="content">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Indication</th>
+                <th>ความหมายโดยหลัก</th>
+                <th>สิ่งที่ควรคิดใน cockpit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>GEN</code> Warning</td>
+                <td>Generator ไม่ได้จ่ายไฟ หรือระบบ generator มีปัญหา</td>
+                <td>
+                  Battery จะเริ่มรับภาระแทน, battery ไม่ถูกชาร์จ, air conditioning เป็น load ที่ถูก shed อัตโนมัติ
+                  และต้องนึกถึงการลด electrical load ตาม checklist
+                </td>
+              </tr>
+              <tr>
+                <td><code>GEN BUS</code> Warning</td>
+                <td>Generator Bus ใช้งานไม่ได้ หรือเสียไฟฝั่ง generator bus</td>
+                <td>
+                  ของที่อยู่บน Generator Bus จะหาย แต่ถ้า generator ยังทำงานและ Bus Tie อยู่ NORM
+                  generator อาจยังเลี้ยง Battery Bus และชาร์จ battery ได้
+                </td>
+              </tr>
+              <tr>
+                <td><code>BAT BUS</code> Warning</td>
+                <td>Battery Bus มีปัญหา หรือ sensing/current limiter มีปัญหา</td>
+                <td>
+                  ต้องสงสัย multiple failures ของระบบฝั่ง Battery Bus เช่น display/UFCP/trim/flap/gear control บางส่วน
+                  และอาจต้องแยก fault ด้วย Bus Tie ตาม checklist
+                </td>
+              </tr>
+              <tr>
+                <td><code>BUS TIE</code> Caution</td>
+                <td>Battery Bus และ Generator Bus ถูกตัดแยกกัน</td>
+                <td>
+                  Generator Bus ยังอยู่ได้ถ้า generator ดี ส่วน Battery Bus จะอยู่ได้เท่าที่ battery ยังมีไฟ
+                  จึงต้องลด non-essential load บน Battery Bus
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="dangerbox" style="margin-top:18px">
+          <b>สำคัญ:</b> หน้า HTML นี้เป็น study guide สำหรับเข้าใจระบบ ไม่ใช่ checklist ปฏิบัติการบินจริง
+          เวลาใช้งานจริงต้องยึด Flight Manual / Checklist ของหน่วยเป็นหลักเสมอ
+        </div>
+      </div>
+    </section>
+
+
+    <section id="hotbat">
+      <div class="section-head">
+        <h2>5) Hot Bat Bus คืออะไร</h2>
+        <p>Hot Bat Bus คือบัสไฟเล็กที่ต่อกับ battery โดยตรง ทำให้บางวงจรยังมีไฟได้แม้ระบบไฟหลักยังไม่ได้เปิดเต็มรูปแบบ</p>
+      </div>
+      <div class="content">
+        <div class="grid-2">
+          <div class="card">
+            <div class="tag danger">ALWAYS ENERGIZED</div>
+            <h3>ความหมายของคำว่า Hot</h3>
+            <p>
+              ในระบบไฟฟ้าเครื่องบิน คำว่า <b>Hot</b> ไม่ได้หมายถึง “ร้อน”
+              แต่หมายถึงวงจรนั้น <b>มีไฟเลี้ยงอยู่ / energized</b>
+              โดยต่อมาจาก battery โดยตรงในวงจรที่กำหนด
+            </p>
+          </div>
+          <div class="card">
+            <div class="tag warn">DIRECT BATTERY PATH</div>
+            <h3>ต่างจาก Battery Bus ปกติ</h3>
+            <p>
+              Battery Bus หลักต้องผ่าน power path และ switch logic ของระบบมากกว่า
+              แต่ Hot Bat Bus เป็นวงจรที่ออกแบบให้บางอุปกรณ์สำคัญมีไฟได้ตลอดหรือพร้อมใช้งานเร็ว
+            </p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:26px">อุปกรณ์ที่อยู่กับ Hot Bat Bus</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>ทำไมถึงอยู่ Hot Bat Bus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>RAM AIR VALVE</code></td>
+                <td>เกี่ยวข้องกับระบบอากาศ/ventilation บางสภาวะ จึงต้องพร้อมใช้ในบาง emergency logic</td>
+              </tr>
+              <tr>
+                <td><code>CLOCKS</code></td>
+                <td>ต้องรักษาเวลาไว้ ไม่ควรขึ้นกับการเปิด aircraft power เต็มระบบ</td>
+              </tr>
+              <tr>
+                <td><code>ELT</code></td>
+                <td>Emergency Locator Transmitter เป็นอุปกรณ์ฉุกเฉินที่ควรพร้อมทำงานได้แม้ระบบไฟหลักไม่ได้เปิด</td>
+              </tr>
+              <tr>
+                <td><code>BATTERY</code></td>
+                <td>เป็น source โดยตรงของ Hot Bat Bus</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="dangerbox" style="margin-top:18px">
+          <b>ข้อควรระวัง:</b> เพราะ Hot Bat Bus อาจมีไฟอยู่แม้ BAT switch OFF
+          ถ้ามี load หรือ fault ในวงจรนี้ อาจทำให้ battery discharge ได้
+        </div>
+
+        <div class="okbox" style="margin-top:18px">
+          <b>จำสั้นที่สุด:</b>
+          <code>Hot Bat Bus = ไฟตรงจากแบต สำหรับของที่ต้องพร้อมเสมอ เช่น RAM AIR VALVE, CLOCKS, ELT</code>
+        </div>
+      </div>
+    </section>
+
+    <section id="auxbat">
+      <div class="section-head">
+        <h2>6) Auxiliary Battery และ Aux Bat Test</h2>
+        <p>Aux Bat คือแบตเตอรี่ฉุกเฉินขนาดเล็กที่เลี้ยงเฉพาะ essential items ไม่ใช่ battery สำหรับเลี้ยงทั้งเครื่องบิน</p>
+      </div>
+      <div class="content">
+        <div class="grid-3">
+          <div class="card">
+            <div class="tag danger">EMERGENCY BATTERY</div>
+            <h3>Aux Battery</h3>
+            <p>
+              Auxiliary Battery เป็น battery สำรองฉุกเฉิน ขนาด <b>24 VDC, 5 Ah</b>
+              อยู่ใน left avionics compartment และควบคุมด้วย AUX BAT switch ที่ front cockpit right console
+            </p>
+          </div>
+          <div class="card">
+            <div class="tag warn">LIMITED TIME</div>
+            <h3>เวลาใช้งาน</h3>
+            <p>
+              ใช้งานได้ประมาณ <b>30 นาที</b> สำหรับ essential load
+              แต่ถ้าใช้วิทยุ transmit บ่อย เวลาจะลดลง เพราะการส่งวิทยุกินไฟมากกว่าการ receive
+            </p>
+          </div>
+          <div class="card">
+            <div class="tag ok">LAST RESORT</div>
+            <h3>บทบาทหลัก</h3>
+            <p>
+              เป็น backup สุดท้ายเมื่อ generator, main battery หรือ Battery Bus มีปัญหา
+              เพื่อให้ยังมีเครื่องวัดสำรองและช่องทางสื่อสารใน emergency
+            </p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:26px">Aux Bat จ่ายไฟให้ระบบอะไร</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ระบบ</th>
+                <th>เหตุผลที่สำคัญ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>Backup Flight Instrument</code></td>
+                <td>ช่วยให้ยังดู attitude / altitude / airspeed backup ได้เมื่อระบบหลักเสีย</td>
+              </tr>
+              <tr>
+                <td><code>Radio Relays</code></td>
+                <td>ช่วยให้ระบบวิทยุ emergency routing ยังทำงานได้</td>
+              </tr>
+              <tr>
+                <td><code>IRU</code></td>
+                <td>รักษา reference บางส่วนของระบบ inertial/navigation</td>
+              </tr>
+              <tr>
+                <td><code>Standby VHF Control</code></td>
+                <td>ใช้สื่อสารผ่าน standby VHF ในสภาวะไฟฟ้าขัดข้อง</td>
+              </tr>
+              <tr>
+                <td><code>FIRE 1 Fire Warning System</code></td>
+                <td>คงความสามารถในการรับ warning ไฟไหม้ฝั่ง FIRE 1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top:26px">Aux Bat Test</h3>
+        <div class="grid-2">
+          <div class="card">
+            <div class="tag ok">TEST FLOW</div>
+            <h3>วิธีคิดของการ test</h3>
+            <div class="checklist">
+              <div class="step"><b>BAT switch - ON</b> เพื่อให้ test panel มีไฟ</div>
+              <div class="step"><b>Hold AUX BAT TEST</b> อย่างน้อย <code>5 seconds</code></div>
+              <div class="step"><b>ดู AUX BAT test light</b> ไฟควรติดเฉพาะตอนกด/hold switch</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="tag warn">INTERPRETATION</div>
+            <h3>แปลผลไฟ AUX BAT</h3>
+            <p>
+              ถ้าไฟ <b>ติดขณะ hold switch</b> แปลว่า Aux Battery มี charge อยู่ในระดับ acceptable / flight capable
+              และ test light ทำงาน
+            </p>
+            <p style="margin-top:12px">
+              ถ้าไฟ <b>ไม่ติด</b> แปลว่า Aux Battery ต่ำกว่า <b>50% capacity</b>
+              ในเชิงเรียนให้จำว่าไม่พร้อมสำหรับ flight capability ตาม test นี้
+            </p>
+          </div>
+        </div>
+
+        <div class="note" style="margin-top:18px">
+          <b>จุดที่มักสับสน:</b> Aux Bat Test ไม่ใช่การเปิดใช้ Aux Battery เพื่อเลี้ยงเครื่องบินทั้งระบบ
+          แต่เป็นการเช็กว่า Aux Battery มีไฟพอ และ AUX BAT light ใช้งานได้
+        </div>
+
+        <div class="okbox" style="margin-top:18px">
+          <b>จำสั้นที่สุด:</b>
+          <code>Aux Bat = 24 VDC / 5 Ah emergency battery, เลี้ยง BFI + radio relays + IRU + standby VHF + FIRE 1 ประมาณ 30 นาที</code>
+        </div>
+      </div>
+    </section>
+
+    <section id="memory">
+      <div class="section-head">
+        <h2>7) จำแบบนักบิน</h2>
+        <p>สรุปเป็นประโยคสั้น ๆ สำหรับทบทวนก่อนสอบ/brief</p>
+      </div>
+      <div class="content">
+        <div class="memory">
+          <div class="line"><div class="emoji">⚡</div><div><b>Generator = ไฟหลัก</b><br/>เครื่องติดแล้ว generator เลี้ยงระบบและชาร์จ battery</div></div>
+          <div class="line"><div class="emoji">🔋</div><div><b>Main Battery = backup หลัก</b><br/>ใช้ start engine และรับภาระแทนเมื่อ generator fail</div></div>
+          <div class="line"><div class="emoji">🟢</div><div><b>Aux Battery = backup สุดท้าย</b><br/>เลี้ยงเฉพาะ emergency essential items ประมาณ 30 นาที ขึ้นกับการใช้งาน</div></div>
+          <div class="line"><div class="emoji">🌉</div><div><b>Bus Tie = สะพาน</b><br/>NORM คือเชื่อม Battery Bus กับ Generator Bus; OPEN/fail คือแยกสอง bus</div></div>
+          <div class="line"><div class="emoji">⬅️</div><div><b>Left CB = Battery Bus</b><br/>จำซ้ายเป็น Battery Bus</div></div>
+          <div class="line"><div class="emoji">➡️</div><div><b>Right CB = Generator Bus</b><br/>จำขวาเป็น Generator Bus</div></div>
+        </div>
+
+        <div class="okbox" style="margin-top:18px">
+          <b>One-line summary:</b>
+          <code>NORMAL = GEN ON + BAT ON + BUS TIE NORM</code>
+          → generator เลี้ยงทั้งสอง bus และชาร์จ battery
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Study guide generated for T-6C Electrical System review • Use official manual/checklist for actual operations.
+    </footer>
+  </div>
+</body>
+</html>

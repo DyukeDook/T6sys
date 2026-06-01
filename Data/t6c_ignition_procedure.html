@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>T-6C Ignition System Procedure - Training Aid</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #637086;
+      --line: #dde3ee;
+      --blue: #2563eb;
+      --blue-soft: #eaf1ff;
+      --red: #b42318;
+      --red-soft: #fff1f0;
+      --amber: #a15c00;
+      --amber-soft: #fff7e6;
+      --green: #147d4f;
+      --green-soft: #eaf8f0;
+      --purple: #6d3fc2;
+      --purple-soft: #f3edff;
+      --shadow: 0 10px 30px rgba(22, 34, 51, .08);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 320px);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    .page { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 56px; }
+    header.hero {
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(255,255,255,.8);
+      backdrop-filter: blur(10px);
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .eyebrow { color: var(--blue); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: .8rem; }
+    h1, h2, h3 { line-height: 1.25; margin: 0; }
+    h1 { font-size: clamp(2rem, 4vw, 3.4rem); margin-top: 8px; }
+    h2 { font-size: clamp(1.45rem, 2.5vw, 2.1rem); margin-bottom: 14px; }
+    h3 { font-size: 1.06rem; margin-bottom: 8px; }
+    p { margin: 0 0 12px; }
+    .lead { color: var(--muted); font-size: 1.08rem; max-width: 860px; margin-top: 12px; }
+    .source { color: var(--muted); font-size: .92rem; margin-top: 16px; }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-weight: 750;
+      cursor: pointer;
+      transition: .15s ease;
+    }
+    .btn:hover, .btn.active { border-color: var(--blue); color: var(--blue); box-shadow: 0 4px 14px rgba(37,99,235,.12); }
+    .btn.print { margin-left: auto; }
+
+    nav.toc {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin: 20px 0;
+    }
+    nav.toc a {
+      text-decoration: none;
+      color: var(--ink);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 750;
+      box-shadow: 0 4px 16px rgba(22,34,51,.04);
+    }
+    nav.toc a:hover { border-color: var(--blue); color: var(--blue); }
+
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 18px 0;
+      box-shadow: 0 6px 20px rgba(22,34,51,.045);
+    }
+
+    .grid { display: grid; gap: 16px; }
+    .grid.two { grid-template-columns: repeat(2, 1fr); }
+    .grid.three { grid-template-columns: repeat(3, 1fr); }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: #fff;
+    }
+    .card.soft-blue { background: var(--blue-soft); border-color: #cfe0ff; }
+    .card.soft-green { background: var(--green-soft); border-color: #c8ecd8; }
+    .card.soft-purple { background: var(--purple-soft); border-color: #ded1ff; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-weight: 850;
+      font-size: .78rem;
+      margin-bottom: 10px;
+    }
+    .pill.blue { background: var(--blue-soft); color: var(--blue); }
+    .pill.green { background: var(--green-soft); color: var(--green); }
+    .pill.purple { background: var(--purple-soft); color: var(--purple); }
+
+    .matrix { width: 100%; border-collapse: separate; border-spacing: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; }
+    .matrix th, .matrix td { padding: 12px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    .matrix th { background: #f1f5fb; color: #23304a; font-size: .9rem; }
+    .matrix tr:last-child td { border-bottom: none; }
+    .matrix strong { color: var(--ink); }
+    .matrix .scenario { font-weight: 900; white-space: nowrap; }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      counter-reset: step;
+    }
+    .step {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px 16px 16px 48px;
+      background: #fff;
+      min-height: 112px;
+    }
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 14px;
+      top: 16px;
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 900;
+      font-size: .82rem;
+    }
+    .step small { color: var(--muted); display: block; margin-top: 4px; }
+
+    .callout {
+      border-radius: 18px;
+      padding: 16px 18px;
+      border: 1px solid;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      margin: 12px 0;
+      break-inside: avoid;
+    }
+    .callout .icon { width: 36px; height: 36px; border-radius: 12px; display: grid; place-items: center; font-weight: 950; color: #fff; }
+    .callout.warning { background: var(--red-soft); border-color: #ffcbc8; }
+    .callout.warning .icon { background: var(--red); }
+    .callout.warning h3 { color: var(--red); }
+    .callout.caution { background: var(--amber-soft); border-color: #ffe0a6; }
+    .callout.caution .icon { background: var(--amber); }
+    .callout.caution h3 { color: var(--amber); }
+    .callout.note { background: var(--blue-soft); border-color: #cfe0ff; }
+    .callout.note .icon { background: var(--blue); }
+    .callout.note h3 { color: var(--blue); }
+    .callout.hidden { display: none; }
+
+    .tagline { color: var(--muted); font-size: .96rem; }
+    .compact-list { margin: 8px 0 0; padding-left: 20px; }
+    .compact-list li { margin: 4px 0; }
+    code.kbd {
+      display: inline-block;
+      border: 1px solid #ccd4e0;
+      border-bottom-width: 2px;
+      border-radius: 7px;
+      background: #fff;
+      padding: 1px 6px;
+      font-family: inherit;
+      font-weight: 850;
+      color: #26334d;
+    }
+
+    .decision {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+    .decision .arrow { color: var(--blue); font-weight: 950; font-size: 1.6rem; text-align: center; }
+
+    footer { color: var(--muted); text-align: center; padding: 28px 0 0; font-size: .92rem; }
+
+    @media (max-width: 920px) {
+      nav.toc { grid-template-columns: repeat(2, 1fr); }
+      .grid.two, .grid.three, .flow, .decision { grid-template-columns: 1fr; }
+      .decision .arrow { transform: rotate(90deg); }
+      .matrix { display: block; overflow-x: auto; }
+      .btn.print { margin-left: 0; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { width: 100%; padding: 0; }
+      header.hero, section { box-shadow: none; border-color: #bfc7d4; }
+      .toolbar, nav.toc { display: none; }
+      .callout.hidden { display: grid; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="eyebrow">T-6C Propulsion Courseware</div>
+      <h1>Ignition System Procedure</h1>
+      <p class="lead">สรุปแบบ training aid: ยุบข้อมูลซ้ำให้เหลือ common rules, แยกสถานการณ์การใช้งาน และเน้น <strong>WARNING / CAUTION / NOTE</strong> ให้มองเห็นทันที</p>
+      <p class="source">Source basis: T-6C Flight Manual - Start and Ignition System, Auto Start Operations, Motoring Run Procedure, and Airstart sections. ใช้เพื่อการเรียนระบบเท่านั้น ไม่ใช้แทน checklist/flight manual ฉบับทางการ</p>
+      <div class="toolbar" aria-label="Filter callouts">
+        <button class="btn active" data-filter="all">Show all</button>
+        <button class="btn" data-filter="warning">WARNING</button>
+        <button class="btn" data-filter="caution">CAUTION</button>
+        <button class="btn" data-filter="note">NOTE</button>
+        <button class="btn print" onclick="window.print()">Print / Save PDF</button>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Table of contents">
+      <a href="#model">1. Mental Model</a>
+      <a href="#matrix">2. Decision Matrix</a>
+      <a href="#flows">3. Procedure Flow</a>
+      <a href="#callouts">4. W/C/N</a>
+      <a href="#memory">5. Memory Hooks</a>
+    </nav>
+
+    <section id="model">
+      <h2>1. Mental Model: เข้าใจ switch ก่อนจำ procedure</h2>
+      <div class="grid three">
+        <article class="card soft-blue">
+          <span class="pill blue">IGNITION</span>
+          <h3><code class="kbd">NORM</code> = ให้ PMU คุม igniters</h3>
+          <p>ใช้ใน normal ground auto start และ normal operation. PMU จะ energize/de-energize igniters เมื่อ logic ต้องการ</p>
+          <h3><code class="kbd">ON</code> = นักบินสั่ง igniters เอง</h3>
+          <p>ใช้เด่นใน airstart และ PMU OFF case เพื่อให้ ignition พร้อมเมื่อ fuel ถูก introduce</p>
+        </article>
+
+        <article class="card soft-green">
+          <span class="pill green">STARTER</span>
+          <h3><code class="kbd">AUTO/RESET</code> = momentary</h3>
+          <p>โยกแล้ว spring กลับ NORM. ใช้ initiate auto start sequence หรือ reset/abort บางกรณีตามเงื่อนไข</p>
+          <h3><code class="kbd">MANUAL</code> = ค้างจนกว่าจะสั่งกลับ</h3>
+          <p>ต้องยกข้าม detent. ใช้ motoring และ PMU OFF airstart. ไม่ spring-loaded กลับเอง</p>
+        </article>
+
+        <article class="card soft-purple">
+          <span class="pill purple">PMU</span>
+          <h3>PMU = ตัวจัด sequence</h3>
+          <p>ใน normal start, PMU คุม starter, boost pump, igniters และ fuel scheduling พร้อม monitor N1, ITT, fuel flow</p>
+          <p>เมื่อ PMU OFF, นักบินต้องคุม fuel/ignition/starter และ monitor limit เองมากขึ้น</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="matrix">
+      <h2>2. Decision Matrix: ตัดข้อมูลซ้ำให้อยู่ในตารางเดียว</h2>
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th>IGNITION</th>
+            <th>STARTER</th>
+            <th>ใครคุม sequence?</th>
+            <th>Key monitor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="scenario">Ground Auto Start</td>
+            <td><strong>NORM</strong></td>
+            <td><strong>AUTO/RESET</strong></td>
+            <td>PMU คุม starter, boost pump, igniters, fuel</td>
+            <td>ST READY, N1, ITT, fuel flow, oil pressure</td>
+          </tr>
+          <tr>
+            <td class="scenario">Motoring Run</td>
+            <td><strong>NORM</strong></td>
+            <td><strong>MANUAL</strong> ไม่เกิน 20 sec</td>
+            <td>นักบินสั่ง starter เพื่อ clear residual fuel / lower ITT</td>
+            <td>Starter duty cycle, ITT trend, prop area clear</td>
+          </tr>
+          <tr>
+            <td class="scenario">PMU NORM Airstart</td>
+            <td><strong>ON</strong></td>
+            <td><strong>AUTO/RESET</strong></td>
+            <td>PMU ช่วย sequencing แต่ pilot ต้อง monitor เอง</td>
+            <td>N1 rise, ITT rise, fuel flow, oil pressure, altitude</td>
+          </tr>
+          <tr>
+            <td class="scenario">PMU OFF Airstart</td>
+            <td><strong>ON</strong></td>
+            <td><strong>MANUAL</strong></td>
+            <td>นักบินคุมเองมากที่สุด โดยเฉพาะ PCL/fuel</td>
+            <td>Fuel flow 75-80 pph initial, ITT peak, N1 acceleration</td>
+          </tr>
+          <tr>
+            <td class="scenario">Immediate Airstart</td>
+            <td><strong>ON after success check/confirm</strong></td>
+            <td><strong>AUTO/RESET</strong></td>
+            <td>ใช้เมื่อเวลา/altitude จำกัด และ PMU NORM</td>
+            <td>N1 rise within 5 sec, ITT within 10 sec after fuel flow</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="flows">
+      <h2>3. Procedure Flow: เขียนเป็น logic ไม่ใช่ checklist เต็ม</h2>
+
+      <h3>Ground Auto Start Logic</h3>
+      <div class="flow">
+        <div class="step"><strong>PCL to start position</strong><small>หา ST READY advisory</small></div>
+        <div class="step"><strong>Confirm ST READY stability</strong><small>ควรเห็น ST READY ค้างมากกว่า 3 sec ก่อน start</small></div>
+        <div class="step"><strong>STARTER AUTO/RESET</strong><small>PMU สั่ง starter + boost pump + igniters + fuel</small></div>
+        <div class="step"><strong>At ~50% N1</strong><small>Starter/igniters de-energize; engine accelerate to idle ~60-61% N1</small></div>
+      </div>
+
+      <h3 style="margin-top:22px;">Motoring Run Logic</h3>
+      <div class="flow">
+        <div class="step"><strong>PCL OFF</strong><small>หยุด fuel ก่อน</small></div>
+        <div class="step"><strong>IGNITION NORM</strong><small>ไม่ต้องการจุดระเบิดเพิ่ม</small></div>
+        <div class="step"><strong>Prop area clear</strong><small>รักษาความปลอดภัยภายนอก</small></div>
+        <div class="step"><strong>STARTER MANUAL</strong><small>motor engine สูงสุด 20 sec แล้วกลับ NORM</small></div>
+      </div>
+
+      <h3 style="margin-top:22px;">Airstart Decision Logic</h3>
+      <div class="decision">
+        <article class="card">
+          <h3>PMU FAIL ไม่ขึ้น</h3>
+          <p>ใช้ <strong>PMU NORM Airstart</strong>: IGNITION ON, STARTER AUTO/RESET, PCL IDLE หลัง N1 มากกว่า minimum ที่ procedure กำหนด</p>
+        </article>
+        <div class="arrow">→</div>
+        <article class="card">
+          <h3>PMU FAIL ขึ้น</h3>
+          <p>ใช้ <strong>PMU OFF Airstart</strong>: PMU OFF, IGNITION ON, STARTER MANUAL, ค่อย ๆ advance PCL พร้อม monitor fuel flow/ITT/N1</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="callouts">
+      <h2>4. WARNING / CAUTION / NOTE ที่ควรทำให้เด่น</h2>
+      <p class="tagline">ใช้ปุ่มด้านบนเพื่อกรองเฉพาะระดับที่ต้องการ</p>
+
+      <article class="callout warning" data-level="warning">
+        <div class="icon">W</div>
+        <div>
+          <h3>Abort engine start ถ้ามีอาการ abnormal</h3>
+          <p>ถ้าเกิดอาการผิดปกติระหว่าง start เช่น ITT พุ่ง, ไม่มี light-off, hung/no start, หรือ indication ไม่ปกติ ต้อง abort ตาม procedure และทำ motoring ถ้ามี fuel introduced</p>
+        </div>
+      </article>
+
+      <article class="callout warning" data-level="warning">
+        <div class="icon">W</div>
+        <div>
+          <h3>PCL above IDLE ก่อน N1 stable อาจทำให้ overtemperature รุนแรง</h3>
+          <p>ในการ airstart ห้ามเร่ง PCL เกิน IDLE ก่อน N1 stabilize ประมาณ idle RPM เพราะ fuel flow จะเพิ่มและอาจทำให้ ITT overtemperature รุนแรงมาก</p>
+        </div>
+      </article>
+
+      <article class="callout warning" data-level="warning">
+        <div class="icon">W</div>
+        <div>
+          <h3>Low altitude airstart: อย่าหน่วงการตัดสินใจ eject</h3>
+          <p>Airstart ไม่แนะนำต่ำกว่า 2,000 ft AGL. ถ้าอยู่ต่ำและสถานการณ์ไม่เอื้อ ต้องให้ priority กับ ejection หรือ aircraft recovery ตาม emergency procedure</p>
+        </div>
+      </article>
+
+      <article class="callout caution" data-level="caution">
+        <div class="icon">C</div>
+        <div>
+          <h3>ST READY ต้องค้างก่อน AUTO/RESET</h3>
+          <p>ก่อนเริ่ม ground auto start ควรแน่ใจว่า ST READY advisory ยัง illuminated มากกว่า 3 sec. ถ้า start โดยไม่มี auto start protection อาจสูญเสีย automatic shutdown feature</p>
+        </div>
+      </article>
+
+      <article class="callout caution" data-level="caution">
+        <div class="icon">C</div>
+        <div>
+          <h3>ถ้า ST READY extinguishes ระหว่าง start: PMU auto protection อาจหาย</h3>
+          <p>เมื่อ ST READY ดับระหว่าง sequence, PMU อาจไม่ cut off fuel ให้เพื่อ terminate start. นักบินต้อง abort manually ด้วย PCL OFF หรือ AUTO/RESET ตามตำแหน่ง PCL/IDLE gate</p>
+        </div>
+      </article>
+
+      <article class="callout caution" data-level="caution">
+        <div class="icon">C</div>
+        <div>
+          <h3>PMU STATUS caution: อย่าดำเนิน Engine Start (AUTO) ต่อ</h3>
+          <p>PMU auto abort function อาจ unavailable. ต้องแก้สถานะ PMU ก่อน ไม่ควร continue auto start เมื่อ PMU STATUS ยังอยู่</p>
+        </div>
+      </article>
+
+      <article class="callout caution" data-level="caution">
+        <div class="icon">C</div>
+        <div>
+          <h3>BOOST PUMP ON ต่อเนื่องทำให้ low pressure fuel pump เสียหายได้</h3>
+          <p>หลัง airstart สำเร็จ/landing ต้องจัดการตาม procedure และแจ้ง maintenance ถึงระยะเวลาที่ BOOST PUMP อยู่ ON หาก manual กำหนด</p>
+        </div>
+      </article>
+
+      <article class="callout caution" data-level="caution">
+        <div class="icon">C</div>
+        <div>
+          <h3>PCL ต้อง OFF ก่อน airstart</h3>
+          <p>PCL OFF ช่วย feather propeller, หยุด fuel flow และป้องกัน fuel เข้า combustion chamber ก่อน ignition พร้อม ซึ่งอาจนำไปสู่ hot start</p>
+        </div>
+      </article>
+
+      <article class="callout note" data-level="note">
+        <div class="icon">N</div>
+        <div>
+          <h3>IGN SEL = ignition selected/on</h3>
+          <p>จะขึ้นเมื่อ IGNITION switch อยู่ ON หรือ igniters ถูก activate ระหว่าง auto start. ถ้าค้างต่อเนื่องผิดปกติหลังควรดับ ให้บันทึก/แจ้ง maintenance</p>
+        </div>
+      </article>
+
+      <article class="callout note" data-level="note">
+        <div class="icon">N</div>
+        <div>
+          <h3>STARTER MANUAL ไม่ spring-loaded กลับ NORM</h3>
+          <p>หลังใช้ MANUAL ต้องสั่งกลับ NORM เอง. หลัง airstart สำเร็จ ถ้า generator reset ไม่ได้ ให้ verify STARTER อยู่ NORM</p>
+        </div>
+      </article>
+
+      <article class="callout note" data-level="note">
+        <div class="icon">N</div>
+        <div>
+          <h3>Motoring Run ใช้ clear residual fuel / lower ITT</h3>
+          <p>ทำหลัง aborted start ที่มี fuel introduced และต้องสังเกต starter duty-cycle cool-down period ก่อน attempt ถัดไป</p>
+        </div>
+      </article>
+
+      <article class="callout note" data-level="note">
+        <div class="icon">N</div>
+        <div>
+          <h3>PMU auto start monitor</h3>
+          <p>ในการ ground auto start, PMU monitor N1, ITT และ fuel flow. ใน flight mode, sequencing ยังช่วยได้ แต่ automatic shutdown feature ไม่เหมือน ground start จึงต้อง monitor เองอย่างใกล้ชิด</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="memory">
+      <h2>5. Memory Hooks</h2>
+      <div class="grid two">
+        <article class="card soft-blue">
+          <h3>จำ switch</h3>
+          <ul class="compact-list">
+            <li><strong>IGNITION NORM</strong> = PMU คุมไฟ</li>
+            <li><strong>IGNITION ON</strong> = pilot สั่งไฟ</li>
+            <li><strong>STARTER AUTO/RESET</strong> = momentary / auto sequence</li>
+            <li><strong>STARTER MANUAL</strong> = ค้างจนกว่าจะกลับ NORM</li>
+          </ul>
+        </article>
+        <article class="card soft-green">
+          <h3>จำ scenario</h3>
+          <ul class="compact-list">
+            <li><strong>Ground Auto Start</strong>: NORM + AUTO/RESET</li>
+            <li><strong>Motoring</strong>: NORM + MANUAL</li>
+            <li><strong>PMU NORM Airstart</strong>: ON + AUTO/RESET</li>
+            <li><strong>PMU OFF Airstart</strong>: ON + MANUAL</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      Training aid for courseware. Always use the official T-6C Flight Manual/checklist for aircraft operation.
+    </footer>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll('[data-filter]');
+    const callouts = document.querySelectorAll('.callout');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        buttons.forEach(b => b.classList.remove('active'));
+        button.classList.add('active');
+        callouts.forEach(card => {
+          const show = filter === 'all' || card.dataset.level === filter;
+          card.classList.toggle('hidden', !show);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

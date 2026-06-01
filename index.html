@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>T6Sys Study Library</title>
+  <script src="library-data.js"></script>
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --surface: #ffffff;
+      --surface-soft: #eef3f7;
+      --text: #17202a;
+      --muted: #667789;
+      --line: #d7e0e8;
+      --accent: #0f766e;
+      --accent-soft: #e2f4f1;
+      --shadow: 0 12px 28px rgba(23, 32, 42, .08);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Thai", "Noto Sans", Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    input,
+    select {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 54px;
+    }
+
+    .hero {
+      display: grid;
+      gap: 18px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 8px 0 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface-soft);
+      white-space: nowrap;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(240px, 1.2fr) minmax(220px, .8fr);
+      gap: 10px;
+      align-items: center;
+    }
+
+    .control {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--text);
+      padding: 10px 12px;
+      outline: none;
+    }
+
+    .control:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, .13);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 28px 0 12px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .section-head span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .topic-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .topic-link {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .topic-link:hover,
+    .topic-link:focus-visible {
+      border-color: var(--accent);
+      box-shadow: 0 8px 22px rgba(23, 32, 42, .08);
+      outline: none;
+    }
+
+    .topic-main {
+      min-width: 0;
+    }
+
+    .topic-title {
+      display: block;
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.28;
+    }
+
+    .topic-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .meta-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 25px;
+      padding: 3px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface-soft);
+      max-width: 100%;
+    }
+
+    .open-label {
+      color: var(--accent);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .section-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .section-chip {
+      display: inline-flex;
+      max-width: 260px;
+      min-height: 26px;
+      align-items: center;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #115e59;
+      font-size: 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .empty {
+      padding: 22px;
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--muted);
+    }
+
+    .empty b {
+      color: var(--text);
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfcfe;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(100% - 20px, 1120px);
+        padding-top: 16px;
+      }
+
+      .hero,
+      .topic-link {
+        padding: 14px;
+      }
+
+      .hero-top,
+      .section-head {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .stats {
+        justify-content: flex-start;
+      }
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .topic-link {
+        grid-template-columns: 1fr;
+      }
+
+      .open-label {
+        justify-self: start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero" aria-label="เมนูหลัก">
+      <div class="hero-top">
+        <div>
+          <h1>T6Sys Study Library</h1>
+          <p class="lead">เลือกหัวข้อจากเมนูหรือคลิกจากรายการด้านล่าง เพื่อเปิดไฟล์ HTML ในโฟลเดอร์ Data โดยตรง</p>
+        </div>
+        <div class="stats" aria-live="polite">
+          <span class="pill" id="fileCount">0 ไฟล์</span>
+          <span class="pill" id="generatedAt">ยังไม่ได้อัปเดต</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <select class="control" id="topicSelect" aria-label="เลือกหัวข้อเพื่อเปิดอ่าน">
+          <option value="">เลือกหัวข้อแล้วเปิดอ่านทันที</option>
+        </select>
+        <input class="control" id="searchInput" type="search" placeholder="ค้นหาหัวข้อ เช่น fuel, gear, electrical" autocomplete="off" />
+      </div>
+    </section>
+
+    <div class="section-head">
+      <h2>หัวข้อทั้งหมด</h2>
+      <span id="resultCount">พบ 0 รายการ</span>
+    </div>
+
+    <section class="topic-list" id="topicList" aria-label="รายการหัวข้อทั้งหมด"></section>
+
+    <p class="footer-note">
+      เพิ่มไฟล์ใหม่ได้โดยวาง `.html` ลงในโฟลเดอร์ `Data` แล้วเปิด `Open-Reader.cmd` อีกครั้ง ระบบจะอัปเดตรายการให้อัตโนมัติ
+    </p>
+  </main>
+
+  <script>
+    (() => {
+      const library = window.T6SYS_LIBRARY || { generatedAt: "", files: [] };
+      const files = Array.isArray(library.files) ? library.files : [];
+      const state = { query: "" };
+      const collator = new Intl.Collator(["th", "en"], { numeric: true, sensitivity: "base" });
+
+      const el = {
+        fileCount: document.getElementById("fileCount"),
+        generatedAt: document.getElementById("generatedAt"),
+        topicSelect: document.getElementById("topicSelect"),
+        searchInput: document.getElementById("searchInput"),
+        resultCount: document.getElementById("resultCount"),
+        topicList: document.getElementById("topicList")
+      };
+
+      function safe(value) {
+        return value == null ? "" : String(value);
+      }
+
+      function escapeHtml(value) {
+        return safe(value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function urlFromPath(path) {
+        return safe(path).split("/").map(part => encodeURIComponent(part)).join("/");
+      }
+
+      function normalize(value) {
+        return safe(value).toLocaleLowerCase("th");
+      }
+
+      function titleOf(item) {
+        return item.title || item.heading || item.fileName || "Untitled";
+      }
+
+      function searchableText(item) {
+        return normalize([
+          item.title,
+          item.heading,
+          item.fileName,
+          item.searchText,
+          ...(item.sections || [])
+        ].join(" "));
+      }
+
+      function sortedFiles() {
+        return files.slice().sort((a, b) => {
+          return collator.compare(titleOf(a), titleOf(b));
+        });
+      }
+
+      function filteredFiles() {
+        const terms = normalize(state.query).trim().split(/\s+/).filter(Boolean);
+        const source = sortedFiles();
+        if (!terms.length) return source;
+        return source.filter(item => {
+          const haystack = searchableText(item);
+          return terms.every(term => haystack.includes(term));
+        });
+      }
+
+      function renderSelect() {
+        const options = sortedFiles().map(item => {
+          return `<option value="${escapeHtml(urlFromPath(item.path))}">${escapeHtml(titleOf(item))}</option>`;
+        });
+        el.topicSelect.innerHTML = `<option value="">เลือกหัวข้อแล้วเปิดอ่านทันที</option>${options.join("")}`;
+      }
+
+      function renderList() {
+        const items = filteredFiles();
+        el.resultCount.textContent = `พบ ${items.length} รายการ`;
+
+        if (!files.length) {
+          el.topicList.innerHTML = `
+            <div class="empty">
+              <b>ยังไม่มีรายการไฟล์</b><br>
+              วางไฟล์ HTML ใน Data แล้วรัน Update-Reader.ps1 หรือเปิด Open-Reader.cmd
+            </div>`;
+          return;
+        }
+
+        if (!items.length) {
+          el.topicList.innerHTML = `
+            <div class="empty">
+              <b>ไม่พบหัวข้อที่ค้นหา</b><br>
+              ลองค้นด้วยชื่อระบบ เช่น fuel, gear, electrical หรือคำในบทเรียน
+            </div>`;
+          return;
+        }
+
+        el.topicList.innerHTML = items.map(item => {
+          const sections = Array.isArray(item.sections) ? item.sections : [];
+          const sectionHtml = sections.slice(0, 5).map(section => {
+            return `<span class="section-chip" title="${escapeHtml(section)}">${escapeHtml(section)}</span>`;
+          }).join("");
+          const more = sections.length > 5 ? `<span class="section-chip">+${sections.length - 5} หัวข้อ</span>` : "";
+          const meta = [
+            item.modified ? `แก้ไข ${item.modified}` : "",
+            item.sizeKb ? `${item.sizeKb} KB` : "",
+            sections.length ? `${sections.length} หัวข้อย่อย` : ""
+          ].filter(Boolean);
+
+          return `
+            <a class="topic-link" href="${escapeHtml(urlFromPath(item.path))}">
+              <span class="topic-main">
+                <span class="topic-title">${escapeHtml(titleOf(item))}</span>
+                <span class="topic-meta">
+                  <span class="meta-chip">${escapeHtml(item.fileName)}</span>
+                  ${meta.map(part => `<span class="meta-chip">${escapeHtml(part)}</span>`).join("")}
+                </span>
+                ${sections.length ? `<span class="section-menu">${sectionHtml}${more}</span>` : ""}
+              </span>
+              <span class="open-label">เปิดอ่าน</span>
+            </a>`;
+        }).join("");
+      }
+
+      function openSelectedTopic() {
+        const url = el.topicSelect.value;
+        if (url) window.location.href = url;
+      }
+
+      function init() {
+        el.fileCount.textContent = `${files.length} ไฟล์`;
+        el.generatedAt.textContent = library.generatedAt ? `อัปเดต ${library.generatedAt}` : "ยังไม่ได้อัปเดต";
+
+        renderSelect();
+        renderList();
+
+        el.topicSelect.addEventListener("change", openSelectedTopic);
+
+        el.searchInput.addEventListener("input", event => {
+          state.query = event.target.value;
+          renderList();
+        });
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
