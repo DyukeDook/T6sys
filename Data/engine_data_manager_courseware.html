@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engine Data Manager (EDM) | T-6C Courseware</title>
+  <style>
+    :root{
+      --bg:#eef3f8;
+      --paper:#ffffff;
+      --ink:#102033;
+      --muted:#5e6f82;
+      --navy:#0d2847;
+      --blue:#1e63b6;
+      --blue-soft:#eaf3ff;
+      --green:#20724f;
+      --green-soft:#eaf8f1;
+      --amber:#a96400;
+      --amber-soft:#fff4dd;
+      --red:#b42318;
+      --red-soft:#fff0ee;
+      --line:#d7e1ec;
+      --shadow:0 14px 40px rgba(13,40,71,.12);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,#dfeaf5 0%,var(--bg) 34%,#f8fbff 100%);
+      color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,"Noto Sans Thai",Arial,sans-serif;
+      line-height:1.68;
+    }
+    header{
+      color:white;
+      background:
+        radial-gradient(circle at 12% 20%,rgba(80,151,255,.45),transparent 28%),
+        radial-gradient(circle at 88% 14%,rgba(255,255,255,.22),transparent 24%),
+        linear-gradient(135deg,#071a32 0%,#0d315c 55%,#114c83 100%);
+      padding:56px 22px 42px;
+      border-bottom:6px solid rgba(255,255,255,.16);
+    }
+    .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+    .hero{display:grid;grid-template-columns:1.35fr .65fr;gap:28px;align-items:center}
+    .eyebrow{letter-spacing:.13em;text-transform:uppercase;font-size:.82rem;color:#bdd9ff;font-weight:800;margin:0 0 10px}
+    h1{font-size:clamp(2rem,5vw,4rem);line-height:1.1;margin:0 0 14px;font-weight:900}
+    .subtitle{font-size:1.18rem;color:#dcecff;max-width:820px;margin:0}
+    .hero-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);border-radius:24px;padding:22px;backdrop-filter:blur(8px)}
+    .hero-card strong{display:block;font-size:1.45rem;margin-bottom:8px;color:#fff}
+    nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    nav .wrap{display:flex;gap:8px;overflow-x:auto;padding-top:10px;padding-bottom:10px}
+    nav a{white-space:nowrap;text-decoration:none;color:#21415f;background:#f3f7fb;border:1px solid #dfe9f3;border-radius:999px;padding:7px 13px;font-size:.92rem;font-weight:700}
+    nav a:hover{background:#e7f0fa;color:#0d315c}
+    main{padding:28px 0 50px}
+    section{margin:24px 0;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .section-head{padding:24px 26px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff,#f8fbff)}
+    h2{margin:0;font-size:1.65rem;line-height:1.25;color:#0d315c}
+    .section-head p{margin:8px 0 0;color:var(--muted)}
+    .content{padding:26px}
+    .grid{display:grid;gap:16px}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .card{border:1px solid var(--line);border-radius:18px;padding:18px;background:#fff}
+    .card h3{margin:0 0 8px;color:#123a62;font-size:1.08rem}
+    .card p{margin:0;color:#40566c}
+    .metric{display:flex;gap:12px;align-items:flex-start}
+    .badge{display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:40px;border-radius:13px;font-weight:900;color:#fff;background:var(--blue);box-shadow:0 8px 18px rgba(30,99,182,.18)}
+    .badge.green{background:var(--green)}
+    .badge.amber{background:#c77900}
+    .badge.red{background:var(--red)}
+    .badge.gray{background:#536579}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:stretch}
+    .flow .step{position:relative;padding:18px;border-radius:18px;border:1px solid #d5e3f2;background:linear-gradient(180deg,#fff,#f4f9ff)}
+    .flow .step:not(:last-child)::after{content:"→";position:absolute;right:-13px;top:50%;transform:translateY(-50%);font-weight:900;color:#6185a8;background:#fff;border:1px solid #d5e3f2;border-radius:50%;width:26px;height:26px;display:grid;place-items:center;z-index:2}
+    .step .num{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:#47709a;font-weight:900}
+    .step h3{font-size:1rem;margin:5px 0 6px;color:#0e3155}
+    .step p{font-size:.93rem;margin:0;color:#536579}
+    table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
+    th,td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+    th{background:#f1f6fb;color:#173a5c;font-size:.92rem;text-transform:uppercase;letter-spacing:.04em}
+    tr:last-child td{border-bottom:0}
+    td{color:#31495e}
+    .pill{display:inline-block;border-radius:999px;padding:3px 9px;font-size:.78rem;font-weight:900;letter-spacing:.03em;text-transform:uppercase}
+    .pill.red{color:#fff;background:var(--red)}
+    .pill.amber{color:#2d1f00;background:#ffd277}
+    .pill.white{color:#18334d;background:#fff;border:1px solid #cbd8e5}
+    .pill.green{color:#fff;background:var(--green)}
+    .alerts{display:grid;gap:14px}
+    .alert{border-radius:18px;padding:18px 18px 18px 20px;border:1px solid;position:relative;overflow:hidden}
+    .alert::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px}
+    .alert h3{margin:0 0 6px;display:flex;align-items:center;gap:10px;font-size:1.05rem}
+    .alert p,.alert ul{margin:0;color:#384d60}
+    .alert ul{padding-left:22px}
+    .alert.note{background:var(--blue-soft);border-color:#b9d7fb}.alert.note::before{background:var(--blue)}.alert.note h3{color:#0f559e}
+    .alert.caution{background:var(--amber-soft);border-color:#ffd38a}.alert.caution::before{background:#c77900}.alert.caution h3{color:#8a4d00}
+    .alert.warning{background:var(--red-soft);border-color:#ffc2bd}.alert.warning::before{background:var(--red)}.alert.warning h3{color:var(--red)}
+    .alert.advisory{background:#f6f8fb;border-color:#d9e3ed}.alert.advisory::before{background:#718196}.alert.advisory h3{color:#3f5267}
+    .compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .big-quote{background:linear-gradient(135deg,#eef7ff,#fff);border:1px solid #d5e7f9;border-radius:20px;padding:24px;text-align:center;font-weight:900;color:#0d315c;font-size:1.25rem}
+    details{background:#f8fbff;border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+    details+details{margin-top:10px}
+    summary{cursor:pointer;font-weight:800;color:#123a62}
+    details p{margin:10px 0 0;color:#40566c}
+    .footer-note{font-size:.92rem;color:#6a7b8b}
+    footer{padding:28px 20px 40px;color:#536579;text-align:center}
+    .source{background:#f5f8fb;border:1px dashed #bfd0e2;border-radius:16px;padding:14px;color:#486176}
+    .print-btn{appearance:none;border:0;background:#fff;color:#0d315c;font-weight:900;padding:10px 14px;border-radius:999px;box-shadow:0 8px 22px rgba(0,0,0,.12);cursor:pointer;margin-top:16px}
+    .print-btn:hover{background:#f0f6ff}
+    @media (max-width:850px){
+      .hero,.grid-3,.grid-2,.flow,.compare{grid-template-columns:1fr}
+      header{padding-top:36px}
+      .flow .step:not(:last-child)::after{content:"↓";right:50%;top:auto;bottom:-13px;transform:translateX(50%)}
+      .content,.section-head{padding:20px}
+    }
+    @media print{
+      nav,.print-btn{display:none}
+      body{background:#fff;color:#000}
+      header{background:#fff;color:#000;border-bottom:2px solid #000;padding:20px 0}
+      .subtitle,.eyebrow{color:#333}
+      section{box-shadow:none;break-inside:avoid;border-color:#999}
+      .hero-card{background:#fff;color:#000;border:1px solid #999}.hero-card strong{color:#000}
+      a{color:#000}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <div>
+        <p class="eyebrow">T-6C Systems Courseware</p>
+        <h1>Engine Data Manager (EDM)</h1>
+        <p class="subtitle">ระบบรวบรวมและประมวลผลข้อมูลเครื่องยนต์และระบบประกอบ เพื่อส่งไปแสดงบน EICAS พร้อม crew alerting ที่เกี่ยวข้อง</p>
+        <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+      </div>
+      <div class="hero-card">
+        <strong>Memory Aid</strong>
+        <p style="margin:0;color:#dcecff">EDM = Sensor Hub + Data Processor + EICAS Source</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="wrap">
+      <a href="#objectives">Objectives</a>
+      <a href="#overview">Overview</a>
+      <a href="#flow">Data Flow</a>
+      <a href="#eicas">EICAS</a>
+      <a href="#failures">Failures</a>
+      <a href="#alerts">Notes / Warnings</a>
+      <a href="#quiz">Quiz</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="objectives">
+      <div class="section-head">
+        <h2>Learning Objectives</h2>
+        <p>เมื่อเรียนจบหน้านี้ ผู้เรียนควรอธิบายระบบ EDM ได้ในระดับใช้งาน cockpit และเข้าใจ indication สำคัญเมื่อระบบผิดปกติ</p>
+      </div>
+      <div class="content grid grid-3">
+        <div class="card metric"><span class="badge">1</span><div><h3>บอกหน้าที่ EDM</h3><p>แยกบทบาทของ EDM ออกจาก PMU และ EICAS ได้</p></div></div>
+        <div class="card metric"><span class="badge green">2</span><div><h3>อธิบาย Data Flow</h3><p>Sensor / transducer → EDM → IAC → MFD/EICAS</p></div></div>
+        <div class="card metric"><span class="badge red">3</span><div><h3>อ่าน Failure Indication</h3><p>แยก EDM FAIL, EDM A INOP, EDM B INOP และ red X/missing pointer ได้</p></div></div>
+      </div>
+    </section>
+
+    <section id="overview">
+      <div class="section-head">
+        <h2>1. System Overview</h2>
+        <p>EDM ไม่ใช่ตัวควบคุมกำลังเครื่องยนต์หลัก แต่เป็นระบบ monitor / data processing สำหรับ engine และ systems หลายรายการ</p>
+      </div>
+      <div class="content">
+        <div class="big-quote">“EDM ไม่ได้ขับเครื่อง — EDM บอกเราว่าเครื่องและระบบสำคัญกำลังเป็นอย่างไร”</div>
+        <div class="grid grid-2" style="margin-top:18px">
+          <div class="card">
+            <h3>Engine Functions</h3>
+            <p>EDM monitor engine operating parameters และช่วยให้ EICAS แสดงค่าที่เกี่ยวข้อง เช่น torque, oil pressure, oil temperature, fuel flow, N1 และ ITT</p>
+          </div>
+          <div class="card">
+            <h3>Non-engine Functions</h3>
+            <p>EDM ยังเกี่ยวข้องกับ fuel balancing, fuel quantity indication, DC volts/amps, hydraulic pressure, cockpit pressure altitude และ cockpit differential pressure</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="flow">
+      <div class="section-head">
+        <h2>2. Normal Data Flow</h2>
+        <p>ภาพรวมการไหลของข้อมูลจาก sensor จนถึง cockpit display</p>
+      </div>
+      <div class="content">
+        <div class="flow">
+          <div class="step"><div class="num">Input</div><h3>Sensors / Transducers</h3><p>รับข้อมูลจริงจาก engine และระบบประกอบ เช่น oil, fuel, hydraulic, electrical, pressure</p></div>
+          <div class="step"><div class="num">Processor</div><h3>Engine Data Manager</h3><p>ประมวลผลข้อมูลและสร้าง output ผ่าน EDM A / EDM B channels</p></div>
+          <div class="step"><div class="num">Avionics</div><h3>IAC</h3><p>Integrated Avionics Computer รับข้อมูลจาก EDM และส่งต่อให้ระบบ display</p></div>
+          <div class="step"><div class="num">Cockpit</div><h3>MFD / EICAS</h3><p>แสดง engine, auxiliary instruments และ crew alerting ในแต่ละ cockpit</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="eicas">
+      <div class="section-head">
+        <h2>3. EICAS Indications</h2>
+        <p>ข้อมูล EDM ถูกนำไปแสดงบน EICAS รวมทั้ง warning, caution, status และ advisory messages</p>
+      </div>
+      <div class="content">
+        <table>
+          <thead><tr><th>หมวด</th><th>ตัวอย่างข้อมูลที่แสดง</th><th>ความหมายสำหรับ Pilot</th></tr></thead>
+          <tbody>
+            <tr><td>Engine</td><td>Torque, fuel flow, N1, ITT, oil pressure, oil temperature</td><td>ใช้ monitor health และ operating limits ของเครื่องยนต์</td></tr>
+            <tr><td>Fuel</td><td>Fuel quantity, fuel balance, bingo fuel</td><td>ใช้ติดตามปริมาณเชื้อเพลิงและ imbalance</td></tr>
+            <tr><td>Electrical</td><td>DC volts, DC amps</td><td>ใช้ติดตามสภาพระบบไฟฟ้า</td></tr>
+            <tr><td>Hydraulic</td><td>Hydraulic pressure</td><td>ใช้ติดตามความพร้อมของ hydraulic system</td></tr>
+            <tr><td>Pressurization</td><td>Cockpit pressure altitude, cockpit differential pressure</td><td>ใช้ติดตาม cockpit pressurization</td></tr>
+          </tbody>
+        </table>
+
+        <div class="grid grid-3" style="margin-top:16px">
+          <div class="card"><h3><span class="pill red">Red</span> Warning</h3><p>ต้องดึงความสนใจทันที เช่น EDM FAIL</p></div>
+          <div class="card"><h3><span class="pill amber">Amber</span> Caution</h3><p>ใช้กับ condition ที่ต้องระวัง/จัดการตาม checklist</p></div>
+          <div class="card"><h3><span class="pill white">White</span> Status / Advisory</h3><p>ใช้กับสถานะ เช่น EDM A INOP หรือ EDM B INOP เมื่ออยู่บนพื้น</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="failures">
+      <div class="section-head">
+        <h2>4. Failure Modes & Crew Indications</h2>
+        <p>แยกความหมายของ failure message และผลกระทบต่อข้อมูลที่แสดง</p>
+      </div>
+      <div class="content">
+        <table>
+          <thead><tr><th>Message / Indication</th><th>ชนิด</th><th>ความหมาย</th><th>การตีความข้อมูล</th></tr></thead>
+          <tbody>
+            <tr><td><strong>EDM FAIL</strong></td><td><span class="pill red">Warning</span></td><td>Engine Data Manager failed</td><td>ให้ถือว่า EDM data unavailable ทั้งหมด</td></tr>
+            <tr><td><strong>EDM A INOP</strong></td><td><span class="pill white">Advisory / Status</span></td><td>Internal failure ของ channel A หรือ data bus/channel ที่เกี่ยวข้อง</td><td>invalid เฉพาะค่าที่มี red X หรือ pointer หาย</td></tr>
+            <tr><td><strong>EDM B INOP</strong></td><td><span class="pill white">Advisory / Status</span></td><td>Internal failure ของ channel B หรือ data bus/channel ที่เกี่ยวข้อง</td><td>invalid เฉพาะค่าที่มี red X หรือ pointer หาย</td></tr>
+            <tr><td><strong>Red X / missing pointer</strong></td><td>Invalid data cue</td><td>ค่าที่แสดงไม่ valid</td><td>อย่าใช้ parameter นั้นเพื่อการตัดสินใจ</td></tr>
+          </tbody>
+        </table>
+
+        <div class="compare" style="margin-top:18px">
+          <div class="alert note">
+            <h3>Key Distinction</h3>
+            <p><strong>EDM A/B INOP</strong> ไม่เท่ากับ EDM data หายทั้งหมด; ให้ดู red X และ missing pointer เป็นตัวบอกว่าค่าใด invalid</p>
+          </div>
+          <div class="alert warning">
+            <h3>Key Distinction</h3>
+            <p><strong>EDM FAIL</strong> หมายถึงข้อมูล EDM unavailable ทั้งหมด แม้บางข้อความอาจยังแสดงอยู่บน EICAS</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="alerts">
+      <div class="section-head">
+        <h2>5. Note / Caution / Warning</h2>
+        <p>รวบรวมข้อความ safety emphasis ที่เกี่ยวข้องกับ EDM โดยรักษาความหมายตามคู่มือ ไม่ใช้แทน checklist จริง</p>
+      </div>
+      <div class="content alerts">
+        <div class="alert warning">
+          <h3>WARNING — EDM FAIL</h3>
+          <p>เมื่อขึ้น <strong>EDM FAIL</strong> ให้ถือว่า engine data manager failed และข้อมูล EDM ไม่พร้อมใช้งานทั้งหมด ผู้เรียนต้องจำว่า failure นี้ทำให้สูญเสียการ monitor โดยตรงของ engine, fuel, electrical, hydraulic และ cockpit pressurization</p>
+        </div>
+
+        <div class="alert note">
+          <h3>NOTE — EDM A INOP / EDM B INOP</h3>
+          <p>เมื่อมี EDM A INOP หรือ EDM B INOP advisory แสดงอยู่ ให้ถือว่า invalid เฉพาะ parameter ที่ถูกแทนด้วย <strong>red X</strong> และ/หรือ <strong>missing pointer</strong> เท่านั้น ไม่ใช่ทุกค่าบน EICAS</p>
+        </div>
+
+        <div class="alert note">
+          <h3>NOTE — EDM FAIL Prior to Start</h3>
+          <p>ถ้า EDM FAIL เกิดก่อน start และมี red X ใน IOAT และ ITT counters คู่มือให้ไปอ้างอิงหัวข้อ <strong>High IOAT at Start &gt; 80 °C</strong></p>
+        </div>
+
+        <div class="alert caution">
+          <h3>CAUTION — Training Emphasis</h3>
+          <p>ถ้า EDM FAIL ยังคงแสดงอยู่ อย่าใช้การมีอยู่ของ messages เช่น CKPT PX, CKPT ALT, HYD FL LO, FUEL BAL, L FUEL LO หรือ R FUEL LO เป็นหลักฐานว่าระบบเหล่านั้นยังถูก monitor อย่างน่าเชื่อถือ เพราะคู่มือระบุว่าข้อความเหล่านี้อาจยังแสดง แต่ไม่ monitor ระบบของตนแล้ว</p>
+        </div>
+
+        <div class="alert note">
+          <h3>NOTE — PMU Relationship</h3>
+          <p>EDM FAIL ไม่ได้แปลว่า PMU offline โดยอัตโนมัติ; คู่มือระบุว่า PMU should remain online ดังนั้นให้แยก “engine control” ออกจาก “engine data monitoring”</p>
+        </div>
+
+        <div class="alert advisory">
+          <h3>Advisory — Maintenance Before Flight</h3>
+          <p>ถ้า EDM A INOP หรือ EDM B INOP advisory ยังคงอยู่ก่อนบิน คู่มือระบุว่าต้องมี maintenance action ก่อน flight</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="model">
+      <div class="section-head">
+        <h2>6. Pilot Mental Model</h2>
+        <p>ใช้ model นี้เพื่อจำบทบาทของ EDM ใน cockpit</p>
+      </div>
+      <div class="content grid grid-3">
+        <div class="card"><h3>PMU</h3><p>คิดเรื่องการควบคุมเครื่องยนต์/propulsion</p></div>
+        <div class="card"><h3>EDM</h3><p>คิดเรื่องการรับข้อมูล ประมวลผล และส่งให้ EICAS</p></div>
+        <div class="card"><h3>EICAS</h3><p>คิดเรื่องการแสดงผลให้ pilot เห็นและแจ้งเตือน</p></div>
+      </div>
+    </section>
+
+    <section id="quiz">
+      <div class="section-head">
+        <h2>7. Quick Check</h2>
+        <p>กดเปิดคำตอบเพื่อทบทวนความเข้าใจ</p>
+      </div>
+      <div class="content">
+        <details>
+          <summary>1) EDM เป็นตัวควบคุมเครื่องยนต์หลักเหมือน PMU หรือไม่?</summary>
+          <p>ไม่ใช่ EDM เป็นระบบ monitor / data manager ส่วน PMU เกี่ยวข้องกับ engine control มากกว่า</p>
+        </details>
+        <details>
+          <summary>2) ถ้าเห็น EDM A INOP แต่ค่า torque ยังไม่มี red X ควรสรุปอย่างไร?</summary>
+          <p>ไม่ควรสรุปว่าข้อมูล EDM ทั้งหมดเสีย ให้ถือว่า invalid เฉพาะ parameter ที่มี red X หรือ pointer หาย</p>
+        </details>
+        <details>
+          <summary>3) ถ้าเห็น EDM FAIL ควรตีความข้อมูล EDM อย่างไร?</summary>
+          <p>ให้ถือว่า EDM data unavailable ทั้งหมด และสูญเสียการ monitor โดยตรงของหลายระบบสำคัญ</p>
+        </details>
+        <details>
+          <summary>4) EDM ส่งข้อมูลไปแสดงที่ใด?</summary>
+          <p>EDM ส่งข้อมูลไปยัง IAC แล้วแสดงบน MFD/EICAS ใน cockpit</p>
+        </details>
+        <details>
+          <summary>5) เหตุใด red X หรือ missing pointer จึงสำคัญ?</summary>
+          <p>เป็น cue ว่าค่านั้น invalid และไม่ควรใช้เป็นฐานในการตัดสินใจ</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="source">
+      <div class="section-head">
+        <h2>Source & Use</h2>
+        <p>ข้อมูลนี้ทำเป็น training aid สำหรับเรียนรู้ระบบ ไม่ใช่เอกสารควบคุมการบินหรือ checklist จริง</p>
+      </div>
+      <div class="content">
+        <div class="source">
+          <strong>Source:</strong> T-6C Flight Manual, Engine Data Manager (EDM), EICAS/CAS description, and Engine Data Manager Fail abnormal procedure sections.<br />
+          <strong>Prepared:</strong> 1 June 2026<br />
+          <strong>Use:</strong> Training aid only. Always refer to the current official flight manual, checklist, and local SOP.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Engine Data Manager (EDM) Courseware — T-6C Training Aid
+  </footer>
+</body>
+</html>

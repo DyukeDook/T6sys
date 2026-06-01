@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>T-6C Oil System - Training Aid</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d9e2ef;
+      --blue: #2563eb;
+      --blue-soft: #eaf1ff;
+      --green: #147d4f;
+      --green-soft: #eaf8f0;
+      --purple: #6d3fc2;
+      --purple-soft: #f3edff;
+      --red: #b42318;
+      --red-soft: #fff1f0;
+      --amber: #a15c00;
+      --amber-soft: #fff7e6;
+      --slate: #475467;
+      --slate-soft: #f2f4f7;
+      --shadow: 0 10px 30px rgba(22, 34, 51, .08);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, .18), transparent 32rem),
+        linear-gradient(180deg, #eef4ff 0%, var(--bg) 360px);
+      line-height: 1.65;
+    }
+
+    .page { width: min(1160px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 56px; }
+
+    header.hero {
+      background: rgba(255, 255, 255, .86);
+      border: 1px solid rgba(255, 255, 255, .9);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      color: var(--blue);
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .78rem;
+    }
+
+    h1, h2, h3 { line-height: 1.25; margin: 0; }
+    h1 { font-size: clamp(2rem, 4vw, 3.45rem); margin-top: 8px; }
+    h2 { font-size: clamp(1.45rem, 2.5vw, 2.05rem); margin-bottom: 14px; }
+    h3 { font-size: 1.06rem; margin-bottom: 8px; }
+    p { margin: 0 0 12px; }
+    .lead { color: var(--muted); font-size: 1.08rem; max-width: 900px; margin-top: 12px; }
+    .source { color: var(--muted); font-size: .92rem; margin-top: 16px; }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .15s ease;
+    }
+    .btn:hover, .btn.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, .14);
+    }
+    .btn.print { margin-left: auto; }
+
+    nav.toc {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin: 20px 0;
+    }
+    nav.toc a {
+      text-decoration: none;
+      color: var(--ink);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 800;
+      box-shadow: 0 4px 16px rgba(22, 34, 51, .04);
+    }
+    nav.toc a:hover { border-color: var(--blue); color: var(--blue); }
+
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 18px 0;
+      box-shadow: 0 6px 20px rgba(22, 34, 51, .045);
+    }
+
+    .grid { display: grid; gap: 16px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: #fff;
+      break-inside: avoid;
+    }
+    .soft-blue { background: var(--blue-soft); border-color: #cfe0ff; }
+    .soft-green { background: var(--green-soft); border-color: #c8ecd8; }
+    .soft-purple { background: var(--purple-soft); border-color: #ded1ff; }
+    .soft-slate { background: var(--slate-soft); border-color: #e4e7ec; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-weight: 900;
+      font-size: .76rem;
+      margin-bottom: 10px;
+      letter-spacing: .02em;
+    }
+    .pill.blue { background: var(--blue-soft); color: var(--blue); }
+    .pill.green { background: var(--green-soft); color: var(--green); }
+    .pill.purple { background: var(--purple-soft); color: var(--purple); }
+    .pill.slate { background: var(--slate-soft); color: var(--slate); }
+    .pill.red { background: var(--red-soft); color: var(--red); }
+    .pill.amber { background: var(--amber-soft); color: var(--amber); }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(110px, 1fr));
+      gap: 10px;
+      counter-reset: step;
+      align-items: stretch;
+    }
+    .step {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px 14px 16px 48px;
+      background: #fff;
+      min-height: 116px;
+    }
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 14px;
+      top: 16px;
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 950;
+      font-size: .82rem;
+    }
+    .step small { color: var(--muted); display: block; margin-top: 4px; }
+
+    .matrix {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+    .matrix th, .matrix td {
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+    }
+    .matrix th { background: #f1f5fb; color: #23304a; font-size: .9rem; }
+    .matrix tr:last-child td { border-bottom: none; }
+    .matrix strong { color: var(--ink); }
+    .matrix .scenario { font-weight: 950; white-space: nowrap; }
+
+    .callout {
+      border-radius: 18px;
+      padding: 16px 18px;
+      border: 1px solid;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      margin: 12px 0;
+      break-inside: avoid;
+    }
+    .callout .icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      font-weight: 950;
+      color: #fff;
+      font-size: 1rem;
+    }
+    .callout.warning { background: var(--red-soft); border-color: #ffcbc8; }
+    .callout.warning .icon { background: var(--red); }
+    .callout.warning h3 { color: var(--red); }
+    .callout.caution { background: var(--amber-soft); border-color: #ffe0a6; }
+    .callout.caution .icon { background: var(--amber); }
+    .callout.caution h3 { color: var(--amber); }
+    .callout.note { background: var(--blue-soft); border-color: #cfe0ff; }
+    .callout.note .icon { background: var(--blue); }
+    .callout.note h3 { color: var(--blue); }
+    .callout.hidden { display: none; }
+
+    .status-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .status {
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .status .value { font-size: 1.6rem; font-weight: 950; line-height: 1.1; }
+    .status .label { color: var(--muted); font-weight: 750; margin-top: 4px; }
+
+    .compact-list { margin: 8px 0 0; padding-left: 20px; }
+    .compact-list li { margin: 4px 0; }
+    code.kbd {
+      display: inline-block;
+      border: 1px solid #ccd4e0;
+      border-bottom-width: 2px;
+      border-radius: 7px;
+      background: #fff;
+      padding: 1px 6px;
+      font-family: inherit;
+      font-weight: 850;
+      color: #26334d;
+    }
+    .muted { color: var(--muted); }
+
+    footer { color: var(--muted); text-align: center; padding: 28px 0 0; font-size: .92rem; }
+
+    @media (max-width: 1040px) {
+      nav.toc { grid-template-columns: repeat(3, 1fr); }
+      .grid.four, .flow { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 760px) {
+      nav.toc, .grid.two, .grid.three, .grid.four, .flow, .status-row { grid-template-columns: 1fr; }
+      .matrix { display: block; overflow-x: auto; }
+      .btn.print { margin-left: 0; }
+      header.hero, section { padding: 20px; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { width: 100%; padding: 0; }
+      header.hero, section { box-shadow: none; border-color: #bfc7d4; }
+      .toolbar, nav.toc { display: none; }
+      .callout.hidden { display: grid; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="eyebrow">T-6C Propulsion Courseware</div>
+      <h1>Oil System</h1>
+      <p class="lead">Training aid สำหรับจำระบบน้ำมันเครื่องของ T-6C: flow การไหล, ส่วนประกอบหลัก, OIL PX logic, CHIP detector และการแยก <strong>WARNING / CAUTION / NOTE</strong> ให้ชัดเจน</p>
+      <p class="source">Source basis: T-6C Flight Manual - Oil System, Oil Pressure Warning/Caution, Propeller System, Oil Servicing, Chip Detector Warning, and Oil System Malfunction/Low Oil Pressure. ใช้เพื่อการเรียนระบบเท่านั้น ไม่ใช้แทน checklist หรือ flight manual ฉบับทางการ</p>
+      <div class="toolbar" aria-label="Filter callouts">
+        <button class="btn active" data-filter="all">Show all</button>
+        <button class="btn" data-filter="warning">WARNING</button>
+        <button class="btn" data-filter="caution">CAUTION</button>
+        <button class="btn" data-filter="note">NOTE</button>
+        <button class="btn print" onclick="window.print()">Print / Save PDF</button>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Table of contents">
+      <a href="#overview">1. Overview</a>
+      <a href="#flow">2. Oil Flow</a>
+      <a href="#components">3. Components</a>
+      <a href="#indications">4. Indications</a>
+      <a href="#callouts">5. W/C/N</a>
+      <a href="#memory">6. Memory</a>
+    </nav>
+
+    <section id="overview">
+      <h2>1. Overview: Oil ไม่ใช่แค่หล่อลื่น</h2>
+      <div class="grid three">
+        <article class="card soft-blue">
+          <span class="pill blue">CAPACITY</span>
+          <h3>18.5 U.S. quarts</h3>
+          <p>ระบบน้ำมันเครื่องให้ filtered oil ต่อเนื่องแก่เครื่องยนต์ใน normal และ aerobatic flight maneuvers</p>
+        </article>
+        <article class="card soft-green">
+          <span class="pill green">SUPPLY</span>
+          <h3>Engine + RGB + Accessory</h3>
+          <p>จ่ายน้ำมันไปยัง engine bearings, reduction gears, accessory drives และ propeller system</p>
+        </article>
+        <article class="card soft-purple">
+          <span class="pill purple">PROP CONTROL</span>
+          <h3>Oil pressure controls blade angle</h3>
+          <p>PMU/PIU ใช้ oil pressure คุม propeller pitch. Oil pressure ลดลงทำให้ blade move toward coarse/feather</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="flow">
+      <h2>2. Oil Flow: จำเป็นสายเดียว</h2>
+      <div class="flow" aria-label="Oil flow sequence">
+        <div class="step"><strong>Oil Tank</strong><small>integral with compressor air inlet; มี filler/dipstick</small></div>
+        <div class="step"><strong>Pressure Pump</strong><small>สร้างแรงดันส่ง oil ออกจาก tank</small></div>
+        <div class="step"><strong>Main Filter</strong><small>กรอง oil; มี bypass valve ถ้า filter clogged</small></div>
+        <div class="step"><strong>Engine/RGB</strong><small>หล่อลื่น bearings, reduction gears, accessory drives</small></div>
+        <div class="step"><strong>Propeller</strong><small>PIU boost oil pressure เพื่อคุม blade angle</small></div>
+        <div class="step"><strong>Scavenge Pumps</strong><small>ดูด oil กลับจาก bearings/gearbox/prop area</small></div>
+        <div class="step"><strong>Oil Cooler → Tank</strong><small>ระบายความร้อนแล้วกลับเข้า tank</small></div>
+      </div>
+    </section>
+
+    <section id="components">
+      <h2>3. Components: แยกตามหน้าที่</h2>
+      <div class="grid four">
+        <article class="card">
+          <span class="pill blue">PRESSURE</span>
+          <h3>Two oil pickup elements</h3>
+          <p>มี pickup ใกล้กลาง tank สำหรับ normal operation และ pickup ใกล้ top of tank เพื่อป้องกัน loss of oil pressure ระหว่าง inverted flight</p>
+        </article>
+        <article class="card">
+          <span class="pill green">SCAVENGE</span>
+          <h3>Two dual-element gear pumps</h3>
+          <p>internal และ external scavenge pumps ดูดน้ำมันกลับจาก bearings และ gearbox</p>
+        </article>
+        <article class="card">
+          <span class="pill purple">COOLING</span>
+          <h3>Oil cooler</h3>
+          <p>scavenged oil ผ่าน oil cooler ที่ lower aft cowl assembly ก่อนกลับเข้า tank</p>
+        </article>
+        <article class="card">
+          <span class="pill slate">BREATHER</span>
+          <h3>Four-point breather</h3>
+          <p>oil tank vent เข้า accessory gearbox ผ่าน breather valve และ centrifugal breather</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="indications">
+      <h2>4. Indications & Logic</h2>
+      <p class="muted">Oil pressure/temperature ถูก sense downstream of main oil pump แล้วส่งไป EDM/SCU เพื่อแสดงผลและสร้าง EICAS caution/warning</p>
+
+      <div class="status-row">
+        <article class="status">
+          <div class="value">90-120 psi</div>
+          <div class="label">steady-state oil pressure โดยทั่วไป</div>
+        </article>
+        <article class="status">
+          <div class="value">≤ 40 psi</div>
+          <div class="label">red OIL PX above idle</div>
+        </article>
+        <article class="status">
+          <div class="value">≤ 15 psi</div>
+          <div class="label">red OIL PX at idle</div>
+        </article>
+      </div>
+
+      <h3 style="margin-top:22px;">OIL PX Warning/Caution Matrix</h3>
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>PCL Position</th>
+            <th>Oil Pressure Condition</th>
+            <th>Time Delay</th>
+            <th>EICAS Indication</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="scenario">IDLE</td>
+            <td>15-40 psi</td>
+            <td>None</td>
+            <td><strong>Amber OIL PX</strong></td>
+          </tr>
+          <tr>
+            <td class="scenario">IDLE</td>
+            <td>15-40 psi</td>
+            <td>5 sec or more</td>
+            <td><strong>Red OIL PX + Amber OIL PX</strong></td>
+          </tr>
+          <tr>
+            <td class="scenario">IDLE</td>
+            <td>15 psi or below</td>
+            <td>None</td>
+            <td><strong>Red OIL PX</strong></td>
+          </tr>
+          <tr>
+            <td class="scenario">Above IDLE</td>
+            <td>40-90 psi</td>
+            <td>10 sec</td>
+            <td><strong>Amber OIL PX</strong></td>
+          </tr>
+          <tr>
+            <td class="scenario">Above IDLE</td>
+            <td>40 psi or below</td>
+            <td>None</td>
+            <td><strong>Red OIL PX</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="callouts">
+      <h2>5. WARNING / CAUTION / NOTE</h2>
+      <p class="muted">กดปุ่มด้านบนเพื่อกรองเฉพาะระดับที่ต้องการ</p>
+
+      <article class="callout warning" data-level="warning">
+        <div class="icon">W</div>
+        <div>
+          <h3>CHIP warning = possible metal contamination</h3>
+          <p>ถ้า CHIP warning ขึ้น หมายถึงอาจมีโลหะปนใน engine oil supply. ถ้ารุนแรง engine อาจ fail ได้โดยมี warning เพิ่มเติมน้อยมากหรือไม่มีเลย</p>
+        </div>
+      </article>
+
+      <article class="callout warning" data-level="warning">
+        <div class="icon">W</div>
+        <div>
+          <h3>Red OIL PX / amber persists / fluctuation / temp out of limits</h3>
+          <p>ใช้ PCL เท่าที่จำเป็นเพื่อ intercept ELP, หลีกเลี่ยงการขยับ PCL โดยไม่จำเป็น และ execute PEL ตาม emergency procedure concept</p>
+        </div>
+      </article>
+
+      <article class="callout warning" data-level="warning">
+        <div class="icon">W</div>
+        <div>
+          <h3>Higher power settings may aggravate the condition</h3>
+          <p>ใน CHIP และ oil system malfunction/low oil pressure, power สูงขึ้นอาจทำให้อาการแย่ลง จึงต้องใช้ minimum necessary power</p>
+        </div>
+      </article>
+
+      <article class="callout warning" data-level="warning">
+        <div class="icon">W</div>
+        <div>
+          <h3>Improper oil servicing can damage the engine</h3>
+          <p>ต้อง service/check oil level ภายใน 30 นาทีหลัง shutdown และแม่นที่สุดประมาณ 15-20 นาทีหลัง shutdown. ถ้า oil level อยู่ที่หรือต่ำกว่า ADD ให้ service ถึง MAX HOT</p>
+        </div>
+      </article>
+
+      <article class="callout caution" data-level="caution">
+        <div class="icon">C</div>
+        <div>
+          <h3>Do not use sight glass as the primary oil-level check</h3>
+          <p>ห้ามใช้ sight glass เป็นตัวบอก oil level หลัก. ใช้ <strong>dipstick</strong> เพื่อ correct indication ของ oil level ใน tank</p>
+        </div>
+      </article>
+
+      <article class="callout caution" data-level="caution">
+        <div class="icon">C</div>
+        <div>
+          <h3>Oil pressure affects propeller pitch control</h3>
+          <p>PMU/PIU ใช้ oil pressure เพื่อควบคุม blade angle. เมื่อ oil pressure ลดลง blade จะ move toward coarse/feather; engine failure with PCL not cutoff อาจทำให้ propeller feather ช้าและอาจไม่ full feather</p>
+        </div>
+      </article>
+
+      <article class="callout caution" data-level="caution">
+        <div class="icon">C</div>
+        <div>
+          <h3>Filter bypass means lubrication continues but oil is unfiltered</h3>
+          <p>ถ้า main oil filter clogged, bypass valve เปิดให้น้ำมันที่ไม่ผ่าน filter หลักไปหล่อลื่นเครื่องต่อได้ เป็นการรักษา lubrication แต่เพิ่มความเสี่ยงด้าน contamination/wear</p>
+        </div>
+      </article>
+
+      <article class="callout caution" data-level="caution">
+        <div class="icon">C</div>
+        <div>
+          <h3>Confirmed oil leak is treated as oil system malfunction</h3>
+          <p>ถ้าเห็น oil leak จาก aircraft ให้ใช้ logic เดียวกับ oil system malfunction/low oil pressure: minimum necessary PCL, avoid unnecessary PCL movements, PEL</p>
+        </div>
+      </article>
+
+      <article class="callout note" data-level="note">
+        <div class="icon">N</div>
+        <div>
+          <h3>Momentary amber OIL PX during maneuver may be nuisance</h3>
+          <p>เพราะ SCU sensitive, amber OIL PX ติดวูบเดียวระหว่าง maneuver อาจเกิดได้และอาจไม่ใช่ malfunction. แต่ถ้าค้าง/ซ้ำ/ร่วมกับ pressure fluctuation หรือ temp out of limits ต้องจริงจัง</p>
+        </div>
+      </article>
+
+      <article class="callout note" data-level="note">
+        <div class="icon">N</div>
+        <div>
+          <h3>Both red + amber OIL PX with normal gauge can indicate SCU failure</h3>
+          <p>ถ้า red และ amber OIL PX ติดพร้อมกัน แต่ oil pressure gauge แสดง normal pressure อาจเป็น SCU failure ตาม manual note</p>
+        </div>
+      </article>
+
+      <article class="callout note" data-level="note">
+        <div class="icon">N</div>
+        <div>
+          <h3>Oil pressure may show up to 4 psi with engine shut down</h3>
+          <p>engine oil pressure indicator อาจแสดงถึง 4 psi แม้ engine shut down เนื่องจาก design ของ pressure transmitter</p>
+        </div>
+      </article>
+
+      <article class="callout note" data-level="note">
+        <div class="icon">N</div>
+        <div>
+          <h3>OIL PX warning with gauge below 5 psi: check OIL TRX CB</h3>
+          <p>ถ้า OIL PX warning illuminate และ oil pressure บ่งชี้น้อยกว่า 5 psi, manual note ให้ check OIL TRX circuit breaker บน battery bus circuit breaker panel; ถ้า open อาจ reset ได้</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="memory">
+      <h2>6. Memory Hooks</h2>
+      <div class="grid two">
+        <article class="card soft-blue">
+          <h3>Oil Flow</h3>
+          <p><strong>Tank → Pressure Pump → Filter → Engine/RGB/Prop → Scavenge → Cooler → Tank</strong></p>
+          <ul class="compact-list">
+            <li>Pressure side = ส่งน้ำมันไปเลี้ยงระบบ</li>
+            <li>Scavenge side = ดูดน้ำมันกลับ</li>
+            <li>Cooling side = ระบายความร้อนก่อนกลับ tank</li>
+          </ul>
+        </article>
+        <article class="card soft-green">
+          <h3>Emergency Concept</h3>
+          <p><strong>OIL PX serious / CHIP / temp out of limits / oil leak → minimum necessary PCL → PEL</strong></p>
+          <ul class="compact-list">
+            <li>อย่าเพิ่ม power เกินจำเป็น</li>
+            <li>หลีกเลี่ยงการขยับ PCL โดยไม่จำเป็น</li>
+            <li>คิดเสมอว่า oil problem อาจกระทบทั้ง lubrication และ prop control</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      Training aid for courseware. Always use the official T-6C Flight Manual/checklist for aircraft operation.
+    </footer>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll('[data-filter]');
+    const callouts = document.querySelectorAll('.callout');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        buttons.forEach(b => b.classList.remove('active'));
+        button.classList.add('active');
+        callouts.forEach(card => {
+          const show = filter === 'all' || card.dataset.level === filter;
+          card.classList.toggle('hidden', !show);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

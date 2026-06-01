@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>T-6C Emergency Engine Courseware</title>
+  <style>
+    :root{--navy:#0f2742;--blue:#1e64a6;--sky:#e8f3ff;--red:#b42318;--redbg:#fff0ef;--amber:#b7791f;--amberbg:#fff8e6;--green:#207a4a;--greenbg:#ecfff4;--gray:#52616f;--line:#d9e2ec;--bg:#f6f8fb;--card:#ffffff;--ink:#17202a;}
+    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65} a{color:inherit}
+    header{background:linear-gradient(135deg,var(--navy),#184f86);color:white;padding:42px 22px 34px} .wrap{max-width:1120px;margin:0 auto} h1{font-size:clamp(1.8rem,4vw,3.1rem);line-height:1.15;margin:0 0 10px} header p{font-size:1.05rem;max-width:850px;opacity:.94} .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);font-weight:700;font-size:.85rem;margin:0 8px 8px 0}
+    nav{position:sticky;top:0;background:white;border-bottom:1px solid var(--line);z-index:2} nav .wrap{display:flex;gap:10px;overflow:auto;padding:10px 16px} nav a{white-space:nowrap;text-decoration:none;padding:8px 12px;border-radius:999px;background:#eef3f8;color:var(--navy);font-weight:700;font-size:.9rem}
+    main{max-width:1120px;margin:24px auto;padding:0 16px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}.card,section{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 28px rgba(15,39,66,.06)}section{padding:24px;margin:18px 0}.card{padding:18px}.card h3,section h2{margin-top:0;color:var(--navy)}.kpi{font-size:2rem;font-weight:900;color:var(--blue);line-height:1}.muted{color:var(--gray)}
+    .flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0}.step{padding:14px;border-radius:14px;background:#f2f6fb;border:1px solid var(--line)}.step b{color:var(--navy)}
+    table{width:100%;border-collapse:collapse;margin:14px 0;overflow:hidden;border-radius:14px}th,td{padding:12px;border:1px solid var(--line);vertical-align:top}th{background:#eef3f8;color:var(--navy);text-align:left}.table-wrap{overflow:auto}.tag{display:inline-block;padding:3px 9px;border-radius:999px;background:#eef3f8;font-size:.78rem;font-weight:800;color:var(--navy);margin:2px}
+    .alert{border-left:8px solid;border-radius:14px;padding:14px 16px;margin:14px 0}.alert .label{display:inline-block;font-weight:900;letter-spacing:.04em;margin-bottom:4px}.warning{background:var(--redbg);border-color:var(--red)}.warning .label{color:var(--red)}.caution{background:var(--amberbg);border-color:var(--amber)}.caution .label{color:var(--amber)}.note{background:var(--sky);border-color:var(--blue)}.note .label{color:var(--blue)}.training{background:var(--greenbg);border-color:var(--green)}.training .label{color:var(--green)}
+    details{border:1px solid var(--line);border-radius:14px;margin:10px 0;background:#fff}summary{cursor:pointer;font-weight:800;color:var(--navy);padding:13px 15px}details div{padding:0 15px 15px}.mini{font-size:.92rem}.callout-title{font-weight:900;color:var(--navy)}
+    footer{padding:28px 16px;text-align:center;color:var(--gray)}@media print{nav{display:none}body{background:white}section,.card{box-shadow:none;break-inside:avoid}}
+  </style>
+</head>
+<body>
+<header><div class="wrap">
+  <span class="badge">T-6C Flight Manual · Section III</span><span class="badge">Emergency / Abnormal Courseware</span><span class="badge">Training Aid Only</span>
+  <h1>Engine Failure, PMU Failure, Uncommanded Feather & Engine Fire in Flight</h1>
+  <p>สรุปเชิงเรียนรู้สำหรับเข้าใจอาการ การวิเคราะห์ และ logic การจัดการเหตุฉุกเฉิน/ผิดปกติของเครื่องยนต์ T-6C โดยคงแนวคิดจาก Flight Manual แต่จัดรูปแบบให้อ่านง่าย พร้อม NOTE / CAUTION / WARNING ที่เกี่ยวข้อง</p>
+</div></header>
+<nav><div class="wrap">
+  <a href="#overview">Overview</a><a href="#compare">Compare</a><a href="#engine-failure">Engine Failure</a><a href="#pmu">PMU Failure</a><a href="#feather">Uncommanded Feather</a><a href="#fire">Engine Fire</a><a href="#memory">Memory Aid</a><a href="#quiz">Quiz</a>
+</div></nav>
+<main>
+<section id="overview">
+  <h2>1) Big Picture</h2>
+  <div class="alert warning"><span class="label">WARNING / TRAINING USE ONLY</span><p>หน้านี้ทำเพื่อการเรียน การ brief และการทบทวน concept เท่านั้น ไม่ใช้แทน Dash-1 / checklist / procedure ทางการ และไม่ควรใช้เป็นแหล่งตัดสินใจในสถานการณ์จริง</p></div>
+  <div class="grid">
+    <div class="card"><div class="kpi">125</div><h3>KIAS minimum</h3><p>ความเร็ว glide สำคัญเมื่อ engine failure และต้องรักษา energy เพื่อ land / airstart / eject decision</p></div>
+    <div class="card"><div class="kpi">PMU</div><h3>Computer protection</h3><p>PMU ช่วยควบคุม torque, ITT, N1; เมื่อ PMU failure นักบินต้อง monitor และควบคุมเองมากขึ้น</p></div>
+    <div class="card"><div class="kpi">NP</div><h3>Propeller clue</h3><p>NP ลดเร็ว + torque สูง + thrust หาย เป็น clue สำคัญของ uncommanded feather</p></div>
+    <div class="card"><div class="kpi">FIRE</div><h3>Confirm first</h3><p>FIRE annunciator คือ possibility of fire; manual ให้ confirm ด้วยอาการประกอบก่อน shutdown engine</p></div>
+  </div>
+</section>
+<section id="compare"><h2>2) เปรียบเทียบอาการแบบเร็ว</h2><div class="table-wrap"><table><thead><tr><th>เหตุการณ์</th><th>แก่นของปัญหา</th><th>Indication เด่น</th><th>แนวคิดแรก</th><th>Risk หลัก</th></tr></thead><tbody>
+<tr><td><b>Engine Failure in Flight</b></td><td>เครื่องไม่ให้กำลัง / flameout</td><td>Loss of power/airspeed, N1-Torque-ITT decay, warning หลายระบบ</td><td>Zoom/Glide → PCL OFF → ELP/Airstart/Eject</td><td>เสีย energy, glide range ลด, hydraulic pressure ไม่พอ</td></tr>
+<tr><td><b>PMU Failure</b></td><td>PMU inoperative; engine อาจยังทำงาน</td><td>PMU FAIL + PMU STATUS, possible step change in power</td><td>ลด power practical → PMU OFF → reset ถ้าเหมาะสม</td><td>เสีย automatic torque/ITT/N1 limiting</td></tr>
+<tr><td><b>Uncommanded Feather</b></td><td>Prop feather เอง / thrust หาย</td><td>NP drop, high torque, prop noise, loss of thrust, vibration</td><td>PCL MID RANGE → PMU OFF → PROP SYS CB ตามเงื่อนไข</td><td>Drag/performance แย่, overtorque/overtemp ถ้าจัดการไม่เหมาะ</td></tr>
+<tr><td><b>Engine Fire in Flight</b></td><td>Possible/confirmed fire ใน engine compartment</td><td>FIRE annunciator + smoke/flame/vibration/high ITT/pressure fluctuation</td><td>Confirm fire → PCL OFF → Firewall shutoff</td><td>ไฟลาม, smoke, loss of aircraft control</td></tr>
+</tbody></table></div></section>
+<section id="engine-failure"><h2>3) Engine Failure in Flight</h2><p><b>Concept:</b> เมื่อ engine failed ต้องตัดสินใจอย่างรวดเร็วระหว่าง <span class="tag">Eject</span><span class="tag">Land</span><span class="tag">Airstart</span> โดย altitude และ energy เป็นตัวกำหนดเวลาที่มี</p>
+<div class="flow"><div class="step"><b>Indications</b><br>Power/airspeed loss, N1-Torque-ITT decay, torque ~0</div><div class="step"><b>Aircraft effect</b><br>Prop moves toward feather; hydraulic pressure may be insufficient</div><div class="step"><b>First mental model</b><br>Trade excess airspeed for altitude if appropriate</div><div class="step"><b>Procedure logic</b><br>Zoom/Glide 125 KIAS minimum → PCL OFF</div></div>
+<div class="alert note"><span class="label">NOTE</span><p>ถ้า engine ยังสร้าง usable torque มากกว่า 6% การ zoom อาจได้ altitude มากกว่ากรณี no-engine หลายร้อยถึงหลายพันฟุต</p></div>
+<div class="alert note"><span class="label">NOTE</span><p>ถ้าเกิด uncommanded power changes / loss of power / uncommanded propeller feather หรือ compressor stall ให้ใช้ procedure เฉพาะหัวข้อนั้น ไม่ปนกับ engine failure logic โดยตรง</p></div>
+<div class="alert caution"><span class="label">CAUTION</span><p>เมื่อ hydraulic pressure หายไป gear และ flaps อาจไม่สามารถลงด้วย normal means และจะค้างที่ตำแหน่งล่าสุดขณะ engine failure; ถ้าพยายาม operate อาจเห็น unsafe/in transit</p></div>
+<div class="alert warning"><span class="label">WARNING</span><p>Low altitude engine failure ต้อง prioritize aircraft control, ejection option, landing option และไม่เสียเวลาทำ troubleshooting เกินความสูง/เวลาที่มี</p></div></section>
+<section id="pmu"><h2>4) PMU Failure</h2><p><b>Concept:</b> PMU inoperative ไม่ได้แปลว่า engine ดับทันที แต่หมายถึง automatic management/protection ของ engine หายไปบางส่วน ต้อง monitor torque, ITT, N1 และ PCL อย่างระวัง</p>
+<div class="table-wrap"><table><tbody><tr><th>Indications</th><td>PMU FAIL warning + PMU STATUS caution; อาจมี step change in engine power เมื่อ fuel management unit revert ไป manual nominal setting</td></tr><tr><th>Lost automation</th><td>Automatic control/limiting ของ torque, ITT, N1 หายไป</td></tr><tr><th>Still available</th><td>Propeller governing/overspeed protection ยังได้จาก mechanical overspeed governor</td></tr><tr><th>Core action</th><td>PCL minimum practical for flight → PMU OFF → reset PMU เฉพาะกรณีที่เหมาะสม → ถ้า reset ไม่สำเร็จ land as soon as practical</td></tr></tbody></table></div>
+<div class="alert caution"><span class="label">CAUTION</span><p>ก่อน reset PMU หรือ switch PMU OFF ให้ set power ที่ lowest practical setting เพื่อลด power shift</p></div>
+<div class="alert note"><span class="label">NOTE</span><p>ถ้า PMU failure มาพร้อม uncommanded power changes ที่ไม่ใช่ anticipated step change อย่า reset PMU; ให้ไปใช้ procedure Uncommanded Power Changes / Loss of Power / Uncommanded Propeller Feather</p></div>
+<div class="alert caution"><span class="label">CAUTION</span><p>ถ้า annunciator ไม่ clear หลัง reset actions ให้ตระหนักว่า automatic torque, ITT และ N1 limiting จะไม่ available</p></div>
+<div class="alert caution"><span class="label">CAUTION</span><p>เมื่อ PMU OFF จะไม่มี ground idle ระหว่าง landing rollout/taxi; ต้องวางแผน landing distance เพิ่มขึ้นเพราะ idle N1 สูงประมาณ 67%</p></div></section>
+<section id="feather"><h2>5) Uncommanded Propeller Feather</h2><p><b>Concept:</b> เป็นส่วนหนึ่งของ “Uncommanded Power Changes / Loss of Power / Uncommanded Propeller Feather” ใช้เมื่อ engine ไม่สร้าง power ตามคาดหรือ prop เคลื่อนไป feather เอง ทำให้ thrust หายชัดเจน</p>
+<div class="grid"><div class="card"><h3>Possible causes</h3><p>PMU scheduling จาก input ผิด/จริง, oil/engine/fuel contamination, propeller dump solenoid failure, loss of oil pressure to pitch control, prop sleeve touchdown</p></div><div class="card"><h3>Prop feather clues</h3><p>NP ลดเร็ว, torque สูง, prop noise เพิ่ม, thrust หายชัดเจน, engine/airframe vibration; PMU FAIL/STATUS อาจขึ้นถ้า PMU drop off-line</p></div><div class="card"><h3>Why PROP SYS CB?</h3><p>ในกรณี errant electrical signal, การ open PROP SYS CB เอา power ออกจาก feather dump solenoid ทำให้น้ำมันกลับสู่ pitch control และ prop อาจออกจาก feather</p></div></div>
+<div class="flow"><div class="step"><b>1</b><br>PCL - MID RANGE</div><div class="step"><b>2</b><br>PMU SWITCH - OFF</div><div class="step"><b>3</b><br>PROP SYS CB - PULL ถ้า NP stable below 40%</div><div class="step"><b>4</b><br>PCL - As required; ถ้า power พอทำ PEL</div></div>
+<div class="alert note"><span class="label">NOTE</span><p>Mid range คือมุม PCL ทางกายภาพประมาณกึ่งกลางระหว่าง IDLE และ MAX; PCL เหนือ IDLE เพิ่มโอกาสให้ engine recover และ mid-range ช่วยลดโอกาส overtorque/overtemperature ตอน PMU OFF</p></div>
+<div class="alert caution"><span class="label">CAUTION</span><p>มีโอกาส ITT limit ถูก exceed ถ้า PMU switch OFF ขณะ ITT ≥ 820 °C</p></div>
+<div class="alert caution"><span class="label">CAUTION</span><p>เมื่อ PMU OFF จะไม่มี ground idle ระหว่าง landing rollout/taxi; ต้อง plan landing distance เพิ่มขึ้นจาก idle N1 ประมาณ 67%</p></div>
+<div class="alert note"><span class="label">NOTE</span><p>NP ถือว่า stable below 40% ได้เมื่อ airspeed และ torque คงที่ และไม่มี upward change นาน 3 วินาที; propeller ควรออกจาก feather ภายในประมาณ 15–20 วินาที</p></div>
+<div class="alert warning"><span class="label">WARNING</span><p>ถ้า rate of descent ที่ 125 KIAS, gear/flaps/speed brake retracted และ torque 4–6% ยังมากกว่า 1500 ft/min ให้เพิ่ม torque ตามความจำเป็นถึง limit ที่ manual ระบุเพื่อให้ ROD ประมาณ 1350–1500 ft/min; ถ้า power ไม่พอให้ PCL OFF และประเมิน forced landing/ejection ตาม checklist</p></div></section>
+<section id="fire"><h2>6) Engine Fire in Flight / Fire in Flight</h2><p><b>Concept:</b> FIRE annunciator หมายถึง “possibility of fire” ใน engine compartment ต้อง confirm fire ด้วยอาการประกอบก่อน shutdown engine</p>
+<div class="table-wrap"><table><thead><tr><th>Fire confirmed เมื่อ FIRE annunciator + อาการประกอบ</th><th>เหตุผล</th></tr></thead><tbody><tr><td>Smoke / flames</td><td>หลักฐานโดยตรงของ fire</td></tr><tr><td>Engine vibration / unusual sounds</td><td>บ่งชี้ความเสียหายหรือ abnormal combustion</td></tr><tr><td>High ITT</td><td>อาจสัมพันธ์กับ overheat/fire condition</td></tr><tr><td>Oil pressure, oil temperature, hydraulic pressure fluctuation</td><td>บ่งชี้ความเสียหายต่อระบบใน engine compartment</td></tr></tbody></table></div>
+<div class="flow"><div class="step"><b>If not confirmed</b><br>Initiate PEL with intention to land as soon as possible</div><div class="step"><b>If confirmed</b><br>PCL - OFF</div><div class="step"><b>Isolate</b><br>FIREWALL SHUTOFF HANDLE - PULL</div><div class="step"><b>Outcome</b><br>If fire extinguished: forced landing. If not / impractical: eject.</div></div>
+<div class="alert warning"><span class="label">WARNING</span><p>อย่า shutdown engine จาก FIRE light อย่างเดียวโดยไม่ confirm เพราะ fire detection fault หรือ bleed air leak อาจทำให้ indication ผิดได้ แต่ถ้า confirm fire แล้วต้อง isolate engine/fuel/oil/hydraulic ตาม procedure ทันที</p></div>
+<div class="alert note"><span class="label">NOTE</span><p>ถ้า confirm fire ไม่ได้ อาจเป็น fault ของ fire warning system; ถ้าเพียง loop เดียวติดและอีก loop test good อาจเป็น false fire indication</p></div>
+<div class="alert warning"><span class="label">WARNING</span><p>ในสภาพ fire/smoke ที่ aircraft control ถูกกระทบ นักบินมี option ใช้ CFS หรือ eject ตามสถานการณ์และ checklist</p></div></section>
+<section id="memory"><h2>7) Memory Aid / Mental Model</h2><div class="grid"><div class="card"><h3>Engine Failure</h3><p><b>125 / OFF / Decide</b><br>Glide 125 KIAS minimum → PCL OFF → land/airstart/eject</p></div><div class="card"><h3>PMU Failure</h3><p><b>Low power / PMU OFF / Reset?</b><br>ลด power ก่อน เพราะ power shift คือ risk สำคัญ</p></div><div class="card"><h3>Uncommanded Feather</h3><p><b>MID / OFF / CB</b><br>PCL mid → PMU OFF → PROP SYS CB ถ้า NP stable low</p></div><div class="card"><h3>Fire</h3><p><b>Confirm / OFF / Firewall</b><br>confirm fire ก่อน; ถ้า confirmed ให้ shutdown-isolate-land/eject</p></div></div></section>
+<section id="quiz"><h2>8) Quick Check</h2>
+<details><summary>1. PMU Failure ต่างจาก Engine Failure อย่างไร?</summary><div>PMU Failure คือ computer/automatic control ของ engine ไม่ทำงาน แต่ engine อาจยังให้กำลังได้; Engine Failure คือ engine ไม่ให้กำลัง/ flameout และต้องจัดการ energy ทันที</div></details>
+<details><summary>2. Clue สำคัญของ Uncommanded Feather คืออะไร?</summary><div>NP ลดเร็ว, torque สูง, prop noise เพิ่ม, thrust หาย และอาจมี vibration; PMU FAIL/STATUS อาจขึ้นถ้า PMU drop off-line</div></details>
+<details><summary>3. ทำไม PMU OFF ต้องระวัง landing distance?</summary><div>เพราะ ground idle ไม่ available และ idle N1 สูงประมาณ 67% ทำให้ rollout/taxi/landing distance เพิ่มขึ้น</div></details>
+<details><summary>4. FIRE annunciator ติดอย่างเดียวพอจะ shutdown engine ทันทีหรือไม่?</summary><div>ตาม concept ของ manual ต้อง confirm fire ด้วยอาการประกอบก่อน เพราะอาจเป็น false indication หรือ fire detection fault</div></details>
+<details><summary>5. ทำไม Engine Failure ต้องคิดเรื่อง zoom/glide?</summary><div>เพราะ excess airspeed สามารถแลกเป็น altitude เพื่อเพิ่ม terrain clearance, glide range, เวลาทำ airstart หรือ ejection margin</div></details>
+</section>
+</main>
+<footer><p><b>Source:</b> T-6C Flight Manual, Section III emergency/abnormal procedures: Engine Failure During Flight, Uncommanded Power Changes/Loss of Power/Uncommanded Propeller Feather, Fire in Flight, PMU Failure.</p><p>Created as offline HTML courseware · Training aid only · Always refer to official manual/checklist.</p></footer>
+</body></html>

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>T-6C Fire Warning System Courseware</title>
+  <style>
+    :root {
+      --navy: #10233f;
+      --blue: #1d4ed8;
+      --sky: #eff6ff;
+      --red: #b91c1c;
+      --red-bg: #fef2f2;
+      --amber: #b45309;
+      --amber-bg: #fffbeb;
+      --note: #0369a1;
+      --note-bg: #f0f9ff;
+      --green: #047857;
+      --green-bg: #ecfdf5;
+      --ink: #172033;
+      --muted: #64748b;
+      --line: #d9e2ef;
+      --card: #ffffff;
+      --bg: #f5f7fb;
+      --shadow: 0 12px 30px rgba(16, 35, 63, 0.12);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(29, 78, 216, 0.10), transparent 34rem),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 30%, #eef3f9 100%);
+      line-height: 1.6;
+    }
+
+    .hero {
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(16, 35, 63, 0.96), rgba(29, 78, 216, 0.88)),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.07), rgba(255,255,255,0.07) 8px, transparent 8px, transparent 18px);
+      padding: 56px 22px 38px;
+      border-bottom-left-radius: 34px;
+      border-bottom-right-radius: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 24px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 999px;
+      color: #dbeafe;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 16px 0 8px;
+      font-size: clamp(2.2rem, 6vw, 4.9rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+    }
+
+    .subtitle {
+      max-width: 720px;
+      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      color: #e0e7ff;
+      margin: 0;
+    }
+
+    .source-card {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: var(--radius);
+      padding: 18px;
+      backdrop-filter: blur(10px);
+    }
+
+    .source-card strong { color: #ffffff; }
+    .source-card p { margin: 8px 0 0; color: #e2e8f0; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav .wrap {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+
+    nav a {
+      flex: 0 0 auto;
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.9rem;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+
+    nav a:hover {
+      background: var(--sky);
+      border-color: #bfdbfe;
+    }
+
+    main { padding: 30px 0 48px; }
+
+    section {
+      margin: 22px 0;
+      scroll-margin-top: 74px;
+    }
+
+    .section-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 22px rgba(16, 35, 63, 0.07);
+      padding: clamp(18px, 2.5vw, 28px);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 16px;
+      color: var(--navy);
+      font-size: clamp(1.35rem, 2vw, 2rem);
+      letter-spacing: -0.02em;
+    }
+
+    .badge {
+      display: inline-grid;
+      place-items: center;
+      min-width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      color: #fff;
+      background: var(--blue);
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    .lead {
+      font-size: 1.08rem;
+      color: #334155;
+      margin-top: 0;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .fact, .mini-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+    }
+
+    .fact .kicker, .mini-card .kicker {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .fact strong {
+      display: block;
+      color: var(--navy);
+      font-size: 1.35rem;
+      line-height: 1.2;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      align-items: stretch;
+      margin: 18px 0;
+    }
+
+    .step {
+      position: relative;
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      border-radius: 18px;
+      padding: 16px 14px;
+      min-height: 132px;
+    }
+
+    .step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: -13px;
+      transform: translateY(-50%);
+      color: var(--blue);
+      font-size: 1.3rem;
+      font-weight: 900;
+      z-index: 2;
+    }
+
+    .step-num {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      background: var(--sky);
+      color: var(--blue);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .step h3, .mini-card h3 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: 1.04rem;
+    }
+
+    .step p, .mini-card p { margin: 0; color: #475569; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #fff;
+      margin-top: 12px;
+    }
+
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    th {
+      background: #eaf1fb;
+      color: var(--navy);
+      font-weight: 900;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .alert {
+      border-radius: 18px;
+      border: 1px solid;
+      padding: 16px 18px;
+      margin: 14px 0;
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .alert .label {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 999px;
+      padding: 8px 10px;
+      color: #fff;
+      font-weight: 1000;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      text-align: center;
+    }
+
+    .alert p { margin: 0; }
+    .alert ul { margin: 0; padding-left: 20px; }
+
+    .warning { background: var(--red-bg); border-color: #fecaca; }
+    .warning .label { background: var(--red); }
+    .warning strong { color: var(--red); }
+
+    .caution { background: var(--amber-bg); border-color: #fde68a; }
+    .caution .label { background: var(--amber); }
+    .caution strong { color: var(--amber); }
+
+    .note { background: var(--note-bg); border-color: #bae6fd; }
+    .note .label { background: var(--note); }
+    .note strong { color: var(--note); }
+
+    .training { background: var(--green-bg); border-color: #bbf7d0; }
+    .training .label { background: var(--green); }
+
+    .memory {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .memory h2 { margin: 0 0 12px; font-size: 1.5rem; }
+    .memory code {
+      display: block;
+      white-space: normal;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.20);
+      border-radius: 16px;
+      padding: 14px;
+      font-size: 1rem;
+      color: #eff6ff;
+    }
+
+    details {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 13px 15px;
+    }
+
+    details + details { margin-top: 10px; }
+
+    summary {
+      cursor: pointer;
+      font-weight: 900;
+      color: var(--navy);
+    }
+
+    details p { margin-bottom: 0; color: #475569; }
+
+    .ref {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 16px;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 26px 0 40px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .grid.cols-2, .grid.cols-3, .grid.cols-4, .flow {
+        grid-template-columns: 1fr;
+      }
+      .step:not(:last-child)::after {
+        content: "↓";
+        top: auto;
+        right: 50%;
+        bottom: -22px;
+        transform: translateX(50%);
+      }
+      .step { min-height: auto; }
+      .alert { grid-template-columns: 1fr; }
+      table { font-size: 0.92rem; }
+      th, td { padding: 10px; }
+    }
+
+    @media print {
+      nav { display: none; }
+      .hero { border-radius: 0; box-shadow: none; }
+      .section-card, .memory { box-shadow: none; break-inside: avoid; }
+      body { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">T-6C Systems Courseware</span>
+        <h1>Fire Warning System</h1>
+        <p class="subtitle">บทเรียนสรุประบบตรวจจับไฟ/ความร้อนสูงบริเวณเครื่องยนต์ พร้อม indication, test logic และ Note / Caution / Warning ที่เกี่ยวข้อง</p>
+      </div>
+      <div class="source-card">
+        <strong>Source</strong>
+        <p>T-6C Flight Manual, Section I: Fire Warning System และ Section III: Fire Warning on Ground / Fire in Flight</p>
+        <p><strong>Use:</strong> Training aid only — ไม่ใช้แทน Flight Manual หรือ checklist ทางการ</p>
+      </div>
+    </div>
+  </header>
+
+  <nav aria-label="Course navigation">
+    <div class="wrap">
+      <a href="#facts">Key Facts</a>
+      <a href="#overview">Overview</a>
+      <a href="#components">Components</a>
+      <a href="#flow">Operation Flow</a>
+      <a href="#test">Test</a>
+      <a href="#indications">Indications</a>
+      <a href="#alerts">NCW</a>
+      <a href="#quiz">Quiz</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="facts">
+      <div class="section-card">
+        <h2 class="section-title"><span class="badge">1</span> Key Facts</h2>
+        <div class="grid cols-4">
+          <div class="fact"><span class="kicker">Function</span><strong>Detect high temperature</strong><p>ตรวจจับความร้อนสูงบริเวณภายนอกเครื่องยนต์</p></div>
+          <div class="fact"><span class="kicker">Architecture</span><strong>Dual loops</strong><p>มี sensor tubes และ responder assemblies สองชุด</p></div>
+          <div class="fact"><span class="kicker">Warning Output</span><strong>FIRE + Tone</strong><p>ไฟ FIRE สีแดงและ aural warning tone</p></div>
+          <div class="fact"><span class="kicker">Power</span><strong>FIRE 1 / FIRE 2</strong><p>FIRE 1 จาก battery bus, FIRE 2 จาก generator bus</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview">
+      <div class="section-card">
+        <h2 class="section-title"><span class="badge">2</span> System Overview</h2>
+        <p class="lead">Fire Warning System ของ T-6C ทำหน้าที่เตือนนักบินเมื่อบริเวณ engine compartment มีอุณหภูมิสูงผิดปกติ ซึ่งอาจเกิดจาก engine fire หรือ hot bleed air leak</p>
+        <div class="alert training">
+          <span class="label">Training</span>
+          <p>FIRE annunciator หมายถึง “มีความเป็นไปได้ของไฟหรือความร้อนสูง” ไม่ได้แปลว่าเห็นไฟจริงเสมอไป การตัดสินใจต้องยึด manual/checklist และ indication ประกอบ</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="components">
+      <div class="section-card">
+        <h2 class="section-title"><span class="badge">3</span> Component Breakdown</h2>
+        <div class="grid cols-3">
+          <div class="mini-card">
+            <span class="kicker">Sensor Tubes</span>
+            <h3>ท่อเซนเซอร์รอบเครื่องยนต์</h3>
+            <p>ติดตั้งรอบ exterior surface ของเครื่องยนต์ เพื่อตรวจจับความร้อนสูงแบบ overall threshold และ localized heat</p>
+          </div>
+          <div class="mini-card">
+            <span class="kicker">Gas / Core</span>
+            <h3>Helium + Hydrogen Core</h3>
+            <p>Helium ตอบสนองต่ออุณหภูมิรวมของท่อ ส่วน hydrogen-charged core ตอบสนองต่อ flame หรือ hot bleed air เฉพาะจุด</p>
+          </div>
+          <div class="mini-card">
+            <span class="kicker">Responder Assembly</span>
+            <h3>ตัวแปลง pressure เป็นสัญญาณเตือน</h3>
+            <p>เมื่อ pressure ไปกด diaphragm ถึง fire detection point จะ trigger วงจรไฟ FIRE และเสียงเตือน</p>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>Component</th><th>หน้าที่หลัก</th><th>สิ่งที่นักบินเห็น</th></tr></thead>
+          <tbody>
+            <tr><td>Dual sensor tubes</td><td>ตรวจจับ high temperature รอบเครื่องยนต์</td><td>ไม่มี indication โดยตรง</td></tr>
+            <tr><td>Responder assemblies</td><td>รับ pressure จาก sensor tube และสั่งวงจรเตือน</td><td>ทำให้ FIRE annunciator ติดเมื่อถึง threshold</td></tr>
+            <tr><td>FIRE annunciator</td><td>ไฟเตือนสีแดงบน glareshield</td><td>แสดง FIRE; มี upper/lower half สำหรับ loop test</td></tr>
+            <tr><td>FIRE test switch</td><td>ทดสอบ electrical continuity และ lamp operation</td><td>ตำแหน่ง 1 ติด upper half, ตำแหน่ง 2 ติด lower half</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="flow">
+      <div class="section-card">
+        <h2 class="section-title"><span class="badge">4</span> Normal Operation Flow</h2>
+        <div class="flow" aria-label="Fire warning operation flow">
+          <div class="step"><span class="step-num">1</span><h3>Heat Source</h3><p>เกิด flame, escaping hot bleed air หรือ engine compartment temperature สูง</p></div>
+          <div class="step"><span class="step-num">2</span><h3>Sensor Tube</h3><p>ความร้อนทำให้ helium pressure เพิ่ม และ/หรือ hydrogen ถูกปล่อยจาก core</p></div>
+          <div class="step"><span class="step-num">3</span><h3>Responder</h3><p>Pressure ไปกด diaphragm ภายใน responder assembly</p></div>
+          <div class="step"><span class="step-num">4</span><h3>Detection Point</h3><p>เมื่อ pressure ถึง preset fire detection point วงจรไฟฟ้าจะถูก trigger</p></div>
+          <div class="step"><span class="step-num">5</span><h3>Cockpit Warning</h3><p>FIRE annunciator สีแดงติด และมี aural tone / MASTER WARN</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="test">
+      <div class="section-card">
+        <h2 class="section-title"><span class="badge">5</span> FIRE Test Logic</h2>
+        <p>FIRE test switch อยู่ที่ front cockpit left console test panel ใช้ momentary select ไปตำแหน่ง 1 หรือ 2 เพื่อตรวจสอบ system integrity และ lamp operation ของแต่ละระบบ</p>
+        <table>
+          <thead><tr><th>Test Position</th><th>ผลที่ต้องเห็น</th><th>ความหมาย</th></tr></thead>
+          <tbody>
+            <tr><td>FIRE 1</td><td>Upper half ของ FIRE annunciator ติด</td><td>ทดสอบ #1 fire warning system</td></tr>
+            <tr><td>FIRE 2</td><td>Lower half ของ FIRE annunciator ติด</td><td>ทดสอบ #2 fire warning system</td></tr>
+          </tbody>
+        </table>
+        <div class="alert warning">
+          <span class="label">Warning</span>
+          <p>ต้องทดสอบทั้ง FIRE 1 และ FIRE 2 ให้ได้ผลดี โดย manual ระบุให้ตรวจว่าหลอดใน annunciator ติดครบใน cockpit ที่มีคนนั่ง</p>
+        </div>
+        <div class="alert note">
+          <span class="label">Note</span>
+          <p>Flattening, twisting, kinking หรือ denting ของ fire warning loop ไม่กระทบการ test หรือ flight operation ตามคำอธิบายใน manual</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="indications">
+      <div class="section-card">
+        <h2 class="section-title"><span class="badge">6</span> Indications & Crew Interface</h2>
+        <table>
+          <thead><tr><th>Indication</th><th>เมื่อเกิดอะไร</th><th>ข้อสังเกต</th></tr></thead>
+          <tbody>
+            <tr><td>Red FIRE annunciator</td><td>ระบบตรวจพบ condition ที่เข้าข่าย fire / high temperature / bleed air leak</td><td>ยังติดอยู่จน underlying cause หายไป</td></tr>
+            <tr><td>MASTER WARN switchlight</td><td>Trigger พร้อมกับ FIRE annunciator</td><td>กดเพื่อ extinguish/rearm switchlight แต่ FIRE จะยังอยู่ถ้า cause ยังไม่หาย</td></tr>
+            <tr><td>Master warn tone</td><td>ดังเมื่อ red FIRE annunciator ติด</td><td>เป็น aural cue ให้ crew รับรู้ warning ทันที</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="abnormal">
+      <div class="section-card">
+        <h2 class="section-title"><span class="badge">7</span> Abnormal / Emergency Context</h2>
+        <div class="grid cols-2">
+          <div class="mini-card">
+            <span class="kicker">On Ground</span>
+            <h3>Fire Warning on Ground</h3>
+            <p>Primary indication คือ FIRE annunciator; อาจมี smoke/fire, high ITT, fuel flow ผิดปกติ หรือได้รับแจ้งจาก ground crew/tower/aircrew อื่น เมื่อมีหลักฐาน fire ให้ใช้ procedure ทางการที่เกี่ยวข้อง</p>
+          </div>
+          <div class="mini-card">
+            <span class="kicker">In Flight</span>
+            <h3>Fire in Flight</h3>
+            <p>FIRE annunciator แสดงความเป็นไปได้ของ fire ใน engine compartment ระหว่างรอ confirmation ให้ initiate PEL procedures ด้วยเจตนา land as soon as possible ตาม manual</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="alerts">
+      <div class="section-card">
+        <h2 class="section-title"><span class="badge">8</span> Note / Caution / Warning</h2>
+        <p class="lead">หัวข้อนี้คัดเฉพาะประเด็น safety ที่เกี่ยวข้องกับ Fire Warning System และ Fire Warning procedures โดยสรุปเป็นภาษาไทยเพื่อการเรียนรู้</p>
+
+        <div class="alert warning">
+          <span class="label">Warning</span>
+          <div>
+            <p><strong>Confirmed engine fire:</strong> ไฟ fire warning ที่มาพร้อมอย่างน้อยหนึ่ง indication เช่น smoke, flames, engine vibration, unusual sounds, high ITT หรือ fluctuation ของ oil pressure / oil temperature / hydraulic pressure ถือเป็นการ confirm engine fire</p>
+          </div>
+        </div>
+
+        <div class="alert warning">
+          <span class="label">Warning</span>
+          <div>
+            <p><strong>Unconfirmed fire:</strong> ไฟ fire warning ที่ไม่มี indication อื่นประกอบ ไม่ถือว่าเป็น confirmed fire; manual ระบุชัดว่าอย่า shutdown engine จาก unconfirmed fire</p>
+          </div>
+        </div>
+
+        <div class="alert warning">
+          <span class="label">Warning</span>
+          <div>
+            <p><strong>Bleed air leak possibility:</strong> อุณหภูมิสูงใน engine compartment จาก bleed air leak อาจทำให้ fire warning light ติดได้ การลด PCL ไปทาง IDLE อาจลด bleed air และดับไฟเตือนได้ แต่ต้องยังคงตรวจหา indication ที่ confirm fire ต่อไป</p>
+          </div>
+        </div>
+
+        <div class="alert note">
+          <span class="label">Note</span>
+          <div>
+            <p><strong>Loop fault logic:</strong> ถ้า confirm fire ไม่ได้ ระบบ fire warning อาจผิดปกติและควร test ตามสภาพที่ทำได้ หากติดเพียง loop เดียว เช่น upper หรือ lower half เท่านั้น และอีก loop test good อาจเป็น false fire indication</p>
+          </div>
+        </div>
+
+        <div class="alert note">
+          <span class="label">Note</span>
+          <div>
+            <p><strong>Auxiliary battery context:</strong> เมื่อใช้ auxiliary battery ระบบที่ยังมีไฟเกี่ยวข้องกับ fire detection คือ FIRE 1 เท่านั้น โดย manual ระบุบริบท backup ประมาณ 30 นาทีสำหรับอุปกรณ์บางรายการ</p>
+          </div>
+        </div>
+
+        <div class="alert caution">
+          <span class="label">Caution</span>
+          <div>
+            <p>ไม่สร้างขั้นตอน emergency ใหม่จากบทเรียนนี้ ให้ใช้ checklist/Flight Manual ตัวจริงเสมอ โดยเฉพาะกรณี Fire Warning on Ground และ Fire in Flight</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="memory">
+        <h2>Pilot Mental Model</h2>
+        <code>Heat / Flame / Hot bleed air → Sensor tube pressure rises → Responder trips → FIRE annunciator + MASTER WARN + aural tone</code>
+      </div>
+    </section>
+
+    <section id="quiz">
+      <div class="section-card">
+        <h2 class="section-title"><span class="badge">9</span> Quick Check Quiz</h2>
+        <details>
+          <summary>1) FIRE test switch ตำแหน่ง 1 ควรทำให้ส่วนใดของ annunciator ติด?</summary>
+          <p>Upper half ของ FIRE annunciator</p>
+        </details>
+        <details>
+          <summary>2) FIRE 1 และ FIRE 2 ใช้ power source เหมือนกันหรือไม่?</summary>
+          <p>ไม่เหมือนกัน: FIRE 1 ผ่าน battery bus circuit breaker; FIRE 2 ผ่าน generator bus circuit breaker</p>
+        </details>
+        <details>
+          <summary>3) Fire warning light อย่างเดียวถือเป็น confirmed fire หรือไม่?</summary>
+          <p>ไม่ถือเป็น confirmed fire ต้องมี indication อื่นประกอบ เช่น smoke, flames, high ITT, vibration หรือ pressure/temperature fluctuation ตาม manual</p>
+        </details>
+        <details>
+          <summary>4) Hydrogen-charged core สำคัญอย่างไร?</summary>
+          <p>ตอบสนองต่อ localized heat เช่น flame หรือ hot bleed air โดยปล่อย hydrogen gas ทำให้ pressure ใน sensor tube เพิ่มขึ้น</p>
+        </details>
+      </div>
+    </section>
+
+    <p class="ref">References: T-6C Flight Manual, Section I page 1-19 to 1-20, page 1-80; Section III page 3-4 and 3-20. This HTML is a training aid only.</p>
+  </main>
+
+  <footer>
+    T-6C Fire Warning System Courseware • Offline single-file HTML • Training use only
+  </footer>
+</body>
+</html>
