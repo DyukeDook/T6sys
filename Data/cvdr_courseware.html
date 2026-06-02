@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CVDR / Recorder System Courseware</title>
+  <style>
+    :root {
+      --navy: #0f2742;
+      --blue: #1f6fb2;
+      --sky: #e8f3ff;
+      --green: #0f7b5f;
+      --green-bg: #e7f7f1;
+      --amber: #a66600;
+      --amber-bg: #fff4dc;
+      --red: #a12424;
+      --red-bg: #fdecec;
+      --gray-900: #172033;
+      --gray-700: #41516a;
+      --gray-500: #6c7a90;
+      --gray-100: #f5f7fb;
+      --white: #ffffff;
+      --border: #d9e2ef;
+      --shadow: 0 10px 28px rgba(15, 39, 66, 0.10);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      color: var(--gray-900);
+      background: linear-gradient(180deg, #f7fbff 0%, #f1f5fb 45%, #ffffff 100%);
+    }
+
+    header {
+      color: var(--white);
+      background:
+        radial-gradient(circle at 18% 20%, rgba(255,255,255,0.22), transparent 28%),
+        linear-gradient(135deg, #0b1f35 0%, #154a79 55%, #1f6fb2 100%);
+      padding: 46px 22px 34px;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 6px 12px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      color: #d7ecff;
+      background: rgba(255,255,255,0.10);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      margin: 16px 0 8px;
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      line-height: 1.05;
+    }
+
+    header p {
+      margin: 0;
+      max-width: 900px;
+      color: #e9f5ff;
+      font-size: clamp(1rem, 2.1vw, 1.25rem);
+    }
+
+    .header-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      align-items: end;
+    }
+
+    .source-card {
+      padding: 18px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      color: #f4fbff;
+    }
+
+    .source-card strong { color: #ffffff; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav .wrap {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+
+    nav a {
+      white-space: nowrap;
+      color: var(--navy);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    nav a:hover { background: var(--sky); color: var(--blue); }
+
+    main { padding: 28px 0 56px; }
+
+    section {
+      margin: 28px 0;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.92);
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      color: var(--navy);
+      font-size: clamp(1.45rem, 2.6vw, 2.1rem);
+      line-height: 1.2;
+    }
+
+    h3 { margin: 18px 0 8px; color: var(--navy); }
+
+    p { margin: 0 0 12px; }
+
+    .lead {
+      font-size: 1.12rem;
+      color: var(--gray-700);
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--sky);
+      color: var(--blue);
+      font-size: 0.86rem;
+      font-weight: 800;
+      margin: 3px 5px 3px 0;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .card {
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+    }
+
+    .card .kicker {
+      color: var(--gray-500);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+    }
+
+    .big-number {
+      margin: 6px 0;
+      color: var(--blue);
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .step {
+      position: relative;
+      padding: 18px;
+      min-height: 145px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #ffffff 0%, #eef7ff 100%);
+      border: 1px solid #cde5fb;
+    }
+
+    .step::after {
+      content: "→";
+      position: absolute;
+      right: -13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--blue);
+      font-size: 1.7rem;
+      font-weight: 900;
+      z-index: 1;
+    }
+
+    .step:last-child::after { display: none; }
+
+    .step .num {
+      display: inline-flex;
+      width: 30px;
+      height: 30px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--blue);
+      font-weight: 900;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 14px;
+      margin-top: 12px;
+      background: #fff;
+    }
+
+    th, td {
+      padding: 13px 14px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      color: var(--navy);
+      background: #edf5ff;
+      font-weight: 900;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    code, .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.96em;
+    }
+
+    .alert {
+      position: relative;
+      padding: 16px 18px 16px 18px;
+      border-radius: 16px;
+      border: 1px solid;
+      margin: 14px 0;
+    }
+
+    .alert .label {
+      display: inline-block;
+      margin-bottom: 6px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+    }
+
+    .alert.note { background: var(--sky); border-color: #b7d9f7; }
+    .alert.note .label { color: #fff; background: var(--blue); }
+    .alert.caution { background: var(--amber-bg); border-color: #f2cf80; }
+    .alert.caution .label { color: #fff; background: var(--amber); }
+    .alert.warning { background: var(--red-bg); border-color: #efaaaa; }
+    .alert.warning .label { color: #fff; background: var(--red); }
+    .alert.success { background: var(--green-bg); border-color: #9ed8c4; }
+    .alert.success .label { color: #fff; background: var(--green); }
+
+    .muted { color: var(--gray-500); }
+
+    .memory-aid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 16px;
+    }
+
+    .memory-aid div {
+      border-radius: 16px;
+      padding: 18px;
+      color: #fff;
+      background: linear-gradient(135deg, #0f2742, #1f6fb2);
+    }
+
+    details {
+      margin: 10px 0;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 850;
+      color: var(--navy);
+    }
+
+    footer {
+      padding: 28px 16px;
+      color: #dce9f8;
+      background: var(--navy);
+      text-align: center;
+    }
+
+    .printbar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 14px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: #fff;
+      background: var(--blue);
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    button:hover { filter: brightness(0.95); }
+
+    @media (max-width: 920px) {
+      .header-grid, .grid-4, .grid-3, .grid-2, .flow, .memory-aid {
+        grid-template-columns: 1fr;
+      }
+
+      .step::after {
+        content: "↓";
+        right: 50%;
+        top: auto;
+        bottom: -23px;
+        transform: translateX(50%);
+      }
+
+      section { padding: 22px; }
+      table { display: block; overflow-x: auto; }
+    }
+
+    @media print {
+      nav, .printbar { display: none; }
+      body { background: #fff; }
+      header { color: #000; background: #fff; border-bottom: 2px solid #000; }
+      header p, .source-card, .eyebrow { color: #000; background: #fff; border-color: #999; }
+      section { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap header-grid">
+      <div>
+        <div class="eyebrow">T-6C Training Aid • Recorder System</div>
+        <h1>CVDR / Recorder System</h1>
+        <p>
+          บทเรียน HTML ภาษาไทยเรื่องระบบบันทึกเสียง วิดีโอ ข้อมูลภารกิจ และข้อมูลการบินของ T-6C
+          โดยใช้ชื่อ <strong>CVDR</strong> เป็นชื่อเรียกเพื่อการเรียน ส่วนชื่อที่ปรากฏในคู่มือคือ
+          <strong>DTS/DVR</strong> และ <strong>IDARS/FDR</strong>
+        </p>
+      </div>
+      <div class="source-card">
+        <strong>Source basis</strong><br />
+        T-6C Flight Manual, Section I:<br />
+        Data Transfer System/Digital Video Recorder (DTS/DVR), Integrated Data Acquisition Recording System (IDARS),
+        และข้อมูลผลกระทบเมื่อ IAC 1 failure<br />
+        <span class="muted">Training aid only — ไม่ใช้แทน manual/checklist ทางการ</span>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="wrap">
+      <a href="#key-facts">Key Facts</a>
+      <a href="#overview">Overview</a>
+      <a href="#components">Components</a>
+      <a href="#flow">Flow</a>
+      <a href="#controls">Controls & Indications</a>
+      <a href="#abnormal">Abnormal</a>
+      <a href="#alerts">Note/Caution/Warning</a>
+      <a href="#quiz">Quiz</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <div class="printbar">
+      <button onclick="window.print()">Print / Save PDF</button>
+    </div>
+
+    <section id="key-facts">
+      <h2>1) Key Facts — จำให้ได้ก่อน</h2>
+      <div class="grid grid-4">
+        <div class="card">
+          <div class="kicker">Official manual name</div>
+          <div class="big-number">DTS/DVR</div>
+          <p>ระบบโหลด/ดึงข้อมูล mission และบันทึกวิดีโอ + เสียง cockpit</p>
+        </div>
+        <div class="card">
+          <div class="kicker">Flight data recorder side</div>
+          <div class="big-number">IDARS</div>
+          <p>ระบบบันทึก flight, structural, engine, ASIP/ENSIP/LESS data</p>
+        </div>
+        <div class="card">
+          <div class="kicker">Video sources</div>
+          <div class="big-number">4 CH</div>
+          <p>3 front MFDs + HUD symbols overlayed over HUD camera video</p>
+        </div>
+        <div class="card">
+          <div class="kicker">DVR capacity</div>
+          <div class="big-number">120 min</div>
+          <p>บันทึก aircraft video data ได้สูงสุด 120 นาที</p>
+        </div>
+      </div>
+      <div class="alert note">
+        <span class="label">ONE-LINE SUMMARY</span>
+        <p>
+          <strong>DTS/DVR</strong> คือส่วนที่ช่วยโหลด mission data และบันทึกภาพ/เสียงเพื่อ debrief;
+          <strong>IDARS/FDR</strong> คือส่วนที่บันทึกข้อมูลเครื่องบินแบบ crash-survivable เพื่อ mishap, maintenance และ tracking.
+        </p>
+      </div>
+    </section>
+
+    <section id="overview">
+      <h2>2) System Overview</h2>
+      <p class="lead">
+        ในบทเรียนนี้ “CVDR” หมายถึงแนวคิดรวมของระบบ recorder ที่เกี่ยวกับ cockpit voice/video/data recording
+        ของ T-6C โดยแยกตามชื่อจริงในคู่มือเป็น 2 กลุ่มใหญ่
+      </p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>DTS/DVR — Debrief & Mission Data</h3>
+          <p>
+            ใช้โหลด mission/navigation data ก่อนบิน, ดึง aircraft/mission data หลังบิน,
+            และบันทึกวิดีโอ 4 channels พร้อมเสียง cockpit จาก pilot intercom system.
+          </p>
+          <span class="pill">Mission data</span>
+          <span class="pill">Video</span>
+          <span class="pill">Audio</span>
+          <span class="pill">Debrief</span>
+        </div>
+        <div class="card">
+          <h3>IDARS/FDR — Flight Data & Tracking</h3>
+          <p>
+            เป็น multifunction processing system ที่ทำหน้าที่เป็น crash-survivable FDR
+            และเก็บข้อมูลสำหรับ mishap investigation, ASIP, ENSIP, LESS, maintenance และ aircraft tracking.
+          </p>
+          <span class="pill">FDR</span>
+          <span class="pill">ASIP</span>
+          <span class="pill">ENSIP</span>
+          <span class="pill">LESS</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="components">
+      <h2>3) Component Breakdown</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>อยู่ในกลุ่ม</th>
+            <th>หน้าที่จำง่าย</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>DTS/DVR Unit</strong></td>
+            <td>DTS/DVR</td>
+            <td>รับ/ส่งข้อมูลกับ IAC ผ่าน RMMD และบันทึกวิดีโอ/เสียง</td>
+          </tr>
+          <tr>
+            <td><strong>RMMD</strong><br /><span class="muted">Removable Mass Memory Device</span></td>
+            <td>DTS/DVR</td>
+            <td>memory device ที่ใส่ก่อนบินและถอดหลังบิน สำหรับ mission/aircraft data</td>
+          </tr>
+          <tr>
+            <td><strong>MFD DTS/DVR Page</strong></td>
+            <td>DTS/DVR</td>
+            <td>เข้าหน้าโดยกด LSK L5 จาก MFD MENU page 1 ใช้ควบคุม load/save/record</td>
+          </tr>
+          <tr>
+            <td><strong>HOTAS red trigger</strong></td>
+            <td>DTS/DVR</td>
+            <td>ใช้ initiate recording ร่วมกับ LSK R6</td>
+          </tr>
+          <tr>
+            <td><strong>Integrated Data Acquisition Recorder</strong></td>
+            <td>IDARS/FDR</td>
+            <td>crash-survivable recorder ติดตั้งใน left avionics bay</td>
+          </tr>
+          <tr>
+            <td><strong>DTM</strong><br /><span class="muted">Data Transfer Module</span></td>
+            <td>IDARS/FDR</td>
+            <td>solid-state portable memory cartridge เก็บ IAT, structures, engine, documentary และ BIT data</td>
+          </tr>
+          <tr>
+            <td><strong>DTMR</strong><br /><span class="muted">Data Transfer Module Receptacle</span></td>
+            <td>IDARS/FDR</td>
+            <td>receptacle/interface ระหว่าง IDARS และ DTM</td>
+          </tr>
+          <tr>
+            <td><strong>FDR Recorder/Maintenance Annunciator</strong></td>
+            <td>IDARS/FDR</td>
+            <td>ไฟแจ้ง MAINT/FAIL สำหรับ ground crew อยู่ใกล้ firewall shutoff handle ใน front cockpit</td>
+          </tr>
+          <tr>
+            <td><strong>Maintenance Connector</strong></td>
+            <td>IDARS/FDR</td>
+            <td>จุดต่อ ground readout equipment เพื่อ download IDARS/ASIP/ENSIP/LESS data</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="flow">
+      <h2>4) Normal Operation Flow</h2>
+      <p class="lead">มองเป็น 4 ช่วง: ก่อนบิน → โหลดข้อมูล → ระหว่างบิน → หลังบิน</p>
+      <div class="flow">
+        <div class="step">
+          <span class="num">1</span>
+          <h3>Pre-flight</h3>
+          <p>ใส่ <strong>RMMD</strong> เข้า DTS/DVR ตามความต้องการ เพื่อเตรียม mission/navigation data</p>
+        </div>
+        <div class="step">
+          <span class="num">2</span>
+          <h3>Load Data</h3>
+          <p>เข้าหน้า DTS/DVR ผ่าน <strong>MFD MENU → LSK L5</strong> แล้วเลือก load options เช่น tactical, user, frequency, configuration, navigation data</p>
+        </div>
+        <div class="step">
+          <span class="num">3</span>
+          <h3>Record</h3>
+          <p>กด <strong>LSK R6</strong> หรือ <strong>HOTAS red trigger</strong> เพื่อเริ่มบันทึก 4 video channels พร้อม audio channel</p>
+        </div>
+        <div class="step">
+          <span class="num">4</span>
+          <h3>Post-flight</h3>
+          <p>ดึงข้อมูล aircraft/mission data เพื่อ debrief และ maintenance; ถอด DTS/DVR cartridge ตาม procedure</p>
+        </div>
+      </div>
+
+      <h3>DTS/DVR Load Options</h3>
+      <table>
+        <thead>
+          <tr><th>Option</th><th>ข้อมูลที่โหลด</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>TACTICAL DATA</td><td>threats, danger areas, bull’s-eye</td></tr>
+          <tr><td>USER DATA</td><td>mission routes, user waypoints, targets</td></tr>
+          <tr><td>FREQUENCY DATA</td><td>mission radio/navigation frequencies และ identification features</td></tr>
+          <tr><td>CONFIGURATION DATA</td><td>student skill level และ A/A, A/G MFD start pages</td></tr>
+          <tr><td>NAVIGATION DATA</td><td>FMS navigation database</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="logic">
+      <h2>5) Recording Logic — START / ABORT</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>เมื่อยังไม่บันทึก</h3>
+          <p><span class="pill">LSK R6 = START</span></p>
+          <p>กด LSK R6 หรือ HOTAS red trigger เพื่อเริ่ม recording แล้ว caption จะเปลี่ยนเป็น <strong>ABORT</strong></p>
+        </div>
+        <div class="card">
+          <h3>เมื่อกำลังบันทึก</h3>
+          <p><span class="pill">LSK R6 = ABORT</span></p>
+          <p>กด LSK R6 ขณะขึ้น ABORT จะหยุด recording แล้ว caption กลับเป็น <strong>START</strong></p>
+        </div>
+      </div>
+      <div class="alert note">
+        <span class="label">TRAINING NOTE</span>
+        <p>
+          วิดีโอและเสียงที่ recorded จะถูก time stamped จาก GPS และมี event markers ที่ crew initiate จาก HOTAS.
+          Time counter แสดงที่ด้านล่างของจอในรูปแบบ <span class="mono">hh:mm:ssZ</span> สำหรับ Zulu time และแสดง elapsed time เมื่อ recording starts.
+        </p>
+      </div>
+    </section>
+
+    <section id="controls">
+      <h2>6) Controls & Indications</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Control / Indication</th>
+            <th>Meaning</th>
+            <th>Action / Interpretation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>LSK L5</strong> on MFD MENU page 1</td>
+            <td>Access DTS/DVR page</td>
+            <td>เข้าใช้งานหน้า DTS/DVR</td>
+          </tr>
+          <tr>
+            <td><strong>LSK L2 START/ABORT</strong></td>
+            <td>Start/stop loading process</td>
+            <td>ใช้กับการ load ข้อมูล เมื่อ loading อยู่ caption จะเป็น ABORT</td>
+          </tr>
+          <tr>
+            <td><strong>LSK L1 LOAD</strong></td>
+            <td>Toggle load options</td>
+            <td>วนเลือก tactical/user/frequency/configuration/navigation data</td>
+          </tr>
+          <tr>
+            <td><strong>LSK R2</strong></td>
+            <td>Save maintenance data</td>
+            <td>บันทึก maintenance data ลง RMMD เพื่อ analysis</td>
+          </tr>
+          <tr>
+            <td><strong>LSK R6 / HOTAS red trigger</strong></td>
+            <td>Recording control</td>
+            <td>เริ่ม/หยุด DVR recording ตาม START/ABORT logic</td>
+          </tr>
+          <tr>
+            <td><strong>DTS/DVR Green PWR LED</strong></td>
+            <td>Unit power supply on/off</td>
+            <td>ใช้บอกสถานะ power ของ DTS/DVR unit</td>
+          </tr>
+          <tr>
+            <td><strong>DTS/DVR Yellow END LED</strong></td>
+            <td>RMMD full or fault detected</td>
+            <td>เป็น maintenance/debrief attention item</td>
+          </tr>
+          <tr>
+            <td><strong>FDR Green MAINT</strong></td>
+            <td>IDARS memory approximately 80% full</td>
+            <td>แจ้ง ground crew ว่าหน่วยความจำใกล้เต็ม</td>
+          </tr>
+          <tr>
+            <td><strong>FDR Amber FAIL</strong></td>
+            <td>Recorder failed or requires maintenance</td>
+            <td>แจ้ง ground crew ว่าระบบ recorder มี failure หรือ needs maintenance</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="abnormal">
+      <h2>7) Abnormal / Failure Behavior</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>IAC 1 Failure Effect</h3>
+          <p>เมื่อเกิด full IAC 1 failure คู่มือระบุว่า <strong>DTS/DVR stops all video and audio recording</strong>.</p>
+        </div>
+        <div class="card">
+          <h3>DTS Load/Download Loss</h3>
+          <p>ใน full IAC 1 failure, DTS ไม่มี capability ในการ load/download data ระหว่าง DTS cartridge กับ IAC 1.</p>
+        </div>
+        <div class="card">
+          <h3>Recorder Maintenance Indications</h3>
+          <p>Yellow END, FDR MAINT หรือ FDR FAIL เป็นสิ่งบอก ground crew/maintenance ว่าต้องตรวจ memory/fault/recorder status.</p>
+        </div>
+      </div>
+      <div class="alert caution">
+        <span class="label">TRAINING CAUTION</span>
+        <p>
+          ข้อมูลหน้านี้อธิบายผลกระทบของระบบเพื่อการเรียนเท่านั้น ไม่ใช่ abnormal/emergency procedure.
+          เมื่อพบ annunciation หรือ failure จริง ให้ใช้ flight manual, checklist และ SOP ล่าสุดของหน่วยเป็นหลัก.
+        </p>
+      </div>
+    </section>
+
+    <section id="alerts">
+      <h2>8) Note / Caution / Warning</h2>
+      <p class="lead">
+        ตรวจในหัวข้อ DTS/DVR และ IDARS/FDR ของคู่มือแล้ว ไม่พบข้อความ <strong>WARNING</strong> หรือ <strong>CAUTION</strong>
+        เฉพาะระบบนี้โดยตรงใน system description ที่ใช้ทำบทเรียนนี้ ส่วนกล่องด้านล่างแยก “official source status” กับ “training note” ให้ชัดเจน
+      </p>
+
+      <div class="alert warning">
+        <span class="label">WARNING — SOURCE STATUS</span>
+        <p>
+          ไม่พบ official WARNING เฉพาะ DTS/DVR หรือ IDARS/FDR ใน system description ที่ใช้ทำบทเรียนนี้.
+          ห้ามสร้าง warning/procedure ใหม่จากบทเรียนนี้; ให้ยึด manual/checklist ทางการเสมอ.
+        </p>
+      </div>
+
+      <div class="alert caution">
+        <span class="label">CAUTION — SOURCE STATUS</span>
+        <p>
+          ไม่พบ official CAUTION เฉพาะ DTS/DVR หรือ IDARS/FDR ใน system description ที่ใช้ทำบทเรียนนี้.
+          ข้อความ caution ในบทเรียนนี้จึงเป็น training caution เรื่องการใช้งานสื่อ ไม่ใช่ aircraft caution ทางการ.
+        </p>
+      </div>
+
+      <div class="alert note">
+        <span class="label">NOTE — TRAINING SUMMARY</span>
+        <p>
+          จำ logic สำคัญ: <strong>DVR = Debrief</strong>, <strong>FDR/IDARS = Investigation + Maintenance Tracking</strong>.
+          ถ้าเห็น <strong>Yellow END</strong> ให้คิดถึง RMMD full/fault; ถ้าเห็น <strong>FDR MAINT</strong> ให้คิดถึง memory ประมาณ 80% full;
+          ถ้าเห็น <strong>FDR FAIL</strong> ให้คิดถึง recorder failed หรือ requires maintenance.
+        </p>
+      </div>
+    </section>
+
+    <section id="memory">
+      <h2>9) Memory Aid</h2>
+      <div class="memory-aid">
+        <div>
+          <h3>DTS/DVR = “สิ่งที่นักบินเห็นและได้ยิน”</h3>
+          <p>บันทึกภาพ MFD/HUD + เสียง cockpit เพื่อใช้ debrief และ maintenance.</p>
+        </div>
+        <div>
+          <h3>IDARS/FDR = “สิ่งที่เครื่องบินเป็นอยู่”</h3>
+          <p>บันทึก flight, structure, engine และ BIT data เพื่อ tracking และ investigation.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz">
+      <h2>10) Quick Check / Quiz</h2>
+      <details>
+        <summary>1. ชื่อระบบที่คู่มือใช้แทน “CVDR” ในบทเรียนนี้คืออะไร?</summary>
+        <p><strong>ตอบ:</strong> DTS/DVR สำหรับ data transfer/digital video recording และ IDARS/FDR สำหรับ flight data recording.</p>
+      </details>
+      <details>
+        <summary>2. DVR บันทึก video channels อะไรบ้าง?</summary>
+        <p><strong>ตอบ:</strong> 3 front MFDs และ HUD symbols overlayed over HUD camera video รวมเป็น 4 video channels.</p>
+      </details>
+      <details>
+        <summary>3. เริ่ม DVR recording ได้อย่างไร?</summary>
+        <p><strong>ตอบ:</strong> กด LSK R6 หรือกด red trigger button บน HOTAS.</p>
+      </details>
+      <details>
+        <summary>4. FDR green MAINT หมายถึงอะไร?</summary>
+        <p><strong>ตอบ:</strong> IDARS memory ประมาณ 80% full เพื่อแจ้ง ground crew.</p>
+      </details>
+      <details>
+        <summary>5. FDR amber FAIL หมายถึงอะไร?</summary>
+        <p><strong>ตอบ:</strong> recorder failed หรือ requires maintenance.</p>
+      </details>
+      <details>
+        <summary>6. Full IAC 1 failure ส่งผลกับ DTS/DVR อย่างไร?</summary>
+        <p><strong>ตอบ:</strong> DTS/DVR หยุด video/audio recording และ DTS ไม่มี capability ในการ load/download data ระหว่าง DTS cartridge กับ IAC 1.</p>
+      </details>
+    </section>
+
+    <section id="source">
+      <h2>11) Source Notes</h2>
+      <ul>
+        <li>T-6C Flight Manual Section I — Data Transfer System/Digital Video Recorder (DTS/DVR), pages 1-156 to 1-157.</li>
+        <li>T-6C Flight Manual Section I — Integrated Data Acquisition Recording System (IDARS), pages 1-157 to 1-158.</li>
+        <li>T-6C Flight Manual Section I — Integrated avionics/IAC failure behavior: full IAC 1 failure effect on DTS/DVR.</li>
+        <li>T-6C Flight Manual Section II checklist references: DTS/DVR cartridge insert/remove as required and FDR light extinguished during relevant checks.</li>
+      </ul>
+      <div class="alert success">
+        <span class="label">USE CASE</span>
+        <p>
+          เหมาะสำหรับ ground school, pre-brief, self-study และ exam review เบื้องต้น.
+          สำหรับการบินจริงให้ตรวจ manual/checklist/SOP ที่ current และ approved ของหน่วยทุกครั้ง.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    CVDR / Recorder System Courseware • T-6C Training Aid • Generated for instructional use only
+  </footer>
+</body>
+</html>

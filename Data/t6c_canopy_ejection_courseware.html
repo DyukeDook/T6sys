@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>T-6C Canopy, CFS & Ejection System Courseware</title>
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --paper:#ffffff;
+      --ink:#152033;
+      --muted:#5d6a7e;
+      --navy:#0b1f3a;
+      --blue:#1d4ed8;
+      --blue-soft:#dbeafe;
+      --amber:#d97706;
+      --amber-soft:#fef3c7;
+      --red:#dc2626;
+      --red-soft:#fee2e2;
+      --green:#0f766e;
+      --green-soft:#ccfbf1;
+      --line:#d7dee9;
+      --shadow:0 10px 30px rgba(10, 31, 58, .10);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Segoe UI",Tahoma,"Noto Sans Thai",Arial,sans-serif;
+      color:var(--ink);
+      background:linear-gradient(180deg,#eef4ff 0%,var(--bg) 320px);
+      line-height:1.6;
+    }
+    header{
+      background:linear-gradient(135deg,#061427 0%,#0b1f3a 48%,#153e75 100%);
+      color:#fff;
+      padding:44px 22px 34px;
+      position:relative;
+      overflow:hidden;
+    }
+    header::after{
+      content:"";
+      position:absolute;
+      width:520px;height:520px;
+      right:-180px;top:-210px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(255,255,255,.20),rgba(255,255,255,0) 65%);
+    }
+    .wrap{max-width:1180px;margin:0 auto;position:relative;z-index:1}
+    .eyebrow{letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;opacity:.82;font-weight:700}
+    h1{margin:.35rem 0 .5rem;font-size:clamp(2rem,5vw,4.3rem);line-height:1.05}
+    .subtitle{font-size:clamp(1rem,2vw,1.22rem);max-width:900px;opacity:.94;margin:0 0 18px}
+    .pillrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);padding:8px 12px;border-radius:999px;font-size:.9rem}
+    nav{
+      position:sticky;top:0;z-index:5;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(10,31,58,.05)
+    }
+    nav .wrap{display:flex;gap:8px;overflow:auto;padding:10px 16px}
+    nav a{white-space:nowrap;text-decoration:none;color:var(--navy);font-weight:700;padding:8px 12px;border-radius:999px;font-size:.9rem}
+    nav a:hover{background:#edf4ff}
+    main{max-width:1180px;margin:28px auto;padding:0 18px 46px}
+    section{margin:24px 0}
+    .card,.panel,.alert,details{
+      background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)
+    }
+    .panel{padding:24px}
+    h2{font-size:clamp(1.45rem,2.8vw,2.1rem);margin:0 0 14px;color:var(--navy)}
+    h3{font-size:1.18rem;margin:20px 0 10px;color:#12315a}
+    p{margin:0 0 12px}.muted{color:var(--muted)}
+    .grid{display:grid;gap:16px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{padding:18px}
+    .card .kicker{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);font-weight:800;margin-bottom:6px}
+    .big{font-size:1.7rem;font-weight:900;color:var(--navy);line-height:1.1}
+    .small{font-size:.92rem;color:var(--muted)}
+    .memory{background:linear-gradient(135deg,#ecfeff,#eff6ff);border:1px solid #bfdbfe;padding:18px;border-radius:var(--radius);font-weight:800;color:#0f2e53}
+    .flow{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap;margin-top:12px}
+    .step{flex:1 1 150px;background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:14px;position:relative;min-height:92px}
+    .step b{display:block;color:#0b1f3a;margin-bottom:5px}.step span{font-size:.92rem;color:var(--muted)}
+    .arrow{align-self:center;font-weight:900;color:var(--blue);font-size:1.4rem}
+    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:14px;background:#fff;border:1px solid var(--line)}
+    th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line)}
+    th{background:#f1f5f9;color:#0b1f3a;font-size:.92rem}tr:last-child td{border-bottom:0}
+    .table-wrap{overflow:auto;border-radius:14px}.tag{display:inline-flex;align-items:center;gap:5px;font-weight:800;border-radius:999px;padding:4px 9px;font-size:.8rem}
+    .tag.normal{background:#e0f2fe;color:#075985}.tag.success{background:var(--green-soft);color:var(--green)}.tag.warn{background:var(--red-soft);color:var(--red)}
+    .alert{padding:16px 18px;margin:12px 0;border-left-width:8px;box-shadow:0 8px 22px rgba(10,31,58,.07)}
+    .alert .label{display:inline-block;font-weight:900;letter-spacing:.08em;margin-bottom:6px;font-size:.78rem;border-radius:6px;padding:3px 7px}
+    .alert.warning{border-left-color:var(--red);background:linear-gradient(90deg,var(--red-soft),#fff 35%)}
+    .alert.warning .label{background:var(--red);color:white}
+    .alert.caution{border-left-color:var(--amber);background:linear-gradient(90deg,var(--amber-soft),#fff 35%)}
+    .alert.caution .label{background:var(--amber);color:white}
+    .alert.note{border-left-color:var(--blue);background:linear-gradient(90deg,var(--blue-soft),#fff 35%)}
+    .alert.note .label{background:var(--blue);color:white}
+    .alert ul{margin:4px 0 0 20px;padding:0}.alert li{margin:5px 0}
+    details{padding:0;margin:12px 0;overflow:hidden}summary{cursor:pointer;padding:14px 18px;font-weight:900;background:#f8fafc;color:#0b1f3a}details .answer{padding:0 18px 16px}
+    .sourcebox{background:#0b1f3a;color:#fff;border-radius:var(--radius);padding:18px}.sourcebox a{color:#bfdbfe}.sourcebox .muted{color:#cbd5e1}
+    .twocol{columns:2;column-gap:28px}.twocol li{break-inside:avoid;margin-bottom:8px}
+    footer{background:#071122;color:#cbd5e1;padding:24px;text-align:center;font-size:.9rem}
+    .print-note{display:none}
+    @media (max-width:850px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.arrow{display:none}.twocol{columns:1}header{padding-top:34px}main{padding-left:14px;padding-right:14px}}
+    @media print{nav{display:none}body{background:white}.card,.panel,.alert,details{box-shadow:none}.print-note{display:block}.panel{page-break-inside:avoid}header{background:#fff;color:#000;border-bottom:2px solid #000}.pill{border-color:#777;color:#000}.subtitle{color:#111}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">T-6C Courseware / Training Aid</div>
+    <h1>Canopy, CFS & Ejection System</h1>
+    <p class="subtitle">บทเรียน HTML หน้าเดียวสำหรับทบทวนระบบ Canopy, Canopy Fracturing System (CFS) และ Ejection Seat พร้อมสรุป NOTE / CAUTION / WARNING ที่เกี่ยวข้องจาก T-6C Flight Manual</p>
+    <div class="pillrow">
+      <span class="pill">Canopy: side-opening / non-jettisonable</span>
+      <span class="pill">CFS: clears escape path</span>
+      <span class="pill">Ejection Seat: fully automatic</span>
+      <span class="pill">ISS: SOLO / BOTH / CMD FWD</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#objectives">Objectives</a>
+    <a href="#quick">Key Facts</a>
+    <a href="#canopy">Canopy</a>
+    <a href="#cfs">CFS</a>
+    <a href="#ejection">Ejection Seat</a>
+    <a href="#iss">ISS</a>
+    <a href="#alerts">Note/Caution/Warning</a>
+    <a href="#quiz">Quiz</a>
+  </div>
+</nav>
+
+<main>
+  <section id="disclaimer" class="sourcebox">
+    <h2 style="color:white;margin-bottom:8px">Training Use Only</h2>
+    <p>เอกสารนี้เป็น <b>training aid</b> เพื่อช่วยเข้าใจระบบ ไม่ใช้แทน Flight Manual, Checklist, Emergency Procedures หรือคำสั่งหน่วยบิน ข้อความ safety เป็นการสรุป/แปลไทยเพื่อการเรียน ให้ยืนยัน wording และ action จากเอกสารทางการก่อนใช้งานจริงเสมอ</p>
+    <p class="muted">Source focus: T-6C Flight Manual, Section I - Canopy, Canopy Fracturing System, Emergency Ground Egress System, Ejection Seats, Interseat Sequencing System.</p>
+  </section>
+
+  <section id="objectives" class="panel">
+    <h2>Learning Objectives</h2>
+    <p>เมื่อเรียนจบหน้านี้ ผู้เรียนควรสามารถ:</p>
+    <ul class="twocol">
+      <li>อธิบายหน้าที่ของ canopy และระบบล็อกได้</li>
+      <li>อธิบายว่า CFS เปิดทางหนีให้ pilot อย่างไร</li>
+      <li>แยก manual CFS กับ automatic CFS during ejection ได้</li>
+      <li>อธิบายลำดับหลักของ ejection seat sequence ได้</li>
+      <li>เข้าใจ ISS mode: SOLO, BOTH, CMD FWD</li>
+      <li>จดจำ NOTE / CAUTION / WARNING สำคัญที่เกี่ยวข้องได้</li>
+    </ul>
+  </section>
+
+  <section id="quick">
+    <h2>Key Facts / Quick Cards</h2>
+    <div class="grid grid-3">
+      <div class="card"><div class="kicker">Canopy</div><div class="big">Single canopy</div><p class="small">Side-opening, lockable, non-jettisonable canopy ครอบทั้ง front และ rear cockpit</p></div>
+      <div class="card"><div class="kicker">Birdstrike</div><div class="big">4 lb / 270 kt</div><p class="small">Windscreen/front transparency หนากว่า rear transparency และออกแบบให้ทน birdstrike ตาม manual</p></div>
+      <div class="card"><div class="kicker">Locking</div><div class="big">5 hooks</div><p class="small">Latch mechanism ขับ overcentering hooks 5 ตัวผ่าน continuous drive rod</p></div>
+      <div class="card"><div class="kicker">Warning</div><div class="big">CANOPY</div><p class="small">Red EICAS warning เมื่อระบบไม่เห็น canopy closed and locked</p></div>
+      <div class="card"><div class="kicker">CFS</div><div class="big">FLSC + MDC</div><p class="small">ใช้ explosive cords เพื่อ fracture transparency ไม่ได้ jettison canopy ทั้งบาน</p></div>
+      <div class="card"><div class="kicker">Ejection Seat</div><div class="big">0/0 to 35,000 ft</div><p class="small">Martin-Baker seat fully automatic ภายใน envelope ที่กำหนด สูงสุดประมาณ 370 KIAS</p></div>
+    </div>
+    <p class="memory" style="margin-top:16px">Mental Model: <b>Canopy keeps cockpit closed → CFS clears the path → Ejection seat takes the pilot out.</b></p>
+  </section>
+
+  <section id="canopy" class="panel">
+    <h2>1) Canopy System</h2>
+    <p><b>หน้าที่หลัก:</b> ปิด/ปกป้อง cockpit, ช่วย defog/ventilation, และเป็นส่วนหนึ่งของ escape path เมื่อใช้ CFS/ejection seat</p>
+    <div class="grid grid-2">
+      <div>
+        <h3>System Overview</h3>
+        <ul>
+          <li>Canopy รวม windscreen เป็นชุด lockable canopy แบบเปิดด้านข้าง</li>
+          <li>ไม่ใช่ canopy แบบ jettisonable; เวลา ejection ใช้ CFS fracture transparency</li>
+          <li>Oil-filled spring struts ช่วยเปิด/ปิดโดยไม่ต้องใช้ power assist</li>
+          <li>ระบบ latch ใช้ overcentering hooks 5 ตัว ขับด้วย continuous drive rod</li>
+          <li>Electrical sensing ใช้ microswitches และ canopy sill switch เพื่อตรวจ locked/latched condition</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Canopy Seal</h3>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Seal</th><th>หน้าที่</th><th>Logic</th></tr>
+            <tr><td>Non-inflatable weather seal</td><td>กันสภาพอากาศภายนอก</td><td>Passive seal</td></tr>
+            <tr><td>Inflatable pressure seal</td><td>ช่วย pressurization sealing</td><td>Inflate อัตโนมัติเมื่อมี cooled engine bleed air และ weight off right main landing gear</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <h3>Canopy Control / Indication Flow</h3>
+    <div class="flow">
+      <div class="step"><b>Pilot input</b><span>Internal/external canopy handle + lock release lever</span></div>
+      <div class="arrow">→</div>
+      <div class="step"><b>Mechanical drive</b><span>Continuous drive rod drives 5 overcentering hooks</span></div>
+      <div class="arrow">→</div>
+      <div class="step"><b>Sensing</b><span>Microswitches + canopy sill switch verify latch/lock</span></div>
+      <div class="arrow">→</div>
+      <div class="step"><b>Indication</b><span>Red CANOPY warning if not closed and locked</span></div>
+    </div>
+
+    <h3>Crew Interface</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Item</th><th>ตำแหน่ง/บทบาท</th><th>ข้อจำสำคัญ</th></tr>
+        <tr><td>External canopy handle</td><td>ใช้เปิด/ปิดจากภายนอก</td><td>ต้องอยู่ตำแหน่ง OPEN ก่อนลด canopy ลงสู่ sill</td></tr>
+        <tr><td>Internal canopy handle</td><td>ใช้เปิด/ปิดจากภายใน cockpit</td><td>ต้องหมุนได้ปกติและ lock canopy closed ได้</td></tr>
+        <tr><td>Lock release lever</td><td>ปลด lock เพื่อเปิดจากด้านใน</td><td>ใช้ตรวจ engagement ของ hooks ตาม manual</td></tr>
+        <tr><td>Mechanical green indicators</td><td>แสดง mechanical lock indication</td><td>ต้อง verify visible ตาม procedure</td></tr>
+        <tr><td>CANOPY warning</td><td>Red EICAS message</td><td>ขึ้นเมื่อ canopy latch/switch logic ไม่ยืนยัน closed and locked</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="cfs" class="panel">
+    <h2>2) Canopy Fracturing System (CFS)</h2>
+    <p><b>หน้าที่หลัก:</b> สร้างทางออกให้ pilot ระหว่าง ejection หรือ emergency ground egress โดย fracture canopy transparency ด้วย explosive cord</p>
+
+    <div class="grid grid-2">
+      <div>
+        <h3>Components</h3>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Component</th><th>หน้าที่</th></tr>
+            <tr><td>FLSC - Flexible Linear Shaped Charge</td><td>ติดตั้งที่ front transparency รอบ periphery และ centerline เพื่อตัดเป็นสอง halves</td></tr>
+            <tr><td>MDC - Mild Detonating Cord</td><td>ติดตั้งที่ rear transparency แยกเป็น periphery และ centerline diamond pattern</td></tr>
+            <tr><td>Internal CFS handles</td><td>อยู่หลัง PCL ในแต่ละ cockpit ใช้ actuate transparency ของ cockpit นั้น</td></tr>
+            <tr><td>External CFS handles/lanyards</td><td>อยู่หลัง ground egress doors ซ้าย/ขวา ใช้ actuate ทั้ง front และ rear transparencies</td></tr>
+            <tr><td>Piezo / flash lamp / laser / fiber optic path</td><td>ส่งพลังงานไป optical detonators เพื่อเริ่ม detonation chain</td></tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h3>Mode of Operation</h3>
+        <div class="flow">
+          <div class="step"><b>Automatic</b><span>Seat motion activates CFS through seat/rail initiator during ejection</span></div>
+          <div class="arrow">→</div>
+          <div class="step"><b>Timed fracture</b><span>Detonation timed with seat passage so transparency moves outward</span></div>
+          <div class="arrow">→</div>
+          <div class="step"><b>Backup effect</b><span>If CFS fails, seat-mounted canopy breaker helps shatter transparency</span></div>
+        </div>
+        <div class="flow" style="margin-top:12px">
+          <div class="step"><b>Manual internal</b><span>Turn/pull internal CFS handle; affects respective transparency only</span></div>
+          <div class="arrow">→</div>
+          <div class="step"><b>Manual external</b><span>Ground rescue lanyard; affects both transparencies</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Pattern / Effect</h3>
+    <div class="grid grid-2">
+      <div class="card"><div class="kicker">Front transparency</div><p>FLSC รอบ periphery และ centerline ตัด transparency เป็น 2 halves แล้วแรง detonation พาชิ้นส่วนออกจาก canopy frame</p></div>
+      <div class="card"><div class="kicker">Rear transparency</div><p>Rear ejection detonate เฉพาะ centerline diamond pattern; ถ้าใช้ rear internal CFS handle หรือ external CFS handle จะ detonate ทั้ง periphery และ diamond pattern</p></div>
+    </div>
+  </section>
+
+  <section id="ejection" class="panel">
+    <h2>3) Ejection Seat System</h2>
+    <p><b>หน้าที่หลัก:</b> พา pilot ออกจาก aircraft อย่างเป็นลำดับอัตโนมัติ หลังดึง ejection control handle</p>
+
+    <div class="grid grid-2">
+      <div>
+        <h3>Seat Overview</h3>
+        <ul>
+          <li>ใช้ Martin-Baker ejection seats</li>
+          <li>แต่ละ cockpit มี seat ของตัวเอง</li>
+          <li>Seat เป็น fully automatic หลัง ejection initiated</li>
+          <li>ให้ safe escape ได้ตั้งแต่ zero altitude / zero speed ถึงประมาณ 35,000 ft และประมาณ 370 KIAS ภายใน envelope</li>
+          <li>มี Manual Override Handle (MOR) สำหรับ restart seat/pilot separation sequence ถ้า automatic system ไม่ทำงาน หรือใช้ตามเงื่อนไขที่ manual ระบุ</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Major Components</h3>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Component</th><th>Function</th></tr>
+            <tr><td>Ejection control handle</td><td>Pull upward to fire seat initiator cartridges</td></tr>
+            <tr><td>Twin telescopic catapults</td><td>Gas pressure drives seat up rails</td></tr>
+            <tr><td>Rocket motor</td><td>เพิ่ม altitude/energy สำหรับ parachute deployment</td></tr>
+            <tr><td>Drogue parachute</td><td>Stabilize seat และลด forward speed</td></tr>
+            <tr><td>Personnel parachute</td><td>Deploy อัตโนมัติเมื่อ sequence ถึงเงื่อนไข</td></tr>
+            <tr><td>Emergency oxygen</td><td>Activate เมื่อ ejection initiated</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <h3>Ejection Sequence - Big Picture</h3>
+    <div class="flow">
+      <div class="step"><b>1 Pull handle</b><span>Seat initiators fire</span></div>
+      <div class="arrow">→</div>
+      <div class="step"><b>2 Catapults</b><span>Seat rises on rails</span></div>
+      <div class="arrow">→</div>
+      <div class="step"><b>3 CFS</b><span>Canopy fractures</span></div>
+      <div class="arrow">→</div>
+      <div class="step"><b>4 Rocket</b><span>Boosts seat trajectory</span></div>
+      <div class="arrow">→</div>
+      <div class="step"><b>5 Drogue</b><span>Stabilizes/reduces speed</span></div>
+      <div class="arrow">→</div>
+      <div class="step"><b>6 Parachute</b><span>Deploy + seat/pilot separation</span></div>
+    </div>
+  </section>
+
+  <section id="iss" class="panel">
+    <h2>4) Interseat Sequencing System (ISS)</h2>
+    <p><b>หน้าที่หลัก:</b> กำหนดว่า ejection จะเกิด seat เดียวหรือสอง seat และจัดลำดับการออกจาก aircraft เมื่อต้อง eject ทั้งสองที่นั่ง</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>ISS Mode</th><th>ผลของการดึง handle</th><th>ข้อจำ</th></tr>
+        <tr><td><span class="tag normal">SOLO</span></td><td>No gas transfer between seats; seat ที่ initiate จะ eject เท่านั้น</td><td>ใช้เมื่อบิน solo</td></tr>
+        <tr><td><span class="tag success">BOTH</span></td><td>ทั้งสอง seats eject; rear seat ejects first regardless of which seat initiates</td><td>มี separation delay ระหว่าง rear และ front</td></tr>
+        <tr><td><span class="tag success">CMD FWD</span></td><td>Front cockpit initiates both seats; rear seat first. Rear cockpit initiates rear seat only</td><td>เหมาะกับ crew concept ที่ให้ front cockpit command dual ejection</td></tr>
+      </table>
+    </div>
+
+    <div class="grid grid-3" style="margin-top:16px">
+      <div class="card"><div class="kicker">Harness timer</div><div class="big">0.17 s</div><p class="small">Timer ให้ shoulder harness reel retract harness เมื่อ ejection both seats ถูก activate</p></div>
+      <div class="card"><div class="kicker">Separation timer</div><div class="big">0.54 s</div><p class="small">Timer ให้การแยก front/rear seats</p></div>
+      <div class="card"><div class="kicker">Elapsed separation</div><div class="big">0.37 s</div><p class="small">Rear seat ejects ก่อน แล้ว front seat ตามเมื่อ dual ejection</p></div>
+    </div>
+  </section>
+
+  <section id="alerts" class="panel">
+    <h2>5) NOTE / CAUTION / WARNING</h2>
+    <p class="muted">กล่องด้านล่างเป็นสรุป/แปลไทยจาก manual เพื่อการเรียน ไม่ใช่ full procedure หรือ wording ทางการ ให้ตรวจ manual/checklist ก่อนใช้งานจริง</p>
+
+    <h3>Canopy Related</h3>
+    <div class="alert warning"><span class="label">WARNING</span><p>Ground egress doors ต้อง unlocked ระหว่าง ground และ flight operations เพื่อให้ ground personnel สามารถ operate CFS ได้เมื่อจำเป็น</p></div>
+    <div class="alert caution"><span class="label">CAUTION</span><p>เมื่อเปิด canopy ให้วางนิ้ว/หัวแม่มือไว้ด้านนอก canopy rail เพื่อหลีกเลี่ยงการบาดเจ็บ เพราะมีช่องว่างน้อยระหว่าง canopy rail กับ canopy breaker tool bar ของ front cockpit ejection seat</p></div>
+    <div class="alert caution"><span class="label">CAUTION</span><p>การลด canopy ลงโดยที่ external handle ไม่อยู่ full OPEN หรือ internal handle ไม่อยู่ fully aft อาจทำให้ canopy hooks เสียหาย ต้องมั่นใจว่า rail clear และ pin box closed</p></div>
+    <div class="alert caution"><span class="label">CAUTION</span><p>ห้ามหมุน canopy handle เร็วหรือใช้แรงมากเกินไป เพราะอาจทำให้ canopy locking system เสียหายหรือทำให้ cam mechanism ของ hooks ทำงานผิดพลาด หากรู้สึก resistance มาก ให้เปิด canopy แล้วตรวจ hooks</p></div>
+    <div class="alert warning"><span class="label">WARNING</span><p>ให้มี occupant เพียงคนเดียว operate canopy handle ระหว่างปิดจากด้านใน เพื่อหลีกเลี่ยงการหนีบนิ้วหรือมือ</p></div>
+    <div class="alert note"><span class="label">NOTE</span><p>Canopy ถูก hold open ด้วย canopy lock ต้อง release canopy lock ก่อนปิด; canopy lock release handle อยู่ที่ right side panel ในแต่ละ cockpit</p></div>
+    <div class="alert note"><span class="label">NOTE</span><p>สามารถจัดตำแหน่ง canopy hooks ด้วยมือเพื่อให้เข้า hook receivers ได้ แต่ถ้า hook alignment ผิดปกติต้อง annotate ใน aircraft forms และ aircrew ต้องตรวจว่า internal canopy handle lock canopy closed ได้จริง</p></div>
+    <div class="alert note"><span class="label">NOTE</span><p>ถ้า canopy ไม่สามารถ lock จากด้านในได้ ห้าม accept aircraft for flight; หากใช้ crew chief ช่วยปิด/lock canopy aircrew ต้อง re-open และ close canopy จากด้านในอีกครั้ง</p></div>
+
+    <h3>CFS / Emergency Ground Egress Related</h3>
+    <div class="alert warning"><span class="label">WARNING</span><ul><li>CFS internal initiators มี safety pin ต้อง remove/stow before flight และ re-install after flight</li><li>CFS เป็น explosive canopy fracturing system; detonation ทำให้ shards/fragments กระเด็นออกด้านนอก canopy อาจทำให้บาดเจ็บรุนแรง</li><li>Ground rescue personnel ควร face away จาก canopy ขณะ activate CFS</li><li>Aircrew ต้อง oxygen mask on และ visor down ก่อน actuate CFS เพื่อป้องกัน shards และ hot fragments</li><li>หากทราบหรือสงสัยว่า CFS handle ถูก actuated ห้ามปิด canopy จนกว่าจะ inspect CFS donor assemblies/firing plungers</li></ul></div>
+    <div class="alert caution"><span class="label">CAUTION</span><p>เพื่อหลีกเลี่ยง accidental CFS activation ต้องมั่นใจว่า area รอบ CFS handle clear ก่อนออกจาก cockpit</p></div>
+    <div class="alert warning"><span class="label">WARNING</span><p>External emergency ground egress lanyard อยู่หลัง access door แต่ละด้านของ aircraft; door มี lock เพื่อป้องกัน unauthorized access และต้อง remain unlocked ระหว่าง flight/ground operations</p></div>
+    <div class="alert note"><span class="label">NOTE</span><p>Internal front/rear cockpit CFS handles operate explosives เฉพาะ transparency ของ cockpit นั้น ส่วน external ground egress handle ด้านใดด้านหนึ่งจะ activate explosives ของทั้งสอง transparencies</p></div>
+    <div class="alert note"><span class="label">NOTE</span><p>Operation ของ CFS system ไม่ทำให้ ejection seat fire และไม่ป้องกันการ fire ของ ejection seat</p></div>
+
+    <h3>Ejection Seat Related</h3>
+    <div class="alert warning"><span class="label">WARNING</span><ul><li>Emergency escape system มี explosive cartridges และ rocket propellant; inadvertent firing อาจทำให้บุคคลใน/บน/ใกล้ aircraft บาดเจ็บรุนแรงหรือเสียชีวิต</li><li>Ejection seats ต้อง pinned เมื่อ canopy ไม่ได้ securely down and locked</li><li>การ operate ejection seat โดย canopy open หรือ unlocked อาจทำให้บาดเจ็บรุนแรงหรือเสียชีวิต</li><li>Ejection control handle safety pin ใช้ทำให้ seat safe ระหว่าง non-flight operations; pilot(s) รับผิดชอบ remove/install ก่อนและหลัง flight และต้องแน่ใจว่า seat pin fully inserted/seated</li></ul></div>
+    <div class="alert warning"><span class="label">WARNING</span><p>เมื่อ eject เหนือ mountainous terrain ที่สูงเกิน 8000 ft MSL manual ระบุให้ใช้ Manual Override (MOR) handle เพื่อ manually separate from seat และ deploy parachute</p></div>
+    <div class="alert note"><span class="label">NOTE</span><p>Risk chart assumptions: ejection อยู่ภายใน seat performance envelope, pitch/roll/yaw rate ต่ำ, injury probability เพิ่มตาม speed, sled test data ใช้กำหนด risk areas และไม่รวม parachute landing injuries หรือ canopy burns</p></div>
+
+    <h3>ISS / Pilot Hookup Related</h3>
+    <div class="alert warning"><span class="label">WARNING</span><p>ถ้า ISS mode selector อยู่ BOTH จะมี delay 0.37 s หลัง rear seat eject ก่อน front seat eject; ถ้า SOLO จะ bypass delay นี้ Manual ระบุให้ set SOLO เมื่อบิน solo และเมื่อ SOLO มีเพียง activating seat ที่ eject</p></div>
+    <div class="alert warning"><span class="label">WARNING</span><ul><li>เมื่อ rear cockpit occupied ห้ามบินโดย ISS mode selector อยู่ SOLO เพราะอาจเกิด unsequenced ejection แบบ front seat first และทำให้ rear cockpit occupant บาดเจ็บรุนแรงหรือเสียชีวิต</li><li>การ fire seat หนึ่งตัวขณะ ISS อยู่ SOLO ไม่ได้ป้องกันอีก seat จากการ fire</li><li>หาก ISS อยู่ BOTH และมีการดึง unpinned ejection handle ทั้งสอง seats จะ eject แม้อีก seat จะ pinned</li><li>ใน CMD FWD, front cockpit สามารถ initiate ทั้ง front/rear seats โดย rear seat ejects first แม้ rear seat ejection handle safety pin จะ installed</li><li>Seat sequencing unpredictable ถ้า ISS mode selector ไม่ locked in a detent</li></ul></div>
+    <div class="alert caution"><span class="label">CAUTION</span><p>ก่อนปรับ seat height ต้อง clear seat pan และ side consoles จาก belts, cords, connections เพื่อป้องกันความเสียหายต่อ seat หรือ equipment</p></div>
+    <div class="alert warning"><span class="label">WARNING</span><ul><li>หาก ejection handle ไม่อยู่ upright หรือ harness straps กีดขวาง handle จะทำให้ initiate ejection ไม่ได้</li><li>ระหว่างเข้า cockpit ต้อง monitor head clearance เพื่อหลีกเลี่ยง canopy alignment pins, latch hooks และ external canopy handle</li><li>Leg restraint garters ต้อง fitted/connected ถูกต้องและ snug รวมถึงเอา slack ออกจาก leg lines มิฉะนั้นอาจ hang-up during egress</li><li>Lap belt ต้อง route ตาม manual: ความผิดพลาดอาจทำให้ entanglement กับ SSK lines หรือทำให้ anti-G suit สูญเสีย air supply</li></ul></div>
+    <div class="alert note"><span class="label">NOTE</span><p>Leg restraint garters ควรอยู่ just above the boot บนแต่ละขาของ pilot</p></div>
+  </section>
+
+  <section id="quiz" class="panel">
+    <h2>Quick Check Quiz</h2>
+    <details><summary>1) ทำไม T-6C ถึงต้องใช้ CFS แทนการ jettison canopy?</summary><div class="answer"><p>เพราะ canopy เป็นแบบ non-jettisonable; escape path จึงถูกสร้างโดย fracture transparency ด้วย CFS เพื่อให้ seat ผ่านออกไปได้</p></div></details>
+    <details><summary>2) CANOPY warning บอกอะไร?</summary><div class="answer"><p>บอกว่า latch mechanism และ sensing logic ไม่ยืนยันว่า canopy อยู่ในสภาพ closed and locked</p></div></details>
+    <details><summary>3) Internal CFS handle กับ external CFS handle ต่างกันอย่างไร?</summary><div class="answer"><p>Internal handle ในแต่ละ cockpit ใช้กับ transparency ของ cockpit นั้นเท่านั้น ส่วน external ground egress handle ด้านใดด้านหนึ่ง activate ทั้ง front และ rear transparencies</p></div></details>
+    <details><summary>4) ลำดับ ejection seat แบบสั้นที่สุดคืออะไร?</summary><div class="answer"><p>Pull handle → catapult drives seat up rails → CFS fractures canopy → rocket motor fires → drogue stabilizes → personnel parachute deploys → seat/pilot separation</p></div></details>
+    <details><summary>5) เมื่อบินสองคน ทำไมไม่ควรตั้ง ISS เป็น SOLO?</summary><div class="answer"><p>เพราะ SOLO ทำให้ only activating seat ejects และอาจทำให้เกิด unsequenced ejection แบบ front seat first ซึ่ง manual ระบุว่าอาจทำให้ rear cockpit occupant บาดเจ็บรุนแรงหรือเสียชีวิต</p></div></details>
+    <details><summary>6) ประโยคจำง่ายของระบบนี้คืออะไร?</summary><div class="answer"><p><b>Canopy keeps cockpit closed. CFS clears the path. Ejection seat takes the pilot out.</b></p></div></details>
+  </section>
+
+  <section id="summary" class="panel">
+    <h2>One-Minute Summary</h2>
+    <div class="grid grid-3">
+      <div class="card"><div class="kicker">Canopy</div><p>ปิดและ seal cockpit ตรวจ lock/latched ด้วย switches หากไม่ closed/locked จะเห็น red CANOPY warning</p></div>
+      <div class="card"><div class="kicker">CFS</div><p>ใช้ FLSC/MDC fracture transparency เพื่อเปิด escape path สำหรับ ejection หรือ ground egress; manual/external/automatic initiation</p></div>
+      <div class="card"><div class="kicker">Ejection</div><p>Martin-Baker seat sequence อัตโนมัติ: catapult, canopy fracture, rocket, drogue, parachute, separation โดย ISS จัดลำดับ front/rear seats</p></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Training aid only. Refer to official T-6C Flight Manual and applicable checklist/emergency procedures. Created as a single-file offline HTML courseware.
+</footer>
+</body>
+</html>

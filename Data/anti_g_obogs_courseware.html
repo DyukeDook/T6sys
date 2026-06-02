@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>T-6C Anti-G System & OBOGS Courseware</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --ink: #142033;
+      --muted: #5d6878;
+      --line: #d9e2ef;
+      --navy: #17345f;
+      --blue: #1f6fbf;
+      --blue-soft: #e8f2ff;
+      --green: #0e7a5f;
+      --green-soft: #e6f7f1;
+      --amber: #a86600;
+      --amber-soft: #fff4dc;
+      --red: #b42318;
+      --red-soft: #ffe9e7;
+      --purple: #6247aa;
+      --purple-soft: #f0ecff;
+      --shadow: 0 18px 45px rgba(20, 32, 51, 0.10);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #dfeeff 0, transparent 35%), var(--bg);
+      color: var(--ink);
+      line-height: 1.68;
+    }
+
+    header {
+      color: #fff;
+      background: linear-gradient(135deg, #11233f, #1e4c86 60%, #2876ba);
+      padding: 46px 24px 34px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      right: -120px;
+      top: -120px;
+      width: 360px;
+      height: 360px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      font-size: 0.88rem;
+      letter-spacing: .02em;
+    }
+
+    h1 {
+      margin: 18px 0 10px;
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    .subtitle {
+      max-width: 850px;
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      color: #e8f1ff;
+      margin: 0;
+    }
+
+    .disclaimer {
+      margin-top: 24px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 16px;
+      padding: 14px 16px;
+      max-width: 930px;
+      color: #f7fbff;
+      font-weight: 650;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px 16px;
+    }
+
+    .nav-inner a {
+      flex: 0 0 auto;
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 750;
+      font-size: .92rem;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #f4f7fb;
+      border: 1px solid transparent;
+    }
+
+    .nav-inner a:hover { border-color: #aecaef; background: #eaf3ff; }
+
+    main { padding: 28px 16px 56px; }
+
+    section {
+      max-width: 1180px;
+      margin: 0 auto 26px;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(20px, 4vw, 34px);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .section-title .num {
+      width: 36px;
+      height: 36px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 850;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(1.45rem, 3vw, 2.15rem);
+      letter-spacing: -0.025em;
+    }
+
+    h3 {
+      color: var(--navy);
+      margin: 24px 0 8px;
+      font-size: 1.22rem;
+    }
+
+    p { margin: 0 0 12px; }
+
+    .muted { color: var(--muted); }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .card h3, .card h4 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+
+    .fact {
+      border-top: 5px solid var(--blue);
+    }
+
+    .fact strong {
+      display: block;
+      color: var(--navy);
+      font-size: 1.08rem;
+      margin-bottom: 6px;
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: stretch;
+      margin: 14px 0;
+    }
+
+    .flow-step {
+      flex: 1 1 155px;
+      background: #f8fbff;
+      border: 1px solid #cfe1f5;
+      border-radius: 16px;
+      padding: 13px 14px;
+      position: relative;
+      min-height: 88px;
+    }
+
+    .flow-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--blue);
+      font-weight: 900;
+      font-size: 1.35rem;
+      z-index: 2;
+    }
+
+    .flow-step b {
+      display: block;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .compare {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: white;
+    }
+
+    .compare th, .compare td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .compare th {
+      background: #eaf2fb;
+      color: var(--navy);
+      font-weight: 850;
+    }
+
+    .compare tr:last-child td { border-bottom: 0; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: .78rem;
+      font-weight: 850;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-right: 6px;
+      white-space: nowrap;
+    }
+
+    .tag.note { background: var(--blue-soft); color: var(--blue); }
+    .tag.caution { background: var(--amber-soft); color: var(--amber); }
+    .tag.warning { background: var(--red-soft); color: var(--red); }
+    .tag.memory { background: var(--green-soft); color: var(--green); }
+
+    .alert {
+      border-radius: 18px;
+      padding: 16px 16px 14px;
+      border: 1px solid;
+      margin: 14px 0;
+      background: white;
+    }
+
+    .alert .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 900;
+      letter-spacing: .06em;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .alert.note { border-color: #9ec8f8; background: var(--blue-soft); }
+    .alert.note .label { color: var(--blue); }
+    .alert.caution { border-color: #f2c879; background: var(--amber-soft); }
+    .alert.caution .label { color: var(--amber); }
+    .alert.warning { border-color: #ffaaa3; background: var(--red-soft); }
+    .alert.warning .label { color: var(--red); }
+
+    .alert p:last-child { margin-bottom: 0; }
+
+    .callout {
+      background: var(--purple-soft);
+      border: 1px solid #d5caff;
+      border-left: 6px solid var(--purple);
+      border-radius: 16px;
+      padding: 16px 18px;
+      margin: 18px 0;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pill-list li {
+      padding: 7px 11px;
+      background: #eef5ff;
+      border: 1px solid #cfe1f5;
+      border-radius: 999px;
+      color: var(--navy);
+      font-weight: 750;
+      font-size: .92rem;
+    }
+
+    .mini-title {
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    details {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+
+    details + details { margin-top: 10px; }
+
+    summary {
+      cursor: pointer;
+      font-weight: 850;
+      color: var(--navy);
+    }
+
+    .source-box {
+      background: #fbfcff;
+      border: 1px dashed #aebbd0;
+      border-radius: 16px;
+      padding: 14px 16px;
+      color: #344054;
+    }
+
+    footer {
+      max-width: 1180px;
+      margin: 0 auto 44px;
+      padding: 0 16px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    @media (max-width: 880px) {
+      .grid.two, .grid.three, .grid.four { grid-template-columns: 1fr; }
+      .flow-step:not(:last-child)::after { display: none; }
+      .compare { display: block; overflow-x: auto; }
+      header { padding-top: 34px; }
+    }
+
+    @media print {
+      nav { display: none; }
+      body { background: white; }
+      section { box-shadow: none; break-inside: avoid; }
+      header { background: #17345f; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">T-6C Flight Manual • Section I / II / III • Training Aid</div>
+      <h1>Anti-G System & OBOGS</h1>
+      <p class="subtitle">Courseware ภาษาไทยสำหรับเข้าใจภาพรวม การไหลของระบบ logic การควบคุม indication และ Note / Caution / Warning ที่เกี่ยวข้อง</p>
+      <div class="disclaimer">เอกสารนี้จัดทำเพื่อการเรียนการสอนเท่านั้น ไม่ใช้แทน Flight Manual, Checklist, SOP หรือคำสั่งทางราชการ/หน่วยบิน เมื่อปฏิบัติจริงให้ยึดเอกสารทางการล่าสุดเสมอ</div>
+    </div>
+  </header>
+
+  <nav aria-label="หัวข้อในหน้า">
+    <div class="nav-inner">
+      <a href="#key-facts">Key facts</a>
+      <a href="#big-picture">Big picture</a>
+      <a href="#antig">Anti-G</a>
+      <a href="#obogs">OBOGS</a>
+      <a href="#indications">Indications</a>
+      <a href="#alerts">Note / Caution / Warning</a>
+      <a href="#memory">Memory aid</a>
+      <a href="#quiz">Quiz</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="key-facts">
+      <div class="section-title"><span class="num">1</span><h2>Key facts จำให้ได้ก่อน</h2></div>
+      <div class="grid four">
+        <div class="card fact"><strong>Anti-G = Right P3</strong>ใช้ engine bleed air จาก right side P3 port เพื่อจ่าย pressure ไปที่ anti-G suit</div>
+        <div class="card fact"><strong>OBOGS = Left P3</strong>ใช้ conditioned bleed air จาก left side P3 port แล้วแยก oxygen ด้วย molecular sieve</div>
+        <div class="card fact"><strong>Anti-G เป็น partial protection</strong>ช่วยลดผลของ high positive G แต่ไม่แทน anti-G straining maneuver</div>
+        <div class="card fact"><strong>OBOGS มี emergency backup</strong>ถ้า OBOGS fail ให้ใช้ emergency oxygen จาก ejection seat ตาม checklist</div>
+      </div>
+      <div class="callout">
+        <span class="tag memory">Mental model</span>
+        <b>Anti-G = เอา bleed air ไปพองชุด</b> • <b>OBOGS = เอา bleed air ไปผลิต oxygen</b>
+      </div>
+    </section>
+
+    <section id="big-picture">
+      <div class="section-title"><span class="num">2</span><h2>Big picture: สองระบบนี้เกี่ยวกันตรงไหน</h2></div>
+      <p>ทั้ง Anti-G System และ OBOGS ใช้ <b>engine bleed air</b> เป็นแหล่งพลังงาน/แหล่งอากาศหลัก แต่ใช้คนละ port และส่ง output คนละแบบ</p>
+      <table class="compare">
+        <thead>
+          <tr><th>หัวข้อ</th><th>Anti-G System</th><th>OBOGS</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>หน้าที่</td><td>เพิ่ม pressure เข้า anti-G suit ตาม positive G</td><td>ผลิตและจ่าย oxygen-rich breathing gas ให้ aircrew</td></tr>
+          <tr><td>Bleed air source</td><td>Right side P3 port</td><td>Left side P3 port</td></tr>
+          <tr><td>Output</td><td>ลมอัดเข้า G-suit</td><td>Oxygen supply เข้า mask</td></tr>
+          <tr><td>Control หลัก</td><td>Anti-G valve ที่มี weighted rod</td><td>OBOGS concentrator + oxygen pressure regulator</td></tr>
+          <tr><td>Failure ที่ aircrew เห็น</td><td>Suit ไม่พอง / anti-G ไม่ available เมื่อระบบ bleed/inflow ถูกปิด</td><td>OBOGS FAIL warning, OBOGS TEMP caution, flow/pressure/concentration abnormal</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="antig">
+      <div class="section-title"><span class="num">3</span><h2>Anti-G System</h2></div>
+      <p><b>หน้าที่:</b> ให้ partial protection ต่อผลทางสรีรวิทยาจาก high positive G โดยจ่าย pressure ไปที่ anti-G suit ของนักบินแต่ละคน</p>
+
+      <h3>3.1 Normal operation flow</h3>
+      <div class="flow" aria-label="Anti-G flow">
+        <div class="flow-step"><b>Right P3 bleed air</b>แหล่งลมจาก engine compressor</div>
+        <div class="flow-step"><b>Canopy seal / Anti-G shutoff</b>ควบคุมด้วย BLEED AIR INFLOW logic</div>
+        <div class="flow-step"><b>Heat exchanger</b>ลดอุณหภูมิ bleed air ก่อนเข้าระบบ</div>
+        <div class="flow-step"><b>Water separator</b>ช่วยป้องกัน contamination เข้า anti-G valve</div>
+        <div class="flow-step"><b>Anti-G valve</b>weighted rod เปิดตาม positive G</div>
+        <div class="flow-step"><b>Anti-G suit</b>pressure เพิ่มตาม G</div>
+      </div>
+
+      <h3>3.2 Control logic</h3>
+      <div class="grid two">
+        <div class="card">
+          <h3>Weighted rod logic</h3>
+          <p>ใน anti-G valve มี weighted rod พร้อม orifice เมื่อ positive G เพิ่มขึ้น weighted rod จะถูกแรง G ทำให้เปิดมากขึ้น ส่งผลให้ pressure เข้า suit เพิ่มขึ้นตามสัดส่วน</p>
+          <ul class="pill-list">
+            <li>G ต่ำ → suit pressure ต่ำ</li>
+            <li>G สูง → suit pressure สูง</li>
+            <li>ปล่อย G → suit deflate</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Shutoff & protection</h3>
+          <p>Canopy seal / anti-G electrical shutoff valve ได้ power ผ่าน INFLOW SYS circuit breaker ถ้าไม่มี power valve จะอยู่ในตำแหน่ง closed</p>
+          <p>มี safety valve relief เมื่อ pressure เกินประมาณ <b>7 psig</b></p>
+        </div>
+      </div>
+
+      <h3>3.3 Crew interface</h3>
+      <table class="compare">
+        <thead><tr><th>อุปกรณ์</th><th>หน้าที่</th><th>สิ่งที่ต้องสังเกต</th></tr></thead>
+        <tbody>
+          <tr><td>Anti-G hose quick disconnect</td><td>ต่อ anti-G suit เข้าระบบ aircraft</td><td>ต้องต่อกับ anti-G hookup ที่ left rear console panel</td></tr>
+          <tr><td>Anti-G test button</td><td>ทดสอบการจ่ายลมเข้า suit</td><td>กดแล้ว suit ต้อง inflate ปล่อยแล้ว deflate</td></tr>
+          <tr><td>BLEED AIR INFLOW switch</td><td>เกี่ยวข้องกับ valve ที่ส่ง bleed air ไป canopy seal / anti-G</td><td>ถ้า OFF หรือไม่มี power บางส่วนของระบบ bleed air/anti-G จะไม่ available</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="obogs">
+      <div class="section-title"><span class="num">4</span><h2>OBOGS - On-Board Oxygen Generating System</h2></div>
+      <p><b>หน้าที่:</b> จ่าย oxygen supply ที่ regulated และมี slight positive pressure ให้ aircrew โดยผลิต oxygen จาก conditioned bleed air แทนการพึ่ง oxygen bottle หลักตลอดเวลา</p>
+
+      <h3>4.1 Normal operation flow</h3>
+      <div class="flow" aria-label="OBOGS flow">
+        <div class="flow-step"><b>Left P3 bleed air</b>แหล่งอากาศสำหรับ OBOGS</div>
+        <div class="flow-step"><b>Heat exchanger / separator</b>ปรับสภาพอากาศก่อนเข้า concentrator</div>
+        <div class="flow-step"><b>Regulator / shutoff valve</b>ควบคุม pressure และการเปิด-ปิด supply</div>
+        <div class="flow-step"><b>Concentrator</b>pressure swing adsorption + molecular sieve</div>
+        <div class="flow-step"><b>Plenum</b>oxygen reserve แบบจำกัดเมื่อ OBOGS fail</div>
+        <div class="flow-step"><b>Mask</b>ผ่าน oxygen pressure regulator แต่ละ cockpit</div>
+      </div>
+
+      <h3>4.2 Molecular sieve ทำอะไร</h3>
+      <p>OBOGS ใช้หลัก <b>pressure swing adsorption</b> ผ่าน molecular sieve เพื่อแยก nitrogen ออกจาก bleed air ทำให้ gas ที่ส่งไป mask มี oxygen concentration สูงขึ้น</p>
+
+      <h3>4.3 Oxygen pressure regulator</h3>
+      <div class="grid three">
+        <div class="card">
+          <h3>Supply lever</h3>
+          <p><b>ON / OFF</b></p>
+          <p>OFF จะตัด electrical power และ oxygen flow ของ regulator นั้น แต่ระบบ OBOGS จะยัง operative ถ้า cockpit ใด cockpit หนึ่งตั้ง supply lever เป็น ON</p>
+        </div>
+        <div class="card">
+          <h3>Concentration lever</h3>
+          <p><b>NORMAL / MAX</b></p>
+          <p>NORMAL ให้ regulator สั่ง concentration ตาม altitude; MAX จาก cockpit ใด cockpit หนึ่งจะสั่ง concentrator ให้จ่าย oxygen concentration สูงสุดไปทั้งสอง regulator</p>
+        </div>
+        <div class="card">
+          <h3>Pressure lever</h3>
+          <p><b>EMERGENCY / NORMAL / TEST MASK</b></p>
+          <p>NORMAL ให้ slight positive pressure, EMERGENCY ให้ positive pressure สำหรับเหตุการณ์ฉุกเฉิน, TEST MASK ใช้ high pressure flow ตรวจ seal ของ mask</p>
+        </div>
+      </div>
+
+      <h3>4.4 Concentration numbers ที่ควรจำ</h3>
+      <table class="compare">
+        <thead><tr><th>Regulator setting</th><th>Altitude</th><th>Oxygen concentration โดยประมาณ</th></tr></thead>
+        <tbody>
+          <tr><td>NORMAL</td><td>Sea level ถึง 15,000 ft MSL</td><td>25-70%</td></tr>
+          <tr><td>NORMAL</td><td>15,000 ถึง 31,000 ft MSL</td><td>45-95%</td></tr>
+          <tr><td>MAX</td><td>ขึ้นกับ demand/bleed pressure/cabin altitude</td><td>สูงสุดที่ concentrator ทำได้; กรณีสองคน demand พร้อมกันอาจต่ำได้ถึงประมาณ 55% และสูงได้ถึง 95%</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="indications">
+      <div class="section-title"><span class="num">5</span><h2>Indications & abnormal awareness</h2></div>
+      <div class="grid two">
+        <div class="card">
+          <h3><span class="tag warning">Red warning</span> OBOGS FAIL</h3>
+          <p>แสดงเมื่อมี low bleed air pressure upstream ของ concentrator, oxygen concentration ต่ำ, หรือ internal/BIT failure</p>
+          <p>ก่อน engine start หรือเมื่อเสีย bleed air pressure, OBOGS FAIL สามารถ illuminate จาก low pressure switch ได้ และจะ extinguish เมื่อ bleed air line pressurized</p>
+        </div>
+        <div class="card">
+          <h3><span class="tag caution">Amber caution</span> OBOGS TEMP</h3>
+          <p>แสดงเมื่อ temperature ใน OBOGS ducting เกิน <b>200°F</b></p>
+          <p>ใน emergency/abnormal context, OBOGS TEMP อาจเกี่ยวกับ OBOGS heat exchanger failure และต้องใช้ checklist ทางการ</p>
+        </div>
+        <div class="card">
+          <h3>Flow indicator / blinker</h3>
+          <p>แสดง visual indication ของ oxygen flow ผ่าน regulator โดยจะปรากฏตามช่วงที่มี flow จากการหายใจ</p>
+        </div>
+        <div class="card">
+          <h3>Maximum concentration light</h3>
+          <p>ติดเมื่อ concentration lever ของ regulator ใด regulator หนึ่งอยู่ที่ MAX</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="alerts">
+      <div class="section-title"><span class="num">6</span><h2>Note / Caution / Warning ที่เกี่ยวข้อง</h2></div>
+      <p class="muted">ข้อความด้านล่างเป็นการย่อและแปลความเพื่อการเรียน โดยคงความหมายด้าน safety จากคู่มือ ไม่ใช่ wording สำหรับใช้แทน checklist</p>
+
+      <h3>6.1 Anti-G System</h3>
+      <div class="alert warning">
+        <div class="label">WARNING - Lap belt / anti-G hose routing</div>
+        <p>ต้อง route lap belt ใต้ anti-G hose หาก route lap belt ผิด อาจทำให้สูญเสีย air supply ไปยัง anti-G suit และทำให้ anti-G suit ใช้งานไม่ได้</p>
+      </div>
+      <div class="alert warning">
+        <div class="label">WARNING - SSK line awareness</div>
+        <p>ในขั้นตอน pilot hookup, lap belt ต้อง route ให้ถูกกับ SSK lines ด้วย เพราะการ route ผิดอาจทำให้เกิด entanglement ระหว่าง seat/pilot separation</p>
+      </div>
+      <div class="alert note">
+        <div class="label">NOTE - Anti-G is partial protection</div>
+        <p>Anti-G system ให้เพียง partial protection ต่อ high positive G ดังนั้นยังต้องใช้ anti-G straining maneuver และปฏิบัติตาม training/SOP</p>
+      </div>
+      <div class="alert note">
+        <div class="label">NOTE - Bleed air / inflow effect</div>
+        <p>เมื่อ BLEED AIR INFLOW ถูกตั้ง OFF ในบาง abnormal procedure, canopy pressure seal และ anti-G system จะไม่ operational</p>
+      </div>
+
+      <h3>6.2 OBOGS</h3>
+      <div class="alert note">
+        <div class="label">NOTE - Mask down / loose fit</div>
+        <p>การใช้ OBOGS โดย mask down หรือ mask fitting หลวม อาจทำให้เกิด OBOGS FAIL warning ได้ ให้ secure mask ก่อน หาก fault ไม่ clear ให้ใช้ I-BIT ตามคู่มือ</p>
+      </div>
+      <div class="alert warning">
+        <div class="label">WARNING - Engine failure / total electrical loss</div>
+        <p>Inflight engine failure หรือ total loss of electrical power จะทำให้สูญเสีย bleed air supply ไปยัง OBOGS concentrator และทำให้ OBOGS failure; emergency oxygen ใช้โดย pulling green handle ที่ ejection seat ตาม checklist</p>
+      </div>
+      <div class="alert warning">
+        <div class="label">WARNING - Zeolite dust without warning light</div>
+        <p>OBOGS concentrator อาจ malfunction แล้วเกิด zeolite dust ใน breathing system โดยไม่มี warning illumination สังเกตได้จาก respiratory irritation, coughing หรือ white dust ใน mask; ควรหลีกเลี่ยงการสูดดม dust</p>
+      </div>
+      <div class="alert warning">
+        <div class="label">WARNING - Warm-up inhibition</div>
+        <p>หลัง OBOGS deactivation หรือ loss of electrical power, concentration monitor activation ของ OBOGS FAIL จะถูก inhibit ประมาณ 3 นาทีระหว่าง warm-up ทำให้ไม่มี indication ของ concentration failure ในช่วงนั้น แต่ low pressure switch ยังสามารถทำให้ OBOGS FAIL ติดได้</p>
+      </div>
+      <div class="alert caution">
+        <div class="label">CAUTION - OBOGS TEMP</div>
+        <p>OBOGS TEMP เป็น amber caution เมื่อ duct temperature เกิน 200°F และอาจสัมพันธ์กับ OBOGS heat exchanger failure ใน abnormal/emergency context</p>
+      </div>
+      <div class="alert warning">
+        <div class="label">WARNING - OBOGS FAIL may lead to hypoxia</div>
+        <p>OBOGS FAIL หมายถึงระบบอาจไม่ผลิต oxygen concentration หรือ pressure เพียงพอ และอาจทำให้เกิด hypoxia symptoms หากไม่แก้ไขทันทีตาม checklist</p>
+      </div>
+      <div class="alert warning">
+        <div class="label">WARNING - Emergency oxygen duration</div>
+        <p>Emergency oxygen bottle ให้ oxygen ประมาณ 10 นาที หาก aircraft pressure altitude สูงกว่า 10,000 ft MSL ต้องมั่นใจว่าจะลงถึง 10,000 ft MSL หรือต่ำกว่าก่อน oxygen หมด มิฉะนั้นผลของ hypoxia อาจ incapacitate crew</p>
+      </div>
+      <div class="alert warning">
+        <div class="label">WARNING - Increased pressure breathing</div>
+        <p>เมื่อ breathing oxygen ภายใต้ increased pressure ให้หายใจด้วย rate และ depth ที่น้อยกว่าปกติเล็กน้อย เพื่อหลีกเลี่ยง hyperventilation</p>
+      </div>
+      <div class="alert warning">
+        <div class="label">WARNING - Mask before CFS/ejection</div>
+        <p>Oxygen mask ต้องสวมและ secure ก่อน actuating CFS หรือ initiating ejection</p>
+      </div>
+      <div class="alert note">
+        <div class="label">NOTE - OBOGS FAIL with both supply levers OFF</div>
+        <p>OBOGS FAIL warning จะ illuminate หาก supply levers ทั้งสอง cockpit อยู่ OFF ขณะ engine running</p>
+      </div>
+      <div class="alert note">
+        <div class="label">NOTE - Low temperature operation</div>
+        <p>ในอุณหภูมิต่ำ OBOGS อาจแสดง indication ว่า inoperative ได้ การ warm-up หลัง engine start อาจช่วยให้ระบบกลับมาปกติ และ aircrew ต้องยืนยันการใช้งาน OBOGS ต่อเนื่อง 3 นาทีโดยไม่มี failure ก่อน takeoff</p>
+      </div>
+    </section>
+
+    <section id="memory">
+      <div class="section-title"><span class="num">7</span><h2>Pilot mental model / memory aid</h2></div>
+      <div class="grid two">
+        <div class="card">
+          <h3>Anti-G memory chain</h3>
+          <p><b>Right P3 → shutoff → cool/separate → weighted rod → G-suit</b></p>
+          <p>จำว่า “G เป็นตัวเปิด valve” ยิ่ง positive G สูง weighted rod เปิดมากขึ้น suit pressure สูงขึ้น</p>
+        </div>
+        <div class="card">
+          <h3>OBOGS memory chain</h3>
+          <p><b>Left P3 → condition → concentrator → plenum → regulator → mask</b></p>
+          <p>จำว่า “OBOGS ต้องการ bleed air + electrical power + mask seal ดี” ถ้าขาดอย่างใดอย่างหนึ่งอาจเห็น OBOGS FAIL หรือเกิด breathing gas abnormal</p>
+        </div>
+      </div>
+      <div class="callout">
+        <span class="tag memory">Exam phrase</span>
+        <b>Right side protects G. Left side makes O₂.</b> → Right P3 สำหรับ Anti-G, Left P3 สำหรับ OBOGS
+      </div>
+    </section>
+
+    <section id="quiz">
+      <div class="section-title"><span class="num">8</span><h2>Quick check quiz</h2></div>
+      <details>
+        <summary>1) Anti-G และ OBOGS ใช้ bleed air จาก port ไหน?</summary>
+        <p>Anti-G ใช้ right side P3 port ส่วน OBOGS ใช้ left side P3 port</p>
+      </details>
+      <details>
+        <summary>2) อะไรทำให้ anti-G suit pressure เพิ่มขึ้นระหว่าง maneuver?</summary>
+        <p>Positive G ทำให้ weighted rod ใน anti-G valve ขยับเปิดมากขึ้น จึงเพิ่ม pressure เข้า suit ตาม G</p>
+      </details>
+      <details>
+        <summary>3) OBOGS ใช้วิธีใดแยก oxygen จาก bleed air?</summary>
+        <p>ใช้ pressure swing adsorption ผ่าน molecular sieve</p>
+      </details>
+      <details>
+        <summary>4) OBOGS FAIL red warning หมายถึงอะไรได้บ้าง?</summary>
+        <p>อาจเกิดจาก low bleed air pressure upstream ของ concentrator, oxygen concentration ต่ำ, หรือ internal/BIT failure</p>
+      </details>
+      <details>
+        <summary>5) ทำไม mask fit ถึงสำคัญกับ OBOGS?</summary>
+        <p>Mask down หรือ fitting หลวมอาจ induce OBOGS FAIL warning ได้ และทำให้การประเมิน flow/pressure/concentration ผิดปกติ</p>
+      </details>
+      <details>
+        <summary>6) Safety item สำคัญของ anti-G hose routing คืออะไร?</summary>
+        <p>Lap belt ต้อง route ใต้ anti-G hose มิฉะนั้นอาจสูญเสีย air supply ไปยัง anti-G suit และทำให้ suit inoperative</p>
+      </details>
+    </section>
+
+    <section id="sources">
+      <div class="section-title"><span class="num">9</span><h2>Source references</h2></div>
+      <div class="source-box">
+        <p><b>Primary source:</b> T-6C Flight Manual, Model 3000, Section I/II/III จากไฟล์ที่อัปโหลด</p>
+        <p><b>Manual areas used:</b> Bleed Air Supply System, Canopy Seal and Anti-G System, On-Board Oxygen Generating System (OBOGS), Oxygen Pressure Regulator, Before Takeoff / ground check items, OBOGS FAIL Message, OBOGS Failure/Physiological Symptoms, and low-temperature OBOGS note.</p>
+        <p><b>จัดทำ:</b> 2026-06-02 • <b>Use:</b> Training aid only</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Training aid only. Do not use for flight operations. Refer to the current official Flight Manual, Checklist, SOP, and instructor guidance.
+  </footer>
+</body>
+</html>

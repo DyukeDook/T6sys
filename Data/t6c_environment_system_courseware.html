@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>T-6C Environmental Control System Courseware</title>
+  <style>
+    :root{
+      --navy:#102a43;
+      --blue:#1d4ed8;
+      --sky:#e0f2fe;
+      --ink:#172033;
+      --muted:#637083;
+      --paper:#ffffff;
+      --bg:#f4f7fb;
+      --line:#d8e2ef;
+      --green:#0f766e;
+      --green-bg:#e6fffb;
+      --amber:#b45309;
+      --amber-bg:#fff7ed;
+      --red:#b91c1c;
+      --red-bg:#fef2f2;
+      --note:#1e40af;
+      --note-bg:#eff6ff;
+      --shadow: 0 12px 30px rgba(16, 42, 67, .10);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Thai", "Noto Sans", Arial, sans-serif;
+      color:var(--ink);
+      background: radial-gradient(circle at top left, #dbeafe 0, transparent 30rem), var(--bg);
+      line-height:1.65;
+    }
+    header{
+      color:#fff;
+      background: linear-gradient(135deg, #0b1f3a 0%, #143b68 55%, #0f766e 100%);
+      padding:48px 22px 38px;
+      position:relative;
+      overflow:hidden;
+    }
+    header:after{
+      content:"";
+      position:absolute;
+      right:-100px; top:-100px;
+      width:320px; height:320px;
+      background:rgba(255,255,255,.10);
+      border-radius:50%;
+    }
+    .wrap{max-width:1180px; margin:0 auto; padding:0 20px}
+    .eyebrow{
+      display:inline-block;
+      padding:6px 12px;
+      border:1px solid rgba(255,255,255,.35);
+      border-radius:999px;
+      font-size:.85rem;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:#dff6ff;
+      margin-bottom:14px;
+    }
+    h1{font-size:clamp(2rem, 5vw, 4.2rem); line-height:1.05; margin:0 0 12px}
+    header p{max-width:880px; font-size:1.08rem; color:#dbeafe; margin:0 0 22px}
+    .hero-badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px}
+    .hero-badges span{background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); padding:8px 12px; border-radius:999px; font-weight:650}
+    nav{
+      position:sticky; top:0; z-index:10;
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    nav .wrap{display:flex; gap:10px; overflow:auto; padding-top:10px; padding-bottom:10px}
+    nav a{
+      white-space:nowrap;
+      text-decoration:none;
+      color:var(--navy);
+      border:1px solid var(--line);
+      background:#fff;
+      padding:7px 11px;
+      border-radius:999px;
+      font-size:.92rem;
+      font-weight:650;
+    }
+    main{padding:28px 0 60px}
+    section{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:28px;
+      margin:22px 0;
+      box-shadow: var(--shadow);
+    }
+    h2{font-size:clamp(1.45rem, 3vw, 2.15rem); margin:0 0 14px; color:var(--navy)}
+    h3{font-size:1.15rem; margin:18px 0 8px; color:#15375c}
+    p{margin:8px 0}
+    .lead{font-size:1.1rem; color:#304156}
+    .grid{display:grid; gap:16px}
+    .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+    .card{
+      background:#fbfdff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px;
+    }
+    .card h3{margin-top:0}
+    .fact{
+      background:linear-gradient(180deg,#ffffff,#f7fbff);
+      border-left:5px solid var(--blue);
+    }
+    .fact .num{font-size:1.9rem; font-weight:800; color:var(--blue); line-height:1.1}
+    .fact .label{color:var(--muted); font-size:.9rem; font-weight:650}
+    .tag{
+      display:inline-block;
+      padding:3px 8px;
+      border-radius:999px;
+      background:#eef2ff;
+      color:#3730a3;
+      font-weight:700;
+      font-size:.78rem;
+      margin-right:5px;
+      margin-top:5px;
+    }
+    .flow{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:10px;
+      align-items:stretch;
+      margin:16px 0 4px;
+    }
+    .flow .step{
+      position:relative;
+      background:#f8fbff;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px;
+      min-height:112px;
+    }
+    .flow .step:not(:last-child):after{
+      content:"→";
+      position:absolute;
+      right:-14px;
+      top:40%;
+      color:var(--blue);
+      font-weight:900;
+      font-size:1.25rem;
+      z-index:2;
+    }
+    .step b{display:block; color:var(--navy); margin-bottom:5px}
+    table{width:100%; border-collapse:collapse; margin:14px 0; overflow:hidden; border-radius:14px}
+    th,td{padding:12px 13px; border:1px solid var(--line); vertical-align:top}
+    th{background:#edf4ff; color:var(--navy); text-align:left}
+    tr:nth-child(even) td{background:#fbfdff}
+    .alert{
+      border-radius:16px;
+      padding:16px 18px;
+      margin:14px 0;
+      border:1px solid;
+      display:grid;
+      grid-template-columns:110px 1fr;
+      gap:14px;
+      align-items:start;
+    }
+    .alert .label{
+      display:inline-block;
+      text-align:center;
+      border-radius:999px;
+      padding:5px 10px;
+      color:white;
+      font-weight:900;
+      letter-spacing:.03em;
+      font-size:.88rem;
+    }
+    .warning{background:var(--red-bg); border-color:#fecaca}
+    .warning .label{background:var(--red)}
+    .caution{background:var(--amber-bg); border-color:#fed7aa}
+    .caution .label{background:var(--amber)}
+    .note{background:var(--note-bg); border-color:#bfdbfe}
+    .note .label{background:var(--note)}
+    .info{background:var(--green-bg); border-color:#99f6e4}
+    .info .label{background:var(--green)}
+    .mini-title{font-weight:800; color:var(--navy)}
+    .two-col{display:grid; grid-template-columns:1.2fr .8fr; gap:18px; align-items:start}
+    .timeline{counter-reset:item; margin:14px 0 0; padding:0; list-style:none}
+    .timeline li{
+      counter-increment:item;
+      position:relative;
+      padding:0 0 16px 46px;
+      border-left:2px solid #dbeafe;
+      margin-left:16px;
+    }
+    .timeline li:before{
+      content:counter(item);
+      position:absolute;
+      left:-17px; top:0;
+      width:32px; height:32px;
+      border-radius:50%;
+      background:var(--blue);
+      color:#fff;
+      display:grid; place-items:center;
+      font-weight:800;
+    }
+    .pill-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .pill{background:#f1f5f9; border:1px solid #dbe2ea; border-radius:999px; padding:6px 10px; font-weight:700; color:#334155}
+    details{
+      border:1px solid var(--line);
+      background:#fbfdff;
+      border-radius:14px;
+      padding:13px 15px;
+      margin:10px 0;
+    }
+    summary{cursor:pointer; font-weight:800; color:var(--navy)}
+    .memory{
+      font-size:1.15rem;
+      text-align:center;
+      padding:20px;
+      border-radius:16px;
+      background:linear-gradient(135deg,#eff6ff,#ecfeff);
+      border:1px dashed #60a5fa;
+      font-weight:800;
+      color:#12345a;
+    }
+    footer{
+      background:#0b1f3a;
+      color:#dbeafe;
+      padding:30px 20px;
+      font-size:.95rem;
+    }
+    footer .wrap{display:grid; gap:8px}
+    .source{font-size:.9rem; color:#64748b}
+    .print-btn{
+      border:0; border-radius:999px;
+      padding:10px 14px;
+      background:#fff; color:var(--navy);
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 4px 16px rgba(0,0,0,.15);
+    }
+    .codeflow{
+      background:#0f172a;
+      color:#e2e8f0;
+      border-radius:16px;
+      padding:18px;
+      font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      overflow:auto;
+      white-space:pre;
+      margin-top:12px;
+    }
+    @media (max-width:900px){
+      .grid.cols-4,.grid.cols-3,.grid.cols-2,.two-col,.flow{grid-template-columns:1fr}
+      .flow .step:not(:last-child):after{content:"↓"; right:50%; top:auto; bottom:-20px; transform:translateX(50%)}
+      section{padding:22px}
+      .alert{grid-template-columns:1fr; gap:8px}
+    }
+    @media print{
+      nav,.print-btn{display:none}
+      body{background:#fff}
+      section{box-shadow:none; break-inside:avoid}
+      header{background:#102a43!important; color:#fff!important}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <span class="eyebrow">T-6C Flight Manual • Section I & III</span>
+      <h1>Environmental Control System (ECS)</h1>
+      <p>HTML courseware ภาษาไทยสำหรับทบทวนระบบควบคุมอากาศใน cockpit: temperature control, pressurization, heating/defogging, cooling, fresh air ventilation และ safety items ที่เกี่ยวข้อง</p>
+      <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
+      <div class="hero-badges">
+        <span>Training Aid Only</span>
+        <span>Responsive Offline HTML</span>
+        <span>มี Note / Caution / Warning</span>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="wrap">
+      <a href="#objectives">Objectives</a>
+      <a href="#overview">Overview</a>
+      <a href="#components">Components</a>
+      <a href="#normal">Normal Flow</a>
+      <a href="#controls">Controls</a>
+      <a href="#indications">Indications</a>
+      <a href="#abnormal">Abnormal</a>
+      <a href="#alerts">NCW</a>
+      <a href="#quiz">Quiz</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="objectives">
+      <h2>Learning Objectives</h2>
+      <p class="lead">เมื่อเรียนจบหน้านี้ ผู้เรียนควรสามารถอธิบายภาพรวม ECS ได้โดยไม่ต้องจำเป็น paragraph ยาว ๆ จาก manual</p>
+      <div class="grid cols-3">
+        <div class="card"><h3>1) อธิบายหน้าที่ระบบ</h3><p>บอกได้ว่า ECS ทำอะไรกับ cockpit air: ร้อน เย็น ไล่ฝ้า กดดัน และรับ fresh air</p></div>
+        <div class="card"><h3>2) ไล่ flow ได้</h3><p>แยก flow ของ bleed air, air conditioning และ ram/fresh air ได้</p></div>
+        <div class="card"><h3>3) อ่าน indication ได้</h3><p>เข้าใจความหมายของ DUCT TEMP, CKPT ALT, CKPT PX และค่า ∆P / cockpit altitude</p></div>
+      </div>
+      <div class="alert caution">
+        <span class="label">TRAINING</span>
+        <div><b>ใช้เพื่อการเรียนเท่านั้น</b><br>ข้อมูล abnormal/emergency ในหน้านี้เป็น concept review ไม่ใช้แทน Flight Manual, checklist หรือคำสั่งหน่วยบิน</div>
+      </div>
+    </section>
+
+    <section id="keyfacts">
+      <h2>Key Facts ที่ควรจำ</h2>
+      <div class="grid cols-4">
+        <div class="card fact"><div class="num">Right P3</div><div class="label">แหล่ง bleed air หลักของ ECS</div><p>ใช้กับ canopy seal, anti-G, heating/defogging และ pressurization</p></div>
+        <div class="card fact"><div class="num">60–90°F</div><div class="label">ช่วง automatic temperature control</div><p>ตั้งจาก TEMP CONTROL ใน front cockpit</p></div>
+        <div class="card fact"><div class="num">3.6 ± 0.2 psi</div><div class="label">normal max differential pressure</div><p>ถึงประมาณที่ aircraft PA 18,069 ft</p></div>
+        <div class="card fact"><div class="num">300°F</div><div class="label">DUCT TEMP threshold</div><p>environmental duct หรือ defog duct overtemp</p></div>
+      </div>
+    </section>
+
+    <section id="overview">
+      <h2>1. Big Picture: ECS คืออะไร?</h2>
+      <p><b>Environmental Control System (ECS)</b> ของ T-6C ทำหน้าที่ควบคุมสภาพแวดล้อมใน cockpit โดยใช้ 3 แนวทางร่วมกัน:</p>
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>Bleed Air</h3>
+          <p>ใช้ conditioned engine bleed air สำหรับ <b>heating, defogging และ pressurization</b></p>
+          <span class="tag">heat</span><span class="tag">defog</span><span class="tag">pressure</span>
+        </div>
+        <div class="card">
+          <h3>Vapor Cycle A/C</h3>
+          <p>ใช้ engine-driven refrigerant compressor เพื่อ <b>cooling cockpit และ avionics</b></p>
+          <span class="tag">cooling</span><span class="tag">dry air</span>
+        </div>
+        <div class="card">
+          <h3>Fresh / Ram Air</h3>
+          <p>ใช้ fresh air ventilation สำหรับ ground operation และ unpressurized flight</p>
+          <span class="tag">ram air</span><span class="tag">ventilation</span>
+        </div>
+      </div>
+      <div class="memory">ประโยคจำง่าย: “Bleed ให้ร้อน-กดดัน-ไล่ฝ้า, A/C ให้เย็น-แห้ง, Ram air ให้ลมสดตอนยังไม่ pressurized”</div>
+    </section>
+
+    <section id="components">
+      <h2>2. Component Breakdown</h2>
+      <div class="two-col">
+        <div>
+          <table>
+            <thead><tr><th>Component</th><th>หน้าที่</th><th>จำแบบง่าย</th></tr></thead>
+            <tbody>
+              <tr><td>Right side P3 bleed air</td><td>แหล่งพลังงานอากาศสำหรับ ECS, canopy seal, anti-G</td><td>ต้นทางของลมร้อน/แรงดัน</td></tr>
+              <tr><td>Inflow valve</td><td>ควบคุม bleed air inflow เข้า cockpit</td><td>ประตูหลักของ bleed air</td></tr>
+              <tr><td>Defog valve</td><td>เพิ่ม bleed air สำหรับ defog</td><td>ประตูเสริมเมื่อต้องไล่ฝ้า</td></tr>
+              <tr><td>Heat exchanger & bypass valve</td><td>ปรับอุณหภูมิ bleed air ก่อนเข้าห้องนักบิน</td><td>หม้อน้ำ/ทางลัดควบคุมร้อนเย็น</td></tr>
+              <tr><td>Temperature controller & sensors</td><td>รับค่า temp setting และ sensor แล้วสั่ง bypass valve</td><td>สมองควบคุมอุณหภูมิ</td></tr>
+              <tr><td>Pressurization valves/regulators</td><td>ควบคุม cockpit altitude และ differential pressure</td><td>ระบบรักษาแรงดัน</td></tr>
+              <tr><td>Vapor cycle A/C</td><td>compressor, condenser, evaporators, blowers, binary pressure switch</td><td>ระบบปรับอากาศเย็น</td></tr>
+              <tr><td>Fresh air valve</td><td>เปิดรับ fresh/ram air เมื่อไม่ pressurized</td><td>วาล์วลมสด</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="alert note">
+            <span class="label">NOTE</span>
+            <div>ถ้าต้องการป้องกัน right side P3 bleed air เข้าสู่ cockpit ต้องให้ทั้ง <b>BLEED AIR INFLOW = OFF</b> และ <b>DEFOG = OFF</b> เพราะสองสวิตช์นี้คุมวาล์วคนละตัว</div>
+          </div>
+          <div class="alert info">
+            <span class="label">MODEL</span>
+            <div>คิดภาพเป็นระบบ 3 ชั้น: <b>Source</b> คือ bleed/A/C/ram air → <b>Control</b> คือ switch, controller, valve → <b>Effect</b> คือ heat/cool/pressure/defog</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="normal">
+      <h2>3. Normal Operation Flow</h2>
+      <h3>Heating / Defog / Pressurization Flow</h3>
+      <div class="flow" aria-label="Heating defog pressurization flow">
+        <div class="step"><b>Right P3 Bleed</b>engine bleed air source</div>
+        <div class="step"><b>Inflow / Defog Valve</b>กำหนดปริมาณ bleed air</div>
+        <div class="step"><b>Heat Exchanger</b>cool หรือ bypass ตาม temp demand</div>
+        <div class="step"><b>ECS Duct / Firewall</b>ส่ง conditioned air เข้าระบบ cockpit</div>
+        <div class="step"><b>Outlets / Pressure</b>defog, footwarmer, cockpit pressure</div>
+      </div>
+
+      <h3>Cockpit & Avionics Cooling Flow</h3>
+      <div class="flow" aria-label="Cooling flow">
+        <div class="step"><b>Engine Running</b>compressor belt-driven</div>
+        <div class="step"><b>AIR COND / DEFOG ON</b>สั่ง compressor clutch</div>
+        <div class="step"><b>Condenser & Blower</b>ระบายความร้อน refrigerant</div>
+        <div class="step"><b>Evaporator Blowers</b>ควบคุมด้วย EVAP BLOWER</div>
+        <div class="step"><b>Cold Air Outlets</b>center console + glareshield</div>
+      </div>
+
+      <h3>Fresh Air Ventilation Flow</h3>
+      <div class="flow" aria-label="Fresh air flow">
+        <div class="step"><b>Cooling Air Inlet</b>รับ fresh/ram air</div>
+        <div class="step"><b>Fresh Air Valve</b>OFF / NORM / HI</div>
+        <div class="step"><b>Main Inflow Duct</b>เข้าทาง duct หน้า firewall</div>
+        <div class="step"><b>Cockpit Ventilation</b>ใช้เมื่อ ground / unpressurized</div>
+        <div class="step"><b>Auto Close</b>ปิดใกล้ 8,000 ft PA เมื่อเริ่ม pressurize</div>
+      </div>
+    </section>
+
+    <section id="logic">
+      <h2>4. Control Logic / Automatic Logic</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Temperature Control</h3>
+          <p>ในโหมด AUTO ระบบควบคุมอุณหภูมิระหว่าง <b>60–90°F</b> ตามตำแหน่ง TEMP CONTROL โดยสั่ง heat exchanger bypass valve ให้ bleed air ผ่าน heat exchanger มากหรือน้อย</p>
+          <div class="codeflow">ต้องการเย็นลง → ผ่าน heat exchanger มากขึ้น
+ต้องการร้อนขึ้น → bypass heat exchanger มากขึ้น</div>
+        </div>
+        <div class="card">
+          <h3>Overtemperature Protection</h3>
+          <p>หาก controller ตรวจพบอุณหภูมิเกิน <b>165°F</b> ที่ cockpit temperature control sensor จะสั่ง bypass valve ไป full closed เพื่อบังคับให้ bleed air ผ่าน heat exchanger มากที่สุด</p>
+        </div>
+        <div class="card">
+          <h3>Defog ON Logic</h3>
+          <p>เมื่อ DEFOG ON: defog valve เปิด, inflow valve ไป HIGH, A/C compressor ทำงานเพื่อช่วยทำให้อากาศแห้ง และ ejector/venturi ช่วยเพิ่ม airflow</p>
+        </div>
+        <div class="card">
+          <h3>A/C Below 7,500 ft MSL</h3>
+          <p>เมื่อ A/C compressor ทำงานและ aircraft ต่ำกว่า <b>7,500 ft MSL</b> ซึ่งไม่ต้องการ pressurization แล้ว inflow valve จะปิดอัตโนมัติ เพื่อเพิ่ม cooling performance</p>
+        </div>
+      </div>
+
+      <h3>Pressurization Logic</h3>
+      <ol class="timeline">
+        <li><b>On ground:</b> dump solenoid ไม่มี power → control valve open → ไม่ pressurize</li>
+        <li><b>Airborne:</b> dump solenoid ได้ power → control valve close → เริ่มสร้าง/ควบคุม pressure</li>
+        <li><b>ใกล้ 8,000 ft PA:</b> regulator เปิด/ปิด control valve เพื่อ maintain cockpit pressure</li>
+        <li><b>สูงขึ้น:</b> maintain cockpit altitude ประมาณ 8,000 ft จน ∆P ถึง 3.6 ± 0.2 psi ที่ aircraft PA ประมาณ 18,069 ft</li>
+        <li><b>High altitude:</b> ที่ aircraft 31,000 ft cockpit pressure altitude ประมาณ 16,600 ft</li>
+      </ol>
+    </section>
+
+    <section id="controls">
+      <h2>5. Controls & Crew Interface</h2>
+      <table>
+        <thead><tr><th>Control</th><th>ตำแหน่ง</th><th>ผลต่อระบบ</th></tr></thead>
+        <tbody>
+          <tr><td>BLEED AIR INFLOW</td><td>OFF / NORM / HI</td><td>ปิด, เปิดบางส่วน, หรือเพิ่ม airflow ผ่าน inflow valve</td></tr>
+          <tr><td>DEFOG</td><td>ON / OFF</td><td>เปิด defog valve, inflow HIGH, A/C compressor ON; เมื่อ OFF defog valve อาจใช้เวลาปิดถึง 40 วินาที</td></tr>
+          <tr><td>TEMP CONTROL</td><td>AUTO range / MANUAL COLD-HOT</td><td>ตั้ง temperature demand หรือสั่ง bypass valve แบบ manual directional control</td></tr>
+          <tr><td>PRESSURIZATION</td><td>NORM / DUMP / RAM-DUMP</td><td>NORM = automatic; DUMP = dump pressure path; RAM/DUMP = เปิด fresh air valve และ dump แต่ bleed air inflow ยังอาจมีอยู่</td></tr>
+          <tr><td>AIR COND</td><td>ON / OFF</td><td>สั่ง vapor cycle A/C compressor เมื่อเงื่อนไข electrical/engine พร้อม</td></tr>
+          <tr><td>EVAP BLOWER</td><td>OFF–HI</td><td>ควบคุม evaporator blower ของแต่ละ cockpit; HI flow ได้ถึงประมาณ 350 ft³/min</td></tr>
+          <tr><td>RAM AIR FLOW</td><td>OFF / NORM / HI</td><td>ควบคุม fresh air valve: closed / mid open / full open</td></tr>
+        </tbody>
+      </table>
+      <div class="alert note">
+        <span class="label">NOTE</span>
+        <div><b>DUMP หรือ RAM/DUMP ไม่ได้ตัด bleed air inflow โดยอัตโนมัติ</b> หากต้องหยุด bleed air inflow ต้องใช้ BLEED AIR INFLOW switch เป็น OFF ตาม manual/checklist</div>
+      </div>
+    </section>
+
+    <section id="indications">
+      <h2>6. Indications / Annunciations</h2>
+      <table>
+        <thead><tr><th>Message / Display</th><th>สี/ชนิด</th><th>Trigger / ความหมาย</th><th>ผลกระทบที่ควรนึกถึง</th></tr></thead>
+        <tbody>
+          <tr><td>DUCT TEMP</td><td>Amber caution</td><td>Environmental duct หรือ defog duct สูงกว่า 300°F</td><td>bleed air duct overtemperature</td></tr>
+          <tr><td>CKPT ALT</td><td>Amber caution</td><td>Cockpit pressure altitude สูงกว่า 19,000 ft</td><td>risk hypoxia / rapid decompression scenario</td></tr>
+          <tr><td>CKPT PX</td><td>Red warning</td><td>Cockpit differential pressure ประมาณ 3.9–4.0 psid หรือมากกว่า</td><td>cockpit overpressurization</td></tr>
+          <tr><td>COCKPIT ALT, FT</td><td>EICAS display</td><td>แสดง cockpit pressure altitude</td><td>ใช้ monitor pressurization</td></tr>
+          <tr><td>∆P, PSI</td><td>EICAS display</td><td>แสดง cockpit differential pressure</td><td>ใช้ monitor pressure differential</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="abnormal">
+      <h2>7. Abnormal / Emergency Behavior — Concept Review</h2>
+      <div class="alert caution">
+        <span class="label">CHECKLIST</span>
+        <div>ส่วนนี้สรุป logic ของระบบเท่านั้น ไม่ใช่ checklist สำหรับบินจริง ให้ใช้ Flight Manual / Checklist ทางการเสมอ</div>
+      </div>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>DUCT TEMP</h3>
+          <p>หมายถึง bleed air temperature ใน environmental/defog duct สูงเกิน 300°F ที่ sensor ตัวใดตัวหนึ่ง แนวคิดคือ <b>ลด heat input</b> และหากยัง persist อาจต้องตัด bleed air inflow ตาม checklist</p>
+        </div>
+        <div class="card">
+          <h3>Defog Valve Fails to Close</h3>
+          <p>ถ้า defog valve ไม่ปิดและ cockpit heat สูงมาก TEMP CONTROL ช่วยลด heat input ได้ ต้องยืนยันว่าให้เวลาวาล์วปิดพอแล้ว เพราะ defog valve อาจใช้เวลาถึง 40 วินาที</p>
+        </div>
+        <div class="card">
+          <h3>Rapid Decompression / CKPT ALT</h3>
+          <p>CKPT ALT ขึ้นเมื่อ cockpit pressure altitude เกิน 19,000 ft ประเด็นหลักคือ oxygen supply, hypoxia risk และ descent ตาม checklist</p>
+        </div>
+        <div class="card">
+          <h3>Cockpit Overpressurization / CKPT PX</h3>
+          <p>CKPT PX เป็น red warning เมื่อ ∆P สูง 3.9–4.0 psid หรือมากกว่า แนวคิดคือจัดการ differential pressure และ bleed inflow ตาม checklist</p>
+        </div>
+        <div class="card">
+          <h3>Cockpit Fails to Pressurize</h3>
+          <p>แนวคิดเริ่มจาก recycle BLEED AIR INFLOW แล้วตรวจ configuration: PRESSURIZATION NORM, RAM AIR OFF, BLEED AIR INFLOW HI และ INFLOW SYS CB ตาม checklist</p>
+        </div>
+        <div class="card">
+          <h3>Defog ON Performance Effect</h3>
+          <p>Defog เพิ่ม bleed air load ทำให้ ITT เพิ่มที่ PCL เดิม และอาจเห็น climb performance ลดลงมากเมื่อจำกัด ITT โดย retarding PCL</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="alerts">
+      <h2>8. Note / Caution / Warning ที่เกี่ยวข้อง</h2>
+      <p class="lead">กล่องด้านล่างแยกตาม label ใน Flight Manual หรือข้อความ safety ที่ระบุใน procedure section โดยคงความหมายเดิมและแปล/สรุปเป็นภาษาไทย</p>
+
+      <h3>Defog / Icing</h3>
+      <div class="alert warning">
+        <span class="label">WARNING</span>
+        <div><b>Canopy/windshield defogging system อาจไม่สามารถ clear windshield ได้ระหว่าง icing encounter</b><br>ความหมาย: อย่าคาดหวังว่า defog จะกู้ forward visibility ได้เสมอใน icing</div>
+      </div>
+      <div class="alert caution">
+        <span class="label">CAUTION</span>
+        <div><b>ระหว่าง icing encounter windshield อาจ opaque จนจำกัด forward visibility และเพิ่ม pilot workload ในช่วง landing</b></div>
+      </div>
+      <div class="alert note">
+        <span class="label">NOTE</span>
+        <div>สัญญาณแรกของ icing อาจเป็นการเริ่มสะสมของน้ำแข็งที่ forward canopy bow และบริเวณฐาน windshield</div>
+      </div>
+
+      <h3>Pressurization</h3>
+      <div class="alert note">
+        <span class="label">NOTE</span>
+        <div>หาก ∆P อ่านได้ไม่ใช่ <b>3.6 ± 0.2 psi</b> ที่หรือเหนือ <b>18,069 ft PA</b> ให้ notify maintenance</div>
+      </div>
+      <div class="alert warning">
+        <span class="label">WARNING</span>
+        <div><b>Hypoxia เป็นข้อกังวลเมื่อ cockpit pressure altitude สูงกว่า 10,000 ft</b><br>Hyperventilation อาจเกิดได้ทุก cockpit pressure altitude และ symptom handling ใช้แนวคิด oxygen supply/connection check ตาม procedure</div>
+      </div>
+      <div class="alert note">
+        <span class="label">NOTE</span>
+        <div>เมื่อ rapid decompression ใกล้ 20,000 ft MSL อาจเกิด transient OBOGS FAIL indication ได้ชั่วคราวถึงประมาณ 20 วินาที ขณะ OBOGS เปลี่ยนเป็น high altitude mode</div>
+      </div>
+
+      <h3>Bleed Air / Inflow OFF Consequence</h3>
+      <div class="alert note">
+        <span class="label">NOTE</span>
+        <div>เมื่อ BLEED AIR INFLOW switch เป็น OFF, cabin pressurization จะ bleed out ผ่าน outflow valves และ <b>canopy pressure seal กับ anti-G systems จะไม่ operational</b></div>
+      </div>
+      <div class="alert note">
+        <span class="label">NOTE</span>
+        <div>Defog valve ที่ malfunction อาจ trip <b>INFLOW SYS circuit breaker</b> และทำให้สูญเสีย pressurization ได้</div>
+      </div>
+      <div class="alert note">
+        <span class="label">NOTE</span>
+        <div>คำว่า “reset” ใน procedure หมายถึง reset circuit breaker ที่ open อยู่แล้ว; pilot ต้องประเมินความรุนแรงของ emergency และอุปกรณ์ที่สูญเสียก่อน reset/open circuit breaker</div>
+      </div>
+
+      <h3>Cooling System</h3>
+      <div class="alert note">
+        <span class="label">NOTE</span>
+        <div>A/C compressor operation มีผลเล็กน้อยมากต่อ aircraft engine และ field performance; manual ระบุว่าอาจเปิด A/C ได้ในการ takeoff, landing และ ground operations โดยไม่กระทบ aircraft/engine performance</div>
+      </div>
+    </section>
+
+    <section id="memory">
+      <h2>9. Pilot Mental Model</h2>
+      <div class="codeflow">ECS = Source + Valve + Controller + Outlet
+
+Right P3 bleed → inflow/defog valve → heat exchanger/bypass → cockpit heat/defog/pressure
+A/C compressor → condenser → evaporator blower → cold outlets
+Ram/Fresh air → fresh air valve → ventilation when unpressurized</div>
+      <div class="pill-row">
+        <span class="pill">ตัด bleed = คิดถึง inflow + defog</span>
+        <span class="pill">Defog ON = bleed load เพิ่ม + A/C ON</span>
+        <span class="pill">DUMP ≠ bleed OFF</span>
+        <span class="pill">CKPT ALT = oxygen/altitude problem</span>
+        <span class="pill">CKPT PX = differential pressure problem</span>
+      </div>
+    </section>
+
+    <section id="quiz">
+      <h2>10. Quick Check Quiz</h2>
+      <details><summary>1) ECS ใช้ bleed air จากจุดไหนเป็นหลักสำหรับ heating/defogging/pressurization?</summary><p>Right side P3 port</p></details>
+      <details><summary>2) ถ้าต้องการหยุด right P3 bleed air เข้าสู่ cockpit ต้องดู switch ใดบ้าง?</summary><p>BLEED AIR INFLOW ต้อง OFF และ DEFOG ต้อง OFF เพราะคุมคนละวาล์ว</p></details>
+      <details><summary>3) DUCT TEMP caution หมายถึงอะไร?</summary><p>Environmental duct หรือ defog duct temperature สูงกว่า 300°F</p></details>
+      <details><summary>4) CKPT ALT กับ CKPT PX ต่างกันอย่างไร?</summary><p>CKPT ALT = cockpit pressure altitude สูงเกิน 19,000 ft; CKPT PX = cockpit differential pressure สูงประมาณ 3.9–4.0 psid หรือมากกว่า</p></details>
+      <details><summary>5) DEFOG ON ทำอะไรกับระบบบ้าง?</summary><p>เปิด defog valve, สั่ง inflow valve ไป HIGH, เปิด A/C compressor เพื่อ dry air และเพิ่ม airflow ผ่าน ejector/venturi</p></details>
+      <details><summary>6) ทำไม DUMP หรือ RAM/DUMP ไม่เท่ากับตัด bleed?</summary><p>เพราะ manual ระบุว่า bleed air inflow ยังดำเนินต่อไปได้ การหยุด bleed air inflow ต้องใช้ BLEED AIR INFLOW switch เป็น OFF</p></details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <b>Training aid only.</b>
+      <span>อ้างอิงเนื้อหาจาก T-6C Flight Manual: Environmental Control System Section I หน้า 1-54 ถึง 1-59, Environmental Systems Duct Overtemp / Cockpit Overpressurization / Rapid Decompression / Cockpit Fails to Pressurize Section III หน้า 3-34 ถึง 3-36 และ Message Cause Table หน้า 3-53</span>
+      <span>ไม่ใช้แทน Flight Manual, Checklist, NATOPS/SOP หรือคำสั่งหน่วยบิน</span>
+    </div>
+  </footer>
+</body>
+</html>

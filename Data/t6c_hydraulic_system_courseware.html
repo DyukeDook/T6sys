@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>T-6C Hydraulic System Courseware</title>
+<style>
+  :root{
+    --bg:#0b1020; --panel:#121a31; --panel2:#17213c; --ink:#eef4ff; --muted:#b8c4d9;
+    --cyan:#41c7ff; --green:#49d47a; --amber:#ffbf45; --red:#ff6464; --blue:#6ca8ff;
+    --line:#2b3b61; --chip:#213052; --white:#ffffff;
+  }
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#081022,#10172a 35%,#0b1020);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;line-height:1.65}
+  header{padding:38px 20px 26px;border-bottom:1px solid var(--line);background:radial-gradient(circle at 20% 10%,rgba(65,199,255,.26),transparent 38%),radial-gradient(circle at 80% 0%,rgba(73,212,122,.18),transparent 32%),#0b1020}
+  .wrap{max-width:1180px;margin:0 auto}.kicker{color:var(--cyan);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.82rem}
+  h1{margin:8px 0 10px;font-size:clamp(2rem,4vw,4rem);line-height:1.05}.subtitle{font-size:1.1rem;color:var(--muted);max-width:850px}.badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);padding:8px 12px;border-radius:999px;color:#e7f1ff;font-weight:650}
+  nav{position:sticky;top:0;z-index:9;background:rgba(11,16,32,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);overflow:auto;white-space:nowrap}nav .wrap{display:flex;gap:8px;padding:10px 20px}nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:999px;font-weight:650}nav a:hover{background:var(--chip);color:var(--ink)}
+  main{padding:26px 20px 60px}section{margin:26px 0}.card{background:linear-gradient(180deg,var(--panel),#0f172b);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 12px 35px rgba(0,0,0,.22)}
+  h2{margin:0 0 14px;font-size:1.65rem}h3{margin:18px 0 8px;color:#dfeaff}.muted{color:var(--muted)}.grid{display:grid;gap:16px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .fact{background:var(--panel2);border:1px solid var(--line);border-radius:18px;padding:16px}.fact .num{font-size:1.55rem;font-weight:850;color:var(--cyan);line-height:1.15}.fact small{display:block;color:var(--muted);margin-top:5px}
+  .flow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap}.node{flex:1;min-width:170px;background:#101a33;border:1px solid #344772;border-radius:18px;padding:14px;text-align:center;position:relative}.node strong{display:block;color:#fff;font-size:1.03rem}.node span{color:var(--muted);font-size:.92rem}.arrow{align-self:center;color:var(--cyan);font-size:1.8rem;font-weight:900}
+  .diagram{background:#0a1327;border:1px solid var(--line);border-radius:24px;padding:18px;overflow:auto}.svgbox{min-width:850px}.legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}.leg{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:.92rem}.sw{width:16px;height:5px;border-radius:8px;background:var(--cyan)}.sw.ret{background:#8c9bb7}.sw.emer{background:var(--amber)}
+  table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:16px}th,td{padding:12px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:#1b2745;color:#fff}td{background:rgba(255,255,255,.025)}tr:last-child td{border-bottom:none}.tag{display:inline-block;padding:4px 8px;border-radius:999px;font-size:.8rem;font-weight:800}.tag.green{background:rgba(73,212,122,.18);color:#81ffa7}.tag.amber{background:rgba(255,191,69,.18);color:#ffd385}.tag.red{background:rgba(255,100,100,.18);color:#ff9c9c}.tag.blue{background:rgba(108,168,255,.18);color:#aacbff}
+  .alert{border-radius:18px;padding:16px 18px;border:1px solid;margin:12px 0}.alert .label{display:inline-block;font-weight:900;letter-spacing:.06em;margin-bottom:6px}.note{background:rgba(108,168,255,.10);border-color:rgba(108,168,255,.45)}.note .label{color:#9cc1ff}.caution{background:rgba(255,191,69,.10);border-color:rgba(255,191,69,.5)}.caution .label{color:#ffd482}.warning{background:rgba(255,100,100,.10);border-color:rgba(255,100,100,.5)}.warning .label{color:#ff9a9a}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tab{cursor:pointer;border:1px solid var(--line);background:var(--chip);color:var(--ink);border-radius:999px;padding:8px 12px;font-weight:700}.tab.active{background:var(--cyan);color:#06101f}.tabpan{display:none}.tabpan.active{display:block}.mini{font-size:.92rem;color:var(--muted)}
+  details{border:1px solid var(--line);border-radius:16px;padding:12px 14px;background:rgba(255,255,255,.035);margin:10px 0}summary{cursor:pointer;font-weight:800;color:#fff}footer{padding:24px 20px;border-top:1px solid var(--line);color:var(--muted);background:#080d1b}.pill{display:inline-block;background:#0c1830;border:1px solid #2d416f;border-radius:999px;padding:3px 9px;color:#dbe8ff;font-weight:700}.memory{font-size:1.25rem;font-weight:850;text-align:center;padding:18px;border:1px dashed rgba(65,199,255,.55);border-radius:18px;background:rgba(65,199,255,.08)}
+  @media (max-width:850px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.arrow{display:none}.card{padding:17px}nav .wrap{padding:9px 12px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">T-6C Flight Manual • Training Aid</div>
+    <h1>Hydraulic System</h1>
+    <p class="subtitle">สรุประบบไฮดรอลิก T-6C แบบเห็นภาพ: normal system, emergency accumulator, indications, abnormal behavior และ Note/Caution/Warning ที่ควรรู้ — <b>ไม่รวม landing gear indicator</b> เพราะมีไฟล์แยกแล้ว</p>
+    <div class="badge-row">
+      <span class="badge">Normal pressure: 3000 ±120 psi</span>
+      <span class="badge">Low pressure cue: &lt; 1800 psi</span>
+      <span class="badge">HYD FL LO: reservoir &lt; ~1 qt</span>
+      <span class="badge">EHYD PX LO: ≤ 2400 psi</span>
+    </div>
+  </div>
+</header>
+<nav><div class="wrap">
+  <a href="#facts">Key facts</a><a href="#overview">Overview</a><a href="#components">Components</a><a href="#flow">Normal flow</a><a href="#emergency">Emergency</a><a href="#indications">Indications</a><a href="#alerts">Note/Caution/Warning</a><a href="#malfunctions">Malfunctions</a><a href="#quiz">Quiz</a>
+</div></nav>
+<main class="wrap">
+<section id="facts" class="card">
+  <h2>1) Key Facts จำก่อน</h2>
+  <div class="grid grid-4">
+    <div class="fact"><div class="num">1 Pump</div><small>Engine-driven pump เป็นแหล่ง pressure หลัก</small></div>
+    <div class="fact"><div class="num">~5 qt</div><small>ความจุระบบโดยประมาณ</small></div>
+    <div class="fact"><div class="num">3000 ±120</div><small>psi ที่ pump pressurize normal system และ emergency accumulator</small></div>
+    <div class="fact"><div class="num">3250–3500</div><small>psi pressure relief valve กัน high system pressure</small></div>
+  </div>
+  <div class="memory" style="margin-top:16px">Reservoir → EDP → Pressure → Valves/Actuators → Return<br><span class="muted">Emergency accumulator = แบตเตอรี่แรงดันไฮดรอลิก</span></div>
+</section>
+
+<section id="overview" class="card">
+  <h2>2) System Overview</h2>
+  <p>ระบบไฮดรอลิกของ T-6C ใช้แรงดันจาก <b>engine-driven pump (EDP)</b> เพื่อขับอุปกรณ์ที่ต้องใช้แรง เช่น flaps, speed brake, nose wheel steering และระบบ landing gear/doors ในเชิง hydraulic consumer โดยในหน้านี้จะไม่ลงรายละเอียดไฟ indicator ของ landing gear</p>
+  <div class="flow">
+    <div class="node"><strong>Reservoir</strong><span>เก็บ hydraulic fluid</span></div><div class="arrow">→</div>
+    <div class="node"><strong>Engine-driven Pump</strong><span>สร้าง pressure</span></div><div class="arrow">→</div>
+    <div class="node"><strong>Selector / Manifold</strong><span>ส่ง pressure ตามคำสั่งระบบ</span></div><div class="arrow">→</div>
+    <div class="node"><strong>Actuators</strong><span>เปลี่ยน pressure เป็น movement</span></div><div class="arrow">→</div>
+    <div class="node"><strong>Return</strong><span>fluid กลับ reservoir</span></div>
+  </div>
+</section>
+
+<section id="components" class="card">
+  <h2>3) Component Breakdown</h2>
+  <div class="grid grid-3">
+    <div class="fact"><h3>Reservoir / Power Package</h3><p>เก็บ fluid และเป็นจุดที่ตรวจ level ผ่าน hydraulic system service bay</p></div>
+    <div class="fact"><h3>Engine-Driven Pump</h3><p>ปั๊มหลักจากเครื่องยนต์ pressurize normal system และ charge emergency accumulator</p></div>
+    <div class="fact"><h3>Pressure Relief Valve</h3><p>อยู่ใน main และ emergency system เพื่อป้องกัน damage จาก high system pressure</p></div>
+    <div class="fact"><h3>Emergency Accumulator</h3><p>เก็บแรงดันสำรองไว้ใช้ emergency extension ของ landing gear/flaps</p></div>
+    <div class="fact"><h3>Check Valve</h3><p>กัน emergency system bleed back กลับ main system เมื่อ main system fail</p></div>
+    <div class="fact"><h3>Hydraulic Fuse</h3><p>จำกัด fluid loss เมื่อ emergency side leak เกิน flow ที่กำหนด</p></div>
+    <div class="fact"><h3>Manual Pressure Release Handle</h3><p>ใช้ release pressurized fluid จาก emergency accumulator กลับ reservoir สำหรับ servicing/checking</p></div>
+    <div class="fact"><h3>HYD SYS Circuit Breaker</h3><p>เกี่ยวกับ pressure indication และ HYD FL LO sensor; EHYD PX LO sensor ยัง available แม้ CB open</p></div>
+    <div class="fact"><h3>Hydraulic Service Bay</h3><p>อยู่ lower aft fuselage หลัง right wing trailing edge มี quantity indicator, release handle และ servicing connection</p></div>
+  </div>
+</section>
+
+<section id="flow" class="card">
+  <h2>4) Normal Operation Flow</h2>
+  <div class="diagram">
+    <svg class="svgbox" viewBox="0 0 920 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hydraulic system flow diagram">
+      <defs>
+        <marker id="arrowC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#41c7ff"/></marker>
+        <marker id="arrowA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ffbf45"/></marker>
+        <marker id="arrowR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8c9bb7"/></marker>
+        <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <rect x="20" y="40" width="145" height="74" rx="16" fill="#17213c" stroke="#2b3b61"/>
+      <text x="92" y="72" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">Reservoir</text><text x="92" y="96" text-anchor="middle" fill="#b8c4d9" font-size="13">~5 qt capacity</text>
+      <rect x="230" y="40" width="150" height="74" rx="16" fill="#17213c" stroke="#2b3b61"/>
+      <text x="305" y="72" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">EDP</text><text x="305" y="96" text-anchor="middle" fill="#b8c4d9" font-size="13">engine-driven pump</text>
+      <rect x="450" y="40" width="180" height="74" rx="16" fill="#17213c" stroke="#2b3b61"/>
+      <text x="540" y="72" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">Normal Manifold</text><text x="540" y="96" text-anchor="middle" fill="#b8c4d9" font-size="13">valves / selectors</text>
+      <rect x="700" y="40" width="185" height="74" rx="16" fill="#17213c" stroke="#2b3b61"/>
+      <text x="793" y="67" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">Consumers</text><text x="793" y="91" text-anchor="middle" fill="#b8c4d9" font-size="13">flaps • speed brake • NWS</text>
+      <line x1="165" y1="77" x2="225" y2="77" stroke="#41c7ff" stroke-width="5" marker-end="url(#arrowC)" filter="url(#glow)"/>
+      <line x1="380" y1="77" x2="445" y2="77" stroke="#41c7ff" stroke-width="5" marker-end="url(#arrowC)" filter="url(#glow)"/>
+      <line x1="630" y1="77" x2="695" y2="77" stroke="#41c7ff" stroke-width="5" marker-end="url(#arrowC)" filter="url(#glow)"/>
+      <path d="M790 115 C790 170 120 170 95 116" fill="none" stroke="#8c9bb7" stroke-width="4" marker-end="url(#arrowR)" stroke-dasharray="8 8"/>
+      <text x="420" y="154" fill="#b8c4d9" font-size="14" text-anchor="middle">Return line กลับ reservoir</text>
+      <rect x="275" y="245" width="190" height="78" rx="16" fill="#18213a" stroke="#ffbf45"/>
+      <text x="370" y="278" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">Emergency</text><text x="370" y="301" text-anchor="middle" fill="#ffd385" font-size="14">Accumulator</text>
+      <path d="M310 115 L310 240" stroke="#ffbf45" stroke-width="5" marker-end="url(#arrowA)" filter="url(#glow)"/>
+      <text x="337" y="205" fill="#ffd385" font-size="14">charge 3000 ±120 psi</text>
+      <path d="M465 284 C585 285 645 250 705 115" fill="none" stroke="#ffbf45" stroke-width="4" marker-end="url(#arrowA)" stroke-dasharray="6 7"/>
+      <text x="600" y="266" fill="#ffd385" font-size="14">emergency lines</text>
+      <rect x="45" y="245" width="160" height="78" rx="16" fill="#17213c" stroke="#2b3b61"/>
+      <text x="125" y="278" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">Relief Valve</text><text x="125" y="302" text-anchor="middle" fill="#b8c4d9" font-size="13">3250–3500 psi</text>
+      <line x1="225" y1="245" x2="275" y2="245" stroke="#ffbf45" stroke-width="3" stroke-dasharray="6 6"/>
+    </svg>
+    <div class="legend"><span class="leg"><span class="sw"></span>pressure line</span><span class="leg"><span class="sw ret"></span>return line</span><span class="leg"><span class="sw emer"></span>emergency/accumulator path</span></div>
+  </div>
+  <p>เมื่อ pressure เกิน <b>1800 psi</b> ระบบสามารถขับ hydraulic consumers ได้ ถ้าต่ำกว่า 1800 psi pressure display จะเปลี่ยนจากขาวเป็น amber</p>
+</section>
+
+<section id="emergency" class="card">
+  <h2>5) Emergency Hydraulic System</h2>
+  <div class="grid grid-2">
+    <div>
+      <h3>หลักการ</h3>
+      <p>Emergency system ไม่ใช่ปั๊มสำรอง แต่เป็น <b>accumulator ที่ถูก charge ไว้ล่วงหน้า</b> โดย normal hydraulic system เมื่อใช้งานฉุกเฉิน emergency accumulator จะปล่อย pressure ผ่าน emergency lines แยกต่างหากเพื่อ extend landing gear และ flaps</p>
+    </div>
+    <div>
+      <h3>Protection logic</h3>
+      <p><span class="pill">Check valve</span> กัน pressure ไหลย้อนกลับ main system และ <span class="pill">Hydraulic fuse</span> ช่วยป้องกัน emergency leak ไม่ให้ดึง fluid จาก main system จนหมดเร็วเกินไป</p>
+    </div>
+  </div>
+  <table>
+    <thead><tr><th>Scenario</th><th>ผลที่ควรเข้าใจ</th></tr></thead>
+    <tbody>
+      <tr><td>Accumulator charged</td><td>มี emergency pressure พร้อมใช้ หลัง normal system เคย pressurize accumulator แล้ว</td></tr>
+      <tr><td>Emergency accumulator pressure ต่ำ</td><td>EICAS แสดง <b>EHYD PX LO</b>; เป็น indication หลักของสถานะ accumulator</td></tr>
+      <tr><td>Emergency leak &gt; .25 GPM</td><td>hydraulic fuse จำกัด fluid loss ประมาณ 20–30 cubic inches หรือ 0.5 qt</td></tr>
+      <tr><td>Emergency leak &lt; .25 GPM</td><td>อาจค่อย ๆ deplete main reservoir จนเกิด HYD FL LO</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="indications" class="card">
+  <h2>6) Indications & Crew Interface</h2>
+  <table>
+    <thead><tr><th>Indication / Item</th><th>Meaning</th><th>จำง่าย</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag amber">HYD pressure &lt; 1800 psi</span></td><td>Hydraulic pressure display เปลี่ยนจาก white เป็น amber</td><td>pressure ต่ำกว่า usable threshold</td></tr>
+      <tr><td><span class="tag amber">HYD FL LO</span></td><td>Reservoir level ต่ำกว่าประมาณ 1 quart / 55 cubic inches</td><td>fluid quantity ต่ำ</td></tr>
+      <tr><td><span class="tag amber">EHYD PX LO</span></td><td>Emergency accumulator pressure at/below ประมาณ 2400 psi</td><td>แรงดันสำรองต่ำ</td></tr>
+      <tr><td><span class="tag blue">HYD SYS CB</span></td><td>ถ้า open: pressure indication และ HYD FL LO sensor ไม่ available แต่ EHYD PX LO sensor ยัง available</td><td>CB เปิดอาจทำให้ดู pressure/fluid level sensor ไม่ได้</td></tr>
+      <tr><td><span class="tag green">FULL AC / FULL AD</span></td><td>hydraulic service bay ใช้ดู fluid level ตามสถานะ accumulator charged/discharged</td><td>AC = accumulator charged, AD = accumulator discharged</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="alerts" class="card">
+  <h2>7) Note / Caution / Warning</h2>
+  <div class="alert note"><span class="label">NOTE — Emergency accumulator discharged</span><p>ถ้า emergency accumulator ถูก discharge แล้ว <b>EHYD PX LO</b> จะยัง illuminate จนกว่าระบบจะ pressurize อีกครั้ง ต้องแน่ใจว่า light ดับก่อน flight</p></div>
+  <div class="alert note"><span class="label">NOTE — ถ้า hydraulic pressure ต่ำ</span><p>Low hydraulic pressure ต่ำกว่า 1800 psi จะทำให้ต้องใช้ emergency gear extension procedure สำหรับ landing gear; สำหรับ flap อาจต้องใช้ emergency landing gear/flap extension system หาก normal pressure ต่ำกว่า usable level</p></div>
+  <div class="alert note"><span class="label">NOTE — Emergency extension consequence</span><p>เมื่อ extend ด้วย emergency landing gear extension system แล้ว <b>gear และ flap retraction ไม่สามารถทำได้</b> จนกว่าจะได้รับการ service/maintenance ตามคู่มือ</p></div>
+  <div class="alert caution"><span class="label">CAUTION / EICAS CAUTION — HYD FL LO และ EHYD PX LO</span><p>ในเนื้อหาระบบนี้คำว่า caution ส่วนใหญ่เป็น <b>EICAS caution message</b> ไม่ใช่กล่อง CAUTION ของ manual: HYD FL LO อาจบอก fluid leak/quantity ต่ำ; EHYD PX LO บอก emergency accumulator pressure ต่ำ และ emergency landing gear/flap extension system ควรถือว่า inoperative เมื่อ EHYD PX LO illuminate</p></div>
+  <div class="alert warning"><span class="label">WARNING</span><p>ไม่พบ WARNING block เฉพาะใน hydraulic system description ที่นำมาทำหน้านี้ อย่างไรก็ตาม abnormal/emergency ให้ใช้ checklist/manual ทางการเสมอ เพราะ training aid นี้ไม่ใช่ procedure ควบคุมการบิน</p></div>
+</section>
+
+<section id="malfunctions" class="card">
+  <h2>8) Abnormal / Malfunction Mental Model</h2>
+  <div class="tabs">
+    <button class="tab active" data-tab="t1">HYD FL LO</button>
+    <button class="tab" data-tab="t2">EHYD PX LO</button>
+    <button class="tab" data-tab="t3">Pressure → 0 psi</button>
+    <button class="tab" data-tab="t4">CB / Sensor issue</button>
+  </div>
+  <div id="t1" class="tabpan active"><h3>HYD FL LO</h3><p>คิดถึง <b>reservoir quantity ต่ำ</b> หรือ leak ในระบบ ถ้าร่วมกับ pressure ต่ำกว่า 1800 psi ให้ถือว่า normal operation ของ landing gear, flaps, speed brake และ NWS ไม่พร้อมใช้งานตามปกติ</p></div>
+  <div id="t2" class="tabpan"><h3>EHYD PX LO</h3><p>คิดถึง <b>emergency accumulator pressure ต่ำ</b> และควรถือว่า emergency landing gear/flap extension system ไม่พร้อมใช้งานตามเจตนาของ checklist/section malfunctions</p></div>
+  <div id="t3" class="tabpan"><h3>Pressure decreasing toward / reads 0 psi</h3><p>อาจเป็น loss of hydraulic pressure หรือ engine-driven hydraulic pump failure/partial failure โดยเฉพาะถ้าไม่มี HYD FL LO หรือ EHYD PX LO illuminate</p></div>
+  <div id="t4" class="tabpan"><h3>Sensor / CB issue</h3><p>ถ้า hydraulic pressure transmitter fail อาจอ่าน 0 psi หรือ abnormal indication แต่ hydraulic systems อาจยังทำงานปกติได้; ถ้า HYD SYS CB open จะไม่มี pressure indication และ HYD FL LO sensor แต่ EHYD PX LO sensor ยังมีอยู่</p></div>
+  <div class="alert caution"><span class="label">Do not create your own procedure</span><p>หน้านี้อธิบาย logic เท่านั้น ไม่ใช่ checklist ปฏิบัติการ เมื่อเกิดจริงให้ใช้ Flight Manual / checklist ทางการ</p></div>
+</section>
+
+<section class="card">
+  <h2>9) Memory Aid</h2>
+  <div class="grid grid-3">
+    <div class="fact"><h3>Pressure</h3><p><b>3000</b> = normal charge/operate<br><b>1800</b> = below this, display amber</p></div>
+    <div class="fact"><h3>Quantity</h3><p><b>HYD FL LO</b> = reservoir low ไม่ใช่ pump fail เสมอไป</p></div>
+    <div class="fact"><h3>Backup</h3><p><b>EHYD PX LO</b> = emergency accumulator pressure low</p></div>
+  </div>
+  <p class="memory" style="margin-top:16px">EDP สร้างแรงดัน • Accumulator เก็บแรงดัน • Check valve กันย้อน • Fuse กัน fluid หมด</p>
+</section>
+
+<section id="quiz" class="card">
+  <h2>10) Quick Check Quiz</h2>
+  <details><summary>1. Normal hydraulic pressure ประมาณเท่าไร?</summary><p>3000 ±120 psi</p></details>
+  <details><summary>2. ถ้า hydraulic pressure ต่ำกว่า 1800 psi cockpit indication เปลี่ยนอย่างไร?</summary><p>Hydraulic pressure display เปลี่ยนจาก white เป็น amber</p></details>
+  <details><summary>3. HYD FL LO หมายถึงอะไร?</summary><p>Hydraulic reservoir fluid level ต่ำกว่าประมาณ 1 quart หรือ 55 cubic inches</p></details>
+  <details><summary>4. EHYD PX LO บอกอะไร?</summary><p>Emergency accumulator pressure at/below ประมาณ 2400 psi</p></details>
+  <details><summary>5. Emergency hydraulic system มี pump สำรองไหม?</summary><p>ไม่ใช่ pump สำรอง แต่ใช้ emergency accumulator ที่ถูก charge ไว้ล่วงหน้า</p></details>
+  <details><summary>6. Hydraulic fuse ทำหน้าที่อะไร?</summary><p>จำกัด fluid loss เมื่อ emergency hydraulic system leak เกินประมาณ .25 GPM</p></details>
+</section>
+</main>
+<footer><div class="wrap">Training aid only. Based on T-6C Flight Manual hydraulic system description and hydraulic system malfunction information. Not a substitute for official Flight Manual, checklist, instructor guidance, or maintenance data. Created for study/review; landing gear indicator details intentionally excluded.</div></footer>
+<script>
+  document.querySelectorAll('.tab').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tabpan').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
