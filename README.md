@@ -1,3 +1,5 @@
+Link Open = https://dyukedook.github.io/T6sys/
+
 # T6Sys Study Library
 
 หน้านี้ใช้รวมไฟล์บทเรียน `.html` ที่อยู่ในโฟลเดอร์ `Data` ให้เป็นสารบัญสำหรับเปิดอ่านทีละไฟล์
