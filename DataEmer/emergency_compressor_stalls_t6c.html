@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>T-6C Emergency Compressor Stalls Courseware</title>
+  <style>
+    :root{
+      --navy:#10243f;--blue:#1f5f99;--sky:#e9f4ff;--bg:#f5f7fb;--card:#ffffff;--text:#18212f;--muted:#5f6b7a;
+      --green:#0f7a55;--greenbg:#e9f8f2;--amber:#a45f00;--amberbg:#fff4dc;--red:#b42318;--redbg:#ffe9e7;--line:#d8e0ea;
+      --shadow:0 12px 28px rgba(16,36,63,.10);--radius:18px;
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+    header{background:linear-gradient(135deg,var(--navy),#1e5a91);color:white;padding:44px 22px 30px}
+    .wrap{max-width:1180px;margin:0 auto}.eyebrow{letter-spacing:.12em;text-transform:uppercase;font-size:.78rem;opacity:.85;font-weight:700}
+    h1{margin:.25rem 0 .4rem;font-size:clamp(2rem,4.5vw,4rem);line-height:1.1} h2{font-size:1.65rem;margin:0 0 14px;color:var(--navy)} h3{margin:18px 0 8px;color:#173b66}
+    .subtitle{font-size:1.12rem;max-width:920px;opacity:.95;margin:0}.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+    .pill{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:7px 12px;font-size:.9rem}
+    nav{position:sticky;top:0;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
+    nav .wrap{display:flex;gap:8px;overflow:auto;padding:10px 18px} nav a{white-space:nowrap;text-decoration:none;color:var(--navy);font-weight:700;font-size:.9rem;padding:8px 12px;border-radius:999px} nav a:hover{background:var(--sky)}
+    main{max-width:1180px;margin:24px auto;padding:0 18px 60px}.section{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin:18px 0}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{background:#fbfdff;border:1px solid var(--line);border-radius:16px;padding:16px}.span-3{grid-column:span 3}.span-4{grid-column:span 4}.span-6{grid-column:span 6}.span-12{grid-column:span 12}
+    .kpi{font-size:1.8rem;font-weight:850;color:var(--blue);line-height:1.15}.label{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:800}.small{color:var(--muted);font-size:.94rem}.lead{font-size:1.08rem}
+    table{width:100%;border-collapse:separate;border-spacing:0;margin:10px 0;border:1px solid var(--line);border-radius:14px;overflow:hidden} th,td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)} th{background:#edf5ff;color:var(--navy)} tr:last-child td{border-bottom:none}
+    .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:12px}.step{position:relative;background:#f8fbff;border:1px solid var(--line);border-radius:16px;padding:16px;min-height:128px}.num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--blue);color:white;font-weight:900;margin-bottom:8px}.step h3{margin:2px 0 6px;font-size:1rem}.step p{margin:.25rem 0}.step.warning{background:var(--redbg);border-color:#ffb3ad}.step.success{background:var(--greenbg);border-color:#b7e6d2}
+    .alert{border-radius:16px;padding:16px 18px;margin:14px 0;border:1px solid}.alert .tag{font-weight:900;letter-spacing:.08em;font-size:.78rem;text-transform:uppercase;display:inline-block;margin-bottom:6px}.note{background:var(--sky);border-color:#b8dcff}.note .tag{color:#165a96}.caution{background:var(--amberbg);border-color:#ffd58a}.caution .tag{color:var(--amber)}.warningbox{background:var(--redbg);border-color:#ffb3ad}.warningbox .tag{color:var(--red)}
+    .callout{border-left:5px solid var(--blue);padding:12px 16px;background:#f7fbff;border-radius:12px;margin:12px 0}.twocol{columns:2;column-gap:28px}.checklist{counter-reset:item}.checkitem{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start;border:1px solid var(--line);border-radius:16px;padding:14px;margin:12px 0;background:#fbfdff}.checkitem:before{counter-increment:item;content:counter(item);background:var(--navy);color:white;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:900}.action{font-weight:900;color:var(--navy)}.why{margin-top:6px;color:#364354}
+    details{border:1px solid var(--line);border-radius:14px;background:#fbfdff;padding:12px 14px;margin:10px 0} summary{cursor:pointer;font-weight:800;color:var(--navy)} footer{border-top:1px solid var(--line);padding:24px 18px;text-align:center;color:var(--muted);background:white}
+    @media(max-width:900px){.span-3,.span-4,.span-6{grid-column:span 12}.flow{grid-template-columns:1fr}.twocol{columns:1} header{padding-top:30px}}
+    @media print{nav{display:none}.section{box-shadow:none;break-inside:avoid}body{background:white}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">T-6C Emergency Procedure Courseware</div>
+    <h1>Emergency Compressor Stalls</h1>
+    <p class="subtitle">บทเรียน HTML ฉบับละเอียดสำหรับทำความเข้าใจอาการ ระบบที่เกี่ยวข้อง ขั้นตอน checklist และเหตุผลของแต่ละ action ในกรณี Compressor Stall</p>
+    <div class="meta">
+      <span class="pill">Source: T-6C Flight Manual</span>
+      <span class="pill">Training aid only</span>
+      <span class="pill">Do not replace official checklist</span>
+    </div>
+  </div>
+</header>
+<nav><div class="wrap">
+  <a href="#summary">ภาพรวม</a><a href="#indications">อาการ</a><a href="#systems">ระบบที่เกี่ยวข้อง</a><a href="#checklist">Checklist</a><a href="#logic">เหตุผล</a><a href="#decision">Decision logic</a><a href="#alerts">Notes / Cautions</a><a href="#memory">จำง่าย</a><a href="#quiz">Quiz</a>
+</div></nav>
+<main>
+<section id="summary" class="section">
+  <h2>1. Big Picture / ภาพรวม</h2>
+  <p class="lead"><strong>Compressor Stall</strong> คือภาวะที่ airflow ผ่าน compressor ไม่ stable ทำให้ compressor ไม่สามารถอัดอากาศได้ต่อเนื่องตามที่ควร ผลที่เห็นคือ engine indications ผิดปกติ เช่น ITT สูงขึ้น, N1 ลดลง, torque ลดลง และอาจมีเสียงดังผิดปกติจากเครื่องยนต์</p>
+  <div class="grid">
+    <div class="card span-3"><div class="label">Primary clue</div><div class="kpi">Noise</div><p>เสียง abnormal, loud bangs, backfires หรือ sputtering เป็นตัวช่วยแยกจาก power loss แบบอื่น</p></div>
+    <div class="card span-3"><div class="label">Engine trend</div><div class="kpi">ITT ↑</div><p>อุณหภูมิ turbine มีแนวโน้มเพิ่ม เพราะการเผาไหม้/airflow ไม่สมดุล</p></div>
+    <div class="card span-3"><div class="label">Power trend</div><div class="kpi">N1/TQ ↓</div><p>N1 และ torque ลดลง หรือ fluctuation ตามความรุนแรงของ stall</p></div>
+    <div class="card span-3"><div class="label">Worst case</div><div class="kpi">Flameout</div><p>Severe compressor stall อาจทำให้ engine damage และ/หรือ flameout</p></div>
+  </div>
+  <div class="alert warningbox"><span class="tag">Safety framing</span><p>หน้านี้เป็นสื่อช่วยเรียน ไม่ใช่ checklist สำหรับใช้งานจริงใน cockpit ต้องยึด official flight manual, checklist, instructor guidance และ procedure ของหน่วยเป็นหลักเสมอ</p></div>
+</section>
+<section id="indications" class="section">
+  <h2>2. Indications / อาการที่ใช้วินิจฉัย</h2>
+  <table><thead><tr><th>สิ่งที่สังเกต</th><th>รายละเอียด</th><th>ความหมายในการวิเคราะห์</th></tr></thead><tbody>
+    <tr><td>Abnormal engine noise</td><td>เสียงเครื่องยนต์ผิดปกติ</td><td>เป็นสัญญาณเริ่มต้นที่สำคัญว่า airflow/combustion ไม่ปกติ</td></tr>
+    <tr><td>Increasing ITT</td><td>ITT เพิ่มขึ้น</td><td>แสดงว่าเครื่องยนต์กำลังทำงานในสภาพไม่สมดุล อาจเข้าใกล้/เกิน limitation หากไม่จัดการ</td></tr>
+    <tr><td>Decreasing N1</td><td>N1 ลดลง</td><td>Compressor spool ไม่รักษาความเร็ว/แรงอัดได้ตาม demand</td></tr>
+    <tr><td>Decreasing torque</td><td>Torque ลดลง</td><td>Power output ลดลง ทำให้ performance ลด และอาจเข้าสู่ descent rate สูง</td></tr>
+    <tr><td>Fluctuations</td><td>ค่า ITT/N1/torque อาจแกว่ง</td><td>airflow ยังไม่กลับมา stable</td></tr>
+    <tr><td>Loud bangs / backfires / sputtering</td><td>เสียงปัง, backfire หรือ sputtering</td><td>เป็นจุดต่างสำคัญจาก uncommanded power change/loss of power/uncommanded propeller feather</td></tr>
+    <tr><td>Flames / smoke from exhaust stacks</td><td>อาจเห็น flame หรือ smoke จาก exhaust</td><td>บ่งชี้ความผิดปกติของการเผาไหม้และ airflow อย่างชัดเจน</td></tr>
+  </tbody></table>
+</section>
+<section id="systems" class="section">
+  <h2>3. Systems ที่เกี่ยวข้อง</h2>
+  <div class="grid">
+    <div class="card span-4"><h3>Engine compressor / turbine</h3><p>เป็น core ของปัญหา Compressor Stall อาจเกิดจาก damaged/degraded compressor หรือ turbine blades, disrupted airflow เข้าเครื่องยนต์ หรือ compressor bleed valve malfunction</p></div>
+    <div class="card span-4"><h3>PCL / Fuel & power demand</h3><p>PCL เป็น pilot input หลักที่เปลี่ยน fuel/power demand การ advance หรือ retard PCL มีผลต่อ compressor loading โดยตรง จึงต้อง “slowly” ตาม checklist</p></div>
+    <div class="card span-4"><h3>Compressor bleed valve</h3><p>ถ้า bleed valve malfunction อาจทำให้ pressure/airflow relationship ใน compressor ผิดปกติ และก่อ compressor stall ได้ทั้งช่วง acceleration หรือ deceleration</p></div>
+    <div class="card span-4"><h3>ECS / DEFOG / Bleed air</h3><p>DEFOG ON เปิด defog valve, เลือก high inflow และเพิ่ม bleed air flow เพื่อช่วย alleviate back pressure on the engine compressor</p></div>
+    <div class="card span-4"><h3>Propeller system</h3><p>เมื่อ power ไม่พอและต้อง shutdown การ feather propeller สำคัญต่อ glide performance; PROP SYS circuit breaker มีผลต่อ feather dump solenoid ในบางกรณี</p></div>
+    <div class="card span-4"><h3>Firewall shutoff / emergency landing path</h3><p>เมื่อเข้าสู่ forced landing/ejection path จะใช้ FIREWALL SHUTOFF handle เพื่อ isolate engine-related flows ตาม emergency shutdown logic</p></div>
+  </div>
+</section>
+<section id="checklist" class="section">
+  <h2>4. Emergency Checklist Flow</h2>
+  <p class="small">เรียงตาม logic ของ procedure: ลด stall ก่อน → เปิด DEFOG เพื่อช่วย compressor → ค่อย ๆ เพิ่ม power เท่าที่จำเป็น → ถ้าพอให้ทำ PEL → ถ้าไม่พอให้ shutdown/forced landing/eject ตามสถานการณ์</p>
+  <div class="checklist">
+    <div class="checkitem"><div><div class="action">PCL — Slowly retard below stall threshold</div><div class="why">ลด PCL อย่างค่อยเป็นค่อยไปจนต่ำกว่าจุดที่เกิด stall เพื่อลด compressor loading และช่วยให้ airflow กลับมา stable</div></div></div>
+    <div class="checkitem"><div><div class="action">DEFOG switch — ON</div><div class="why">ใช้เมื่อ power เพียงพอสำหรับ continued flight; DEFOG ON จะเลือก high bleed air inflow ช่วย alleviate back pressure บน engine compressor</div></div></div>
+    <div class="checkitem"><div><div class="action">PCL — Slowly advance, as required</div><div class="why">ค่อย ๆ เพิ่ม power เท่าที่จำเป็นเพื่อประเมิน power available โดยไม่ดัน compressor กลับเข้าสู่ stall ซ้ำ</div></div></div>
+    <div class="checkitem"><div><div class="action">IF POWER IS SUFFICIENT FOR CONTINUED FLIGHT: PEL — Execute</div><div class="why">แม้ engine จะกลับมามี power ได้ แต่ compressor stall อาจเกิดซ้ำหรือมี engine damage จึงเข้าสู่ Precautionary Emergency Landing</div></div></div>
+    <div class="checkitem"><div><div class="action">IF POWER IS INSUFFICIENT TO COMPLETE PEL: PCL — OFF</div><div class="why">เมื่อ engine underpowered จนไม่สามารถรักษา descent rate/flight path ได้ ต้องเข้าสู่ shutdown path เพื่อ feather prop และจัดการ glide/forced landing</div></div></div>
+    <div class="checkitem"><div><div class="action">PROP SYS circuit breaker — Reset, as required</div><div class="why">ในกรณีที่เกี่ยวข้องกับ PROP SYS CB/PMU logic การ reset ตาม checklist ช่วยให้ feather dump solenoid มี electrical power และ propeller feather ได้เร็วขึ้น</div></div></div>
+    <div class="checkitem"><div><div class="action">PCL — OFF</div><div class="why">ยืนยัน engine shutdown command ใน forced landing path</div></div></div>
+    <div class="checkitem"><div><div class="action">FIREWALL SHUTOFF handle — Pull</div><div class="why">ตัด/แยกระบบที่เกี่ยวข้องกับ engine compartment ตาม emergency shutdown เพื่อควบคุมความเสี่ยงเพิ่มเติม</div></div></div>
+    <div class="checkitem"><div><div class="action">Execute Forced Landing or Eject</div><div class="why">เมื่อไม่สามารถทำ PEL ด้วย power ที่มีได้ ต้องเลือก forced landing หรือ ejection ตาม altitude, controllability, landing site, sink rate และสถานการณ์จริง</div></div></div>
+  </div>
+</section>
+<section id="logic" class="section">
+  <h2>5. เหตุผลเชิงระบบของแต่ละ Action</h2>
+  <div class="flow">
+    <div class="step"><span class="num">1</span><h3>Retard</h3><p><strong>ลด demand</strong> ต่อ compressor และลดโอกาสให้ pressure ratio/airflow อยู่ในจุดที่ stall</p></div>
+    <div class="step"><span class="num">2</span><h3>Relieve</h3><p><strong>DEFOG ON</strong> เพิ่ม bleed air flow และลด back pressure ที่ compressor</p></div>
+    <div class="step"><span class="num">3</span><h3>Re-advance</h3><p>เพิ่ม PCL ช้า ๆ เพื่อหาว่า engine ยังให้ usable power ได้เท่าใด</p></div>
+    <div class="step success"><span class="num">4</span><h3>If usable</h3><p>ถ้า power พอ → ทำ <strong>PEL</strong> เพราะ engine reliability ไม่ปกติแล้ว</p></div>
+    <div class="step warning"><span class="num">5</span><h3>If not usable</h3><p>ถ้า power ไม่พอ → shutdown/feather path แล้ว forced landing หรือ eject</p></div>
+  </div>
+  <div class="callout"><strong>แนวคิดสำคัญ:</strong> อย่าคิดว่า checklist นี้เป็นแค่ “เพิ่ม/ลด power” แต่เป็นการจัดการ compressor airflow, back pressure, engine operating limits และ aircraft glide performance พร้อมกัน</div>
+</section>
+<section id="decision" class="section">
+  <h2>6. Decision Logic / เกณฑ์ตัดสินใจ</h2>
+  <table><thead><tr><th>สถานการณ์</th><th>การตีความ</th><th>แนวทางตาม procedure</th></tr></thead><tbody>
+    <tr><td>หลัง retard แล้ว engine stable และ power พอ</td><td>Compressor stall อาจถูกยับยั้งได้ แต่ engine ยังไม่น่าเชื่อถือเต็มที่</td><td>DEFOG ON, slowly advance as required, then PEL</td></tr>
+    <tr><td>Power available ไม่พอสำหรับ continued flight หรือ PEL</td><td>ไม่สามารถคุม flight path ได้อย่างปลอดภัยด้วย engine power ที่เหลือ</td><td>PCL OFF และเข้าสู่ forced landing/ejection path</td></tr>
+    <tr><td>Rate of descent สูงแม้ stabilized ที่ 125 KIAS, gear/flaps/speed brake retracted และ torque ต่ำ</td><td>Engine underpowered อาจทำให้เสีย altitude และ glide range อย่างรวดเร็ว</td><td>ถ้าเพิ่ม torque ได้ถึง limit เพื่อคุม ROD ให้ทำ; ถ้า power ไม่พอให้ PCL OFF</td></tr>
+    <tr><td>ไม่แน่ใจ power available</td><td>อาจต้องประเมินช่วง PCL เพื่อดู usable power</td><td>พิจารณา moving PCL through full range ตาม note เพื่อ determine power available</td></tr>
+  </tbody></table>
+</section>
+<section id="alerts" class="section">
+  <h2>7. Notes / Cautions / Performance Items</h2>
+  <div class="alert note"><span class="tag">NOTE — Power available</span><p>Pilot should consider moving the PCL through the full range of motion to determine power available. ความหมายคือ หลังอาการ stall ถูกจัดการเบื้องต้นแล้ว อาจต้องประเมินว่า engine ยังให้ power ได้ช่วงไหนบ้าง แต่ต้องทำด้วยความระมัดระวังตาม context ของ procedure</p></div>
+  <div class="alert note"><span class="tag">NOTE — DEFOG effect</span><p>Setting DEFOG switch to ON automatically selects high bleed air inflow and will alleviate back pressure on the engine compressor. นี่คือเหตุผลที่ DEFOG ON อยู่ใน compressor stall checklist ไม่ใช่เพราะต้องการ clear canopy เป็นหลัก</p></div>
+  <div class="alert caution"><span class="tag">CAUTION — Underpowered engine</span><p>เมื่อ engine underpowered จนเกิด high rate of descent การ delay shutdown เพื่อให้ propeller feather อาจทำให้ altitude ไม่พอไปถึง suitable landing site</p></div>
+  <div class="alert caution"><span class="tag">CAUTION — PROP SYS CB / PMU OFF</span><p>ถ้า PROP SYS circuit breaker ถูก pull และ PMU switch OFF, feather dump solenoid จะไม่มี power ทำให้ propeller feather ช้าลงจาก oil pressure decrease และ feathering spring เท่านั้น ส่งผลให้ glide performance ลดลงมาก</p></div>
+  <div class="alert note"><span class="tag">NOTE — Engine left running consideration</span><p>ในบาง context มีข้อพิจารณาเรื่อง leaving the engine operating with PCL at mid range โดยเฉพาะเมื่อ loss of thrust อาจเกี่ยวกับ uncommanded propeller feather และ engine ยังอยู่ใน operational limits เพราะ engine ที่ยังทำงานอาจจ่าย power ให้ accessories เช่น OBOGS, DEFOG, pressurization และ hydraulic equipment ได้</p></div>
+  <div class="alert caution"><span class="tag">Performance — DEFOG ON</span><p>DEFOG ON เพิ่ม bleed air load ทำให้ ITT สูงขึ้นสำหรับ PCL setting เดิม ต้อง adjust PCL เพื่อรักษา ITT within limitations และ performance อาจลดลง โดยเฉพาะ climb performance</p></div>
+  <div class="alert warningbox"><span class="tag">Limitation reminder</span><p>Canopy defog must be OFF for takeoff and landing. ดังนั้น DEFOG ON ใน emergency checklist ต้องเข้าใจ context และจัดการตาม official procedure/phase of flight</p></div>
+</section>
+<section id="memory" class="section">
+  <h2>8. Mental Model / วิธีจำ</h2>
+  <div class="grid">
+    <div class="card span-6"><h3>4R Memory Aid</h3><p class="lead"><strong>Retard → Relieve → Re-advance → Recover / Reject</strong></p><p>Retard PCL เพื่อลด stall, Relieve compressor back pressure ด้วย DEFOG, Re-advance power ช้า ๆ, Recover ไป PEL ถ้าพอ หรือ Reject engine power แล้ว forced landing/eject ถ้าไม่พอ</p></div>
+    <div class="card span-6"><h3>One-sentence logic</h3><p class="lead">“ลด power ให้ stall หยุด, เปิด DEFOG ให้ compressor หายใจ, เพิ่ม power ช้า ๆ เพื่อดู usable power, ถ้าพอให้ PEL ถ้าไม่พอให้ shutdown แล้วเอา aircraft ลงหรือ eject”</p></div>
+  </div>
+  <h3>Common Confusions</h3>
+  <table><thead><tr><th>สับสนกับ</th><th>จุดแยก</th></tr></thead><tbody>
+    <tr><td>Uncommanded power change / loss of power</td><td>Compressor stall มักมี audible indications เช่น bangs/backfire/sputtering ชัดเจนกว่า</td></tr>
+    <tr><td>Uncommanded propeller feather</td><td>Prop feather อาจทำให้ thrust loss แต่ถ้า engine ยังอยู่ใน ITT/torque limit อาจมีโอกาส unfeather และ engine ยังจ่าย accessories ได้</td></tr>
+    <tr><td>ECS/DEFOG ใช้เพื่อ visibility เท่านั้น</td><td>ใน checklist นี้ DEFOG ON มี function เชิง engine คือ high bleed air inflow เพื่อ alleviate compressor back pressure</td></tr>
+  </tbody></table>
+</section>
+<section id="quiz" class="section">
+  <h2>9. Quick Check / Quiz</h2>
+  <details><summary>1) อาการอะไรที่ช่วยแยก compressor stall จาก uncommanded power change?</summary><p>Audible indications เช่น loud bangs, backfires หรือ engine sputtering รวมถึง abnormal engine noise เป็น clue สำคัญ</p></details>
+  <details><summary>2) ทำไม checklist ให้ PCL slowly retard ก่อน?</summary><p>เพื่อลด compressor loading และลด demand ที่ทำให้ airflow แยกตัว/ไม่ stable จนต่ำกว่า stall threshold</p></details>
+  <details><summary>3) DEFOG ON ช่วย compressor stall อย่างไร?</summary><p>DEFOG ON automatically selects high bleed air inflow และช่วย alleviate back pressure on the engine compressor</p></details>
+  <details><summary>4) ถ้า power พอหลังแก้ stall ต้องทำอะไรต่อ?</summary><p>Execute PEL เพราะ engine มี abnormal event แล้ว อาจเกิดซ้ำหรือมี damage</p></details>
+  <details><summary>5) ทำไมการ delay shutdown ในกรณี engine underpowered อันตราย?</summary><p>เพราะ propeller อาจยังไม่ feather ทำให้ drag สูง เสีย glide performance และ altitude อาจไม่พอถึง landing site</p></details>
+  <details><summary>6) PROP SYS circuit breaker เกี่ยวข้องกับ glide performance อย่างไร?</summary><p>ถ้า CB ถูก pull และ PMU OFF, feather dump solenoid ไม่มี power ทำให้ feather ช้าลงและ glide performance ลดลงมาก</p></details>
+</section>
+<section class="section">
+  <h2>10. Instructor / Briefing Notes</h2>
+  <ul>
+    <li>เน้นให้นักเรียนวิเคราะห์จาก <strong>sound + trend</strong>: noise/backfire + ITT rise + N1/torque drop</li>
+    <li>ถามเสมอว่า “ตอนนี้ power พอสำหรับ continued flight/PEL หรือไม่” เพราะ checklist แยก path ตาม power sufficiency</li>
+    <li>DEFOG ON ใน procedure นี้เป็น engine-management logic ไม่ใช่แค่ visibility logic</li>
+    <li>อย่ามองข้าม drag/glide effect ของ propeller feathering เมื่อจำเป็นต้อง shutdown</li>
+    <li>เชื่อมโยงกับ PEL, Forced Landing, Ejection decision โดยใช้ altitude, sink rate, landing site และ aircraft controllability</li>
+  </ul>
+</section>
+</main>
+<footer>
+  Training aid only. Refer to official T-6C Flight Manual, checklist, and unit SOP. Created for courseware review.
+</footer>
+</body>
+</html>

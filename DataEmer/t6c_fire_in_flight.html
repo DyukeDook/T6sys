@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>T-6C Emergency Fire In Flight Courseware</title>
+  <style>
+    :root{
+      --bg:#f4f7fb; --paper:#ffffff; --ink:#152033; --muted:#64748b; --line:#d9e2ef;
+      --navy:#0b1f3a; --blue:#0f5f9e; --blue2:#e9f4ff; --red:#b42318; --red2:#fff1f0;
+      --amber:#b45309; --amber2:#fff7e6; --green:#157347; --green2:#eaf8ef; --gray:#eef2f7;
+      --shadow:0 14px 36px rgba(11,31,58,.12); --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,"Noto Sans Thai",Arial,sans-serif; color:var(--ink); background:linear-gradient(180deg,#e8f0fa 0%,var(--bg) 230px); line-height:1.65}
+    header{background:linear-gradient(135deg,#071a33 0%,#0b3d66 58%,#155e75 100%); color:#fff; padding:34px 18px 28px; position:relative; overflow:hidden}
+    header:before{content:""; position:absolute; inset:-120px -80px auto auto; width:340px; height:340px; border-radius:999px; background:rgba(255,255,255,.08)}
+    header .wrap{max-width:1180px; margin:0 auto; position:relative; z-index:1}
+    h1{margin:0 0 10px; font-size:clamp(2rem,4vw,4.3rem); line-height:1.08; letter-spacing:-.04em}
+    .subtitle{font-size:clamp(1rem,1.8vw,1.35rem); margin:0; max-width:960px; color:#dcecff}
+    .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px}
+    .badge{border:1px solid rgba(255,255,255,.28); background:rgba(255,255,255,.12); color:#fff; padding:7px 12px; border-radius:999px; font-weight:700; font-size:.92rem; backdrop-filter:blur(6px)}
+    nav{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94); border-bottom:1px solid var(--line); backdrop-filter:blur(10px); box-shadow:0 8px 20px rgba(11,31,58,.06)}
+    nav .wrap{max-width:1180px; margin:0 auto; display:flex; gap:8px; overflow-x:auto; padding:9px 14px}
+    nav a{white-space:nowrap; color:var(--navy); text-decoration:none; padding:8px 12px; border-radius:999px; font-size:.9rem; font-weight:800}
+    nav a:hover{background:var(--blue2); color:var(--blue)}
+    main{max-width:1180px; margin:24px auto 70px; padding:0 16px}
+    section{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:clamp(18px,3vw,34px); margin:18px 0}
+    section.flat{box-shadow:none; background:transparent; border:none; padding:0}
+    h2{font-size:clamp(1.45rem,2.5vw,2.2rem); line-height:1.18; margin:0 0 18px; letter-spacing:-.02em; color:#0b1f3a}
+    h3{font-size:1.22rem; margin:26px 0 10px; color:#0b1f3a}
+    h4{font-size:1.05rem; margin:16px 0 8px; color:#17375e}
+    p{margin:0 0 12px}.lead{font-size:1.12rem; color:#25344d}.muted{color:var(--muted)}
+    .grid{display:grid; gap:14px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+    @media(max-width:900px){.grid.two,.grid.three,.grid.four{grid-template-columns:1fr} section{border-radius:14px}}
+    .card{background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px; box-shadow:0 8px 20px rgba(11,31,58,.05)}
+    .card h3,.card h4{margin-top:0}.card .kicker{font-size:.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; font-weight:900}
+    .fact{background:linear-gradient(180deg,#fff,#f8fbff); border-left:5px solid var(--blue)}
+    .danger{border-left:5px solid var(--red); background:linear-gradient(180deg,#fff,var(--red2))}
+    .success{border-left:5px solid var(--green); background:linear-gradient(180deg,#fff,var(--green2))}
+    .cautionCard{border-left:5px solid var(--amber); background:linear-gradient(180deg,#fff,var(--amber2))}
+    .alert{border-radius:16px; padding:15px 16px; margin:14px 0; border:1px solid; display:grid; grid-template-columns:auto 1fr; gap:10px; align-items:start}
+    .alert .label{font-weight:1000; border-radius:999px; padding:3px 9px; font-size:.78rem; letter-spacing:.05em}
+    .alert.warning{background:var(--red2); border-color:#ffccc7}.alert.warning .label{background:var(--red); color:#fff}
+    .alert.caution{background:var(--amber2); border-color:#ffd591}.alert.caution .label{background:var(--amber); color:#fff}
+    .alert.note{background:var(--blue2); border-color:#b7ddff}.alert.note .label{background:var(--blue); color:#fff}
+    .alert.ok{background:var(--green2); border-color:#b7ebc6}.alert.ok .label{background:var(--green); color:#fff}
+    table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:14px; border:1px solid var(--line); background:#fff; margin:14px 0 20px}
+    th,td{padding:13px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line)}
+    th{background:#edf4fb; color:#0b1f3a; font-weight:1000}tr:last-child td{border-bottom:none}
+    .tablewrap{overflow-x:auto; border-radius:14px}
+    .steps{counter-reset:step; display:grid; gap:14px; margin:16px 0}.step{position:relative; padding:18px 18px 18px 72px; border:1px solid var(--line); border-radius:18px; background:#fff}.step:before{counter-increment:step; content:counter(step); position:absolute; left:18px; top:18px; width:38px; height:38px; border-radius:50%; display:grid; place-items:center; background:#0b3d66; color:#fff; font-weight:1000}.step.critical:before{background:var(--red)}.step h3{margin:0 0 6px}.cmd{display:inline-block; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; background:#0b1f3a; color:#fff; padding:4px 8px; border-radius:8px; font-weight:900; margin:0 2px}.chip{display:inline-block; padding:3px 8px; border-radius:999px; background:#eef2f7; color:#334155; font-weight:800; font-size:.82rem}.fire{background:var(--red); color:#fff}.pel{background:#0f5f9e; color:#fff}.elpc{background:#157347; color:#fff}.flow{display:grid; grid-template-columns:repeat(5,minmax(120px,1fr)); gap:12px; align-items:stretch; margin:16px 0}@media(max-width:1000px){.flow{grid-template-columns:1fr}}.flow .node{background:#fff; border:1px solid var(--line); border-radius:16px; padding:14px; position:relative}.flow .node:not(:last-child):after{content:"→"; position:absolute; right:-15px; top:50%; transform:translateY(-50%); color:#64748b; font-size:1.4rem; font-weight:1000}@media(max-width:1000px){.flow .node:not(:last-child):after{content:"↓"; right:50%; top:auto; bottom:-19px; transform:translateX(50%)}}
+    .decision{display:grid; gap:12px; margin-top:18px}.decision .row{display:grid; grid-template-columns:260px 1fr; gap:12px}@media(max-width:800px){.decision .row{grid-template-columns:1fr}}.decision .q{background:#0b1f3a; color:#fff; border-radius:14px; padding:14px; font-weight:1000}.decision .a{background:#f8fbff; border:1px solid var(--line); border-radius:14px; padding:14px}.decision .a.red{background:var(--red2); border-color:#ffccc7}.decision .a.green{background:var(--green2); border-color:#b7ebc6}.decision .a.blue{background:var(--blue2); border-color:#b7ddff}
+    details{background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px 14px; margin:10px 0}summary{cursor:pointer; font-weight:1000; color:#0b1f3a}details[open]{box-shadow:0 8px 18px rgba(11,31,58,.06)}
+    .src{font-size:.92rem; color:#475569; background:#f8fafc; border:1px dashed #cbd5e1; border-radius:14px; padding:12px 14px}
+    .btns{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}.button{border:none; background:#0b3d66; color:white; border-radius:999px; padding:10px 14px; font-weight:900; cursor:pointer}.button.secondary{background:#e2e8f0;color:#0b1f3a}.button:hover{filter:brightness(1.05)}
+    .print-note{display:none}
+    footer{max-width:1180px; margin:0 auto 50px; padding:0 16px; color:#64748b}
+    @media print{nav,.btns{display:none}body{background:#fff}section{box-shadow:none; break-inside:avoid}.print-note{display:block}.flow{grid-template-columns:1fr}.flow .node:after{display:none}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>T-6C Emergency: Fire In Flight</h1>
+    <p class="subtitle">HTML courseware ภาษาไทยแบบละเอียด: ทำอะไรเมื่อ FIRE annunciator ขึ้น, ต้อง confirm อย่างไร, checklist ให้ทำอะไร, เกี่ยวข้องกับระบบใด และแต่ละ action ส่งผลอย่างไร</p>
+    <div class="badges">
+      <span class="badge">Training Aid Only</span>
+      <span class="badge">Engine Compartment Fire Logic</span>
+      <span class="badge">PEL / Forced Landing / Ejection Decision</span>
+      <span class="badge">Based on T-6C Flight Manual</span>
+    </div>
+  </div>
+</header>
+<nav>
+  <div class="wrap">
+    <a href="#safety">Safety</a><a href="#objectives">Objectives</a><a href="#bigpicture">Big Picture</a><a href="#checklist">Checklist</a><a href="#confirm">Confirm Fire</a><a href="#systems">Systems</a><a href="#effects">Action Effects</a><a href="#pel-forced">PEL/ELP/Forced</a><a href="#pitfalls">Pitfalls</a><a href="#quiz">Quiz</a><a href="#sources">Sources</a>
+  </div>
+</nav>
+<main>
+  <section id="safety">
+    <h2>คำเตือนการใช้งาน</h2>
+    <div class="alert warning"><span class="label">WARNING</span><div><strong>หน้านี้เป็นเอกสารช่วยเรียน ไม่ใช่ checklist ทางการ</strong> ในการบินจริงให้ใช้ checklist/flight manual/คำสั่งหน่วยที่ได้รับอนุมัติเท่านั้น และคง wording ของ emergency checklist ตามต้นฉบับเสมอ</div></div>
+    <div class="alert caution"><span class="label">CAUTION</span><div>เนื้อหานี้อธิบาย logic และระบบเพื่อการทบทวนความเข้าใจ ไม่ควรใช้เป็นเหตุผลในการสร้าง procedure ใหม่หรือตัดขั้นตอนจาก manual</div></div>
+    <div class="btns"><button class="button" onclick="window.print()">Print / Save as PDF</button><button class="button secondary" onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">Open All Details</button><button class="button secondary" onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">Close All Details</button></div>
+  </section>
+
+  <section id="objectives">
+    <h2>Learning Objectives</h2>
+    <p class="lead">เมื่อเรียนจบหน้านี้ ผู้เรียนควรอธิบาย Fire In Flight ได้ทั้งในมุม checklist และมุมระบบ ไม่ใช่จำเฉพาะคำสั่งสั้น ๆ</p>
+    <div class="grid three">
+      <div class="card fact"><div class="kicker">Objective 1</div><h3>แยก FIRE light กับ confirmed fire</h3><p>เข้าใจว่า FIRE annunciator หมายถึงความเป็นไปได้ของไฟใน engine compartment แต่ไฟเตือนเพียงอย่างเดียวไม่ใช่ confirmed fire</p></div>
+      <div class="card fact"><div class="kicker">Objective 2</div><h3>ทำ decision flow ได้</h3><p>เริ่ม PEL ระหว่างรอยืนยัน ถ้า confirm ให้ shutdown/isolate engine แล้วไป Forced Landing หรือ Eject ตามสภาพ</p></div>
+      <div class="card fact"><div class="kicker">Objective 3</div><h3>เชื่อมกับระบบ aircraft ได้</h3><p>อธิบายผลต่อ Fire Warning, PCL/FMU/engine, propeller feathering, fuel, hydraulic, bleed air/ECS/OBOGS/anti-G/pressurization และ ELP/PEL</p></div>
+    </div>
+  </section>
+
+  <section id="bigpicture">
+    <h2>Big Picture: Fire In Flight คือ emergency แบบไหน</h2>
+    <p class="lead"><strong>Fire In Flight ของ T-6C คือ emergency decision ที่เริ่มจากการพบ FIRE annunciator แล้วต้องแยกให้ได้ว่าเป็น “confirmed engine fire” หรือ “unconfirmed fire indication”</strong></p>
+    <div class="flow">
+      <div class="node"><span class="chip fire">FIRE annunciator</span><h3>Possibility</h3><p>ไฟเตือนแปลว่ามีความเป็นไปได้ว่า engine compartment มีไฟหรือมี high temperature</p></div>
+      <div class="node"><span class="chip pel">Pending confirmation</span><h3>Initiate PEL</h3><p>ระหว่างยังไม่ confirm ให้เริ่ม PEL ด้วยเจตนาจะ land as soon as possible</p></div>
+      <div class="node"><span class="chip">Confirm</span><h3>Look for evidence</h3><p>ต้องมี FIRE light พร้อมอาการประกอบ เช่น smoke/flames/vibration/sound/high ITT/fluctuating oil/hydraulic indications</p></div>
+      <div class="node"><span class="chip fire">Confirmed</span><h3>Shutdown + Isolate</h3><p>PCL OFF และ Firewall Shutoff Pull เพื่อตัด combustion/fuel/hydraulic/bleed air path</p></div>
+      <div class="node"><span class="chip elpc">Recover</span><h3>Forced Landing or Eject</h3><p>ถ้าไฟดับให้ Forced Landing; ถ้าไม่ดับหรือ landing ทำไม่ได้ให้ Eject ทั้งสองคน</p></div>
+    </div>
+    <div class="alert note"><span class="label">KEY IDEA</span><div><strong>ไม่ใช่ “เห็น FIRE แล้วดับเครื่องทันทีทุกครั้ง”</strong> แต่เป็น “เห็น FIRE → เริ่ม PEL → confirm → ถ้า confirm จึง shutdown/isolate” เพราะ manual ระบุว่า fire warning light เดี่ยว ๆ ไม่ใช่ confirmed fire</div></div>
+  </section>
+
+  <section id="checklist">
+    <h2>Fire In Flight Checklist — โครงสร้างเต็มแบบอธิบายละเอียด</h2>
+    <p class="lead">ส่วนนี้คงคำสั่ง checklist สำคัญไว้ แล้วขยายว่าแต่ละข้อ “สั่งอะไร”, “ไปกระทบระบบใด”, “หวังผลอะไร”, และ “ต้องระวังอะไร”</p>
+
+    <div class="alert note"><span class="label">PENDING CONFIRMATION</span><div>เมื่อ FIRE annunciator ขึ้น ให้ถือว่าอาจมี fire ใน engine compartment และ <strong>initiate PEL procedures</strong> ด้วยเจตนาจะลงให้เร็วที่สุด ระหว่างนั้นต้องหา evidence เพิ่มเพื่อ confirm หรือ reject fire</div></div>
+
+    <h3>IF FIRE IS CONFIRMED</h3>
+    <div class="steps">
+      <div class="step critical"><h3><span class="cmd">1. PCL - OFF</span></h3><p><strong>Action:</strong> เลื่อน Power Control Lever ไป OFF/cutoff เพื่อ shutdown engine</p><p><strong>System effect:</strong> ลด/ตัด fuel scheduling ผ่าน FMU เข้าสู่ engine combustion และทำให้เครื่องยนต์ไม่สร้าง power ต่อ ขั้นตอนนี้ยังเกี่ยวกับ propeller feathering เพราะ PCL OFF เป็นเงื่อนไขสำคัญที่ช่วยให้ propeller feather เพื่อลด drag</p><p><strong>Training meaning:</strong> เมื่อตัดสินว่าเป็น confirmed fire แล้ว ต้องยอมเสีย engine เพื่อกำจัด heat/combustion source ไม่ใช่พยายามรักษา power ต่อ</p></div>
+      <div class="step critical"><h3><span class="cmd">2. FIREWALL SHUTOFF HANDLE - PULL</span></h3><p><strong>Action:</strong> ดึง firewall shutoff handle ที่ front left console</p><p><strong>System effect:</strong> mechanically closes valves at the firewall เพื่อตัด <strong>fuel</strong> และ <strong>hydraulic fluid</strong> ไปยัง engine รวมทั้งตัด <strong>bleed air</strong> จาก engine</p><p><strong>Training meaning:</strong> PCL OFF หยุด combustion แต่ firewall shutoff คือการ isolate engine compartment จากของไหลและอากาศร้อนที่อาจ feed fire หรือทำให้ไฟลุกต่อ</p></div>
+      <div class="step"><h3><span class="cmd">IF FIRE IS EXTINGUISHED: 3. Forced Landing - Execute</span></h3><p><strong>Action:</strong> ถ้าไฟดับแล้ว ให้ดำเนินการ Forced Landing</p><p><strong>System effect:</strong> หลัง PCL OFF + firewall shutoff เครื่องยนต์ถือว่าไม่ available แล้ว จึงต้องบินโดยอาศัย energy/glide และ ELP profile</p><p><strong>Training meaning:</strong> ไม่ใช่กลับไปบินปกติหรือพยายาม restart หลัง confirmed fire; aircraft อยู่ใน engine-not-available recovery</p></div>
+      <div class="step critical"><h3><span class="cmd">IF FIRE DOES NOT EXTINGUISH OR FORCED LANDING IS IMPRACTICAL: 4. Eject (BOTH)</span></h3><p><strong>Action:</strong> ถ้าไฟไม่ดับ หรือไม่มีทางลงที่ใช้ได้ ให้ eject ทั้งสองคนตาม crew coordination</p><p><strong>System/safety effect:</strong> ไฟที่ไม่ดับอาจทำให้ aircraft control, structure, engine compartment, hydraulic/flight systems หรือ visibility แย่ลงอย่างรวดเร็ว</p><p><strong>Training meaning:</strong> checklist ให้ priority กับ survival; ถ้า fire ยังอยู่หรือ landing ไม่ realistic อย่าฝืนเอา aircraft กลับ</p></div>
+      <div class="step"><h3><span class="cmd">IF FIRE IS NOT CONFIRMED: 5. PEL - Execute</span></h3><p><strong>Action:</strong> ถ้าไม่มี evidence เพียงพอที่จะ confirm engine fire ให้ execute PEL</p><p><strong>System effect:</strong> ยังไม่ shutdown engine เพียงเพราะ FIRE light เพราะอาจเป็น false indication หรือ bleed air leak ที่ทำให้ compartment temperature สูง</p><p><strong>Training meaning:</strong> รักษา option ของ power ไว้เพื่อให้ landing ปลอดภัยขึ้น แต่ยังลงโดยเร็วตาม PEL เพราะระบบ fire warning อาจมีปัญหาจริง</p></div>
+    </div>
+  </section>
+
+  <section id="confirm">
+    <h2>Confirmed Fire Criteria: ต้องเห็นอะไรถึงถือว่าเป็นไฟจริง</h2>
+    <p class="lead">Manual ระบุ logic สำคัญว่า FIRE warning light ต้องมี indication อื่นประกอบอย่างน้อยหนึ่งอย่างจึงเป็น confirmation of engine fire</p>
+    <div class="grid three">
+      <div class="card danger"><h3>Visual / Sensory</h3><p><span class="chip fire">smoke</span> <span class="chip fire">flames</span></p><p>ควันหรือเปลวไฟเป็น evidence โดยตรงว่าอาจมี combustion/ไฟจริงใน engine compartment หรือบริเวณที่เกี่ยวข้อง</p></div>
+      <div class="card cautionCard"><h3>Engine behavior</h3><p><span class="chip">engine vibration</span> <span class="chip">unusual sounds</span></p><p>การสั่นหรือเสียงผิดปกติอาจบอกถึง mechanical damage, compressor/turbine problem, fire damage หรือ failure ที่กำลังลุกลาม</p></div>
+      <div class="card cautionCard"><h3>Engine/System indications</h3><p><span class="chip">high ITT</span> <span class="chip">oil pressure fluctuation</span> <span class="chip">oil temp fluctuation</span> <span class="chip">hydraulic pressure fluctuation</span></p><p>ค่าที่ผิดปกติหรือแกว่ง บอกว่าไฟ/ความร้อน/รั่ว/ความเสียหายอาจกระทบ engine oil หรือ hydraulic system แล้ว</p></div>
+    </div>
+    <div class="alert warning"><span class="label">DO NOT</span><div><strong>Fire warning light ที่ไม่มี indication ประกอบ ไม่ใช่ confirmed fire</strong> manual ระบุว่าไม่ควร shutdown engine สำหรับ unconfirmed fire</div></div>
+    <div class="alert note"><span class="label">BLEED AIR LEAK</span><div>High engine compartment temperature จาก bleed air leak อาจทำให้ FIRE warning light ติดได้ การลด PCL toward IDLE จะลดปริมาณ bleed air และอาจทำให้ fire light ดับ แต่ถ้าต้องการ intercept ELP อาจต้อง advance PCL ตามจำเป็น และยังต้อง investigate หา indication ที่ confirm engine fire ต่อไป</div></div>
+    <div class="alert note"><span class="label">FIRE LOOP</span><div>ถ้าไม่สามารถ confirm fire ได้ ระบบ fire warning อาจมี fault; ถ้ามีแค่ครึ่งบนหรือครึ่งล่างของ FIRE annunciator ติด และอีก loop test good อาจเป็น false fire indication</div></div>
+  </section>
+
+  <section id="systems">
+    <h2>ระบบที่เกี่ยวข้องทั้งหมด</h2>
+    <p class="lead">Fire In Flight ไม่ใช่เรื่องของ “ไฟเตือน” อย่างเดียว แต่เป็น emergency ที่เกี่ยวข้องกับหลายระบบตั้งแต่ detection ไปจนถึง recovery profile</p>
+
+    <h3>1) Fire Warning System — ระบบตรวจจับและเตือน</h3>
+    <div class="grid two">
+      <div class="card fact"><h4>หน้าที่</h4><p>ตรวจจับ high temperature รอบ engine exterior surface แล้ว trigger red FIRE annunciator และ aural tone เพื่อเตือน crew ว่าอาจมีไฟหรือความร้อนผิดปกติใน engine compartment</p></div>
+      <div class="card fact"><h4>ส่วนประกอบหลัก</h4><p>dual sensor tubes, responder assemblies, red FIRE annunciator, aural warning/tone, FIRE test switch และ fire warning loops สองระบบ</p></div>
+    </div>
+    <div class="tablewrap"><table><thead><tr><th>องค์ประกอบ</th><th>ทำหน้าที่</th><th>ผลต่อ Fire In Flight</th></tr></thead><tbody>
+      <tr><td>Sensor tubes</td><td>ติดตั้งรอบ exterior surface ของ engine เพื่อตรวจ high temperature</td><td>เป็น input แรกของ fire warning; ตรวจได้ทั้ง overall heat และ localized heat</td></tr>
+      <tr><td>Helium gas</td><td>ตอบสนองต่อ overall threshold temperature</td><td>เมื่อร้อนขึ้น gas pressure เพิ่มจน responder trigger circuit</td></tr>
+      <tr><td>Hydrogen-charged core</td><td>ตอบสนองต่อ localized heat จาก flames หรือ escaping hot bleed air gases</td><td>อธิบายว่าทำไม bleed air leak อาจทำให้ fire warning light ติดได้</td></tr>
+      <tr><td>Responder assembly</td><td>รับ pressure จาก sensor tube แล้วปิด/เปิด electrical circuit เมื่อถึง fire detection point</td><td>ส่งผลให้ red FIRE annunciator และ aural tone ทำงาน</td></tr>
+      <tr><td>FIRE annunciator</td><td>แสดง red FIRE warning ให้ crew เห็น</td><td>เป็น trigger ให้เริ่ม Fire In Flight decision flow</td></tr>
+      <tr><td>FIRE test switch</td><td>ทดสอบ electrical continuity และ lamp operation ของระบบ 1/2</td><td>ใช้ช่วยประเมิน system integrity เมื่อ conditions permit โดยตำแหน่ง 1/2 จะทดสอบคนละครึ่งของ annunciator</td></tr>
+      <tr><td>Power source</td><td>FIRE 1 ผ่าน battery bus; FIRE 2 ผ่าน generator bus</td><td>ช่วยให้เข้าใจว่าการสูญเสีย electrical configuration อาจกระทบ fire detection loop แตกต่างกัน</td></tr>
+    </tbody></table></div>
+
+    <h3>2) PCL / FMU / Engine — ระบบที่หยุดแหล่งกำเนิดกำลังและ combustion</h3>
+    <p>PCL อยู่ที่ left console ทั้งสอง cockpit และ interconnected กัน การขยับ PCL หนึ่งตัวทำให้อีกตัวขยับด้วย front PCL เชื่อมกับ Fuel Management Unit (FMU) ผ่าน cable ทั้งทาง electrical/mechanical และมี cutoff gate ป้องกัน inadvertent engine shutdown</p>
+    <div class="grid three">
+      <div class="card"><h4>PCL</h4><p>เป็น pilot input หลักสำหรับ engine power และเป็นคำสั่งที่ใช้ shutdown engine เมื่อย้ายไป OFF/cutoff</p></div>
+      <div class="card"><h4>FMU</h4><p>ควบคุม/จัด fuel ให้ engine ตามคำสั่ง PCL และ logic ของ engine control</p></div>
+      <div class="card"><h4>PT6A-68 Engine</h4><p>เป็น free-turbine turboprop; เมื่อยุติ fuel/combustion จะไม่ให้ power ต่อ aircraft recovery ต้องใช้ glide/ELP</p></div>
+    </div>
+
+    <h3>3) Propeller Feathering — ผลสำคัญหลัง PCL OFF</h3>
+    <p>คู่มืออธิบายว่าเมื่อ engine failure ถ้า PCL ยังไม่อยู่ cutoff propeller อาจค่อย ๆ เคลื่อนไปทาง feather จาก loss of oil pressure แต่ may not fully feather. การ shutdown ด้วย PCL ขณะ PMU NORM และ/หรือการทำงานของ feather dump solenoid ช่วย dump oil pressure เพื่อให้ counterweights และ feathering spring feather propeller ได้รวดเร็วขึ้น</p>
+    <div class="alert note"><span class="label">WHY IT MATTERS</span><div>Propeller feathering ลด drag และเพิ่ม glide distance จึงสำคัญมากต่อ Forced Landing/ELP หลัง confirmed fire</div></div>
+
+    <h3>4) Firewall Shutoff Handle — ระบบ isolate engine compartment</h3>
+    <p>Firewall shutoff handle อยู่ที่ front left console panel การใช้งานต้อง lift guard, rotate guard ออก แล้ว pull up ประมาณ 2–2.5 inches เพื่อ activate firewall shutoff valves. Handle สามารถ reset ด้วยการ push down แต่ใน Fire In Flight confirmed fire ไม่ใช่สิ่งที่ควรทำเองเว้นแต่ manual/procedure สั่ง</p>
+    <div class="grid three">
+      <div class="card danger"><h4>Fuel shutoff</h4><p>ตัด fuel ไปยัง engine เพื่อลด source ที่ feed fire</p></div>
+      <div class="card danger"><h4>Hydraulic fluid shutoff</h4><p>ตัด hydraulic fluid ไปยัง engine area เพื่อลดของไหลที่อาจรั่ว/ติดไฟ/เพิ่มความเสียหาย</p></div>
+      <div class="card danger"><h4>Bleed air shutoff</h4><p>ตัด bleed air จาก engine ลด hot air source และลดโอกาสที่ escaping hot bleed air จะทำให้ warning หรือไฟรุนแรงขึ้น</p></div>
+    </div>
+
+    <h3>5) Fuel System — เชื้อเพลิงคือ fire feed ที่ต้องตัด</h3>
+    <p>จาก fuel schematic มี engine feed, fuel pumps, FMU, fuel flow transmitter และ firewall shutoff valve. ใน Fire In Flight, fuel path เป็นสิ่งที่ต้องหยุดผ่านทั้ง PCL OFF และ firewall shutoff เพื่อไม่ให้ fire ได้เชื้อเพลิงต่อ</p>
+
+    <h3>6) Hydraulic System — เกี่ยวข้องเพราะ firewall shutoff ตัด hydraulic fluid ไป engine และ forced landing ต้องจัด configuration</h3>
+    <p>Fire In Flight ไม่ใช่ hydraulic failure โดยตรง แต่ hydraulic indications เป็นหนึ่งใน criteria ที่ช่วย confirm fire ถ้า pressure fluctuation เกิดพร้อม FIRE light. นอกจากนี้ after shutdown/isolation, การจัด landing gear/flaps ต้องคิดตาม Forced Landing/ELP และอาจต้องใช้ emergency landing gear extension ตามสถานการณ์</p>
+
+    <h3>7) Bleed Air / ECS / Pressurization / OBOGS / Anti-G / Defog</h3>
+    <p>Engine bleed air ถูกใช้กับ canopy pressurization seal, anti-G system, cockpit heating/defogging, pressurization และ OBOGS. Bleed air ถูก tap จาก compressor P3 ports. Firewall shutoff และ engine shutdown จึงมีผลต่อระบบเหล่านี้โดยตรงหรือโดยอ้อม</p>
+    <div class="tablewrap"><table><thead><tr><th>ระบบย่อย</th><th>เกี่ยวข้องอย่างไรกับ Fire In Flight</th><th>ผลที่ต้องคาด</th></tr></thead><tbody>
+      <tr><td>ECS / heating / defog</td><td>ใช้ conditioned engine bleed air; defog ใช้ bleed air เพิ่มและอาจเพิ่ม ITT สำหรับ PCL เดิม</td><td>เมื่อ engine shutdown/bleed ถูกตัด อาจสูญเสีย defog/heating และเกิด canopy/windshield fogging หรือ icing ตามสภาพแวดล้อม</td></tr>
+      <tr><td>Pressurization</td><td>pressurization ใช้ conditioned bleed air</td><td>หลัง shutdown/bleed cut ความสามารถ pressurization ไม่ใช่สิ่งที่พึ่งได้; ต้องคิดเรื่อง descent/oxygen/visibility ตาม checklist อื่นที่เกี่ยวข้อง</td></tr>
+      <tr><td>OBOGS</td><td>OBOGS ใช้ left P3 bleed air ผ่าน oxygen regulator supply</td><td>loss of bleed air อาจนำไปสู่ OBOGS low pressure/failure indications; ควรเข้าใจว่า oxygen source อาจเปลี่ยนเป็น emergency oxygen ตาม procedure ที่เกี่ยวข้อง</td></tr>
+      <tr><td>Anti-G</td><td>anti-G ใช้ bleed air ผ่าน canopy seal/anti-G shutoff path</td><td>หลัง fire recovery ไม่ใช่ profile high-G; อย่างไรก็ดีระบบ anti-G อาจไม่พร้อมตาม bleed/valve state</td></tr>
+      <tr><td>Canopy seal</td><td>ใช้ bleed air เพื่อ pressurization/seal</td><td>engine shutdown/bleed cut อาจกระทบ pressurization seal behavior</td></tr>
+    </tbody></table></div>
+
+    <h3>8) ELP / PEL / Forced Landing / Ejection — ระบบการจัด flight path และ survival decision</h3>
+    <p>หลัง confirmed fire, checklist ไม่จบที่ engine shutdown แต่ต้องตัดสินใจ recovery mode: ถ้าไฟดับให้ Forced Landing, ถ้าไม่ดับหรือ landing ไม่ practical ให้ Eject. ถ้าไม่ confirmed ให้ PEL Execute</p>
+  </section>
+
+  <section id="effects">
+    <h2>ทำไม checklist เรียงลำดับแบบนี้: Action → System → Result</h2>
+    <div class="tablewrap"><table><thead><tr><th>Checklist item</th><th>ระบบที่ถูกสั่ง/ได้รับผล</th><th>ผลที่ต้องการ</th><th>สิ่งที่ต้องระวัง</th></tr></thead><tbody>
+      <tr><td><span class="cmd">PCL - OFF</span></td><td>PCL, FMU, engine fuel/combustion, propeller feathering logic</td><td>หยุด engine combustion, ลด heat/power source, ช่วยให้ propeller feather ลด drag</td><td>หลังทำแล้ว engine power ไม่ available; ต้องคิด Forced Landing/ELP หรือ Ejection ไม่ใช่บินต่อปกติ</td></tr>
+      <tr><td><span class="cmd">FIREWALL SHUTOFF HANDLE - PULL</span></td><td>firewall valves, fuel line, hydraulic fluid line, bleed air line</td><td>isolate engine compartment จาก fuel/hydraulic/bleed air ที่อาจ feed fire</td><td>กระทบระบบที่พึ่ง bleed air และ engine area services; ต้องเตรียมสภาพ cockpit/visibility/configuration</td></tr>
+      <tr><td><span class="cmd">Forced Landing - Execute</span></td><td>ELP profile, landing gear/flaps, energy management, aircraft configuration</td><td>นำ aircraft ลงเมื่อ engine not available และไฟดับแล้ว</td><td>energy management critical; ถ้าไม่มี suitable landing area ควรประเมิน ejection</td></tr>
+      <tr><td><span class="cmd">Eject (BOTH)</span></td><td>ejection seat/ISS/crew coordination</td><td>รักษาชีวิต crew เมื่อ fire ไม่ดับหรือ forced landing impractical</td><td>ต้องไม่ delay เกินไปจนออกนอก ejection envelope/altitude margin</td></tr>
+      <tr><td><span class="cmd">PEL - Execute</span></td><td>engine still available, ELP intercept, systematic aircraft/instrument check</td><td>ใช้ power/altitude/airspeed/configuration ให้เข้าสู่ emergency landing pattern โดยยังไม่ shutdown engine จาก unconfirmed fire</td><td>ยังต้อง monitor และพร้อม transition เป็น confirmed fire/forced landing ถ้ามี evidence เพิ่ม</td></tr>
+    </tbody></table></div>
+
+    <h3>Action Layer: PCL OFF vs Firewall Shutoff ต่างกันอย่างไร</h3>
+    <div class="grid two">
+      <div class="card danger"><h3>PCL OFF = หยุด engine จากด้าน control/fuel scheduling</h3><p>เป้าหมายคือหยุด combustion และ engine power. นี่เป็นการตัดต้นทางพลังงานหลักของไฟ และช่วยให้ propeller feather สำหรับ glide performance</p></div>
+      <div class="card danger"><h3>Firewall Shutoff = ปิดประตู firewall จากด้าน plumbing</h3><p>เป้าหมายคือ isolate engine compartment โดย mechanical valves ตัด fuel, hydraulic fluid และ bleed air. แม้ engine ถูก shutdown แล้ว ถ้ายังมี line/pressure/heat source อยู่ fire อาจไม่หยุด</p></div>
+    </div>
+  </section>
+
+  <section id="pel-forced">
+    <h2>PEL, ELP, Forced Landing เกี่ยวข้องกับ Fire In Flight อย่างไร</h2>
+    <h3>Emergency Landing Pattern (ELP)</h3>
+    <p>ELP คือ profile สำหรับ recover aircraft เมื่อ system/engine malfunction jeopardizes continued engine operation. Pattern ต้องปรับตาม altitude, airspeed, configuration และ wind และควรใช้กับ suitable landing area เช่น hard surface runway, taxiway หรือ under/overrun</p>
+    <div class="grid three">
+      <div class="card"><h4>High key</h4><p>โดยภาพ pattern แสดง low key 1500 ft AGL abeam touchdown point; high key/entry logic ต้องใช้ตาม training/local procedure และ manual figure</p></div>
+      <div class="card"><h4>Airspeed discipline</h4><p>Forced landing ใช้ 125 KIAS prior to gear extension; 120 KIAS minimum until final; 110 KIAS minimum on final</p></div>
+      <div class="card"><h4>Touchdown planning</h4><p>aim/plan touchdown within first one-third of runway ตาม figure เพื่อให้มี stopping margin</p></div>
+    </div>
+    <div class="alert caution"><span class="label">ENERGY</span><div>ที่ higher temperature/pressure altitude power response delayed. Airspeed below 110 KIAS on ELP final ร่วมกับ high flare อาจนำไปสู่ hard landing และ landing gear component failure</div></div>
+
+    <h3>Forced Landing</h3>
+    <p>ใช้เมื่อ engine not available และไม่ attempt airstart หรือ airstart unsuccessful. สำหรับ Fire In Flight confirmed fire หลัง PCL OFF + firewall shutoff แล้ว ถ้าไฟดับจึงเข้า Forced Landing</p>
+    <div class="tablewrap"><table><thead><tr><th>Forced Landing item</th><th>ความหมาย</th><th>ผล/เหตุผล</th></tr></thead><tbody>
+      <tr><td>Airspeed 125 KIAS prior to extending landing gear</td><td>ตั้ง speed ก่อนเริ่ม configuration</td><td>รักษา energy และ control margin ก่อน gear drag เพิ่ม</td></tr>
+      <tr><td>EMER LDG GR handle - Pull as required</td><td>ใช้ emergency landing gear extension ตามจำเป็น</td><td>หลัง engine/hydraulic/normal system condition อาจไม่เหมือน normal landing ต้องพร้อมใช้ emergency means</td></tr>
+      <tr><td>120 KIAS minimum until intercepting final; 110 KIAS minimum on final</td><td>minimum speed discipline ใน ELP/Forced Landing</td><td>ลด risk low-energy/hard landing โดยเฉพาะใน final/flare</td></tr>
+      <tr><td>Flaps - As required</td><td>ใช้ flap ตามสภาพและเมื่อ landing assured</td><td>flap เพิ่ม drag มาก โดย LDG flap ไม่ควรลดจนกว่า landing assured</td></tr>
+    </tbody></table></div>
+    <div class="alert warning"><span class="label">UNPREPARED / DITCHING</span><div>ถ้าลง unprepared surface หรือ ditching ไม่ให้ extend landing gear. ถ้าลง unprepared surface manual ระบุว่า risk injury เพิ่มขึ้นมากจาก crash loads และความซับซ้อนของ ground/water egress</div></div>
+    <div class="alert caution"><span class="label">VISIBILITY</span><div>Engine failure หรือ shutdown จะ disable bleed air system completely; อาจเกิด canopy icing/fogging และลด visibility อย่างมาก โดยเฉพาะ rear cockpit</div></div>
+
+    <h3>Precautionary Emergency Landing (PEL)</h3>
+    <p>PEL ใช้เมื่อมี indication ว่าอาจเกิด engine failure หรือเมื่อ checklist สั่ง. ใน Fire In Flight ใช้สองจังหวะ: ระหว่างรอยืนยัน FIRE และเมื่อ fire ไม่ confirmed</p>
+    <div class="steps">
+      <div class="step"><h3>Turn to nearest suitable field</h3><p>เริ่มไปหา field ที่เหมาะสมทันทีเพื่อลดเวลาที่ต้องอยู่กับ malfunction</p></div>
+      <div class="step"><h3>Climb or accelerate to intercept ELP</h3><p>ใช้ power/altitude/airspeed ที่มีอยู่เพื่อสร้าง energy state ให้เข้ากับ ELP</p></div>
+      <div class="step"><h3>Gear, flaps, speed brake - UP</h3><p>ลด drag เพื่อแก้ low-energy state และรักษา option ในการเข้ารูปแบบ emergency landing pattern</p></div>
+      <div class="step"><h3>Conduct systematic aircraft/instrument check</h3><p>ตรวจหา sign เพิ่ม เช่น oil pressure fluctuation, excessive noise/vibration, engine instruments เพื่อดูว่ากำลังกลายเป็น confirmed fire หรือ impending engine failure หรือไม่</p></div>
+      <div class="step"><h3>BOOST PUMP / IGNITION - As required</h3><p>ใช้ตาม nature ของ malfunction. Manual note ระบุว่าไม่ set boost pump/ignition ON สำหรับบาง engine malfunctions เช่น oil system, chip light, fire, FOD เพราะอาจให้ undesirable immediate relight</p></div>
+      <div class="step"><h3>Plan intercept ELP at/below high key, proper configuration, minimum 120 KIAS</h3><p>จุดหมายคือไม่เพียงไปใกล้ runway แต่ต้องเข้า profile ที่ทำให้ลงได้ด้วย energy เหมาะสม</p></div>
+    </div>
+  </section>
+
+  <section id="decision">
+    <h2>Decision Map: จาก FIRE light ไปสู่การลงหรือ eject</h2>
+    <div class="decision">
+      <div class="row"><div class="q">FIRE annunciator illuminated?</div><div class="a blue">เริ่มคิดว่าอาจมี engine compartment fire และ initiate PEL pending confirmation</div></div>
+      <div class="row"><div class="q">มี smoke/flames/vibration/unusual sound/high ITT/oil/hydraulic fluctuation?</div><div class="a red">ถ้ามีอย่างน้อยหนึ่งอย่างร่วมกับ FIRE light = confirmed fire → PCL OFF + Firewall Shutoff Pull</div></div>
+      <div class="row"><div class="q">ทำ PCL OFF + Firewall Shutoff แล้วไฟดับ?</div><div class="a green">ถ้าไฟดับ → Forced Landing Execute เพราะ engine no longer available</div></div>
+      <div class="row"><div class="q">ไฟไม่ดับ หรือ forced landing impractical?</div><div class="a red">Eject (BOTH)</div></div>
+      <div class="row"><div class="q">ไม่มี indication ประกอบ / confirm ไม่ได้?</div><div class="a blue">PEL Execute; ไม่ shutdown engine จาก FIRE light เดี่ยว ๆ; investigate/test system as conditions permit</div></div>
+    </div>
+  </section>
+
+  <section id="pitfalls">
+    <h2>Common Pitfalls / Misconceptions</h2>
+    <div class="grid two">
+      <div class="card danger"><h3>1. Shutdown จาก FIRE light เดี่ยว ๆ</h3><p>ผิด logic เพราะ manual ระบุว่า fire warning light ที่ไม่มี indication อื่นประกอบไม่ใช่ confirmed fire และไม่ควร shutdown engine สำหรับ unconfirmed fire</p></div>
+      <div class="card cautionCard"><h3>2. ไม่ initiate PEL ระหว่างรอยืนยัน</h3><p>ผิด mindset เพราะแม้ยังไม่ confirm ก็ต้องเตรียมลงให้เร็วที่สุด ไม่ใช่บินต่อปกติแล้วค่อยตัดสินใจทีหลัง</p></div>
+      <div class="card cautionCard"><h3>3. มองข้าม bleed air leak</h3><p>escaping hot bleed air gases หรือ high engine compartment temperature จาก bleed leak อาจ trigger FIRE light ได้ ต้องเข้าใจความเชื่อมโยงกับ PCL/bleed/ECS</p></div>
+      <div class="card danger"><h3>4. พยายามรักษา engine หลัง confirmed fire</h3><p>เมื่อ confirm fire แล้ว checklist สั่ง PCL OFF และ firewall shutoff. จุดประสงค์คือกำจัด fire sources ไม่ใช่รักษา thrust</p></div>
+      <div class="card cautionCard"><h3>5. ใช้ flap/gear เร็วเกินใน Forced Landing</h3><p>configuration เพิ่ม drag. Manual เน้น energy management และห้าม lower LDG flaps จนกว่า landing assured</p></div>
+      <div class="card danger"><h3>6. Delay ejection เมื่อไม่มี landing solution</h3><p>ถ้าไฟไม่ดับหรือ forced landing impractical checklist ให้ Eject (BOTH). Survival decision ต้องมาก่อน aircraft recovery</p></div>
+    </div>
+  </section>
+
+  <section id="memory">
+    <h2>Memory Aid</h2>
+    <div class="card fact"><h3>FIRE = Find evidence → Initiate PEL → Remove power → Extinguish/isolate → Land/Eject</h3><p><strong>จำแบบสั้น:</strong> <span class="chip fire">FIRE light</span> → <span class="chip pel">PEL while confirming</span> → <span class="chip">Confirm?</span> → <span class="chip fire">PCL OFF + Firewall Pull</span> → <span class="chip elpc">Forced Landing</span> หรือ <span class="chip fire">Eject</span></p></div>
+    <div class="grid two">
+      <div class="card"><h3>Confirmed Fire</h3><p><strong>OFF + PULL + LAND/EJECT</strong></p><p>PCL OFF, Firewall Shutoff Pull, ถ้าไฟดับ Forced Landing, ถ้าไม่ดับ/ลงไม่ได้ Eject</p></div>
+      <div class="card"><h3>Not Confirmed</h3><p><strong>PEL + INVESTIGATE</strong></p><p>ไม่ดับเครื่องจาก light เดี่ยว ๆ; execute PEL และ monitor/investigate ต่อ</p></div>
+    </div>
+  </section>
+
+  <section id="quiz">
+    <h2>Quick Check / Quiz</h2>
+    <details><summary>1) FIRE annunciator ขึ้นอย่างเดียว ไม่มี smoke/flame/vibration/sound/high ITT/oil/hydraulic abnormality ควรถือว่า confirmed fire หรือไม่?</summary><p><strong>ไม่ใช่ confirmed fire.</strong> ให้ initiate/execute PEL ตามกรณีและ investigate ต่อ ไม่ shutdown engine เพียงเพราะ FIRE light เดี่ยว ๆ</p></details>
+    <details><summary>2) ทำไม PCL OFF เป็นข้อแรกเมื่อ fire confirmed?</summary><p>เพราะต้องหยุด engine combustion/fuel scheduling และลด heat/power source ของ fire อีกทั้ง PCL OFF ช่วยให้ propeller feather เพื่อลด drag และเพิ่ม glide distance สำหรับ forced landing</p></details>
+    <details><summary>3) Firewall Shutoff Handle ตัดอะไรบ้าง?</summary><p>ตัด fuel และ hydraulic fluid ไปยัง engine รวมถึงตัด bleed air จาก engine โดยปิด valves ที่ firewall ผ่าน mechanical cables</p></details>
+    <details><summary>4) Bleed air leak ทำไมทำให้ FIRE light ติดได้?</summary><p>เพราะ fire warning loop ตอบสนองต่อ localized heat รวมถึง escaping hot bleed air gases ได้ จึงเกิด high engine compartment temperature และ trigger FIRE warning ได้แม้ยังไม่ใช่ fire confirmed</p></details>
+    <details><summary>5) ถ้า confirmed fire แล้วทำ PCL OFF + Firewall Pull แล้วไฟดับ ขั้นต่อไปคืออะไร?</summary><p>Forced Landing Execute เพราะ engine ถูก shutdown/isolate แล้ว ไม่ถือว่ามี engine power สำหรับ flight ต่อ</p></details>
+    <details><summary>6) ถ้าไฟไม่ดับ หรือไม่มีพื้นที่/สภาพที่ forced landing ได้จริง ควรทำอะไร?</summary><p>Eject (BOTH) ตาม checklist เพราะ risk จาก fire ที่ไม่ดับหรือ landing impractical สูงเกินกว่าจะฝืน aircraft recovery</p></details>
+    <details><summary>7) PEL ต่างจาก Forced Landing ในบริบทนี้อย่างไร?</summary><p>PEL ใช้เมื่อยังมี/อาจมี engine power และต้องการ intercept ELP ด้วย energy ที่เหมาะสม โดยเฉพาะเมื่อ fire ยังไม่ confirmed. Forced Landing ใช้เมื่อ engine not available เช่น หลัง confirmed fire แล้ว shutdown/isolate engine และไฟดับ</p></details>
+  </section>
+
+  <section id="sources">
+    <h2>Source Map / Manual Cross-Reference</h2>
+    <p class="lead">ตำแหน่งอ้างอิงใน T-6C Flight Manual ที่ใช้ทำ courseware นี้</p>
+    <div class="tablewrap"><table><thead><tr><th>หัวข้อ</th><th>ตำแหน่งใน manual</th><th>ใช้ใน courseware ตรงไหน</th></tr></thead><tbody>
+      <tr><td>Fire Warning System</td><td>Section I, p. 1-19 to 1-20, Figure 1-15/1-16</td><td>components, sensor logic, FIRE annunciator, test switch, fire loops</td></tr>
+      <tr><td>Firewall Shutoff Handle</td><td>Section I, p. 1-20; ECS schematic around p. 1-56/1-57</td><td>fuel/hydraulic/bleed air isolation, handle operation, firewall valve effect</td></tr>
+      <tr><td>Power Control Lever / Engine / Propeller</td><td>Section I, p. 1-11 to 1-17; p. 1-14 propeller feathering description</td><td>PCL OFF, FMU relationship, propeller feathering and glide logic</td></tr>
+      <tr><td>Bleed Air / ECS / Pressurization / OBOGS / Anti-G / Defog</td><td>Section I, p. 1-54 to 1-58; OBOGS around p. 1-163</td><td>ระบบที่ได้รับผลจาก bleed air และ engine shutdown/firewall shutoff</td></tr>
+      <tr><td>Fire In Flight</td><td>Section III, p. 3-20</td><td>main emergency checklist, confirmed fire criteria, unconfirmed fire notes</td></tr>
+      <tr><td>Emergency Landing Pattern / Forced Landing</td><td>Section III, p. 3-43 to 3-44; Figure 3-10</td><td>ELP profile, forced landing airspeeds, gear/flap cautions, unprepared surface notes</td></tr>
+      <tr><td>Precautionary Emergency Landing</td><td>Section III, p. 3-47</td><td>PEL logic, turn to nearest field, intercept ELP, systematic check</td></tr>
+      <tr><td>Critical Action Table</td><td>Section III, p. 3-58 to 3-59</td><td>immediate-action summary for Fire In Flight, Forced Landing, PEL</td></tr>
+    </tbody></table></div>
+    <p class="src">Prepared as Thai training courseware from the user-provided T-6C Flight Manual PDF. This file is self-contained and uses no external assets. Always refer to the official manual/checklist for flight operations.</p>
+  </section>
+</main>
+<footer>
+  <p>Training aid only. Refer to official T-6C Flight Manual and authorized checklist. Created for classroom/study use.</p>
+</footer>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const links = [...document.querySelectorAll('nav a')];
+    const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const setActive = () => {
+      let current = sections[0];
+      for (const s of sections) { if (s.getBoundingClientRect().top < 120) current = s; }
+      links.forEach(a => a.style.background = a.getAttribute('href') === '#' + current.id ? '#e9f4ff' : 'transparent');
+    };
+    document.addEventListener('scroll', setActive, {passive:true});
+    setActive();
+  });
+</script>
+</body>
+</html>
