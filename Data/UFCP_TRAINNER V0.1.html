@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>T-6C UFCP Practice Trainer v0.1 Display XL Missions</title>
+  <style>
+    :root{
+      --bg:#0f172a;--panel:#111827;--panel2:#1f2937;--ink:#e5e7eb;--muted:#94a3b8;--line:#334155;
+      --screen:#050b12;--green:#9fffb5;--amber:#fbbf24;--blue:#60a5fa;--red:#f87171;--good:#86efac;
+      --button:#243244;--button2:#334155;--buttonActive:#0ea5e9;--card:#f8fafc;--cardText:#0f172a;
+      --shadow:0 20px 60px rgba(0,0,0,.35);--radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(160deg,#0f172a 0%,#111827 45%,#0b1120 100%);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.45}
+    header{padding:28px 18px 18px;max-width:1460px;margin:0 auto}
+    .titleRow{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    h1{margin:0;font-size:clamp(1.45rem,3vw,2.25rem);letter-spacing:.02em}
+    .subtitle{margin:8px 0 0;color:#cbd5e1;max-width:880px}
+    .pill{display:inline-flex;gap:8px;align-items:center;border:1px solid #475569;border-radius:999px;padding:7px 12px;background:rgba(15,23,42,.65);color:#cbd5e1;font-size:.9rem}
+    .warning{max-width:1460px;margin:0 auto 16px;padding:12px 16px;border:1px solid rgba(248,113,113,.55);border-left:6px solid var(--red);background:rgba(127,29,29,.24);border-radius:14px;color:#fee2e2}
+    main{max-width:1460px;margin:0 auto;padding:0 18px 28px;display:grid;grid-template-columns:minmax(860px,1.38fr) minmax(330px,.62fr);gap:18px;align-items:start}
+    .ufcpWrap{background:linear-gradient(180deg,#111827,#0b1120);border:1px solid #334155;border-radius:28px;padding:16px;box-shadow:var(--shadow);position:sticky;top:10px}
+    .ufcp{display:grid;grid-template-columns:minmax(180px,.78fr) minmax(420px,1.72fr) minmax(185px,.82fr);gap:14px;align-items:start;background:#111827;border:2px solid #475569;border-radius:22px;padding:14px;position:relative}
+    .ufcp.scratchMode{grid-template-columns:minmax(165px,.70fr) minmax(560px,2.18fr) minmax(165px,.70fr)}
+    .engrave{font-size:.74rem;letter-spacing:.14em;color:#94a3b8;text-align:center;text-transform:uppercase;margin-bottom:8px}
+    .akb,.pfb,.master,.screenCard,.lowerPanel{background:#0f172a;border:1px solid #334155;border-radius:16px;padding:10px}
+    .akbGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+    button{font-family:inherit;color:var(--ink);border:1px solid #475569;background:linear-gradient(180deg,#334155,#1f2937);border-radius:10px;min-height:38px;padding:8px 10px;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.08);transition:.08s transform,.08s background,.08s border-color}
+    button:hover{border-color:#7dd3fc;background:linear-gradient(180deg,#475569,#243244)}
+    button:active{transform:translateY(1px)}
+    button.active{border-color:#38bdf8;background:linear-gradient(180deg,#0284c7,#075985);box-shadow:0 0 0 2px rgba(14,165,233,.25)}
+    button.small{min-height:32px;padding:6px 8px;font-size:.82rem}
+    button.big{font-weight:700;letter-spacing:.04em}
+    button.warnBtn{border-color:#f59e0b;color:#fff7ed}
+    .pfbGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .masterGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+    .screenCard{padding:16px;background:#09111c;border-color:#1e3a5f;box-shadow:inset 0 0 0 1px rgba(125,211,252,.08)}
+    .screenTitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;color:#bae6fd;font-size:.95rem;letter-spacing:.1em;text-transform:uppercase}
+    .screen{background:radial-gradient(circle at top,#0b2c1e 0%,#06110b 55%,#020617 100%);border:2px solid #1f6f43;border-radius:18px;padding:18px 16px;box-shadow:inset 0 0 24px rgba(34,197,94,.20),0 0 0 1px rgba(34,197,94,.10);font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;min-height:342px}
+    .wrow{display:grid;grid-template-columns:58px 1fr;gap:12px;align-items:center;margin:13px 0}
+    .wkey{min-height:58px;background:linear-gradient(180deg,#1e293b,#0f172a);font-weight:800;color:#bfdbfe;border-radius:13px}
+    .display{min-height:62px;border:1px solid #14532d;background:linear-gradient(180deg,#04100b,#020617 65%);border-radius:13px;padding:10px 14px;color:var(--green);font-size:clamp(1.45rem,1.95vw,1.9rem);display:flex;align-items:center;justify-content:space-between;text-shadow:0 0 11px rgba(134,239,172,.42);letter-spacing:.06em;white-space:nowrap;overflow:hidden;box-shadow:inset 0 0 14px rgba(34,197,94,.10)}
+    .display .text{min-width:0;overflow:hidden;text-overflow:ellipsis}
+    .display .tag{flex:0 0 auto;margin-left:12px;font-size:.74rem;color:#7dd3fc;border:1px solid #155e75;border-radius:999px;padding:4px 8px;letter-spacing:0;text-shadow:none;background:rgba(8,47,73,.28)}
+    .display.activeEdit{border-color:#facc15;color:#fde68a;box-shadow:0 0 0 2px rgba(250,204,21,.16)}
+    .display.select{border-color:#0ea5e9;color:#bfdbfe}
+    .display.disabled{color:#64748b;border-color:#334155;text-shadow:none}
+    .scratchpadXl{margin-top:16px;border:1px solid #1f6f43;background:linear-gradient(180deg,#04110a,#020617);border-radius:16px;padding:14px;box-shadow:inset 0 0 24px rgba(34,197,94,.16)}
+    .scratchpadXl .spadLabel{display:flex;align-items:center;justify-content:space-between;color:#7dd3fc;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}
+    .scratchpadXl .spadFull{min-height:86px;display:flex;align-items:center;border:1px solid #14532d;border-radius:12px;background:#010712;color:var(--green);font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:clamp(1.85rem,3.2vw,2.75rem);letter-spacing:.1em;text-shadow:0 0 14px rgba(134,239,172,.48);padding:12px 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .scratchpadXl .spadHelp{margin-top:7px;color:#cbd5e1;font-size:.82rem;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .pageHint{font-size:.9rem;color:#cbd5e1;margin-top:14px;min-height:48px;line-height:1.55}
+    .lowerPanel{grid-column:1 / -1;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:center}
+    .knob{height:58px;border-radius:999px;border:5px solid #475569;background:radial-gradient(circle,#94a3b8 0 18%,#1f2937 20% 100%);display:flex;align-items:center;justify-content:center;text-align:center;font-size:.72rem;color:#e2e8f0;box-shadow:inset 0 0 18px rgba(0,0,0,.5)}
+    .side{display:grid;gap:14px}
+    .card{background:var(--card);color:var(--cardText);border-radius:var(--radius);padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+    .card h2,.card h3{margin:.1rem 0 .65rem;color:#0f172a}
+    .card p{margin:.35rem 0;color:#334155}
+    .card ul{margin:.4rem 0 .2rem;padding-left:1.25rem;color:#334155}
+    .statusGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .stat{border:1px solid #e2e8f0;border-radius:12px;padding:9px;background:#fff}
+    .stat b{display:block;color:#0f172a;font-size:.85rem}
+    .stat span{font-family:"SFMono-Regular",Consolas,monospace;color:#0369a1;font-size:.95rem}
+    .log{height:160px;overflow:auto;background:#020617;color:#cbd5e1;border-radius:12px;padding:10px;font-size:.86rem;font-family:"SFMono-Regular",Consolas,monospace}
+    .log div{border-bottom:1px dashed rgba(148,163,184,.22);padding:3px 0}
+    .mission{border:1px solid #e2e8f0;border-radius:14px;padding:10px 10px;margin:8px 0;background:#fff}
+    .mission.done{border-color:#22c55e;background:#f0fdf4}
+    .missionTitle{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:800;color:#0f172a}
+    .badge{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:2px 8px;font-size:.75rem;font-weight:700;background:#e2e8f0;color:#334155;white-space:nowrap}
+    .mission.done .badge{background:#bbf7d0;color:#166534}
+    .stepText{font-size:.88rem;color:#475569;margin-top:4px}
+    .missionMeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+    .chip{display:inline-flex;align-items:center;border-radius:999px;background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe;padding:2px 8px;font-size:.72rem;font-weight:800;letter-spacing:.02em}
+    .missionHint{margin:8px 0 0;border:1px dashed #cbd5e1;border-radius:10px;padding:7px 9px;background:#f8fafc}
+    .missionHint summary{font-size:.84rem;color:#0369a1;font-weight:800;cursor:pointer}
+    .missionHint .hintBody{font-size:.86rem;color:#334155;margin-top:6px;line-height:1.45}
+    .missionProgress{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:.3rem 0 .75rem;color:#475569;font-size:.9rem}
+    .progressBar{height:8px;flex:1;background:#e2e8f0;border-radius:999px;overflow:hidden}
+    .progressBar span{display:block;height:100%;background:linear-gradient(90deg,#0ea5e9,#22c55e);border-radius:999px}
+    .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+    .tabBtn{background:#e2e8f0;color:#0f172a;border-color:#cbd5e1;min-height:34px}
+    .tabBtn.active{background:#0ea5e9;color:white;border-color:#0284c7}
+    .lesson{display:none}.lesson.active{display:block}
+    details{border:1px solid #e2e8f0;border-radius:12px;padding:9px 11px;background:#fff;margin:8px 0} summary{cursor:pointer;font-weight:700;color:#0f172a}
+    .note{border-left:6px solid #0ea5e9;background:#eff6ff;border-radius:12px;padding:10px 12px;color:#1e3a8a;margin:10px 0}
+    .caution{border-left:6px solid #f59e0b;background:#fffbeb;border-radius:12px;padding:10px 12px;color:#92400e;margin:10px 0}
+    .footer{max-width:1460px;margin:0 auto;padding:0 18px 40px;color:#94a3b8;font-size:.88rem}
+    .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#020617;color:#e2e8f0;border:1px solid #475569;border-radius:999px;padding:10px 16px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.2s opacity,.2s transform;z-index:20}.toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
+    .miniRow{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.miniRow button{color:#0f172a;background:#e2e8f0;border-color:#cbd5e1}
+    @media (max-width:1180px){main{grid-template-columns:1fr}.ufcpWrap{position:relative;top:auto}.ufcp,.ufcp.scratchMode{grid-template-columns:1fr}.lowerPanel{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:620px){header{padding-top:18px}.ufcpWrap{padding:8px}.ufcp{padding:9px}.akbGrid{grid-template-columns:repeat(5,1fr)}button{min-height:36px;padding:7px 8px}.pfbGrid{grid-template-columns:repeat(3,1fr)}.display{font-size:1.05rem}.statusGrid{grid-template-columns:1fr}.lowerPanel{grid-template-columns:1fr 1fr}.screen{min-height:220px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="titleRow">
+      <div>
+        <h1>T-6C UFCP Practice Trainer</h1>
+        <p class="subtitle">Prototype web app สำหรับฝึก flow การกด UFCP โดยคง design/interaction แบบ v0.1 และขยายแผงจอ W1-W4 / Scratchpad ให้อ่านง่ายและใกล้ UFCP จริงขึ้น</p>
+      </div>
+      <span class="pill">Version 0.1-DISPLAY-XL • Offline HTML</span>
+    </div>
+  </header>
+  <div class="warning"><b>TRAINING AID ONLY:</b> โปรแกรมนี้ทำเพื่อฝึกคุ้นเคยกับหน้าตาและ flow การกดเท่านั้น ไม่ใช้แทน Flight Manual, Checklist, simulator หรือขั้นตอนของหน่วยบินจริง</div>
+  <main>
+    <section class="ufcpWrap" aria-label="UFCP simulator">
+      <div class="ufcp" id="ufcpPanel">
+        <div class="akb">
+          <div class="engrave">Alphanumeric Keyboard</div>
+          <div class="akbGrid" id="akbGrid"></div>
+        </div>
+        <div class="screenCard">
+          <div class="screenTitle"><span id="pageLabel">NAV PERSISTENT</span><span id="modeLabel">MASTER: NAV</span></div>
+          <div class="screen" id="screen"></div>
+          <div class="pageHint" id="pageHint"></div>
+        </div>
+        <div>
+          <div class="master">
+            <div class="engrave">Master Mode</div>
+            <div class="masterGrid">
+              <button class="big" data-master="NAV">NAV</button>
+              <button class="big" data-master="AA">A/A</button>
+              <button class="big" data-master="AG">A/G</button>
+            </div>
+          </div>
+          <div class="pfb" style="margin-top:12px">
+            <div class="engrave">Priority Function Buttons</div>
+            <div class="pfbGrid" id="pfbGrid"></div>
+          </div>
+        </div>
+        <div class="lowerPanel">
+          <button class="big" id="rtnBtn">RTN</button>
+          <button class="big warnBtn" id="clrBtn">CLR</button>
+          <button class="big" id="entBtn">ENT</button>
+          <div class="knob" id="dataKnob" role="button" tabindex="0">DATA<br>ENTRY<br>KNOB</div>
+          <div class="knob">HUD<br>BRIGHT</div>
+          <div class="knob">MFD/UFCP<br>BRIGHT</div>
+          <div class="knob">BARO<br>SET</div>
+          <button class="big" id="resetBtn">RESET SIM</button>
+        </div>
+      </div>
+    </section>
+    <aside class="side">
+      <section class="card">
+        <h2>สถานะปัจจุบัน</h2>
+        <div class="statusGrid" id="statusGrid"></div>
+      </section>
+      <section class="card">
+        <h2>ภารกิจฝึก</h2>
+        <div id="missionList"></div>
+        <div class="miniRow"><button id="checkMissionBtn">ตรวจภารกิจ</button><button id="collapseHintsBtn">ปิด Hint ทั้งหมด</button></div>
+      </section>
+      <section class="card">
+        <h2>บทเรียนย่อ</h2>
+        <div class="tabs" id="tabs"></div>
+        <div id="lessons"></div>
+      </section>
+      <section class="card">
+        <h2>Event Log</h2>
+        <div class="log" id="log"></div>
+      </section>
+    </aside>
+  </main>
+  <div class="footer">Source basis: T-6C Flight Manual UFCP functions. Version 0.1-DISPLAY-XL-MISSIONS keeps the v0.1 design/interaction, enlarges the central W1-W4 display/scratchpad area, adds a larger mission pack, and hides each mission hint until opened.</div>
+  <div class="toast" id="toast"></div>
+<script>
+(function(){
+  'use strict';
+  const $ = (id)=>document.getElementById(id);
+  const pfbButtons = ['COM1','COM2','NAV TUNE','ID','FMS SPAD','PFD','SYS','USER WPT','CLK','EXEC','MRK','CLR','ENT','RTN','DIR'];
+  const akbKeys = ['1','2','3','4','5','6','7','8','9','0','.','+/-','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+  const tabs = [
+    ['concept','Concept'],['pfb','PFB'],['entry','Data Entry'],['limits','Ranges'],['quiz','Quiz']
+  ];
+  const defaults = () => ({
+    master:'NAV', page:'PERSIST', previousPage:'PERSIST', navTuneSub:'VORLOC', sysSub:null,
+    edit:null, buffer:'', log:[], hintIndex:0, completedMissions:[],
+    com1Freq:'127.500', com2Freq:'243.000', navFreq:'110.300', navIdent:'###', navPreset:'##', navCourse:'360',
+    xpdrCode:'1200', xpdrStatus:'SBY', xpdrAlt:false,
+    com1Preset:'##', com2Preset:'##', com1SQ:true, com2SQ:true,
+    adfPreset:'01', adfFreq:'345.0', adfMode:'ADF', adfBfo:false, dmeHold:false,
+    baro:'29.92', altBug:'5000', ra:'500', speedBug:'200', bingo:'400',
+    userNum:'01', userSel:'LAT', userHem:'N', userLat:'134500', userLong:'1003000', userElev:'00000',
+    scratch:'', directTo:'', dirStage:'entry', toWpt:'----',
+    timerRunning:false, timerSec:0, mark:{lat:'N134500', lon:'E1003000', time:'--:--:--'},
+    idUntil:0
+  });
+  let state = loadState() || defaults();
+  let timerHandle = setInterval(()=>{ if(state.timerRunning){state.timerSec++; saveRender(false);} updateClockOnly(); },1000);
+  function saveState(){ try{localStorage.setItem('t6cUfcpPracticeState', JSON.stringify(state));}catch(e){} }
+  function loadState(){ try{return JSON.parse(localStorage.getItem('t6cUfcpPracticeState')||'null')}catch(e){return null} }
+  function log(msg){ state.log.unshift(new Date().toLocaleTimeString('th-TH',{hour12:false})+'  '+msg); state.log=state.log.slice(0,80); }
+  function toast(msg){ const el=$('toast'); el.textContent=msg; el.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove('show'),1800); }
+  function saveRender(full=true){ saveState(); render(full); }
+  function fmtTime(sec){ const m=String(Math.floor(sec/60)).padStart(2,'0'); const s=String(sec%60).padStart(2,'0'); return m+':'+s; }
+  function nowZulu(){ return new Date().toISOString().substring(11,19); }
+  function fit(text){ return String(text ?? '').substring(0,8); }
+  function row(text,type='display',desc='',editable=null,action=null){ return {text:fit(text), type, desc, editable, action}; }
+  function rowsForPage(){
+    const s=state;
+    if(Date.now()<s.idUntil) return [row('XPDR','display','Equipment ID'),row(s.xpdrCode,'display','Current transponder code'),row(s.xpdrAlt?'ALT ON':(s.xpdrStatus==='SBY'?'SBY':'ALT OFF'),'display','Current transponder mode'),row('IDENT','display','IDENT confirmation')];
+    switch(s.page){
+      case 'PERSIST': return [
+        row(s.com1Freq,'entry','W1 COM1 active VHF frequency','com1Freq'),
+        row(s.com2Freq,'entry','W2 COM2 active VHF frequency','com2Freq'),
+        row(s.navFreq,'entry','W3 NAV navaid frequency','navFreq'),
+        row(s.xpdrCode+' '+s.xpdrStatus,'nav','W4 opens transponder control',null,()=>openNavTune('XPDR'))
+      ];
+      case 'COM1': return [row('VHF '+s.com1Preset,'entry','COM1 preset number 01-99','com1Preset'),row(s.com1Freq,'entry','COM1 frequency','com1Freq'),row('','disabled','No function'),row('SQ '+(s.com1SQ?'ON':'OFF'),'select','Toggle COM1 squelch',null,()=>{s.com1SQ=!s.com1SQ; log('COM1 squelch '+(s.com1SQ?'ON':'OFF'));})];
+      case 'COM2': return [row('VHF '+s.com2Preset,'entry','COM2 preset number 01-99','com2Preset'),row(s.com2Freq,'entry','COM2 frequency','com2Freq'),row('','disabled','No function'),row('SQ '+(s.com2SQ?'ON':'OFF'),'select','Toggle COM2 squelch',null,()=>{s.com2SQ=!s.com2SQ; log('COM2 squelch '+(s.com2SQ?'ON':'OFF'));})];
+      case 'NAVTUNE': return navTuneRows();
+      case 'PFD': return [row('SET'+s.baro.replace('.',''),'entry','Barometric correction setting','baro'),row('AB'+s.altBug,'entry','Altitude bug','altBug'),row('RA '+s.ra,'entry','Radar altimeter bug','ra'),row('SPD '+s.speedBug,'entry','Airspeed bug','speedBug')];
+      case 'SYS': return [row('ALT/SPD','nav','Open ALT/SPD / PFD controls',null,()=>{s.page='PFD'; log('SYS > ALT/SPD');}),row('HEADING','nav','Demo page: heading setting'),row('DISPLAY','nav','Demo page: display options'),row('BGO/IP','nav','Open Bingo fuel practice',null,()=>{s.page='BINGO'; log('SYS > BGO/IP');})];
+      case 'BINGO': return [row('BINGO','display','Bingo fuel page'),row('FUEL','display','Fuel reference'),row('','disabled','No function'),row(s.bingo+' LB','entry','Bingo fuel setting 0-1200 lb','bingo')];
+      case 'USERWPT': return userWptRows();
+      case 'CLK': return [row('TIME Z','display','GMT clock'),row(nowZulu(),'display','Current GMT/Z time'),row(s.timerRunning?'STOP':'START','select','Start/stop timer',null,()=>{s.timerRunning=!s.timerRunning; log('Timer '+(s.timerRunning?'started':'stopped'));}),row('R '+fmtTime(s.timerSec),'select','Reset timer when pressed',null,()=>{s.timerRunning=false;s.timerSec=0;log('Timer reset');})];
+      case 'MRK': return [row('MARK','display','Mark-on-top page'),row(s.mark.lat,'display','Saved latitude'),row(s.mark.lon,'display','Saved longitude'),row(s.mark.time,'display','Creation time')];
+      case 'DIR': return [row('DIRCT TO','display','Direct-To page'),row(s.directTo || 'NO DATA','entry','Enter waypoint identifier','directTo'),row(s.dirStage==='confirm'?'CONFIRM':(s.dirStage==='error'?'DB ERR':''), s.dirStage==='confirm'?'select':'display','Confirm direct-to',null,()=>{s.toWpt=s.directTo.toUpperCase();s.dirStage='entry';log('Direct-To activated: '+s.toWpt);toast('Direct-To '+s.toWpt+' activated');}),row(s.dirStage==='dupe'?'USE MFD':'','display','Use MFD if duplicates')];
+      case 'FMSPAD': return scratchRows();
+      case 'EXEC': return [row('EXEC','display','Execute page'),row(s.toWpt || 'NO DATA','display','Current TO waypoint'),row('READY','display','Demo status'),row('','disabled','No function')];
+      default: return [row('NO PAGE','display','Unknown page'),row('','',''),row('','',''),row('','','')];
+    }
+  }
+  function navTuneRows(){ const s=state; switch(s.navTuneSub){
+    case 'VORLOC': return [row('VOR '+s.navPreset,'entry','NAV preset number 01-99','navPreset'),row(s.navIdent,'entry','Station ident practice','navIdent'),row(s.navFreq,'entry','VOR/LOC frequency','navFreq'),row('','disabled','No function')];
+    case 'DME': return [row('DME','display','DME page'),row(s.navFreq+(s.dmeHold?'H':''),'select','Toggle DME hold',null,()=>{s.dmeHold=!s.dmeHold;log('DME hold '+(s.dmeHold?'ON':'OFF'));}),row('','disabled','No function'),row('','disabled','No function')];
+    case 'ADF': return [row('ADF '+s.adfPreset,'entry','ADF preset 01-99','adfPreset'),row(s.adfFreq,'entry','ADF frequency kHz','adfFreq'),row(s.adfMode,'select','Toggle ADF/ANT',null,()=>{s.adfMode=s.adfMode==='ADF'?'ANT':'ADF';log('ADF mode '+s.adfMode);}),row('BFO '+(s.adfBfo?'ON':'OFF'),'select','Toggle BFO',null,()=>{s.adfBfo=!s.adfBfo;log('BFO '+(s.adfBfo?'ON':'OFF'));})];
+    case 'XPDR': return [row('XPDR'+(s.xpdrStatus==='ACT'?'ACT':'SBY'),'select','Toggle XPDR ACT/SBY',null,()=>{s.xpdrStatus=s.xpdrStatus==='ACT'?'SBY':'ACT';log('XPDR '+s.xpdrStatus);}),row(s.xpdrCode,'entry','Transponder code 0000-7777','xpdrCode'),row('ALT '+(s.xpdrAlt?'ON':'OFF'),'select','Toggle altitude reporting',null,()=>{s.xpdrAlt=!s.xpdrAlt;log('XPDR ALT '+(s.xpdrAlt?'ON':'OFF'));}),row('','disabled','No function')];
+  }}
+  function userWptRows(){ const s=state; let hem=s.userSel==='LAT'?s.userHem:(s.userSel==='LONG'?(s.userHem==='N'?'E':s.userHem==='S'?'W':s.userHem):''); let val=s.userSel==='LAT'?s.userLat:s.userSel==='LONG'?s.userLong:s.userElev; return [row(s.userNum+'WPT','entry','User waypoint number 01-99','userNum'),row(s.userSel,'select','Cycle LAT/LONG/ELEV',null,()=>{s.userSel=s.userSel==='LAT'?'LONG':s.userSel==='LONG'?'ELEV':'LAT';log('USER WPT selection '+s.userSel);}),row(hem,'select','Toggle hemisphere',null,()=>toggleHem()),row(val,'entry','Waypoint value','userValue')]; }
+  function scratchRows(){ const sp=(state.scratch || '').padEnd(24,'_'); return [row('S PAD','display','FMS Scratchpad'),row(sp.slice(0,8),'entry','Scratchpad characters 1-8','scratch'),row(sp.slice(8,16),'entry','Scratchpad characters 9-16','scratch'),row(sp.slice(16,24),'entry','Scratchpad characters 17-24','scratch')]; }
+  function toggleHem(){ const s=state; if(s.userSel==='LAT') s.userHem=s.userHem==='N'?'S':'N'; else if(s.userSel==='LONG') s.userHem=s.userHem==='E'?'W':'E'; log('Hemisphere '+s.userHem); }
+  function openPage(page){ if(state.page!==page){ state.previousPage=state.page; } state.page=page; state.edit=null; state.buffer=''; if(page!=='DIR') state.dirStage = state.dirStage==='confirm'?state.dirStage:'entry'; log('Page '+page); saveRender(); }
+  function openNavTune(sub){ state.previousPage=state.page; state.page='NAVTUNE'; state.navTuneSub=sub || state.navTuneSub || 'VORLOC'; state.edit=null; state.buffer=''; log('NAV TUNE '+state.navTuneSub); saveRender(); }
+  function handlePfb(name){
+    if(name==='CLR') return clearKey(); if(name==='ENT') return enterKey(); if(name==='RTN') return rtnKey();
+    if(name==='COM1') return openPage('COM1'); if(name==='COM2') return openPage('COM2');
+    if(name==='NAV TUNE'){ const order=['VORLOC','DME','ADF','XPDR']; if(state.page==='NAVTUNE'){ state.navTuneSub=order[(order.indexOf(state.navTuneSub)+1)%order.length]; log('NAV TUNE cycle: '+state.navTuneSub); saveRender(); } else openNavTune(state.navTuneSub); return; }
+    if(name==='ID'){ state.idUntil=Date.now()+5000; log('IDENT squawk demo displayed 5 sec'); saveRender(); setTimeout(()=>{state.idUntil=0; saveRender();},5100); return; }
+    if(name==='FMS SPAD') return openPage('FMSPAD'); if(name==='PFD') return openPage('PFD'); if(name==='SYS') return openPage('SYS'); if(name==='USER WPT') return openPage('USERWPT'); if(name==='CLK') return openPage('CLK'); if(name==='MRK'){ state.mark={lat:'N134500',lon:'E1003000',time:nowZulu()}; return openPage('MRK'); } if(name==='DIR') return openPage('DIR'); if(name==='EXEC') return openPage('EXEC');
+  }
+  function pressWindow(i){ const r=rowsForPage()[i-1]; if(!r || r.type==='disabled' || r.type==='display') { toast(r?.desc || 'No function'); return; }
+    if(r.action){ r.action(); state.edit=null; state.buffer=''; saveRender(); checkMissions(); return; }
+    if(r.editable){ state.edit={win:i,key:r.editable,original:getValue(r.editable)}; state.buffer=''; log('Edit W'+i+' '+r.editable); saveRender(); return; }
+    toast(r.desc || 'Selected');
+  }
+  function getValue(key){ const s=state; if(key==='userValue') return s.userSel==='LAT'?s.userLat:s.userSel==='LONG'?s.userLong:s.userElev; return s[key] || ''; }
+  function setValue(key,val){ const s=state; if(key==='userValue'){ if(s.userSel==='LAT') s.userLat=val; else if(s.userSel==='LONG') s.userLong=val; else s.userElev=val; } else s[key]=val; }
+  function typeKey(k){
+    if(k===' +/-') k='+/-';
+    if(k==='+/-'){
+      if(state.edit && ['altBug','userValue','bingo'].includes(state.edit.key)){ state.buffer = state.buffer.startsWith('-') ? state.buffer.slice(1) : '-'+state.buffer; saveRender(); return; }
+      toast('ใช้ +/- ได้เฉพาะบาง field'); return;
+    }
+    if(state.page==='FMSPAD' && (!state.edit || state.edit.key==='scratch')){ if(state.scratch.length<24){state.scratch+=k; log('Scratchpad input '+k); saveRender();} return; }
+    if(!state.edit){ toast('กด W1-W4 เพื่อเลือกช่องก่อน'); return; }
+    if(state.buffer.length>=10){ toast('Field full'); return; }
+    state.buffer += k;
+    saveRender();
+  }
+  function clearKey(){
+    if(state.page==='FMSPAD' && (!state.edit || state.edit.key==='scratch')){ if(state.scratch.length>0){state.scratch=state.scratch.slice(0,-1); log('Scratchpad backspace');} else {state.scratch='DELETE'; log('Scratchpad DELETE inserted');} saveRender(); return; }
+    if(state.edit){ if(state.buffer.length>0){state.buffer=state.buffer.slice(0,-1); log('CLR backspace');} else {state.buffer=''; log('CLR field');} saveRender(); return; }
+    log('CLR pressed'); toast('ไม่มี active entry');
+  }
+  function rtnKey(){
+    if(state.edit){ state.edit=null; state.buffer=''; log('RTN cancelled data entry'); saveRender(); return; }
+    if(state.page==='PERSIST'){ toast('Already persistent display'); return; }
+    state.page='PERSIST'; state.sysSub=null; state.dirStage=state.dirStage==='confirm'?'entry':state.dirStage; log('RTN to persistent display'); saveRender();
+  }
+  function enterKey(){
+    if(state.page==='DIR' && state.edit && state.edit.key==='directTo'){
+      const raw=(state.buffer || state.directTo || '').toUpperCase().trim();
+      if(!/^[A-Z0-9]{2,6}$/.test(raw)){ state.dirStage='error'; toast('Waypoint format invalid'); log('DIR DB ERR'); state.edit=null; state.buffer=''; saveRender(); return; }
+      state.directTo=raw; state.dirStage='confirm'; state.edit=null; state.buffer=''; log('DIR search single result: '+raw); saveRender(); return;
+    }
+    if(!state.edit){ toast('ไม่มี active entry'); return; }
+    const key=state.edit.key; const raw=(state.buffer || '').trim();
+    if(raw===''){ state.edit=null; state.buffer=''; toast('Original data restored'); saveRender(); return; }
+    const res=validate(key,raw);
+    if(!res.ok){ toast(res.msg); log('Invalid '+key+': '+raw+' ('+res.msg+')'); saveRender(); return; }
+    setValue(key,res.value); log('ENT accepted '+key+' = '+res.value); state.edit=null; state.buffer=''; saveRender(); checkMissions();
+  }
+  function validate(key,raw){
+    const n=parseFloat(raw); const intRaw=raw.replace(/^\+/,'');
+    const range=(cond,msg,value)=>cond?{ok:true,value}:{ok:false,msg};
+    if(['com1Freq','com2Freq'].includes(key)){ if(!raw.includes('.')) return {ok:false,msg:'COM frequency ต้องมี decimal'}; return range(!isNaN(n)&&n>=118.000&&n<=151.975,'COM range 118.000-151.975 MHz',n.toFixed(3)); }
+    if(key==='navFreq'){ if(!raw.includes('.')) return {ok:false,msg:'NAV frequency ต้องมี decimal'}; return range(!isNaN(n)&&n>=108.000&&n<=117.950,'NAV demo range 108.000-117.950 MHz',n.toFixed(3)); }
+    if(['com1Preset','com2Preset','navPreset','adfPreset'].includes(key)){ const v=parseInt(raw,10); return range(/^\d{1,2}$/.test(raw)&&v>=1&&v<=99,'Preset 01-99',String(v).padStart(2,'0')); }
+    if(key==='navIdent'){ return range(/^[A-Z0-9]{2,5}$/i.test(raw),'IDENT 2-5 ตัวอักษร/ตัวเลข',raw.toUpperCase()); }
+    if(key==='adfFreq'){ return range(!isNaN(n)&&n>=190.0&&n<=1860.0,'ADF range 190.0-1860.0 kHz',n.toFixed(1)); }
+    if(key==='xpdrCode'){ return range(/^[0-7]{4}$/.test(intRaw),'XPDR code ต้องเป็น 0000-7777 และใช้เลข 0-7',intRaw.padStart(4,'0')); }
+    if(key==='baro'){ let v=n; if(/^\d{4}$/.test(raw)) v=parseFloat(raw.slice(0,2)+'.'+raw.slice(2)); return range(!isNaN(v)&&v>=27.00&&v<=32.00,'Baro 27.00-32.00 inHg',v.toFixed(2)); }
+    if(key==='altBug'){ const v=parseInt(raw,10); return range(Number.isInteger(v)&&v>=-1000&&v<=55000,'Altitude bug -1000 ถึง 55000 ft',String(v)); }
+    if(key==='ra'){ const v=parseInt(raw,10); return range(Number.isInteger(v)&&v>=0&&v<=2500,'RA 0-2500 ft',String(v)); }
+    if(key==='speedBug'){ const v=parseInt(raw,10); return range(Number.isInteger(v)&&v>=40&&v<=360,'Speed bug 40-360 kt',String(v)); }
+    if(key==='bingo'){ const v=parseInt(raw,10); return range(Number.isInteger(v)&&v>=0&&v<=1200,'Bingo 0-1200 lb',String(v)); }
+    if(key==='userNum'){ const v=parseInt(raw,10); return range(/^\d{1,2}$/.test(raw)&&v>=1&&v<=99,'User waypoint 01-99',String(v).padStart(2,'0')); }
+    if(key==='userValue'){ const s=state; if(s.userSel==='LAT') return range(/^\d{6}$/.test(raw)&&parseInt(raw.slice(0,2),10)<=89,'LAT format DDMMMM',raw); if(s.userSel==='LONG') return range(/^\d{7}$/.test(raw)&&parseInt(raw.slice(0,3),10)<=179,'LONG format DDDMMMM',raw); const v=parseInt(raw,10); return range(Number.isInteger(v)&&v>=-32767&&v<=32767,'ELEV -32767 ถึง 32767 ft',String(v).padStart(5,'0')); }
+    if(key==='scratch'){ return {ok:true,value:raw.toUpperCase().slice(0,24)}; }
+    if(key==='directTo'){ return range(/^[A-Z0-9]{2,6}$/i.test(raw),'Waypoint ID 2-6 ตัว',raw.toUpperCase()); }
+    return {ok:true,value:raw.toUpperCase()};
+  }
+  function dataKnob(delta=1){ if(!state.edit){ toast('เลือก field ก่อนหมุน knob'); return; } const k=state.edit.key; const cur=getValue(k); let val=null;
+    if(['com1Preset','com2Preset','navPreset','adfPreset','userNum'].includes(k)){ let v=parseInt(cur==='##'?'1':cur,10)+delta; if(v<1)v=99;if(v>99)v=1; val=String(v).padStart(2,'0'); }
+    if(k==='baro'){ let v=parseFloat(cur)+delta*.01; if(v<27)v=32;if(v>32)v=27; val=v.toFixed(2); }
+    if(k==='altBug'){ val=String(Math.min(55000,Math.max(-1000,parseInt(cur,10)+delta*10))); }
+    if(k==='ra'){ val=String(Math.min(2500,Math.max(0,parseInt(cur,10)+delta*10))); }
+    if(k==='speedBug'){ val=String(Math.min(360,Math.max(40,parseInt(cur,10)+delta))); }
+    if(val!==null){ setValue(k,val); log('Knob '+(delta>0?'+':'-')+' '+k+' = '+val); saveRender(); } else toast('Knob demo ใช้กับบาง field');
+  }
+  function render(full=true){ renderScreen(); renderStatus(); renderMissions(); renderLog(); updateButtons(); if(full){renderLessons();} }
+  function renderScreen(){ const rows=rowsForPage(); $('pageLabel').textContent=pageName(); $('modeLabel').textContent='MASTER: '+state.master.replace('AA','A/A').replace('AG','A/G');
+    const panel=$('ufcpPanel'); if(panel) panel.classList.toggle('scratchMode', state.page==='FMSPAD');
+    const rowHtml=rows.map((r,idx)=>{ let txt=r.text; let type=r.type; if(state.edit && state.edit.win===idx+1){ type='activeEdit'; txt=fit((state.buffer||'') || getValue(state.edit.key)); if(!txt)txt='________'; }
+      const tag = type==='entry'?'ENTRY':type==='select'?'SEL':type==='nav'?'NAV':type==='activeEdit'?'EDIT':'';
+      return `<div class="wrow"><button class="wkey" data-win="${idx+1}">W${idx+1}</button><div class="display ${type}"><span class="text">${escapeHtml(txt || ' ')}</span>${tag?`<span class="tag">${tag}</span>`:''}</div></div>`; }).join('');
+    const scratch=(state.scratch || '').padEnd(24,'_');
+    const scratchHtml = state.page==='FMSPAD' ? `<div class="scratchpadXl"><div class="spadLabel"><span>Expanded FMS Scratchpad</span><span>${Math.min(state.scratch.length,24)}/24</span></div><div class="spadFull">${escapeHtml(scratch)}</div><div class="spadHelp"><span>กด AKB เพื่อพิมพ์ • CLR ลบทีละตัว • RTN กลับหน้า persistent</span><span>ยังคงแยก W2-W4 เป็น 8+8+8 chars ตาม v0.1</span></div></div>` : '';
+    $('screen').innerHTML=rowHtml + scratchHtml; document.querySelectorAll('[data-win]').forEach(b=>b.onclick=()=>pressWindow(Number(b.dataset.win)));
+    const active=rows.find((_,i)=>state.edit&&state.edit.win===i+1); $('pageHint').textContent=state.edit?('กำลังแก้ไข W'+state.edit.win+' • พิมพ์ด้วย AKB แล้วกด ENT หรือ CLR/RTN'):(rows.map((r,i)=>r.desc?`W${i+1}: ${r.desc}`:'').filter(Boolean).join('  | '));
+  }
+  function pageName(){ if(state.page==='NAVTUNE') return 'NAV TUNE - '+state.navTuneSub; if(state.page==='PERSIST') return state.master+' PERSISTENT'; if(state.page==='FMSPAD') return 'FMS SCRATCHPAD'; if(state.page==='USERWPT') return 'USER WPT'; return state.page; }
+  function renderStatus(){ const items=[['COM1',state.com1Freq],['COM2',state.com2Freq],['NAV',state.navFreq+' / CRS '+state.navCourse],['XPDR',state.xpdrCode+' '+state.xpdrStatus+' ALT '+(state.xpdrAlt?'ON':'OFF')],['PFD','BARO '+state.baro+' SPD '+state.speedBug],['TO WPT',state.toWpt],['BINGO',state.bingo+' LB'],['TIMER',(state.timerRunning?'RUN ':'STOP ')+fmtTime(state.timerSec)]]; $('statusGrid').innerHTML=items.map(([k,v])=>`<div class="stat"><b>${k}</b><span>${escapeHtml(v)}</span></div>`).join(''); }
+  function updateClockOnly(){ if(state.page==='CLK') renderScreen(); renderStatus(); }
+  const missions=[
+    {id:'m01',cat:'COM',level:'Basic',title:'Tune COM1 = 126.200',steps:'COM1 → W2 → 126.2 → ENT',check:()=>state.com1Freq==='126.200',hint:'กด COM1 ก่อน แล้วเลือก W2 เพราะ W2 คือ active frequency ของ COM1 ในหน้าฝึกนี้'},
+    {id:'m02',cat:'COM',level:'Basic',title:'Tune COM2 = 134.100',steps:'COM2 → W2 → 134.1 → ENT',check:()=>state.com2Freq==='134.100',hint:'COM2 page ใช้ W2 เหมือน COM1 แต่จะเปลี่ยนค่า com2Freq'},
+    {id:'m03',cat:'COM',level:'Basic',title:'Set COM1 preset 12',steps:'COM1 → W1 → 12 → ENT',check:()=>state.com1Preset==='12',hint:'W1 ใน COM1 page เป็น VHF preset number; ใส่ 1-99 แล้ว ENT'},
+    {id:'m04',cat:'COM',level:'Basic',title:'Set COM2 preset 24',steps:'COM2 → W1 → 24 → ENT',check:()=>state.com2Preset==='24',hint:'W1 ใน COM2 page เป็น preset ของ COM2 แยกจาก COM1'},
+    {id:'m05',cat:'COM',level:'Switch',title:'Toggle COM1 squelch OFF',steps:'COM1 → W4',check:()=>state.com1SQ===false,hint:'W4 บน COM1 page เป็น select/toggle ไม่ต้องพิมพ์ค่า'},
+    {id:'m06',cat:'COM',level:'Switch',title:'Toggle COM2 squelch OFF',steps:'COM2 → W4',check:()=>state.com2SQ===false,hint:'ถ้าปุ่มเขียน SQ ON ให้กด W4 หนึ่งครั้งเพื่อเปลี่ยนเป็น OFF'},
+    {id:'m07',cat:'NAV',level:'Basic',title:'Tune NAV = 116.300',steps:'PERSIST W3 หรือ NAV TUNE → W3 → 116.3 → ENT',check:()=>state.navFreq==='116.300',hint:'ใน persistent display W3 คือ NAV frequency; ใน NAV TUNE/VORLOC ก็ใช้ W3 เช่นกัน'},
+    {id:'m08',cat:'NAV',level:'Basic',title:'Set NAV preset 07',steps:'NAV TUNE VOR/LOC → W1 → 7 → ENT',check:()=>state.navPreset==='07',hint:'กด NAV TUNE จนอยู่หน้า VORLOC แล้ว W1 จะเป็น NAV preset'},
+    {id:'m09',cat:'NAV',level:'Basic',title:'Set NAV ident ABC',steps:'NAV TUNE VOR/LOC → W2 → ABC → ENT',check:()=>state.navIdent==='ABC',hint:'W2 ใน VORLOC page ใช้ฝึก station ident; รับตัวอักษร/ตัวเลข 2-5 ตัว'},
+    {id:'m10',cat:'NAV',level:'Switch',title:'Turn DME HOLD ON',steps:'NAV TUNE จนถึง DME → W2',check:()=>state.dmeHold===true,hint:'ปุ่ม NAV TUNE กดซ้ำเพื่อ cycle VORLOC → DME → ADF → XPDR'},
+    {id:'m11',cat:'ADF',level:'Basic',title:'Set ADF preset 06',steps:'NAV TUNE จนถึง ADF → W1 → 6 → ENT',check:()=>state.adfPreset==='06',hint:'ใน ADF page W1 เป็น preset number'},
+    {id:'m12',cat:'ADF',level:'Basic',title:'Set ADF frequency 365.0',steps:'NAV TUNE จนถึง ADF → W2 → 365.0 → ENT',check:()=>state.adfFreq==='365.0',hint:'ADF frequency รับค่าหน่วย kHz และต้องอยู่ในช่วงที่ prototype อนุญาต'},
+    {id:'m13',cat:'ADF',level:'Switch',title:'Set ADF mode to ANT',steps:'NAV TUNE จนถึง ADF → W3',check:()=>state.adfMode==='ANT',hint:'W3 ใน ADF page toggle ระหว่าง ADF กับ ANT'},
+    {id:'m14',cat:'ADF',level:'Switch',title:'Turn BFO ON',steps:'NAV TUNE จนถึง ADF → W4',check:()=>state.adfBfo===true,hint:'W4 ใน ADF page เป็น BFO ON/OFF'},
+    {id:'m15',cat:'XPDR',level:'Basic',title:'Set XPDR code 4251',steps:'NAV TUNE จนถึง XPDR → W2 → 4251 → ENT',check:()=>state.xpdrCode==='4251',hint:'XPDR code ต้องใช้ตัวเลข 0-7 จำนวน 4 หลัก'},
+    {id:'m16',cat:'XPDR',level:'Switch',title:'Set XPDR ALT ON',steps:'NAV TUNE จนถึง XPDR → W3',check:()=>state.xpdrAlt===true,hint:'W3 ใน XPDR page toggle altitude reporting ON/OFF'},
+    {id:'m17',cat:'XPDR',level:'Switch',title:'Set XPDR ACT',steps:'NAV TUNE จนถึง XPDR → W1',check:()=>state.xpdrStatus==='ACT',hint:'W1 ใน XPDR page toggle ACT/SBY'},
+    {id:'m18',cat:'PFD',level:'Basic',title:'Set BARO 30.12',steps:'PFD → W1 → 30.12 → ENT',check:()=>state.baro==='30.12',hint:'W1 ใน PFD page คือ barometric setting; ใส่ได้แบบ 30.12 หรือ 3012'},
+    {id:'m19',cat:'PFD',level:'Basic',title:'Set altitude bug 8000',steps:'PFD → W2 → 8000 → ENT',check:()=>state.altBug==='8000',hint:'W2 ใน PFD page คือ altitude bug'},
+    {id:'m20',cat:'PFD',level:'Basic',title:'Set RA bug 700',steps:'PFD → W3 → 700 → ENT',check:()=>state.ra==='700',hint:'W3 ใน PFD page คือ radar altitude bug'},
+    {id:'m21',cat:'PFD',level:'Basic',title:'Set speed bug 180',steps:'PFD → W4 → 180 → ENT',check:()=>state.speedBug==='180',hint:'W4 ใน PFD page คือ speed bug'},
+    {id:'m22',cat:'SYS',level:'Basic',title:'Set BINGO fuel 650 LB',steps:'SYS → W4 BGO/IP → W4 → 650 → ENT',check:()=>state.bingo==='650',hint:'เข้า SYS แล้ว W4 เปิดหน้า BINGO; ในหน้า BINGO ใช้ W4 เป็น entry'},
+    {id:'m23',cat:'USER WPT',level:'Basic',title:'Set USER waypoint number 05',steps:'USER WPT → W1 → 5 → ENT',check:()=>state.userNum==='05',hint:'W1 ใน USER WPT page เป็นเลข waypoint 01-99'},
+    {id:'m24',cat:'USER WPT',level:'Basic',title:'Set USER LAT = 132459',steps:'USER WPT ให้ W2 เป็น LAT → W4 → 132459 → ENT',check:()=>state.userSel==='LAT'&&state.userLat==='132459',hint:'กด W2 เพื่อ cycle LAT/LONG/ELEV; เมื่อขึ้น LAT แล้ว W4 คือค่า latitude'},
+    {id:'m25',cat:'USER WPT',level:'Basic',title:'Set USER LONG = 1003030',steps:'USER WPT → W2 จนเป็น LONG → W4 → 1003030 → ENT',check:()=>state.userSel==='LONG'&&state.userLong==='1003030',hint:'LONG format ใน prototype คือ DDDMMMM จำนวน 7 หลัก'},
+    {id:'m26',cat:'USER WPT',level:'Basic',title:'Set USER ELEV = 00150',steps:'USER WPT → W2 จนเป็น ELEV → W4 → 150 → ENT',check:()=>state.userSel==='ELEV'&&state.userElev==='00150',hint:'ELEV รับค่าเป็น ft; ระบบจะ pad เป็น 5 หลัก'},
+    {id:'m27',cat:'DIR',level:'Basic',title:'Direct-To VTBD',steps:'DIR → W2 → VTBD → ENT → W3 CONFIRM',check:()=>state.toWpt==='VTBD',hint:'หลังใส่ waypoint แล้วกด ENT ให้กด W3 เพื่อ confirm'},
+    {id:'m28',cat:'DIR',level:'Basic',title:'Direct-To VTBU',steps:'DIR → W2 → VTBU → ENT → W3 CONFIRM',check:()=>state.toWpt==='VTBU',hint:'ใช้ flow เดียวกับ Direct-To อื่น ๆ; ค่าล่าสุดจะอยู่ใน status TO WPT'},
+    {id:'m29',cat:'CLK',level:'Switch',title:'Start clock timer',steps:'CLK → W3 START',check:()=>state.timerRunning||state.timerSec>0,hint:'บน CLK page W3 start/stop timer และ W4 reset'},
+    {id:'m30',cat:'CLK',level:'Switch',title:'Stop clock timer after run',steps:'CLK → W3 START → รอให้เวลาขยับ → W3 STOP',check:()=>state.timerRunning===false&&state.timerSec>0,hint:'กด W3 ครั้งแรกเพื่อเริ่ม timer แล้วกด W3 อีกครั้งเพื่อหยุด; ต้องมีเวลาเกิน 00:00'},
+    {id:'m31',cat:'FMS SPAD',level:'Text',title:'Enter scratchpad T6CDEMO',steps:'FMS SPAD → พิมพ์ T6CDEMO',check:()=>state.scratch==='T6CDEMO',hint:'บนหน้า FMS SPAD พิมพ์ AKB ได้ทันที; CLR ลบทีละตัว'},
+    {id:'m32',cat:'FMS SPAD',level:'Text',title:'Enter scratchpad VTBD01',steps:'FMS SPAD → CLR จนว่าง → พิมพ์ VTBD01',check:()=>state.scratch==='VTBD01',hint:'ถ้ามีข้อความเก่า ให้กด CLR ซ้ำจนว่างก่อนพิมพ์'},
+    {id:'m33',cat:'MASTER',level:'Mode',title:'Select A/A master mode',steps:'กด A/A ใน MASTER MODE',check:()=>state.master==='AA',hint:'ปุ่ม master mode อยู่ด้านขวาบน; เมื่อเลือกแล้ว persistent page จะเปลี่ยนชื่อ mode'},
+    {id:'m34',cat:'MASTER',level:'Mode',title:'Select A/G master mode',steps:'กด A/G ใน MASTER MODE',check:()=>state.master==='AG',hint:'A/G เป็น master mode อีกตัวหนึ่ง; กด NAV เพื่อกลับค่าเดิมได้'},
+    {id:'m35',cat:'MRK',level:'Action',title:'Create Mark point',steps:'กด MRK',check:()=>state.mark.time!=='--:--:--',hint:'MRK จะสร้าง mark-on-top demo พร้อม lat/lon/time'},
+    {id:'m36',cat:'EXEC',level:'Action',title:'Open EXEC with active Direct-To',steps:'ทำ Direct-To ให้สำเร็จ → EXEC',check:()=>state.page==='EXEC'&&state.toWpt!=='----',hint:'EXEC page จะแสดง current TO waypoint จาก Direct-To ล่าสุด'},
+    {id:'m37',cat:'Scenario',level:'Combo',title:'Departure preset: COM1 126.200 + XPDR 4251 ALT ON',steps:'ทำ COM1 126.200 และ XPDR 4251 ALT ON',check:()=>state.com1Freq==='126.200'&&state.xpdrCode==='4251'&&state.xpdrAlt===true,hint:'เป็น scenario รวมจาก COM1 กับ XPDR; ทำทีละส่วนก็ได้'},
+    {id:'m38',cat:'Scenario',level:'Combo',title:'PFD setup: BARO 30.12 / ALT 8000 / SPD 180',steps:'PFD ตั้ง W1, W2, W4 ตามค่า',check:()=>state.baro==='30.12'&&state.altBug==='8000'&&state.speedBug==='180',hint:'เปิด PFD แล้วแก้ W1 BARO, W2 altitude bug, W4 speed bug'},
+    {id:'m39',cat:'Scenario',level:'Combo',title:'NAV/ADF setup: NAV 116.300 + ADF 365.0 ANT',steps:'ตั้ง NAV frequency และ ADF frequency/mode',check:()=>state.navFreq==='116.300'&&state.adfFreq==='365.0'&&state.adfMode==='ANT',hint:'ใช้ NAV TUNE cycle ไป VORLOC เพื่อ NAV และ ADF เพื่อ ADF'},
+    {id:'m40',cat:'Scenario',level:'Combo',title:'User waypoint build: WPT05 LONG 1003030',steps:'USER WPT → W1=05 → W2 LONG → W4=1003030',check:()=>state.userNum==='05'&&state.userSel==='LONG'&&state.userLong==='1003030',hint:'ระวังว่า W2 ต้องอยู่ที่ LONG ตอนตรวจ mission นี้'}
+  ];
+  function updateMissionCompletion(){
+    const completed=new Set(state.completedMissions || []);
+    let changed=false;
+    missions.forEach(m=>{ if(m.check() && !completed.has(m.id)){ completed.add(m.id); changed=true; log('Mission completed: '+m.title); } });
+    if(changed){ state.completedMissions=Array.from(completed); saveState(); }
+    return completed;
+  }
+  function renderMissions(){
+    const completed=updateMissionCompletion();
+    const done=missions.filter(m=>completed.has(m.id)).length;
+    const pct=Math.round(done/missions.length*100);
+    $('missionList').innerHTML=`<div class="missionProgress"><b>${done}/${missions.length} complete</b><div class="progressBar"><span style="width:${pct}%"></span></div><span>${pct}%</span></div>` + missions.map((m,idx)=>{
+      const isDone=completed.has(m.id);
+      return `<div class="mission ${isDone?'done':''}"><div class="missionTitle"><span>${String(idx+1).padStart(2,'0')}. ${escapeHtml(m.title)}</span><span class="badge">${isDone?'DONE':'TODO'}</span></div><div class="stepText">${escapeHtml(m.steps)}</div><div class="missionMeta"><span class="chip">${escapeHtml(m.cat)}</span><span class="chip">${escapeHtml(m.level)}</span></div><details class="missionHint"><summary>เปิด Hint ของภารกิจนี้</summary><div class="hintBody">${escapeHtml(m.hint)}</div></details></div>`;
+    }).join('');
+  }
+  function checkMissions(){ const completed=updateMissionCompletion(); const done=missions.filter(m=>completed.has(m.id)).length; toast('ภารกิจสำเร็จ '+done+'/'+missions.length); log('Mission check '+done+'/'+missions.length); renderMissions(); renderLog(); }
+  function renderLog(){ $('log').innerHTML=state.log.map(x=>`<div>${escapeHtml(x)}</div>`).join('') || '<div>Ready.</div>'; }
+  function updateButtons(){ document.querySelectorAll('[data-master]').forEach(b=>{b.classList.toggle('active',b.dataset.master===state.master);}); document.querySelectorAll('[data-pfb]').forEach(b=>{let p=b.dataset.pfb; b.classList.toggle('active',(p==='COM1'&&state.page==='COM1')||(p==='COM2'&&state.page==='COM2')||(p==='PFD'&&state.page==='PFD')||(p==='SYS'&&state.page==='SYS')||(p==='CLK'&&state.page==='CLK')||(p==='DIR'&&state.page==='DIR')||(p==='NAV TUNE'&&state.page==='NAVTUNE')||(p==='FMS SPAD'&&state.page==='FMSPAD')||(p==='USER WPT'&&state.page==='USERWPT'));}); }
+  function renderLessons(){
+    if(!$('tabs').dataset.ready){ $('tabs').innerHTML=tabs.map((t,i)=>`<button class="tabBtn ${i===0?'active':''}" data-tab="${t[0]}">${t[1]}</button>`).join(''); $('tabs').dataset.ready='1'; $('tabs').addEventListener('click',e=>{if(e.target.dataset.tab){document.querySelectorAll('.tabBtn').forEach(b=>b.classList.toggle('active',b===e.target));document.querySelectorAll('.lesson').forEach(l=>l.classList.toggle('active',l.id==='lesson-'+e.target.dataset.tab));}}); }
+    $('lessons').innerHTML=`
+      <div class="lesson active" id="lesson-concept"><p><b>UFCP</b> เป็น interface หลักสำหรับ data entry และ selection ที่เกี่ยวกับ COM, NAV aid, transponder, waypoint, display/reference parameter และ clock function.</p><p>หน้าจอฝึกนี้ใช้ 4 display windows: W1-W4. กดปุ่ม W ข้างหน้าต่างเพื่อเข้า entry, toggle หรือ navigate ตามชนิดของ window.</p><div class="note"><b>จำง่าย:</b> W เลือกช่อง → AKB พิมพ์ค่า → ENT ตรวจ/รับค่า → CLR ลบ → RTN กลับ persistent display</div></div>
+      <div class="lesson" id="lesson-pfb"><ul><li><b>COM1/COM2:</b> preset, VHF frequency, squelch.</li><li><b>NAV TUNE:</b> cycle NAV, DME, ADF, XPDR.</li><li><b>PFD:</b> baro, altitude bug, radar altitude, speed bug.</li><li><b>DIR:</b> direct-to waypoint.</li><li><b>CLK:</b> GMT and count-up timer.</li><li><b>FMS SPAD:</b> scratchpad practice.</li></ul></div>
+      <div class="lesson" id="lesson-entry"><p>ใน prototype นี้ field ที่รับค่าได้จะติดป้าย <b>ENTRY</b>. เมื่อ active จะเป็น <b>EDIT</b> สีเหลือง. กด ENT เพื่อ validate range. ถ้าค่าผิด โปรแกรมจะไม่รับและขึ้น message.</p><div class="caution"><b>ข้อจำกัด:</b> นี่เป็น logic ฝึก ไม่ใช่ avionics simulation; ไม่มี ARINC/FMS database จริง และไม่จำลอง failure ทั้งหมด.</div></div>
+      <div class="lesson" id="lesson-limits"><ul><li>COM demo range: 118.000-151.975 MHz</li><li>NAV demo range: 108.000-117.950 MHz</li><li>XPDR: 0000-7777, ใช้เลข 0-7</li><li>Baro: 27.00-32.00 inHg</li><li>RA: 0-2500 ft, Speed bug: 40-360 kt</li><li>Bingo fuel: 0-1200 lb</li></ul></div>
+      <div class="lesson" id="lesson-quiz"><details><summary>ทำไมบางหน้าต่างกดแล้วไม่เกิดอะไร?</summary><p>เพราะเป็น data display window หรือ blank/no control function ในหน้านั้น.</p></details><details><summary>ถ้าจะตั้ง transponder code ต้องไปทางไหน?</summary><p>กด NAV TUNE จนถึง XPDR แล้วใช้ W2 เป็น data entry.</p></details><details><summary>RTN ใช้ทำอะไรใน prototype?</summary><p>ถ้ามี active entry จะ cancel; ถ้าอยู่ใน lower page จะกลับ persistent display.</p></details></div>`;
+  }
+  function escapeHtml(x){ return String(x).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+  function init(){
+    $('akbGrid').innerHTML=akbKeys.map(k=>`<button class="small" data-akb="${k}">${k}</button>`).join(''); document.querySelectorAll('[data-akb]').forEach(b=>b.onclick=()=>typeKey(b.dataset.akb));
+    $('pfbGrid').innerHTML=pfbButtons.map(k=>`<button class="small" data-pfb="${k}">${k}</button>`).join(''); document.querySelectorAll('[data-pfb]').forEach(b=>b.onclick=()=>handlePfb(b.dataset.pfb));
+    document.querySelectorAll('[data-master]').forEach(b=>b.onclick=()=>{state.master=b.dataset.master; state.page='PERSIST'; log('Master mode '+state.master); saveRender();});
+    $('rtnBtn').onclick=rtnKey; $('clrBtn').onclick=clearKey; $('entBtn').onclick=enterKey; $('dataKnob').onclick=()=>dataKnob(1); $('dataKnob').oncontextmenu=(e)=>{e.preventDefault();dataKnob(-1);}; $('resetBtn').onclick=()=>{ if(confirm('Reset simulator state?')){ state=defaults(); log('Simulator reset'); saveRender(); }};
+    $('checkMissionBtn').onclick=checkMissions; $('collapseHintsBtn').onclick=()=>{ document.querySelectorAll('.missionHint[open]').forEach(d=>d.removeAttribute('open')); toast('ปิด Hint ทั้งหมดแล้ว'); };
+    window.addEventListener('keydown',e=>{ if(e.key==='Enter')enterKey(); else if(e.key==='Backspace'){e.preventDefault();clearKey();} else if(e.key==='Escape')rtnKey(); else if(/^[a-z0-9.]$/i.test(e.key)) typeKey(e.key.toUpperCase()); });
+    render(); log('Ready'); renderLog();
+  }
+  init();
+})();
+</script>
+</body>
+</html>
