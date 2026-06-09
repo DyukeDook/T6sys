@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="th"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>T-6C Checklist Study — Thai N/W/C</title><style>
+
+<html lang="th"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>T-6C Checklist Study — Thai N/W/C + Concept</title><style>
 :root{--bg:#0b1020;--panel:#111936;--panel2:#0f172f;--text:#e8eefc;--muted:#a9b5d6;--line:#263453;--accent:#66e0ff;--warn:#ff5f6d;--caution:#ffd166;--note:#7ee787;}
 *{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans Thai",sans-serif;background:radial-gradient(circle at top left,#182554,#0b1020 40%);color:var(--text);}
 header{position:sticky;top:0;z-index:10;background:rgba(11,16,32,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:14px 18px} h1{font-size:20px;margin:0 0 8px}.sub{color:var(--muted);font-size:13px}.controls{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap} input,select,button.filter{background:#0b132b;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:11px 12px;font-size:15px} input{flex:1;min-width:230px}.stats{font-size:12px;color:var(--muted);margin-top:8px}.wrap{max-width:1180px;margin:0 auto;padding:18px}.legend{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 18px}.pill,.badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 9px;font-size:12px;border:1px solid var(--line);background:#0b132b}.badge.W,.ref.W{color:var(--warn);border-color:rgba(255,95,109,.45)}.badge.C,.ref.C{color:var(--caution);border-color:rgba(255,209,102,.45)}.badge.N,.ref.N{color:var(--note);border-color:rgba(126,231,135,.45)}.ref{font-weight:800;border:1px solid;border-radius:7px;padding:1px 4px;background:rgba(255,255,255,.04)}.card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:linear-gradient(180deg,rgba(17,25,54,.95),rgba(12,18,38,.95));margin:12px 0;box-shadow:0 10px 30px rgba(0,0,0,.18)}.cardHead{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;background:transparent;color:var(--text);border:0;padding:16px 18px;font-size:16px}.cardHead strong{color:var(--accent)}.meta{color:var(--muted);font-size:12px;white-space:nowrap}.cardBody{display:none;border-top:1px solid var(--line);padding:16px}.card.open .cardBody{display:block}.grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:14px}.grid section{background:rgba(7,12,26,.55);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px}h4{margin:0 0 10px;color:#d6e4ff}.checklist{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.55;white-space:normal}.checklist div{padding:2px 0;border-bottom:1px dashed rgba(255,255,255,.04)}.noteItem{border:1px solid var(--line);border-radius:13px;padding:10px;margin:8px 0;background:#0b132b}.noteItem.W{border-left:5px solid var(--warn)}.noteItem.C{border-left:5px solid var(--caution)}.noteItem.N{border-left:5px solid var(--note)}.noteText{margin-top:8px;line-height:1.45;color:#e9eefb;font-size:14px}.empty p{color:var(--muted)}details{margin-top:10px}summary{cursor:pointer;color:var(--muted)}pre{white-space:pre-wrap;font-size:12px;line-height:1.35;color:#cbd5ee;background:#060b18;border-radius:10px;padding:10px;max-height:420px;overflow:auto}.notice{background:rgba(255,209,102,.08);border:1px solid rgba(255,209,102,.35);border-radius:14px;padding:12px;color:#ffe7a3;margin:12px 0 16px}.hide{display:none!important}@media(max-width:820px){.grid{grid-template-columns:1fr}.cardHead{align-items:flex-start;flex-direction:column}.wrap{padding:12px}header{padding:12px}.cardBody{padding:11px}}
 
 .thaiText{margin-top:8px;padding:9px 10px;border-radius:10px;background:rgba(102,224,255,.07);border:1px solid rgba(102,224,255,.18);line-height:1.55;color:#e8fbff;font-size:14px}.thaiText b{color:#66e0ff}.translationNotice{background:rgba(102,224,255,.08);border:1px solid rgba(102,224,255,.25);border-radius:14px;padding:12px;color:#dff8ff;margin:12px 0 16px}
+
+.conceptBox{margin-top:14px;border:1px solid rgba(102,224,255,.28);border-left:5px solid var(--accent);border-radius:14px;background:rgba(102,224,255,.07);padding:13px 14px}.conceptBox h4{margin:0 0 8px;color:#66e0ff}.conceptBox ul{margin:8px 0 0 20px;padding:0}.conceptBox li{margin:6px 0;line-height:1.55}.conceptLabel{display:inline-block;border:1px solid rgba(102,224,255,.35);border-radius:999px;padding:2px 8px;color:#aef5ff;font-size:12px;margin-bottom:6px}.conceptWarn{color:#ffe7a3;font-size:13px;margin-top:8px}
 </style></head><body>
-<header><h1>T-6C Abbreviated Checklist Study HTML — Thai N/W/C</h1><div class="sub">สร้างจากไฟล์: Abbrevated T-6C checklist Chg00.pdf · รวม Checklist + Notes/Cautions/Warnings จากหน้าก่อนหน้าเมื่อระบบจับคู่ได้</div><div class="controls"><input id="q" placeholder="ค้นหา เช่น EB-23, OBOGS, RUNAWAY TRIM, GEN INOP"/><select id="section"><option value="">ทุกหมวด</option><option value="EA">EA (6)</option><option value="EB">EB (19)</option><option value="EC">EC (5)</option><option value="ED">ED (7)</option><option value="EE">EE (16)</option><option value="EF">EF (3)</option><option value="EG">EG (16)</option><option value="N">N (5)</option><option value="P">P (1)</option></select><button class="filter" onclick="setAll(true)">กางทั้งหมด</button><button class="filter" onclick="setAll(false)">พับทั้งหมด</button></div><div class="stats" id="count"></div></header>
-<div class="wrap"><div class="notice"><b>วิธีใช้:</b> ค้นหาด้วยรหัสหรือคำสำคัญ แล้วกดหัวข้อเพื่อเปิดอ่าน ข้อความรหัส <span class="ref N">1N</span> = Note, <span class="ref C">1C</span> = Caution, <span class="ref W">1W</span> = Warning. ควรเทียบกับ PDF ต้นฉบับก่อนใช้งานจริง เพราะนี่เป็นไฟล์ study aid จาก OCR/text extraction.</div><div class="translationNotice"><b>เวอร์ชันแปลไทย N/W/C:</b> ข้อความไทยใต้ Note/Caution/Warning เป็นคำแปลช่วยทบทวน โดยยังคงศัพท์ cockpit / switch / acronym ภาษาอังกฤษไว้เพื่อลดความคลาดเคลื่อน โปรดเทียบ PDF ต้นฉบับก่อนใช้งานจริง</div><div class="legend"><span class="pill">หัวข้อทั้งหมด: 78</span><span class="pill"><span class="badge W">W</span> Warning</span><span class="pill"><span class="badge C">C</span> Caution</span><span class="pill"><span class="badge N">N</span> Note</span></div>
+<header><h1>T-6C Abbreviated Checklist Study HTML — Thai N/W/C + Concept</h1><div class="sub">สร้างจากไฟล์: Abbrevated T-6C checklist Chg00.pdf · รวม Checklist + Notes/Cautions/Warnings จากหน้าก่อนหน้าเมื่อระบบจับคู่ได้</div><div class="controls"><input id="q" placeholder="ค้นหา เช่น EB-23, OBOGS, RUNAWAY TRIM, GEN INOP"/><select id="section"><option value="">ทุกหมวด</option><option value="EA">EA (6)</option><option value="EB">EB (19)</option><option value="EC">EC (5)</option><option value="ED">ED (7)</option><option value="EE">EE (16)</option><option value="EF">EF (3)</option><option value="EG">EG (16)</option><option value="N">N (5)</option><option value="P">P (1)</option></select><button class="filter" onclick="setAll(true)">กางทั้งหมด</button><button class="filter" onclick="setAll(false)">พับทั้งหมด</button></div><div class="stats" id="count"></div></header>
+<div class="wrap"><div class="notice"><b>วิธีใช้:</b> ค้นหาด้วยรหัสหรือคำสำคัญ แล้วกดหัวข้อเพื่อเปิดอ่าน ข้อความรหัส <span class="ref N">1N</span> = Note, <span class="ref C">1C</span> = Caution, <span class="ref W">1W</span> = Warning. ควรเทียบกับ PDF ต้นฉบับก่อนใช้งานจริง เพราะนี่เป็นไฟล์ study aid จาก OCR/text extraction.</div><div class="translationNotice"><b>เวอร์ชันแปลไทย N/W/C:</b> ข้อความไทยใต้ Note/Caution/Warning เป็นคำแปลช่วยทบทวน โดยยังคงศัพท์ cockpit / switch / acronym ภาษาอังกฤษไว้เพื่อลดความคลาดเคลื่อน โปรดเทียบ PDF ต้นฉบับก่อนใช้งานจริง<br/><b>เพิ่ม:</b> ท้ายแต่ละหัวข้อมี Concept ภาษาไทย สรุปเจตนาของ procedure เพื่อช่วยจำและเข้าใจภาพรวม ไม่ใช้แทน checklist จริง</div><div class="legend"><span class="pill">หัวข้อทั้งหมด: 78</span><span class="pill"><span class="badge W">W</span> Warning</span><span class="pill"><span class="badge C">C</span> Caution</span><span class="pill"><span class="badge N">N</span> Note</span></div>
 <article class="card emergency" data-section="EA" data-text="ea-3 hydraulic system malfunctions ea-3
 hydraulic system malfunctions
 1. hydraulic pressure - check
@@ -104,7 +107,7 @@ using emergency landing gear extension system.
 5N
 6N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>มองว่าเป็นปัญหา “แรงดัน/น้ำมัน hydraulic ไม่พอหรือรั่ว” ซึ่งอาจกระทบ gear และ flaps โดยตรง</li><li>แนวคิดหลักคือรีบลดความเสี่ยงก่อนระบบหมดแรงดัน: ตรวจ pressure, จำกัดความเร็ว, เอา gear/flaps ลงเมื่อเหมาะสม</li><li>จำไว้ว่าเมื่อใช้ emergency extension แล้ว การ retraction มักทำไม่ได้ จึงต้องคิดเรื่อง landing configuration ให้จบก่อน</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EA" data-text="ea-5 landing gear malfunction ea-5/(ea-6 blank)
 landing gear malfunction
@@ -276,7 +279,7 @@ sure.
 6N
 7N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>มองว่าเป็นปัญหา “ยืนยันสถานะ landing gear ให้ได้” ไม่ใช่ดูไฟดวงเดียวแล้วตัดสินทันที</li><li>Concept คือใช้ indication หลายแหล่งเทียบกัน เช่น cockpit lights, HUD cues, lights/visual check แล้วเลือกวิธีลงที่ลดความเสียหาย</li><li>ถ้าจำเป็นต้องใช้ emergency gear extension ให้คิดต่อทันทีเรื่อง configuration, controllability และการลงจอดที่ปลอดภัยที่สุด</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EA" data-text="ea-7 landing gear malfunction (continued) ea-7
 landing gear malfunction (continued)
@@ -342,7 +345,7 @@ landing gear malfunction (continued) ">
 <div>LANDING GEAR MALFUNCTION (CONTINUED)</div></div></section>
 <section><div class="notes empty"><h4>Notes / Cautions / Warnings</h4><p>ไม่พบหน้าก่อนหน้าที่เป็น W/C/N อัตโนมัติ หรือหัวข้อนี้ไม่มีรหัสกำกับ</p></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>มองว่าเป็นปัญหา “ยืนยันสถานะ landing gear ให้ได้” ไม่ใช่ดูไฟดวงเดียวแล้วตัดสินทันที</li><li>Concept คือใช้ indication หลายแหล่งเทียบกัน เช่น cockpit lights, HUD cues, lights/visual check แล้วเลือกวิธีลงที่ลดความเสียหาย</li><li>ถ้าจำเป็นต้องใช้ emergency gear extension ให้คิดต่อทันทีเรื่อง configuration, controllability และการลงจอดที่ปลอดภัยที่สุด</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EA" data-text="ea-9 landing with unsafe gear indications ea-9
 landing with unsafe gear indications
@@ -474,7 +477,7 @@ safety pins have been properly installed.
 5C
 6W</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>มองว่าเป็นปัญหา “ยืนยันสถานะ landing gear ให้ได้” ไม่ใช่ดูไฟดวงเดียวแล้วตัดสินทันที</li><li>Concept คือใช้ indication หลายแหล่งเทียบกัน เช่น cockpit lights, HUD cues, lights/visual check แล้วเลือกวิธีลงที่ลดความเสียหาย</li><li>ถ้าจำเป็นต้องใช้ emergency gear extension ให้คิดต่อทันทีเรื่อง configuration, controllability และการลงจอดที่ปลอดภัยที่สุด</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EA" data-text="ea-11 landing gear emergency extension ea-11
 landing gear emergency extension
@@ -612,7 +615,7 @@ doors open.
 8W
 9C</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>มองว่าเป็นปัญหา “ยืนยันสถานะ landing gear ให้ได้” ไม่ใช่ดูไฟดวงเดียวแล้วตัดสินทันที</li><li>Concept คือใช้ indication หลายแหล่งเทียบกัน เช่น cockpit lights, HUD cues, lights/visual check แล้วเลือกวิธีลงที่ลดความเสียหาย</li><li>ถ้าจำเป็นต้องใช้ emergency gear extension ให้คิดต่อทันทีเรื่อง configuration, controllability และการลงจอดที่ปลอดภัยที่สุด</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EA" data-text="ea-13 landing with cocked nose wheel ea-13/(ea-14 blank)
 landing with cocked nose wheel
@@ -686,7 +689,7 @@ directional control becomes difficult.
 1N
 2N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>มองว่าเป็นปัญหา “ยืนยันสถานะ landing gear ให้ได้” ไม่ใช่ดูไฟดวงเดียวแล้วตัดสินทันที</li><li>Concept คือใช้ indication หลายแหล่งเทียบกัน เช่น cockpit lights, HUD cues, lights/visual check แล้วเลือกวิธีลงที่ลดความเสียหาย</li><li>ถ้าจำเป็นต้องใช้ emergency gear extension ให้คิดต่อทันทีเรื่อง configuration, controllability และการลงจอดที่ปลอดภัยที่สุด</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-3 pull, reset after 5 seconds eb-3
 • iac failure is confirmed or suspected, and
@@ -810,7 +813,7 @@ V/UHF control head.
 6N
 7N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>กลุ่มนี้เกี่ยวกับ electrical/avionics/instrument ต้องคิดว่า information หรือ power source ไหนยังเชื่อถือได้</li><li>Concept คือ isolate fault, cross-check กับ backup และ preserve ระบบสำคัญให้บินกลับได้</li><li>ลด workload และวางแผน landing เพราะ situational awareness หรือ redundancy ลดลง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-5 irs failure (loss of attitude or heading dis- play on hud and mfd) eb-5
 irs failure (loss of attitude or heading dis-
@@ -864,7 +867,7 @@ opening any circuit breaker.
 1N
 2N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือปัญหา “ข้อมูลท่าทาง/ทิศทางบินไม่น่าเชื่อถือ” ต้องเปลี่ยน mindset เป็น cross-check instruments</li><li>Concept คืออย่าบินตามแหล่งข้อมูลเดียว ให้เทียบ HUD/MFD/BFI/standby และใช้ข้อมูลที่ยัง reliable</li><li>เป้าหมายคือรักษา aircraft control ก่อน แล้วค่อยลด workload/กลับฐานหรือ land ตามความเหมาะสม</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-7 mfd failure or avionics bus failure for mfd failure with no other indications: eb-7
 mfd failure or avionics bus failure
@@ -942,7 +945,7 @@ the FMS MENU.
 2N
 3N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม avionics/sensor/display degraded ไม่ได้แปลว่า aircraft บินไม่ได้เสมอไป แต่ข้อมูลบางอย่างอาจหายหรือไม่น่าเชื่อถือ</li><li>Concept คือระบุว่า “เสียที่ display, sensor, bus หรือ function” แล้วใช้ backup/cross-check แทน</li><li>ให้ลด reliance ต่อข้อมูลที่เกี่ยวข้อง และวางแผนกลับ/ลงจอดโดยเพิ่ม margin เพราะ situational awareness ลดลง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-9 ufcp failure (blank ufcp entry windows, data entry knob or system button non- functioning) eb-9
 ufcp failure (blank ufcp entry windows,
@@ -1004,7 +1007,7 @@ toggle, and radio tuning with UFCP.
 2N
 3N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม avionics/sensor/display degraded ไม่ได้แปลว่า aircraft บินไม่ได้เสมอไป แต่ข้อมูลบางอย่างอาจหายหรือไม่น่าเชื่อถือ</li><li>Concept คือระบุว่า “เสียที่ display, sensor, bus หรือ function” แล้วใช้ backup/cross-check แทน</li><li>ให้ลด reliance ต่อข้อมูลที่เกี่ยวข้อง และวางแผนกลับ/ลงจอดโดยเพิ่ม margin เพราะ situational awareness ลดลง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-11 backup flight instrument display failure eb-11
 backup flight instrument display failure
@@ -1062,7 +1065,7 @@ opening any circuit breaker.
 1N
 2N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>กลุ่มนี้เกี่ยวกับ electrical/avionics/instrument ต้องคิดว่า information หรือ power source ไหนยังเชื่อถือได้</li><li>Concept คือ isolate fault, cross-check กับ backup และ preserve ระบบสำคัญให้บินกลับได้</li><li>ลด workload และวางแผน landing เพราะ situational awareness หรือ redundancy ลดลง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-13 or edm a inop or edm b inop advisory result- ing in total or partial loss of engine data manager information) eb-13
 engine data manager fail (edm fail warning
@@ -1152,7 +1155,7 @@ quired.
 4N
 5N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม avionics/sensor/display degraded ไม่ได้แปลว่า aircraft บินไม่ได้เสมอไป แต่ข้อมูลบางอย่างอาจหายหรือไม่น่าเชื่อถือ</li><li>Concept คือระบุว่า “เสียที่ display, sensor, bus หรือ function” แล้วใช้ backup/cross-check แทน</li><li>ให้ลด reliance ต่อข้อมูลที่เกี่ยวข้อง และวางแผนกลับ/ลงจอดโดยเพิ่ม margin เพราะ situational awareness ลดลง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-15 air data computer failure (adc fail warn- ing or adc a inop or adc b inop advisory re- sulting in total or partial loss of air data computer information) eb-15
 air data computer failure (adc fail warn-
@@ -1224,7 +1227,7 @@ nate after landing.
 2N
 3N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม avionics/sensor/display degraded ไม่ได้แปลว่า aircraft บินไม่ได้เสมอไป แต่ข้อมูลบางอย่างอาจหายหรือไม่น่าเชื่อถือ</li><li>Concept คือระบุว่า “เสียที่ display, sensor, bus หรือ function” แล้วใช้ backup/cross-check แทน</li><li>ให้ลด reliance ต่อข้อมูลที่เกี่ยวข้อง และวางแผนกลับ/ลงจอดโดยเพิ่ม margin เพราะ situational awareness ลดลง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-17 loss of ics/audio eb-17
 loss of ics/audio
@@ -1292,7 +1295,7 @@ should be taken prior to placing the EMR/NRM switch to EMR.
 2N
 3N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือปัญหา communication ภายใน/ภายนอก ทำให้ crew coordination และ ATC coordination ลดลง</li><li>Concept คือรีบแยกให้ออกว่าเสียที่ ICS, radio, audio panel หรือ headset/mask แล้วใช้วิธีสื่อสารสำรอง</li><li>เน้น aviate ก่อน จากนั้นใช้ visual signal/backup radio/standard lost comm mindset ตามสถานการณ์</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-19 aoa computer failure eb-19
 aoa computer failure
@@ -1348,7 +1351,7 @@ the loss of AOA indication in the HUD.
 2N
 3N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม avionics/sensor/display degraded ไม่ได้แปลว่า aircraft บินไม่ได้เสมอไป แต่ข้อมูลบางอย่างอาจหายหรือไม่น่าเชื่อถือ</li><li>Concept คือระบุว่า “เสียที่ display, sensor, bus หรือ function” แล้วใช้ backup/cross-check แทน</li><li>ให้ลด reliance ต่อข้อมูลที่เกี่ยวข้อง และวางแผนกลับ/ลงจอดโดยเพิ่ม margin เพราะ situational awareness ลดลง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-21 backup flight instrument (bfi) crosscheck attitude alert eb-21
 backup flight instrument (bfi) crosscheck
@@ -1428,7 +1431,7 @@ straight and level flight. Ensure sufficient airspace is available.
 2N
 3C</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือปัญหา “ข้อมูลท่าทาง/ทิศทางบินไม่น่าเชื่อถือ” ต้องเปลี่ยน mindset เป็น cross-check instruments</li><li>Concept คืออย่าบินตามแหล่งข้อมูลเดียว ให้เทียบ HUD/MFD/BFI/standby และใช้ข้อมูลที่ยัง reliable</li><li>เป้าหมายคือรักษา aircraft control ก่อน แล้วค่อยลด workload/กลับฐานหรือ land ตามความเหมาะสม</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-23 generator inoperative eb-23
 generator inoperative
@@ -1510,7 +1513,7 @@ Cockpit will depressurize when power to the battery bus is lost.
 4N
 5N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม electrical power management ต้องคิดว่า “ไฟมาจากไหน เหลือ bus ไหน และต้อง preserve battery แค่ไหน”</li><li>Concept คือ isolate fault ลด load และรักษาไฟให้กับอุปกรณ์จำเป็น โดยเฉพาะก่อน main battery หมด</li><li>ถ้ามีกลิ่นไหม้/ควัน ให้มองเป็น fire/fume risk ก่อน แล้วจัดการ ventilation + electrical isolation ตาม checklist</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-25 generator bus inoperative eb-25/(eb-46 blank)
 generator bus inoperative
@@ -1616,7 +1619,7 @@ battery buses. Items on the generator bus will remain inopera-
 tive.
 1N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม electrical power management ต้องคิดว่า “ไฟมาจากไหน เหลือ bus ไหน และต้อง preserve battery แค่ไหน”</li><li>Concept คือ isolate fault ลด load และรักษาไฟให้กับอุปกรณ์จำเป็น โดยเฉพาะก่อน main battery หมด</li><li>ถ้ามีกลิ่นไหม้/ควัน ให้มองเป็น fire/fume risk ก่อน แล้วจัดการ ventilation + electrical isolation ตาม checklist</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-29 battery bus inoperative eb-29/(eb-46 blank)
 battery bus inoperative
@@ -1762,7 +1765,7 @@ tion indicators will not be powered.
 7N
 8W</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม electrical power management ต้องคิดว่า “ไฟมาจากไหน เหลือ bus ไหน และต้อง preserve battery แค่ไหน”</li><li>Concept คือ isolate fault ลด load และรักษาไฟให้กับอุปกรณ์จำเป็น โดยเฉพาะก่อน main battery หมด</li><li>ถ้ามีกลิ่นไหม้/ควัน ให้มองเป็น fire/fume risk ก่อน แล้วจัดการ ventilation + electrical isolation ตาม checklist</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-35 bus tie inoperative eb-35
 bus tie inoperative
@@ -1816,7 +1819,7 @@ Cockpit will depressurize when power to the battery bus is lost.
 2N
 3N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม electrical power management ต้องคิดว่า “ไฟมาจากไหน เหลือ bus ไหน และต้อง preserve battery แค่ไหน”</li><li>Concept คือ isolate fault ลด load และรักษาไฟให้กับอุปกรณ์จำเป็น โดยเฉพาะก่อน main battery หมด</li><li>ถ้ามีกลิ่นไหม้/ควัน ให้มองเป็น fire/fume risk ก่อน แล้วจัดการ ventilation + electrical isolation ตาม checklist</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-37 battery and generator failure eb-37
 battery and generator failure
@@ -1886,7 +1889,7 @@ and landing lights will not be functional.
 2N
 3N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม electrical power management ต้องคิดว่า “ไฟมาจากไหน เหลือ bus ไหน และต้อง preserve battery แค่ไหน”</li><li>Concept คือ isolate fault ลด load และรักษาไฟให้กับอุปกรณ์จำเป็น โดยเฉพาะก่อน main battery หมด</li><li>ถ้ามีกลิ่นไหม้/ควัน ให้มองเป็น fire/fume risk ก่อน แล้วจัดการ ventilation + electrical isolation ตาม checklist</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-39 smoke and fume elimination/electrical fire eb-39
 smoke and fume elimination/electrical fire
@@ -2024,7 +2027,7 @@ tended using the emergency landing gear extension system.
 7N
 8N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม electrical power management ต้องคิดว่า “ไฟมาจากไหน เหลือ bus ไหน และต้อง preserve battery แค่ไหน”</li><li>Concept คือ isolate fault ลด load และรักษาไฟให้กับอุปกรณ์จำเป็น โดยเฉพาะก่อน main battery หมด</li><li>ถ้ามีกลิ่นไหม้/ควัน ให้มองเป็น fire/fume risk ก่อน แล้วจัดการ ventilation + electrical isolation ตาม checklist</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-41 iac xtalk failure eb-41
 iac xtalk failure
@@ -2080,7 +2083,7 @@ COM2.
 2N
 3N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม avionics/sensor/display degraded ไม่ได้แปลว่า aircraft บินไม่ได้เสมอไป แต่ข้อมูลบางอย่างอาจหายหรือไม่น่าเชื่อถือ</li><li>Concept คือระบุว่า “เสียที่ display, sensor, bus หรือ function” แล้วใช้ backup/cross-check แทน</li><li>ให้ลด reliance ต่อข้อมูลที่เกี่ยวข้อง และวางแผนกลับ/ลงจอดโดยเพิ่ม margin เพราะ situational awareness ลดลง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-43 ads-b out failure eb-43
 ads-b out failure
@@ -2124,7 +2127,7 @@ transponder placed in standby, all transponder related functions
 will be lost (mode C, S, TCAS, ADS-B).
 1N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม avionics/sensor/display degraded ไม่ได้แปลว่า aircraft บินไม่ได้เสมอไป แต่ข้อมูลบางอย่างอาจหายหรือไม่น่าเชื่อถือ</li><li>Concept คือระบุว่า “เสียที่ display, sensor, bus หรือ function” แล้วใช้ backup/cross-check แทน</li><li>ให้ลด reliance ต่อข้อมูลที่เกี่ยวข้อง และวางแผนกลับ/ลงจอดโดยเพิ่ม margin เพราะ situational awareness ลดลง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EB" data-text="eb-45 xpdr failure eb-45/(eb-46 blank)
 xpdr failure
@@ -2172,7 +2175,7 @@ transponder placed in standby, all transponder related functions
 will be lost (mode C, S, TCAS, ADS-B).
 1N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม avionics/sensor/display degraded ไม่ได้แปลว่า aircraft บินไม่ได้เสมอไป แต่ข้อมูลบางอย่างอาจหายหรือไม่น่าเชื่อถือ</li><li>Concept คือระบุว่า “เสียที่ display, sensor, bus หรือ function” แล้วใช้ backup/cross-check แทน</li><li>ให้ลด reliance ต่อข้อมูลที่เกี่ยวข้อง และวางแผนกลับ/ลงจอดโดยเพิ่ม margin เพราะ situational awareness ลดลง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EC" data-text="ec-3 low fuel pressure ec-3
 low fuel pressure
@@ -2216,7 +2219,7 @@ circuit breaker (left front console) if open.
 1N
 2C</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม fuel management ต้องคิดทั้ง “ปริมาณ fuel”, “แรงดัน fuel”, “imbalance”, “leak” และ “flow ผิดปกติ”</li><li>Concept คือหาสาเหตุว่าเป็น feed/pressure/indication/leak แล้วป้องกัน engine starvation หรือ CG/handling issue</li><li>ถ้าเกี่ยวกับ leak หรือ high fuel flow ให้คิดเรื่อง fire risk และเวลาที่เหลือในการกลับลงจอดเสมอ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EC" data-text="ec-5 fuel imbalance ec-5
 fuel imbalance
@@ -2318,7 +2321,7 @@ trapped fuel to get total usable fuel.
 5N
 6N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม fuel management ต้องคิดทั้ง “ปริมาณ fuel”, “แรงดัน fuel”, “imbalance”, “leak” และ “flow ผิดปกติ”</li><li>Concept คือหาสาเหตุว่าเป็น feed/pressure/indication/leak แล้วป้องกัน engine starvation หรือ CG/handling issue</li><li>ถ้าเกี่ยวกับ leak หรือ high fuel flow ให้คิดเรื่อง fire risk และเวลาที่เหลือในการกลับลงจอดเสมอ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EC" data-text="ec-7 leaking fuel from wing ec-7
 leaking fuel from wing
@@ -2372,7 +2375,7 @@ empty), sufficient lateral authority exists to control the aircraft (no
 crosswind). Expect increased lateral stick forces.
 1N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม fuel management ต้องคิดทั้ง “ปริมาณ fuel”, “แรงดัน fuel”, “imbalance”, “leak” และ “flow ผิดปกติ”</li><li>Concept คือหาสาเหตุว่าเป็น feed/pressure/indication/leak แล้วป้องกัน engine starvation หรือ CG/handling issue</li><li>ถ้าเกี่ยวกับ leak หรือ high fuel flow ให้คิดเรื่อง fire risk และเวลาที่เหลือในการกลับลงจอดเสมอ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EC" data-text="ec-9 fuel probe malfunction ec-9
 fuel probe malfunction
@@ -2434,7 +2437,7 @@ equipment lost prior to resetting or opening any circuit breaker.
 3N3N
 4N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม fuel management ต้องคิดทั้ง “ปริมาณ fuel”, “แรงดัน fuel”, “imbalance”, “leak” และ “flow ผิดปกติ”</li><li>Concept คือหาสาเหตุว่าเป็น feed/pressure/indication/leak แล้วป้องกัน engine starvation หรือ CG/handling issue</li><li>ถ้าเกี่ยวกับ leak หรือ high fuel flow ให้คิดเรื่อง fire risk และเวลาที่เหลือในการกลับลงจอดเสมอ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EC" data-text="ec-11 high fuel flow if fuel flow is 800 pph or greater: ec-11/(ec-12 blank)
 high fuel flow
@@ -2470,7 +2473,7 @@ the existing condition. However, if ITT is within limits reducing
 power could result in engine flameout.
 1W</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม fuel management ต้องคิดทั้ง “ปริมาณ fuel”, “แรงดัน fuel”, “imbalance”, “leak” และ “flow ผิดปกติ”</li><li>Concept คือหาสาเหตุว่าเป็น feed/pressure/indication/leak แล้วป้องกัน engine starvation หรือ CG/handling issue</li><li>ถ้าเกี่ยวกับ leak หรือ high fuel flow ให้คิดเรื่อง fire risk และเวลาที่เหลือในการกลับลงจอดเสมอ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="ED" data-text="ed-3 obogs fail message ed-3
 obogs fail message
@@ -2570,7 +2573,7 @@ are set to OFF with the engine running.
 5C
 6N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม life support/pressurization ต้องคิดว่า “คนต้องรอดก่อนระบบ” โดยเฉพาะ hypoxia และ physiological symptoms</li><li>Concept คือ oxygen → descend → reduce pressure/bleed problem → land; อย่ารอพิสูจน์นานถ้ามีอาการผิดปกติ</li><li>ตัวเลขสำคัญคือการลงต่ำกว่า 10,000 ft MSL เมื่อเกี่ยวกับ oxygen/physiological risk และต้องคุมการหายใจไม่ให้ hyperventilate</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="ED" data-text="ed-5 obogs failure/physiological symptoms ed-5
 obogs failure/physiological symptoms
@@ -2730,7 +2733,7 @@ considering ejection.
 10W
 11W</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม life support/pressurization ต้องคิดว่า “คนต้องรอดก่อนระบบ” โดยเฉพาะ hypoxia และ physiological symptoms</li><li>Concept คือ oxygen → descend → reduce pressure/bleed problem → land; อย่ารอพิสูจน์นานถ้ามีอาการผิดปกติ</li><li>ตัวเลขสำคัญคือการลงต่ำกว่า 10,000 ft MSL เมื่อเกี่ยวกับ oxygen/physiological risk และต้องคุมการหายใจไม่ให้ hyperventilate</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="ED" data-text="ed-7 environmental systems duct overtemp ed-7
 environmental systems duct overtemp
@@ -2782,7 +2785,7 @@ tion outflow valves when the inflow switch is set to OFF. The
 canopy pressure seal and anti-G systems will not be operational.
 1N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม life support/pressurization ต้องคิดว่า “คนต้องรอดก่อนระบบ” โดยเฉพาะ hypoxia และ physiological symptoms</li><li>Concept คือ oxygen → descend → reduce pressure/bleed problem → land; อย่ารอพิสูจน์นานถ้ามีอาการผิดปกติ</li><li>ตัวเลขสำคัญคือการลงต่ำกว่า 10,000 ft MSL เมื่อเกี่ยวกับ oxygen/physiological risk และต้องคุมการหายใจไม่ให้ hyperventilate</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="ED" data-text="ed-9 cockpit overpressurization ed-9
 cockpit overpressurization
@@ -2822,7 +2825,7 @@ tion outflow valves when the inflow switch is set to OFF. The
 canopy pressure seal and anti-G systems will not be operational.
 1N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม life support/pressurization ต้องคิดว่า “คนต้องรอดก่อนระบบ” โดยเฉพาะ hypoxia และ physiological symptoms</li><li>Concept คือ oxygen → descend → reduce pressure/bleed problem → land; อย่ารอพิสูจน์นานถ้ามีอาการผิดปกติ</li><li>ตัวเลขสำคัญคือการลงต่ำกว่า 10,000 ft MSL เมื่อเกี่ยวกับ oxygen/physiological risk และต้องคุมการหายใจไม่ให้ hyperventilate</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="ED" data-text="ed-11 rapid decompression/cockpit pressure al- titude exceeds 19,000 feet ed-11/(ed-16 blank)
 rapid decompression/cockpit pressure al-
@@ -2936,7 +2939,7 @@ opening any circuit breaker.
 3N
 4N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม life support/pressurization ต้องคิดว่า “คนต้องรอดก่อนระบบ” โดยเฉพาะ hypoxia และ physiological symptoms</li><li>Concept คือ oxygen → descend → reduce pressure/bleed problem → land; อย่ารอพิสูจน์นานถ้ามีอาการผิดปกติ</li><li>ตัวเลขสำคัญคือการลงต่ำกว่า 10,000 ft MSL เมื่อเกี่ยวกับ oxygen/physiological risk และต้องคุมการหายใจไม่ให้ hyperventilate</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="ED" data-text="ed-13 defog valve fails to close in flight ed-13
 defog valve fails to close in flight
@@ -2986,7 +2989,7 @@ defog valve fails to close in flight ">
 <div>DEFOG VALVE FAILS TO CLOSE IN FLIGHT</div></div></section>
 <section><div class="notes empty"><h4>Notes / Cautions / Warnings</h4><p>ไม่พบหน้าก่อนหน้าที่เป็น W/C/N อัตโนมัติ หรือหัวข้อนี้ไม่มีรหัสกำกับ</p></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม life support/pressurization ต้องคิดว่า “คนต้องรอดก่อนระบบ” โดยเฉพาะ hypoxia และ physiological symptoms</li><li>Concept คือ oxygen → descend → reduce pressure/bleed problem → land; อย่ารอพิสูจน์นานถ้ามีอาการผิดปกติ</li><li>ตัวเลขสำคัญคือการลงต่ำกว่า 10,000 ft MSL เมื่อเกี่ยวกับ oxygen/physiological risk และต้องคุมการหายใจไม่ให้ hyperventilate</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="ED" data-text="ed-15 cockpit fails to pressurize ed-15/(ed-16 blank)
 cockpit fails to pressurize
@@ -3056,7 +3059,7 @@ verity of the emergency and equipment lost prior to resetting or
 opening any circuit breaker.
 1N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>กลุ่มนี้เกี่ยวกับ oxygen/pressurization/environmental control ให้คิดเรื่อง physiological safety ก่อน</li><li>Concept คือให้ crew มี oxygen เพียงพอ ลด altitude/pressure risk และหยุด source ของปัญหาเมื่อเหมาะสม</li><li>ถ้ามีอาการทางร่างกาย ให้ถือว่า serious และรีบลดความเสี่ยงก่อนวิเคราะห์ละเอียด</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-3 abort start procedure ee-3/(ee-34 blank)
 abort start procedure
@@ -3172,7 +3175,7 @@ Observe starter duty cycle cool-down period.
 7C
 8N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือปัญหาระหว่าง start/ground operation จุดสำคัญคือหยุด chain ของความเสียหายตั้งแต่ยังอยู่พื้น</li><li>Concept คือควบคุม fuel/ignition/power source เพื่อตัดโอกาส fire, hot start, hung start หรือ prop/engine hazard</li><li>หลังหยุดเหตุการณ์ ต้องรักษาความปลอดภัยพื้นที่และไม่รีบ restart จนกว่าจะเข้าใจสาเหตุ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-5 emergency engine shutdown on the ground ee-5
 emergency engine shutdown on the ground
@@ -3204,7 +3207,7 @@ emergency engine shutdown on the ground ">
 <div>EMERGENCY ENGINE SHUTDOWN ON THE GROUND</div></div></section>
 <section><div class="notes empty"><h4>Notes / Cautions / Warnings</h4><p>ไม่พบหน้าก่อนหน้าที่เป็น W/C/N อัตโนมัติ หรือหัวข้อนี้ไม่มีรหัสกำกับ</p></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือปัญหาระหว่าง start/ground operation จุดสำคัญคือหยุด chain ของความเสียหายตั้งแต่ยังอยู่พื้น</li><li>Concept คือควบคุม fuel/ignition/power source เพื่อตัดโอกาส fire, hot start, hung start หรือ prop/engine hazard</li><li>หลังหยุดเหตุการณ์ ต้องรักษาความปลอดภัยพื้นที่และไม่รีบ restart จนกว่าจะเข้าใจสาเหตุ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-7 uncommanded power changes/loss of pow- er/uncommanded propeller feather ee-7
 uncommanded power changes/loss of pow-
@@ -3360,7 +3363,7 @@ emergency landing pattern.
 11C
 12W</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม engine/propulsion emergency ต้องคิดว่า “ควบคุมเครื่องบินก่อน แล้วค่อยจัดการเครื่องยนต์”</li><li>Concept คือรักษา airspeed/attitude, วิเคราะห์ว่าเป็น power loss, fire, PMU, oil หรือ restart case แล้วทำตาม checklist ที่ตรงอาการ</li><li>ถ้า restart ไม่สำเร็จหรือสถานการณ์ไม่มั่นคง ให้ shift mindset ไป forced landing/ejection decision ตามเวลาและ altitude ที่เหลือ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-9 compressor stalls ee-9
 compressor stalls
@@ -3418,7 +3421,7 @@ may result in insufficient altitude to reach a suitable landing site.
 1N
 2W</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม engine/propulsion emergency ต้องคิดว่า “ควบคุมเครื่องบินก่อน แล้วค่อยจัดการเครื่องยนต์”</li><li>Concept คือรักษา airspeed/attitude, วิเคราะห์ว่าเป็น power loss, fire, PMU, oil หรือ restart case แล้วทำตาม checklist ที่ตรงอาการ</li><li>ถ้า restart ไม่สำเร็จหรือสถานการณ์ไม่มั่นคง ให้ shift mindset ไป forced landing/ejection decision ตามเวลาและ altitude ที่เหลือ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-11 fire in flight ee-11
 fire in flight
@@ -3514,7 +3517,7 @@ the emergency procedure.
 4W
 5W5W</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม engine/propulsion emergency ต้องคิดว่า “ควบคุมเครื่องบินก่อน แล้วค่อยจัดการเครื่องยนต์”</li><li>Concept คือรักษา airspeed/attitude, วิเคราะห์ว่าเป็น power loss, fire, PMU, oil หรือ restart case แล้วทำตาม checklist ที่ตรงอาการ</li><li>ถ้า restart ไม่สำเร็จหรือสถานการณ์ไม่มั่นคง ให้ shift mindset ไป forced landing/ejection decision ตามเวลาและ altitude ที่เหลือ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-13 pmu failure ee-13
 pmu failure
@@ -3600,7 +3603,7 @@ proximately 67%).
 4C
 5C</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม engine/propulsion emergency ต้องคิดว่า “ควบคุมเครื่องบินก่อน แล้วค่อยจัดการเครื่องยนต์”</li><li>Concept คือรักษา airspeed/attitude, วิเคราะห์ว่าเป็น power loss, fire, PMU, oil หรือ restart case แล้วทำตาม checklist ที่ตรงอาการ</li><li>ถ้า restart ไม่สำเร็จหรือสถานการณ์ไม่มั่นคง ให้ shift mindset ไป forced landing/ejection decision ตามเวลาและ altitude ที่เหลือ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-15 pmu fault ee-15
 pmu fault
@@ -3658,7 +3661,7 @@ malfunction could prevent the gear from retracting.
 2C
 3N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม engine/propulsion emergency ต้องคิดว่า “ควบคุมเครื่องบินก่อน แล้วค่อยจัดการเครื่องยนต์”</li><li>Concept คือรักษา airspeed/attitude, วิเคราะห์ว่าเป็น power loss, fire, PMU, oil หรือ restart case แล้วทำตาม checklist ที่ตรงอาการ</li><li>ถ้า restart ไม่สำเร็จหรือสถานการณ์ไม่มั่นคง ให้ shift mindset ไป forced landing/ejection decision ตามเวลาและ altitude ที่เหลือ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-17 avoid unnecessary pcl movements ee-17
 chip detector warning
@@ -3688,7 +3691,7 @@ chip detector warning ">
 <div>CHIP DETECTOR WARNING</div></div></section>
 <section><div class="notes empty"><h4>Notes / Cautions / Warnings</h4><p>ไม่พบหน้าก่อนหน้าที่เป็น W/C/N อัตโนมัติ หรือหัวข้อนี้ไม่มีรหัสกำกับ</p></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>กลุ่มนี้เกี่ยวกับ engine/propulsion ต้องรักษา aircraft control ก่อนเสมอ</li><li>Concept คือ aviate → diagnose → checklist → decide ว่าจะ restart, recover, forced landing หรือ eject</li><li>พลังงาน/airspeed/altitude คือเวลาที่เหลือในการตัดสินใจ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-19 oil system malfunction or low oil pres- sure ee-19
 oil system malfunction or low oil pres-
@@ -3766,7 +3769,7 @@ Higher power settings may aggravate the existing condition.
 4N
 5C</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม engine/propulsion emergency ต้องคิดว่า “ควบคุมเครื่องบินก่อน แล้วค่อยจัดการเครื่องยนต์”</li><li>Concept คือรักษา airspeed/attitude, วิเคราะห์ว่าเป็น power loss, fire, PMU, oil หรือ restart case แล้วทำตาม checklist ที่ตรงอาการ</li><li>ถ้า restart ไม่สำเร็จหรือสถานการณ์ไม่มั่นคง ให้ shift mindset ไป forced landing/ejection decision ตามเวลาและ altitude ที่เหลือ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-21 immediate airstart (pmu norm) ee-21
 immediate airstart (pmu norm)
@@ -3916,7 +3919,7 @@ in MANUAL.
 8C
 9N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม engine/propulsion emergency ต้องคิดว่า “ควบคุมเครื่องบินก่อน แล้วค่อยจัดการเครื่องยนต์”</li><li>Concept คือรักษา airspeed/attitude, วิเคราะห์ว่าเป็น power loss, fire, PMU, oil หรือ restart case แล้วทำตาม checklist ที่ตรงอาการ</li><li>ถ้า restart ไม่สำเร็จหรือสถานการณ์ไม่มั่นคง ให้ shift mindset ไป forced landing/ejection decision ตามเวลาและ altitude ที่เหลือ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-23 1w 2w 3w 4w 5c 6c ee-23
 precautionary emergency landing (pel)
@@ -4038,7 +4041,7 @@ gine once landing is assured.
 7N
 8N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>กลุ่มนี้เกี่ยวกับ engine/propulsion ต้องรักษา aircraft control ก่อนเสมอ</li><li>Concept คือ aviate → diagnose → checklist → decide ว่าจะ restart, recover, forced landing หรือ eject</li><li>พลังงาน/airspeed/altitude คือเวลาที่เหลือในการตัดสินใจ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-25 engine failure during flight ee-25
 engine failure during flight
@@ -4126,7 +4129,7 @@ play oil pressures up to 4 psi with or without the engine seized.
 5W
 6N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม engine/propulsion emergency ต้องคิดว่า “ควบคุมเครื่องบินก่อน แล้วค่อยจัดการเครื่องยนต์”</li><li>Concept คือรักษา airspeed/attitude, วิเคราะห์ว่าเป็น power loss, fire, PMU, oil หรือ restart case แล้วทำตาม checklist ที่ตรงอาการ</li><li>ถ้า restart ไม่สำเร็จหรือสถานการณ์ไม่มั่นคง ให้ shift mindset ไป forced landing/ejection decision ตามเวลาและ altitude ที่เหลือ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-27 pmu norm airstart ee-27
 pmu norm airstart
@@ -4282,7 +4285,7 @@ in MANUAL.
 8C
 9N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม engine/propulsion emergency ต้องคิดว่า “ควบคุมเครื่องบินก่อน แล้วค่อยจัดการเครื่องยนต์”</li><li>Concept คือรักษา airspeed/attitude, วิเคราะห์ว่าเป็น power loss, fire, PMU, oil หรือ restart case แล้วทำตาม checklist ที่ตรงอาการ</li><li>ถ้า restart ไม่สำเร็จหรือสถานการณ์ไม่มั่นคง ให้ shift mindset ไป forced landing/ejection decision ตามเวลาและ altitude ที่เหลือ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-29 pmu off airstart ee-29
 pmu off airstart
@@ -4452,7 +4455,7 @@ in MANUAL.
 9C
 10N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม engine/propulsion emergency ต้องคิดว่า “ควบคุมเครื่องบินก่อน แล้วค่อยจัดการเครื่องยนต์”</li><li>Concept คือรักษา airspeed/attitude, วิเคราะห์ว่าเป็น power loss, fire, PMU, oil หรือ restart case แล้วทำตาม checklist ที่ตรงอาการ</li><li>ถ้า restart ไม่สำเร็จหรือสถานการณ์ไม่มั่นคง ให้ shift mindset ไป forced landing/ejection decision ตามเวลาและ altitude ที่เหลือ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-31 pmu off ground start ee-31
 pmu off ground start
@@ -4572,7 +4575,7 @@ may cause engine damage due to overtemperature.
 4C
 5C</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือปัญหาระหว่าง start/ground operation จุดสำคัญคือหยุด chain ของความเสียหายตั้งแต่ยังอยู่พื้น</li><li>Concept คือควบคุม fuel/ignition/power source เพื่อตัดโอกาส fire, hot start, hung start หรือ prop/engine hazard</li><li>หลังหยุดเหตุการณ์ ต้องรักษาความปลอดภัยพื้นที่และไม่รีบ restart จนกว่าจะเข้าใจสาเหตุ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EE" data-text="ee-33 forced landing ee-33/(ee-34 blank)
 forced landing
@@ -4730,7 +4733,7 @@ signal for a longer distance and could aid in rescue/recovery.
 11N
 12N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม engine/propulsion emergency ต้องคิดว่า “ควบคุมเครื่องบินก่อน แล้วค่อยจัดการเครื่องยนต์”</li><li>Concept คือรักษา airspeed/attitude, วิเคราะห์ว่าเป็น power loss, fire, PMU, oil หรือ restart case แล้วทำตาม checklist ที่ตรงอาการ</li><li>ถ้า restart ไม่สำเร็จหรือสถานการณ์ไม่มั่นคง ให้ shift mindset ไป forced landing/ejection decision ตามเวลาและ altitude ที่เหลือ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EF" data-text="ef-3 abort ef-3
 abort
@@ -4760,7 +4763,7 @@ gested area until brakes have had sufficient time to cool. Do not
 set parking brake.
 1W</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือปัญหา takeoff/ground roll decision จุดสำคัญคือ runway remaining, controllability และ energy state</li><li>Concept คือถ้ายังหยุดได้ให้ abort อย่างมั่นคง ถ้าหลุด airborne แล้วต้องรักษา control และไม่รีบเปลี่ยน configuration โดยไม่จำเป็น</li><li>คิดเสมอว่า speed สูง = energy สูง การ brake/steer ต้องนุ่มและรักษา directional control เป็นหลัก</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EF" data-text="ef-5 tire failure during takeoff ef-5
 tire failure during takeoff
@@ -4802,7 +4805,7 @@ in the middle). Maintain directional control using rudder, brakes,
 and nose wheel steering as required.
 1C</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือปัญหา takeoff/ground roll decision จุดสำคัญคือ runway remaining, controllability และ energy state</li><li>Concept คือถ้ายังหยุดได้ให้ abort อย่างมั่นคง ถ้าหลุด airborne แล้วต้องรักษา control และไม่รีบเปลี่ยน configuration โดยไม่จำเป็น</li><li>คิดเสมอว่า speed สูง = energy สูง การ brake/steer ต้องนุ่มและรักษา directional control เป็นหลัก</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EF" data-text="ef-7 engine failure immediately after takeoff (sufficient runway remaining straight ahead) ef-7/(ef-8 blank)
 engine failure immediately after takeoff
@@ -4868,7 +4871,7 @@ be lowered by normal means.
 3N
 4N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม engine/propulsion emergency ต้องคิดว่า “ควบคุมเครื่องบินก่อน แล้วค่อยจัดการเครื่องยนต์”</li><li>Concept คือรักษา airspeed/attitude, วิเคราะห์ว่าเป็น power loss, fire, PMU, oil หรือ restart case แล้วทำตาม checklist ที่ตรงอาการ</li><li>ถ้า restart ไม่สำเร็จหรือสถานการณ์ไม่มั่นคง ให้ shift mindset ไป forced landing/ejection decision ตามเวลาและ altitude ที่เหลือ</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-3 inadvertent departure from controlled flight eg-3/(eg-34 blank)
 inadvertent departure from controlled
@@ -4948,7 +4951,7 @@ tenance personnel after flight.
 3W
 4C</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือ loss of control / departure recovery ต้องตัดสิ่งที่ทำให้ aircraft หลุดออกจาก controlled flight</li><li>Concept คือ unload/reduce aggravated inputs, recover attitude/airspeed และหลีกเลี่ยงการแก้ด้วย control input ที่สวนกับ recovery</li><li>เป้าหมายแรกคือกลับมาควบคุม aircraft ได้ ไม่ใช่รักษา altitude หรือ heading เดิมทันที</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-5 flight with shattered/damaged canopy eg-5
 flight with shattered/damaged canopy
@@ -4982,7 +4985,7 @@ flight with shattered/damaged canopy ">
 <div>FLIGHT WITH SHATTERED/DAMAGED CANOPY</div></div></section>
 <section><div class="notes empty"><h4>Notes / Cautions / Warnings</h4><p>ไม่พบหน้าก่อนหน้าที่เป็น W/C/N อัตโนมัติ หรือหัวข้อนี้ไม่มีรหัสกำกับ</p></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือ canopy/structural cockpit environment problem ต้องคิดเรื่อง windblast, noise, visibility และ ejection/landing risk</li><li>Concept คือรักษา control ลด airspeed ตามจำเป็น และประเมินว่าบินต่อ/ลงจอด/เตรียม eject ปลอดภัยกว่ากัน</li><li>อย่ามองเป็นแค่ความรำคาญใน cockpit เพราะ canopy issue อาจกระทบ communication, vision และ crew survivability</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-7 canopy unlocked eg-7
 canopy unlocked
@@ -5034,7 +5037,7 @@ viously unlocked, do not eject.
 1W
 2W</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือ canopy/structural cockpit environment problem ต้องคิดเรื่อง windblast, noise, visibility และ ejection/landing risk</li><li>Concept คือรักษา control ลด airspeed ตามจำเป็น และประเมินว่าบินต่อ/ลงจอด/เตรียม eject ปลอดภัยกว่ากัน</li><li>อย่ามองเป็นแค่ความรำคาญใน cockpit เพราะ canopy issue อาจกระทบ communication, vision และ crew survivability</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-9 runaway trim eg-9
 runaway trim
@@ -5104,7 +5107,7 @@ able the pilot to use pitch trim when necessary.
 1N
 2N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือ trim malfunction ต้องคิดว่า “trim กำลังสร้าง control force ผิดปกติ”</li><li>Concept คือหยุด trim ที่ runaway ก่อน ลด airspeed/ปรับ power เพื่อลดแรงคันบังคับ แล้วแยกระบบด้วย disconnect/CB ตามจำเป็น</li><li>หลังหยุดอาการ ต้องทำ controllability check เพราะ approach/landing speed อาจให้ force ต่างจากตอน cruise</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-11 stuck/failed trim eg-11
 stuck/failed trim
@@ -5144,7 +5147,7 @@ maximum forces for aileron trim or rudder trim are 5 pounds and
 20 pounds respectively.
 1N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือ trim malfunction ต้องคิดว่า “trim กำลังสร้าง control force ผิดปกติ”</li><li>Concept คือหยุด trim ที่ runaway ก่อน ลด airspeed/ปรับ power เพื่อลดแรงคันบังคับ แล้วแยกระบบด้วย disconnect/CB ตามจำเป็น</li><li>หลังหยุดอาการ ต้องทำ controllability check เพราะ approach/landing speed อาจให้ force ต่างจากตอน cruise</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-13 trim aid device failure (tad) eg-13
 trim aid device failure (tad)
@@ -5182,7 +5185,7 @@ trim aid device failure (tad) ">
 <div>TRIM AID DEVICE FAILURE (TAD)</div></div></section>
 <section><div class="notes empty"><h4>Notes / Cautions / Warnings</h4><p>ไม่พบหน้าก่อนหน้าที่เป็น W/C/N อัตโนมัติ หรือหัวข้อนี้ไม่มีรหัสกำกับ</p></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือ trim malfunction ต้องคิดว่า “trim กำลังสร้าง control force ผิดปกติ”</li><li>Concept คือหยุด trim ที่ runaway ก่อน ลด airspeed/ปรับ power เพื่อลดแรงคันบังคับ แล้วแยกระบบด้วย disconnect/CB ตามจำเป็น</li><li>หลังหยุดอาการ ต้องทำ controllability check เพราะ approach/landing speed อาจให้ force ต่างจากตอน cruise</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-15 asymmetric flaps (split-flap condition) eg-15
 asymmetric flaps (split-flap condition)
@@ -5242,7 +5245,7 @@ inspection by another aircraft.
 2W
 3N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือ flight control / handling abnormality ต้องคิดเรื่อง controllability envelope</li><li>Concept คือหา speed/configuration/power ที่ aircraft ยังควบคุมได้ดีที่สุด แล้วล็อก mental model สำหรับ approach และ landing</li><li>อย่าเปลี่ยน configuration มากเกินจำเป็นก่อนรู้ผล เพราะอาจทำให้ control force หรือ roll/yaw moment แย่ลง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-17 increased rudder pedal forces if higher than anticipated rudder pedal forces are observed, proceed as follows: eg-17
 increased rudder pedal forces
@@ -5326,7 +5329,7 @@ trim and increasing rudder pedal forces.
 1N
 2N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือ flight control / handling abnormality ต้องคิดเรื่อง controllability envelope</li><li>Concept คือหา speed/configuration/power ที่ aircraft ยังควบคุมได้ดีที่สุด แล้วล็อก mental model สำหรับ approach และ landing</li><li>อย่าเปลี่ยน configuration มากเกินจำเป็นก่อนรู้ผล เพราะอาจทำให้ control force หรือ roll/yaw moment แย่ลง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-19 controllability check (structural dam- age/flight control malfunction) eg-19
 controllability check (structural dam-
@@ -5470,7 +5473,7 @@ down.
 7C
 8N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือ flight control / handling abnormality ต้องคิดเรื่อง controllability envelope</li><li>Concept คือหา speed/configuration/power ที่ aircraft ยังควบคุมได้ดีที่สุด แล้วล็อก mental model สำหรับ approach และ landing</li><li>อย่าเปลี่ยน configuration มากเกินจำเป็นก่อนรู้ผล เพราะอาจทำให้ control force หรือ roll/yaw moment แย่ลง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-21 emergency ground egress eg-21
 emergency ground egress
@@ -5586,7 +5589,7 @@ quick-release lever.
 6W
 7N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม survival/escape ไม่ใช่การแก้ระบบเครื่องบิน แต่คือการพา crew ออกจากสถานการณ์ที่ aircraft ไม่ปลอดภัยแล้ว</li><li>Concept คือ decision ต้องเด็ดขาด: เมื่อ aircraft/altitude/time ไม่พอ ให้ focus ที่ ejection/egress sequence และ body position</li><li>หลัง ejection ให้เปลี่ยน mindset เป็น survival: canopy/seat separation, parachute, life raft, signaling และรอ rescue</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-23 controlled ejection eg-23
 controlled ejection
@@ -5732,7 +5735,7 @@ ejection.
 6W
 7W</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม survival/escape ไม่ใช่การแก้ระบบเครื่องบิน แต่คือการพา crew ออกจากสถานการณ์ที่ aircraft ไม่ปลอดภัยแล้ว</li><li>Concept คือ decision ต้องเด็ดขาด: เมื่อ aircraft/altitude/time ไม่พอ ให้ focus ที่ ejection/egress sequence และ body position</li><li>หลัง ejection ให้เปลี่ยน mindset เป็น survival: canopy/seat separation, parachute, life raft, signaling และรอ rescue</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-25 eject eg-25
 eject
@@ -5802,7 +5805,7 @@ ing line or use risers for controllability.
 3W
 4N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม survival/escape ไม่ใช่การแก้ระบบเครื่องบิน แต่คือการพา crew ออกจากสถานการณ์ที่ aircraft ไม่ปลอดภัยแล้ว</li><li>Concept คือ decision ต้องเด็ดขาด: เมื่อ aircraft/altitude/time ไม่พอ ให้ focus ที่ ejection/egress sequence และ body position</li><li>หลัง ejection ให้เปลี่ยน mindset เป็น survival: canopy/seat separation, parachute, life raft, signaling และรอ rescue</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-27 post ejection procedures eg-27
 post ejection procedures
@@ -5866,7 +5869,7 @@ post ejection procedures ">
 <div>POST EJECTION PROCEDURES</div></div></section>
 <section><div class="notes empty"><h4>Notes / Cautions / Warnings</h4><p>ไม่พบหน้าก่อนหน้าที่เป็น W/C/N อัตโนมัติ หรือหัวข้อนี้ไม่มีรหัสกำกับ</p></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม survival/escape ไม่ใช่การแก้ระบบเครื่องบิน แต่คือการพา crew ออกจากสถานการณ์ที่ aircraft ไม่ปลอดภัยแล้ว</li><li>Concept คือ decision ต้องเด็ดขาด: เมื่อ aircraft/altitude/time ไม่พอ ให้ focus ที่ ejection/egress sequence และ body position</li><li>หลัง ejection ให้เปลี่ยน mindset เป็น survival: canopy/seat separation, parachute, life raft, signaling และรอ rescue</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-29 post ejection procedures (continued) eg-29/(eg-34 blank)
 post ejection procedures (continued)
@@ -5968,7 +5971,7 @@ Heels should never contact the ground while performing a PLF.
 2W
 3N</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม survival/escape ไม่ใช่การแก้ระบบเครื่องบิน แต่คือการพา crew ออกจากสถานการณ์ที่ aircraft ไม่ปลอดภัยแล้ว</li><li>Concept คือ decision ต้องเด็ดขาด: เมื่อ aircraft/altitude/time ไม่พอ ให้ focus ที่ ejection/egress sequence และ body position</li><li>หลัง ejection ให้เปลี่ยน mindset เป็น survival: canopy/seat separation, parachute, life raft, signaling และรอ rescue</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-31 life raft operation (if applicable) eg-31
 life raft operation (if applicable)
@@ -6046,7 +6049,7 @@ life raft operation (if applicable) ">
 <div>LIFE RAFT OPERATION (IF APPLICABLE)</div></div></section>
 <section><div class="notes empty"><h4>Notes / Cautions / Warnings</h4><p>ไม่พบหน้าก่อนหน้าที่เป็น W/C/N อัตโนมัติ หรือหัวข้อนี้ไม่มีรหัสกำกับ</p></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม survival/escape ไม่ใช่การแก้ระบบเครื่องบิน แต่คือการพา crew ออกจากสถานการณ์ที่ aircraft ไม่ปลอดภัยแล้ว</li><li>Concept คือ decision ต้องเด็ดขาด: เมื่อ aircraft/altitude/time ไม่พอ ให้ focus ที่ ejection/egress sequence และ body position</li><li>หลัง ejection ให้เปลี่ยน mindset เป็น survival: canopy/seat separation, parachute, life raft, signaling และรอ rescue</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card emergency" data-section="EG" data-text="eg-33 rescue eg-33/(eg-34 blank)
 rescue
@@ -6124,7 +6127,7 @@ copter aircrewman assists them to a seat in the aircraft.
 2W
 3W</pre></details></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม survival/escape ไม่ใช่การแก้ระบบเครื่องบิน แต่คือการพา crew ออกจากสถานการณ์ที่ aircraft ไม่ปลอดภัยแล้ว</li><li>Concept คือ decision ต้องเด็ดขาด: เมื่อ aircraft/altitude/time ไม่พอ ให้ focus ที่ ejection/egress sequence และ body position</li><li>หลัง ejection ให้เปลี่ยน mindset เป็น survival: canopy/seat separation, parachute, life raft, signaling และรอ rescue</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card normal" data-section="N" data-text="n-1 table of contents page table of contents page
 normal procedures
@@ -6198,7 +6201,7 @@ table of contents ">
 <div>TABLE OF CONTENTS</div></div></section>
 <section><div class="notes empty"><h4>Notes / Cautions / Warnings</h4><p>ไม่พบหน้าก่อนหน้าที่เป็น W/C/N อัตโนมัติ หรือหัวข้อนี้ไม่มีรหัสกำกับ</p></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือส่วน normal/reference ใช้เพื่อเตรียมความพร้อมและรู้ตำแหน่งอุปกรณ์ ไม่ใช่ emergency response โดยตรง</li><li>Concept คืออ่านเพื่อสร้าง cockpit map ในหัว: switch/CB อยู่ตรงไหน และระบบไหนอยู่ bus ใด</li><li>ประโยชน์คือเมื่อเกิด emergency จะหา switch/CB ได้เร็วและเข้าใจว่าการเสีย bus หนึ่งกระทบอะไรบ้าง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card normal" data-section="N" data-text="n-2 preflight check before exterior inspection n-2
 preflight check
@@ -6288,7 +6291,7 @@ battery start)
 <div><b>24.</b> BAT switch - OFF</div></div></section>
 <section><div class="notes empty"><h4>Notes / Cautions / Warnings</h4><p>ไม่พบหน้าก่อนหน้าที่เป็น W/C/N อัตโนมัติ หรือหัวข้อนี้ไม่มีรหัสกำกับ</p></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือส่วน normal/reference ใช้เพื่อเตรียมความพร้อมและรู้ตำแหน่งอุปกรณ์ ไม่ใช่ emergency response โดยตรง</li><li>Concept คืออ่านเพื่อสร้าง cockpit map ในหัว: switch/CB อยู่ตรงไหน และระบบไหนอยู่ bus ใด</li><li>ประโยชน์คือเมื่อเกิด emergency จะหา switch/CB ได้เร็วและเข้าใจว่าการเสีย bus หนึ่งกระทบอะไรบ้าง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card normal" data-section="N" data-text="n-19 latch n-19/(n-20 blank)
 10. hydraulic reservoir fluid level - check
@@ -6346,7 +6349,7 @@ aoa for heating
 <div><b>28.</b> CFS handle safety pins - REMOVE AND STOW (BOTH)</div></div></section>
 <section><div class="notes empty"><h4>Notes / Cautions / Warnings</h4><p>ไม่พบหน้าก่อนหน้าที่เป็น W/C/N อัตโนมัติ หรือหัวข้อนี้ไม่มีรหัสกำกับ</p></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือส่วน normal/reference ใช้เพื่อเตรียมความพร้อมและรู้ตำแหน่งอุปกรณ์ ไม่ใช่ emergency response โดยตรง</li><li>Concept คืออ่านเพื่อสร้าง cockpit map ในหัว: switch/CB อยู่ตรงไหน และระบบไหนอยู่ bus ใด</li><li>ประโยชน์คือเมื่อเกิด emergency จะหา switch/CB ได้เร็วและเข้าใจว่าการเสีย bus หนึ่งกระทบอะไรบ้าง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card normal" data-section="N" data-text="n-21 table of contents page table of contents page
 reference data
@@ -6418,7 +6421,7 @@ table of contents page ">
 <div>TABLE OF CONTENTS PAGE</div></div></section>
 <section><div class="notes empty"><h4>Notes / Cautions / Warnings</h4><p>ไม่พบหน้าก่อนหน้าที่เป็น W/C/N อัตโนมัติ หรือหัวข้อนี้ไม่มีรหัสกำกับ</p></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือส่วน normal/reference ใช้เพื่อเตรียมความพร้อมและรู้ตำแหน่งอุปกรณ์ ไม่ใช่ emergency response โดยตรง</li><li>Concept คืออ่านเพื่อสร้าง cockpit map ในหัว: switch/CB อยู่ตรงไหน และระบบไหนอยู่ bus ใด</li><li>ประโยชน์คือเมื่อเกิด emergency จะหา switch/CB ได้เร็วและเข้าใจว่าการเสีย bus หนึ่งกระทบอะไรบ้าง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card normal" data-section="N" data-text="n-31 front cockpit left console battery bus front cockpit right console generator bus rear cockpit left console battery bus rear cockpit n-31/(n-32 blank)
 circuit breaker panels
@@ -6662,7 +6665,7 @@ lights
 <div>7½</div></div></section>
 <section><div class="notes empty"><h4>Notes / Cautions / Warnings</h4><p>ไม่พบหน้าก่อนหน้าที่เป็น W/C/N อัตโนมัติ หรือหัวข้อนี้ไม่มีรหัสกำกับ</p></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือกลุ่ม electrical power management ต้องคิดว่า “ไฟมาจากไหน เหลือ bus ไหน และต้อง preserve battery แค่ไหน”</li><li>Concept คือ isolate fault ลด load และรักษาไฟให้กับอุปกรณ์จำเป็น โดยเฉพาะก่อน main battery หมด</li><li>ถ้ามีกลิ่นไหม้/ควัน ให้มองเป็น fire/fume risk ก่อน แล้วจัดการ ventilation + electrical isolation ตาม checklist</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 <article class="card performance" data-section="P" data-text="p-1 table of contents page p-1/(p-2 blank)
 position correction. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . p-3
@@ -6732,7 +6735,7 @@ performance data ">
 <div>PERFORMANCE DATA</div></div></section>
 <section><div class="notes empty"><h4>Notes / Cautions / Warnings</h4><p>ไม่พบหน้าก่อนหน้าที่เป็น W/C/N อัตโนมัติ หรือหัวข้อนี้ไม่มีรหัสกำกับ</p></div></section>
 </div>
-</div>
+<div class="conceptBox"><span class="conceptLabel">Concept ภาษาไทยท้ายหัวข้อ</span><h4>Concept / ภาพรวมที่ต้องเข้าใจ</h4><ul><li>นี่คือส่วน normal/reference ใช้เพื่อเตรียมความพร้อมและรู้ตำแหน่งอุปกรณ์ ไม่ใช่ emergency response โดยตรง</li><li>Concept คืออ่านเพื่อสร้าง cockpit map ในหัว: switch/CB อยู่ตรงไหน และระบบไหนอยู่ bus ใด</li><li>ประโยชน์คือเมื่อเกิด emergency จะหา switch/CB ได้เร็วและเข้าใจว่าการเสีย bus หนึ่งกระทบอะไรบ้าง</li></ul><div class="conceptWarn">หมายเหตุ: Concept นี้เป็นคำอธิบายเพื่อการเรียน/ทบทวน ไม่ใช้แทน procedure และไม่ใช้แทน checklist ต้นฉบับ</div></div></div>
 </article>
 </div><script>
 const q=document.getElementById('q'), section=document.getElementById('section'), count=document.getElementById('count');
