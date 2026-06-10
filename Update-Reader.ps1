@@ -20,6 +20,12 @@ $CategoryConfigs = @(
     title = "T6Emer"
     description = "Emergency and abnormal procedure study files."
     dataFolder = "DataEmer"
+  },
+  [pscustomobject]@{
+    id = "airwork"
+    title = "Airwork"
+    description = "Contact, maneuver, and airwork study files."
+    dataFolder = "Airwork"
   }
 )
 
