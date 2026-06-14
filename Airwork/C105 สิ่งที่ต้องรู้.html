@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C105 สิ่งที่ต้องรู้ — T-6C Airstart & Landing Notes</title>
+<style>
+:root{
+  --bg:#f6f8fc;--card:#ffffff;--ink:#172033;--muted:#596579;--line:#dbe2ee;
+  --blue:#1d4ed8;--navy:#0f172a;--red:#dc2626;--amber:#b45309;--green:#047857;--violet:#6d28d9;
+  --soft-blue:#eaf1ff;--soft-red:#fff1f2;--soft-yellow:#fffbeb;--soft-green:#ecfdf5;--soft-violet:#f3e8ff;
+  --shadow:0 10px 30px rgba(15,23,42,.08);--radius:22px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,"Noto Sans Thai",Arial,sans-serif;background:linear-gradient(180deg,#eaf2ff 0%,var(--bg) 320px);color:var(--ink);line-height:1.75}
+header{padding:48px 20px 24px;text-align:center}
+header .eyebrow{display:inline-block;background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe;border-radius:999px;padding:6px 14px;font-weight:900;margin-bottom:14px}
+header h1{margin:0 auto 12px;max-width:1040px;font-size:clamp(30px,5vw,54px);line-height:1.08;letter-spacing:-.035em}
+header p{margin:0 auto;max-width:960px;color:var(--muted);font-size:18px}
+main{max-width:1160px;margin:0 auto;padding:16px 20px 62px}
+footer{max-width:1160px;margin:0 auto 50px;padding:0 20px;color:var(--muted);font-size:14px;text-align:center}
+a{color:var(--blue)}
+.notice,.logic,.danger,.good,.note,.callout{border-radius:17px;padding:16px 18px;margin:18px 0;border:1px solid var(--line);box-shadow:0 4px 16px rgba(15,23,42,.04)}
+.notice{background:var(--soft-yellow);border-color:#fde68a;border-left:7px solid var(--amber)}
+.logic{background:var(--soft-blue);border-color:#bfdbfe;border-left:7px solid var(--blue);font-weight:800}
+.danger{background:var(--soft-red);border-color:#fecdd3;border-left:7px solid var(--red)}
+.good{background:var(--soft-green);border-color:#bbf7d0;border-left:7px solid var(--green)}
+.note{background:#f8fafc;border-color:#cbd5e1;border-left:7px solid #64748b}.callout{background:var(--soft-violet);border-color:#ddd6fe;border-left:7px solid var(--violet)}
+.toc,.mini,section.card{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}
+.toc{border-radius:var(--radius);padding:20px;margin:20px 0 28px}.toc h2{margin:0 0 12px;font-size:22px}.toc-grid,.summary,.flow,.two,.three{display:grid;gap:12px}.toc-grid{grid-template-columns:repeat(auto-fit,minmax(255px,1fr))}.summary{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:24px 0}.flow,.two{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin:14px 0}.three{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin:14px 0}
+.toc a{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:14px;color:var(--blue);text-decoration:none;background:#fbfdff;font-weight:800}.toc a:hover{background:var(--soft-blue)}
+.mini{border-radius:18px;padding:16px}.mini strong{display:block;color:var(--blue);font-size:18px;margin-bottom:6px}.mini small{color:var(--muted)}
+section.card{border-radius:26px;padding:26px;margin:24px 0}section.card h2{margin:0 0 14px;font-size:clamp(24px,3vw,34px);line-height:1.25;letter-spacing:-.02em}h3{margin:22px 0 10px;color:#111827;font-size:21px}h4{margin:0 0 8px;color:#0f2e6e;font-size:17px}p{margin:10px 0}ul,ol{padding-left:26px;margin:10px 0}li{margin:6px 0}.tag{display:inline-block;border-radius:999px;padding:4px 10px;margin:0 4px 8px 0;background:#eef2ff;color:#3730a3;font-size:14px;font-weight:800}
+.step,.subcard{background:#fbfdff;border:1px solid var(--line);border-radius:16px;padding:14px}.step b{display:block;color:#123d86;font-size:17px;margin:0 0 4px}.subcard h4{display:block;color:#123d86;font-size:17px;margin:0 0 4px}
+.checklist{background:#0f172a;color:#e5e7eb;border-radius:18px;padding:18px 20px;margin:16px 0;overflow:auto}.checklist h3{color:#fff;margin-top:0}.checklist strong{color:#fff}.checklist .dim{color:#cbd5e1}
+.mem{font-size:20px;font-weight:900;text-align:center;background:#f8fafc;border:1px dashed #94a3b8;border-radius:16px;padding:14px;margin-top:18px}table{width:100%;border-collapse:collapse;margin:16px 0;border-radius:14px;border:1px solid var(--line);overflow:hidden}th,td{border-bottom:1px solid var(--line);padding:12px 14px;vertical-align:top;text-align:left}th{background:#f1f5f9;color:#0f172a}tr:last-child td{border-bottom:none}.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#eef2ff;color:#3730a3;border-radius:8px;padding:1px 6px;font-weight:800}.red{color:#b91c1c;font-weight:900}.amber{color:#92400e;font-weight:900}.green{color:#047857;font-weight:900}.formula{background:#111827;color:#f9fafb;border-radius:16px;padding:16px;font-weight:800;overflow:auto}.formula code{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+@media print{body{background:white;color:black}.toc,.mini,section.card,.notice,.logic,.danger,.good,.note,.callout{box-shadow:none;break-inside:avoid}a{color:black;text-decoration:none}.checklist{background:white;color:black;border:1px solid #222}.checklist h3,.checklist strong{color:black}}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">C105 สิ่งที่ต้องรู้</div>
+  <h1>T-6C Airstart &amp; Ground Handling Study Notes</h1>
+  <p>สรุปเพื่อเข้าใจ logic ของ 4 หัวข้อ: PMU Normal Air Start, PMU OFF Air Start, Immediate Air Start และ Blown Tire</p>
+</header>
+<main>
+  <div class="notice"><strong>Training aid only:</strong> เอกสารนี้ใช้เพื่อทบทวนความเข้าใจ ไม่ใช้แทน Flight Manual, checklist, SOP หรือคำสั่งหน่วย ในเหตุจริงให้ยึดเอกสารทางการเป็นหลัก</div>
+
+  <nav class="toc"><h2>สารบัญ</h2><div class="toc-grid">
+    <a href="#norm">๑.๑ PMU Normal Air Start</a>
+    <a href="#pmuoff">๑.๒ PMU OFF Air Start</a>
+    <a href="#immediate">๑.๓ Immediate Air Start</a>
+    <a href="#tire">๑.๔ Blown Tire</a>
+  </div></nav>
+
+  <div class="summary">
+    <div class="mini"><strong>Airstart mindset</strong>คุม aircraft ก่อน แล้วค่อย start: airspeed, altitude, flight path และ landing/ejection option</div>
+    <div class="mini"><strong>PMU status matters</strong>PMU ปกติใช้ PMU NORM airstart; ถ้า <span class="red">PMU FAIL</span> ใช้ PMU OFF airstart</div>
+    <div class="mini"><strong>PCL discipline</strong>PCL ต้อง OFF ตอนเริ่ม และการขยับ PCL เป็นจุด critical ที่สุดของ airstart</div>
+    <div class="mini"><strong>Low altitude caution</strong>ต่ำกว่า 2000 ft AGL ไม่ควร delay ejection เพื่อพยายาม airstart</div>
+  </div>
+
+  <section class="card" id="norm">
+    <h2>๑.๑ PMU Normal Air Start</h2><span class="tag">Primary airstart</span><span class="tag">PMU normal</span><span class="tag">Least complicated</span><span class="tag">Starter assisted</span>
+    <p>PMU NORM airstart คือวิธี <strong>หลัก</strong> และเป็นวิธีที่ง่ายที่สุดเมื่อ PMU ยังปกติอยู่ ใช้สำหรับกรณี engine failure ที่ <strong>ไม่ได้เกิดจาก fire หรือ mechanical failure</strong> โดยระบบ start ยังอาศัย starter assist</p>
+    <div class="logic">Mental model: <strong>ถ้า PMU ยังใช้ได้ ให้ใช้ PMU NORM airstart เพราะระบบจะช่วยจัดการ start ให้มากที่สุด เหลือนักบินคุมลำดับและ monitor engine indications</strong></div>
+    <div class="callout"><strong>Airstart envelope:</strong> manual ระบุว่า airstart ควรพยายามทำภายใน envelope ที่แนะนำ — โดยคร่าว ๆ 125-200 KIAS ตั้งแต่ sea level ถึง 15,000 ft และ 135-200 KIAS ที่ 15,001-20,000 ft และ <strong>airstart not recommended below 2000 ft AGL</strong></div>
+    <div class="checklist"><h3>Core checklist logic</h3><ol>
+      <li><strong>PCL - OFF</strong> <span class="dim">ต้อง OFF เพื่อ feather prop และให้ starter/ignition/boost pump/PMU ทำงานถูกต้อง</span></li>
+      <li><strong>Confirm circuit breakers and firewall shutoff handle</strong> <span class="dim">START, IGN, BOOST PUMP, PMU CBs in; firewall handle down</span></li>
+      <li><strong>BLEED AIR INFLOW - OFF</strong></li>
+      <li><strong>BOOST PUMP - ON</strong></li>
+      <li><strong>IGNITION - ON</strong></li>
+      <li><strong>STARTER - AUTO/RESET</strong></li>
+      <li><strong>PCL - IDLE above 13% N1</strong></li>
+      <li><strong>Monitor ITT, N1, oil pressure</strong></li>
+      <li><strong>If successful:</strong> PCL as required after N1 reaches idle (~67%), then restore systems and execute PEL</li>
+      <li><strong>If unsuccessful:</strong> PCL OFF, firewall shutoff handle pull, then forced landing or eject</li>
+    </ol></div>
+    <table>
+      <tr><th>จุดสำคัญ</th><th>เหตุผล</th><th>ถ้าพลาดจะเกิดอะไร</th></tr>
+      <tr><td>PCL ต้อง OFF ตอนเริ่ม</td><td>ป้องกัน fuel เข้าเร็วเกินก่อนระบบพร้อม</td><td>fuel introduced prematurely, start พังหรือร้อนเกิน</td></tr>
+      <tr><td>เอา PCL ไป IDLE เฉพาะเมื่อ N1 &gt; 13%</td><td>ให้ core speed พอสำหรับ light-off ที่เหมาะสม</td><td>start อาจไม่ติดหรือไม่เสถียร</td></tr>
+      <tr><td>ห้ามขยับ PCL เลย IDLE ก่อน N1 stabilize ~67%</td><td>ป้องกัน fuel flow พุ่งและ ITT overtemp</td><td>catastrophic engine damage จาก severe ITT overtemperature</td></tr>
+      <tr><td>ถ้าไม่มี ITT rise ภายใน 10 วินาทีหลังมี fuel flow</td><td>บ่งชี้ unsuccessful light-off</td><td>ต้อง abort start ทันที</td></tr>
+    </table>
+    <div class="danger"><strong>ข้อห้ามที่ต้องจำ:</strong> ถ้า engine failure เกิดจาก fire หรือ mechanical failure ไม่ควรฝืน airstart แบบ routine และถ้าต่ำกว่า 2000 ft AGL อย่าหน่วงเวลาการ eject เพราะมัวแต่พยายาม restart</div>
+    <div class="good"><strong>ภาพรวมหลัง start สำเร็จ:</strong> reset/verify GEN, คืน BLEED AIR INFLOW, จัดการ OBOGS ตามต้องการ แล้วเข้าสู่ PEL / recovery plan ทันที</div>
+    <div class="mem">จำง่าย: “PCL OFF — system set — starter AUTO — PCL IDLE above 13% — monitor — ถ้าได้ก็ PEL, ถ้าไม่ได้ก็ land/eject”</div>
+  </section>
+
+  <section class="card" id="pmuoff">
+    <h2>๑.๒ PMU OFF Air Start</h2><span class="tag">PMU FAIL</span><span class="tag">Manual engine start logic</span><span class="tag">Most critical PCL movement</span>
+    <p>ถ้า <span class="red">PMU FAIL</span> warning ติด แปลว่า PMU malfunction และ <strong>ต้องใช้ PMU OFF airstart</strong> เพราะ PMU ไม่ช่วยจัดการ start ให้ตามปกติแล้ว ในโหมดนี้ igniters จะไม่ทำงานอัตโนมัติ นักบินต้องสั่งเอง และการขยับ PCL จะเป็นจุดสำคัญที่สุด</p>
+    <div class="logic">Mental model: <strong>PMU OFF airstart = start แบบ manual มากขึ้น ต้องคุมทั้ง ignition, starter และ fuel introduction ด้วยมือ</strong></div>
+    <div class="note"><strong>คู่มือระบุชัด:</strong> “The most critical pilot action during the PMU OFF start is PCL movement while monitoring fuel flow, ITT, and N1 acceleration.”</div>
+    <div class="checklist"><h3>Core checklist logic</h3><ol>
+      <li><strong>PCL - OFF</strong></li>
+      <li><strong>PMU switch - OFF</strong></li>
+      <li><strong>Confirm START/IGN/BOOST PUMP CBs and firewall handle</strong></li>
+      <li><strong>BLEED AIR INFLOW - OFF</strong></li>
+      <li><strong>BOOST PUMP - ON</strong></li>
+      <li><strong>IGNITION - ON</strong></li>
+      <li><strong>STARTER - MANUAL</strong></li>
+      <li><strong>At 13% N1 minimum, advance PCL to obtain initial fuel flow, then slowly to IDLE</strong></li>
+      <li><strong>Monitor ITT, N1, oil pressure</strong></li>
+      <li><strong>If successful:</strong> PCL as required after N1 idle (~67%), starter NORM, verify GEN ON/reset, bleed air NORM, OBOGS as required, execute PEL</li>
+      <li><strong>If unsuccessful:</strong> PCL OFF, firewall shutoff handle pull, forced landing or eject</li>
+    </ol></div>
+    <table>
+      <tr><th>เรื่องที่ต้องเข้าใจ</th><th>ความหมาย</th></tr>
+      <tr><td>ทำไมใช้ STARTER MANUAL</td><td>เพราะ PMU ไม่ช่วย sequencing ตามปกติ จึงต้องพึ่ง manual control มากขึ้น</td></tr>
+      <tr><td>ทำไม PCL ต้องค่อย ๆ ไป IDLE</td><td>ถ้าเร็วไป ITT พุ่ง; ถ้าช้าไป N1 อาจ roll back พร้อม ITT ลดลง</td></tr>
+      <tr><td>ทำไม boost pump ON</td><td>เพื่อ positive fuel pressure ระหว่าง start</td></tr>
+      <tr><td>ทำไมยังต้องคิดเรื่อง altitude loss</td><td>แต่ละ attempt โดยทั่วไปเสีย altitude มากกว่า 1200 ft ได้ จึงต้องประเมิน margin ก่อนเริ่ม</td></tr>
+    </table>
+    <div class="danger"><strong>หลุมพราง:</strong> ถ้าสตาร์ตโดย PCL ไม่อยู่ OFF จะมี fuel เข้าก่อน ignition พร้อม ทำให้มีโอกาสเกิด hot start สูงมาก</div>
+    <div class="mem">จำง่าย: “PMU FAIL = PMU OFF — starter MANUAL — PCL ค่อย ๆ เข้า — monitor ใกล้ชิดสุด”</div>
+  </section>
+
+  <section class="card" id="immediate">
+    <h2>๑.๓ Immediate Air Start (PMU NORM)</h2><span class="tag">Low altitude</span><span class="tag">Time critical</span><span class="tag">Condensed procedure</span>
+    <p>Immediate Airstart (PMU NORM) ใช้หลัง engine failure <strong>เมื่ออยู่ต่ำและต้องการ thrust เร็ว</strong> หรือเมื่อ <strong>ไม่มีเวลา/เงื่อนไขไม่เอื้อ</strong> ให้ทำ full airstart procedure ครบทั้งหมด เป็นการย่อขั้นตอนเพื่อรีบให้เครื่องกลับมามีกำลัง</p>
+    <div class="logic">Mental model: <strong>Immediate airstart = เวอร์ชันย่อเพื่อซื้อเวลาและ thrust กลับมาเร็วที่สุด แต่ยังต้องรักษา PCL discipline เหมือนเดิม</strong></div>
+    <div class="checklist"><h3>Core checklist logic</h3><ol>
+      <li><strong>PCL - OFF</strong></li>
+      <li><strong>STARTER - AUTO/RESET</strong></li>
+      <li><strong>PCL - IDLE above 13% N1</strong></li>
+      <li><strong>Monitor ITT, N1, oil pressure</strong></li>
+      <li><strong>If unsuccessful:</strong> PCL OFF, firewall shutoff handle pull, forced landing or eject</li>
+      <li><strong>If successful:</strong> PCL as required after N1 idle (~67%), execute PEL, then confirm boost pump ON, ignition ON, starter NORM, bleed air NORM, GEN verify ON/reset</li>
+    </ol></div>
+    <div class="two">
+      <div class="subcard"><h4>Immediate airstart ใช้เมื่อไร</h4><ul>
+        <li>engine failure หลัง takeoff / low altitude</li>
+        <li>thrust requirements critical</li>
+        <li>เวลาไม่พอทำ full checklist ทั้งหมดก่อน</li>
+      </ul></div>
+      <div class="subcard"><h4>สิ่งที่ยังเหมือน PMU NORM</h4><ul>
+        <li>PCL ต้อง OFF ตอนเริ่ม</li>
+        <li>above 13% N1 ค่อยไป IDLE</li>
+        <li>อย่า overtravel PCL ก่อน N1 stabilize</li>
+        <li>ต่ำกว่า 2000 ft AGL อย่ามัวแต่พยายาม start ถ้าไม่มี margin</li>
+      </ul></div>
+    </div>
+    <div class="danger"><strong>จุดอันตราย:</strong> ความเร่งรีบทำให้ pilot เผลอลืมว่า restart attempt ก็กินเวลาและ altitude ถ้าสถานการณ์ไม่ได้ให้โอกาสจริง ๆ ต้องหันไป forced landing หรือ eject ให้เร็ว</div>
+    <div class="good"><strong>หลัง start ติด:</strong> อย่าคิดว่าจบงาน — ต้อง restore supporting switches ให้ครบ, check generator, then execute PEL / recovery เพราะอาจยังเป็น partial power / unstable engine event ได้</div>
+    <div class="mem">จำง่าย: “Immediate = start ให้เร็วที่สุด แต่ถ้าไม่ได้ต้องตัดใจเร็วที่สุดเหมือนกัน”</div>
+  </section>
+
+  <section class="card" id="tire">
+    <h2>๑.๔ Blown Tire</h2><span class="tag">Landing rollout</span><span class="tag">Directional control</span><span class="tag">Main tire</span><span class="tag">Do not taxi with flat tire</span>
+    <p>Blown tire ใน T-6C มักเกี่ยวข้องกับช่วง landing rollout และ braking technique คู่มือชี้ว่า <strong>main tire ที่แตกอาจไม่ชัดเจนทันที</strong> สัญญาณแรกอาจเป็นแรงดึงไปด้านยางที่แตก หรือ rumble / shudder ที่อาจถูกเข้าใจผิดว่าเป็น nose wheel shimmy</p>
+    <div class="logic">Mental model: <strong>Blown tire = เป้าหมายแรกคือรักษา directional control; เป้าหมายถัดมาคือหยุดอย่างปลอดภัยโดยไม่ทำให้สถานการณ์ลุกลาม</strong></div>
+    <table>
+      <tr><th>สถานการณ์</th><th>สิ่งที่คู่มือเน้น</th><th>เหตุผล</th></tr>
+      <tr><td>รู้ก่อนลงว่ามี main tire แตก</td><td>fly straight-in approach และพยายามลงด้าน runway ที่ตรงกับ good tire</td><td>ช่วยลด tendency ที่ aircraft จะ drift ไปทางล้อเสีย</td></tr>
+      <tr><td>ยางแตกขณะเบรก</td><td>เครื่องอาจ drift away from the blown tire initially</td><td>pilot ต้องพร้อมแก้ทิศทางด้วย rudder, brakes และ nose wheel steering</td></tr>
+      <tr><td>หลังหยุด</td><td><strong>Do not taxi with a flat tire</strong></td><td>ลดความเสียหายต่อ gear/wheel และลดความเสี่ยงเสียการควบคุมเพิ่มเติม</td></tr>
+    </table>
+    <div class="three">
+      <div class="step"><b>1. Recognize</b>สังเกต pull, rumble, shudder และ directional control difficulty</div>
+      <div class="step"><b>2. Keep control</b>ใช้ rudder เป็นหลัก เสริมด้วย braking / nosewheel steering ตามความเหมาะสม</div>
+      <div class="step"><b>3. Leave flaps as is</b>ถ้าสงสัย blown main tire ระหว่าง rollout ให้คง flap setting เดิม</div>
+      <div class="step"><b>4. Be ready for follow-on emergency</b>ถ้าคุมไม่ได้ให้เตรียม Aircraft Departs Prepared Surface / Emergency Ground Egress</div>
+      <div class="step"><b>5. Stop and assess</b>หยุดให้ปลอดภัยก่อน อย่าพยายาม taxi ต่อด้วย flat tire</div>
+      <div class="step"><b>6. Think prevention too</b>ยางแตกจำนวนมากเกิดก่อน tire spin-up หรือความเร็วต่ำจากการ hold brake มากเกิน</div>
+    </div>
+    <div class="note"><strong>Prevention note จากคู่มือ:</strong> ยางแตกจำนวนมากเกิดก่อน tire spin-up หรือที่ความเร็วต่ำกว่า 40 knots และการ hold brake มากเกินช่วงต่ำกว่า 20 knots อาจทำให้ล้อล็อกจนเกิด blown tire ได้</div>
+    <div class="danger"><strong>อีกเรื่องที่เกี่ยวข้อง:</strong> T-6C ไม่มี anti-skid/anti-lock protection การเบรกแรงเกิน โดยเฉพาะก่อน weight ลงเต็มล้อหรือที่ความเร็วสูง อาจนำไปสู่ locked brake, blown tire, brake fade และ directional control problem</div>
+    <div class="mem">จำง่าย: “ยางแตก = คุมทิศทางก่อน หยุดให้ปลอดภัย อย่าฝืน taxi”</div>
+  </section>
+
+  <section class="card">
+    <h2>สรุปจำเร็วทั้ง C105</h2>
+    <div class="flow">
+      <div class="mini"><strong>PMU NORM airstart</strong>ใช้เมื่อ PMU ยังปกติ เป็นวิธีหลักและง่ายที่สุด</div>
+      <div class="mini"><strong>PMU OFF airstart</strong>ใช้เมื่อ PMU FAIL — manual มากขึ้น และ PCL movement สำคัญที่สุด</div>
+      <div class="mini"><strong>Immediate airstart</strong>ใช้เมื่ออยู่ต่ำ/เวลาไม่พอ — ย่อขั้นตอนเพื่อรีบได้ thrust</div>
+      <div class="mini"><strong>Low altitude rule</strong>ต่ำกว่า 2000 ft AGL อย่าหน่วงการ eject เพราะมัวแต่พยายาม restart</div>
+      <div class="mini"><strong>Blown tire</strong>รักษา directional control, stop safely, do not taxi with a flat tire</div>
+      <div class="mini"><strong>Common thread</strong>ทุกหัวข้อคือ “Aviate — Decide early — Don’t make it worse”</div>
+    </div>
+  </section>
+</main>
+<footer>
+  สรุปนี้จัดทำเพื่อการทบทวนเท่านั้น • ให้ยึด T-6C Flight Manual, checklist และ SOP หน่วยเป็นหลักในการใช้งานจริง
+</footer>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C104 สิ่งที่ต้องรู้ — T-6C Systems Study Notes</title>
+<style>
+:root{
+  --bg:#f6f8fc;--card:#ffffff;--ink:#172033;--muted:#596579;--line:#dbe2ee;
+  --blue:#1d4ed8;--navy:#0f172a;--red:#dc2626;--amber:#b45309;--green:#047857;--violet:#6d28d9;
+  --soft-blue:#eaf1ff;--soft-red:#fff1f2;--soft-yellow:#fffbeb;--soft-green:#ecfdf5;--soft-violet:#f3e8ff;
+  --shadow:0 10px 30px rgba(15,23,42,.08);--radius:22px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,"Noto Sans Thai",Arial,sans-serif;background:linear-gradient(180deg,#eaf2ff 0%,var(--bg) 320px);color:var(--ink);line-height:1.75}
+header{padding:48px 20px 24px;text-align:center}
+header .eyebrow{display:inline-block;background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe;border-radius:999px;padding:6px 14px;font-weight:900;margin-bottom:14px}
+header h1{margin:0 auto 12px;max-width:1040px;font-size:clamp(30px,5vw,54px);line-height:1.08;letter-spacing:-.035em}
+header p{margin:0 auto;max-width:960px;color:var(--muted);font-size:18px}
+main{max-width:1160px;margin:0 auto;padding:16px 20px 62px}
+footer{max-width:1160px;margin:0 auto 50px;padding:0 20px;color:var(--muted);font-size:14px;text-align:center}
+a{color:var(--blue)}
+.notice,.logic,.danger,.good,.note,.callout{border-radius:17px;padding:16px 18px;margin:18px 0;border:1px solid var(--line);box-shadow:0 4px 16px rgba(15,23,42,.04)}
+.notice{background:var(--soft-yellow);border-color:#fde68a;border-left:7px solid var(--amber)}
+.logic{background:var(--soft-blue);border-color:#bfdbfe;border-left:7px solid var(--blue);font-weight:800}
+.danger{background:var(--soft-red);border-color:#fecdd3;border-left:7px solid var(--red)}
+.good{background:var(--soft-green);border-color:#bbf7d0;border-left:7px solid var(--green)}
+.note{background:#f8fafc;border-color:#cbd5e1;border-left:7px solid #64748b}.callout{background:var(--soft-violet);border-color:#ddd6fe;border-left:7px solid var(--violet)}
+.toc,.mini,section.card{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}
+.toc{border-radius:var(--radius);padding:20px;margin:20px 0 28px}.toc h2{margin:0 0 12px;font-size:22px}.toc-grid,.summary,.flow,.two,.three{display:grid;gap:12px}.toc-grid{grid-template-columns:repeat(auto-fit,minmax(255px,1fr))}.summary{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:24px 0}.flow,.two{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin:14px 0}.three{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin:14px 0}
+.toc a{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:14px;color:var(--blue);text-decoration:none;background:#fbfdff;font-weight:800}.toc a:hover{background:var(--soft-blue)}
+.mini{border-radius:18px;padding:16px}.mini strong{display:block;color:var(--blue);font-size:18px;margin-bottom:6px}.mini small{color:var(--muted)}
+section.card{border-radius:26px;padding:26px;margin:24px 0}section.card h2{margin:0 0 14px;font-size:clamp(24px,3vw,34px);line-height:1.25;letter-spacing:-.02em}h3{margin:22px 0 10px;color:#111827;font-size:21px}h4{margin:0 0 8px;color:#0f2e6e;font-size:17px}p{margin:10px 0}ul,ol{padding-left:26px;margin:10px 0}li{margin:6px 0}.tag{display:inline-block;border-radius:999px;padding:4px 10px;margin:0 4px 8px 0;background:#eef2ff;color:#3730a3;font-size:14px;font-weight:800}
+.step,.subcard{background:#fbfdff;border:1px solid var(--line);border-radius:16px;padding:14px}.step b{display:block;color:#123d86;font-size:17px;margin:0 0 4px}.subcard h4{display:block;color:#123d86;font-size:17px;margin:0 0 4px}
+.checklist{background:#0f172a;color:#e5e7eb;border-radius:18px;padding:18px 20px;margin:16px 0;overflow:auto}.checklist h3{color:#fff;margin-top:0}.checklist strong{color:#fff}.checklist .dim{color:#cbd5e1}
+.mem{font-size:20px;font-weight:900;text-align:center;background:#f8fafc;border:1px dashed #94a3b8;border-radius:16px;padding:14px;margin-top:18px}table{width:100%;border-collapse:collapse;margin:16px 0;border-radius:14px;border:1px solid var(--line);overflow:hidden}th,td{border-bottom:1px solid var(--line);padding:12px 14px;vertical-align:top;text-align:left}th{background:#f1f5f9;color:#0f172a}tr:last-child td{border-bottom:none}.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#eef2ff;color:#3730a3;border-radius:8px;padding:1px 6px;font-weight:800}.red{color:#b91c1c;font-weight:900}.amber{color:#92400e;font-weight:900}.green{color:#047857;font-weight:900}details{background:#fbfdff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:10px 0}summary{cursor:pointer;font-weight:800;color:#123d86}.hr{height:1px;background:var(--line);margin:20px 0}.formula{background:#111827;color:#f9fafb;border-radius:16px;padding:16px;font-weight:800;overflow:auto}.formula code{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+@media print{body{background:white;color:black}.toc,.mini,section.card,.notice,.logic,.danger,.good,.note,.callout{box-shadow:none;break-inside:avoid}a{color:black;text-decoration:none}.checklist{background:white;color:black;border:1px solid #222}.checklist h3,.checklist strong{color:black}}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">C104 สิ่งที่ต้องรู้</div>
+  <h1>T-6C Systems / Abnormal Study Notes</h1>
+  <p>สรุปเพื่อเข้าใจ logic ของ 6 หัวข้อ: Fuel System Failure &amp; Fuel Balancing, Hydraulic System Failure, OBOGS Failure, Electrical Failure, Avionic Failure และ HUD Symbology</p>
+</header>
+<main>
+  <div class="notice"><strong>Training aid only:</strong> เอกสารนี้ใช้เพื่อทบทวนความเข้าใจและลำดับความคิด ไม่ใช้แทน Flight Manual, Checklist, SOP หรือคำสั่งหน่วยในการปฏิบัติจริง เวลาเจอเหตุจริงให้ยึดเอกสารทางการเป็นหลัก</div>
+
+  <nav class="toc"><h2>สารบัญ</h2><div class="toc-grid">
+    <a href="#fuel">๑.๑ Fuel System Failure and Fuel Balancing Procedure</a>
+    <a href="#hyd">๑.๒ Hydraulic System Failure</a>
+    <a href="#obogs">๑.๓ OBOGS Failure</a>
+    <a href="#elec">๑.๔ Electrical Failure</a>
+    <a href="#avionics">๑.๕ Avionic Failure</a>
+    <a href="#hud">๑.๖ HUD Symbology</a>
+  </div></nav>
+
+  <div class="summary">
+    <div class="mini"><strong>Aviate first</strong>คุม attitude, airspeed, flight path และ terrain clearance ก่อนค่อยเข้า abnormal checklist</div>
+    <div class="mini"><strong>Know the system effect</strong>ทุก failure ต้องคิดว่า “อะไรหายไป” เช่น fuel feed, hydraulic assist, oxygen source, electrical bus หรือ display source</div>
+    <div class="mini"><strong>Communicate early</strong>ถ้าเรื่องนั้นกระทบ mission หรือ safety ให้บอก ATC/crew เร็ว: position, problem, intention</div>
+    <div class="mini"><strong>Land with a plan</strong>หลาย failure ไม่ได้บังคับลงทันที แต่ต้องเลือกสนาม, configuration และ landing technique ให้เหมาะกับข้อจำกัดของระบบ</div>
+  </div>
+
+  <section class="card" id="fuel">
+    <h2>๑.๑ Fuel System Failure and Fuel Balancing Procedure</h2><span class="tag">Fuel feed</span><span class="tag">Boost pump</span><span class="tag">Fuel imbalance</span><span class="tag">Land as soon as practical</span>
+    <p>หัวข้อนี้ต้องแยกเป็น 2 เรื่อง: <strong>fuel system failure</strong> และ <strong>fuel balancing</strong> เพราะอย่างแรกคือความผิดปกติของระบบจ่ายเชื้อเพลิง ส่วนอย่างหลังคือการจัดการเชื้อเพลิงซ้าย-ขวาให้สมดุลเพื่อลด asymmetry และคงการ feed ให้เหมาะสม</p>
+    <div class="logic">Mental model: <strong>Fuel problem = ตรวจว่ามี fuel จริงไหม, feed ปกติไหม, imbalance มากไหม, และมันกำลังพาไปสู่ engine malfunction หรือไม่</strong></div>
+    <div class="two">
+      <div class="subcard"><h4>สิ่งที่ต้องนึกถึงเมื่อเกิด fuel malfunction</h4><ul>
+        <li>Fuel quantity ที่เห็นเชื่อถือได้หรือไม่</li>
+        <li>Fuel flow สูงผิดปกติ / fluctuation หรือไม่</li>
+        <li>มี warning/caution เช่น <span class="amber">FP FAIL</span>, low fuel หรือ indication related fuel pump หรือไม่</li>
+        <li>เครื่องยนต์เริ่มมีอาการ power loss, surging หรือ flameout tendency หรือไม่</li>
+      </ul></div>
+      <div class="subcard"><h4>เป้าหมายของ fuel balancing</h4><ul>
+        <li>ลด lateral imbalance</li>
+        <li>ทำให้ feed จาก tank ที่มี fuel มากกว่าถูกใช้ก่อน</li>
+        <li>คง controllability และลด trim burden</li>
+        <li>ป้องกันไม่ให้ imbalance ไปไกลจนจำกัดการบิน/landing</li>
+      </ul></div>
+    </div>
+    <table>
+      <tr><th>อาการ/ประเด็น</th><th>ความหมายทางระบบ</th><th>ผลกับการตัดสินใจ</th></tr>
+      <tr><td>Fuel flow สูงมากผิดปกติ</td><td>อาจบ่งชี้ fuel system malfunction และมีความเป็นไปได้ของ engine failure</td><td>เตรียม nearest suitable field และมองภาพแบบ engine problem ไม่ใช่แค่ quantity issue</td></tr>
+      <tr><td>Fuel quantity ซ้าย-ขวาไม่เท่ากัน</td><td>เกิด imbalance / automatic balancing อาจไม่ทำงานเต็มที่</td><td>ต้องวางแผน balance และ monitor controllability</td></tr>
+      <tr><td>Fuel pressure/pump fault</td><td>การ feed เชื้อเพลิงอาจไม่เป็นไปตามปกติ</td><td>ตาม checklist, ลดความเสี่ยง และเตรียมลงสนาม</td></tr>
+    </table>
+    <div class="checklist"><h3>Study logic</h3><ol>
+      <li><strong>Confirm indications</strong> <span class="dim">ดู quantity, fuel flow, engine response, warning/caution</span></li>
+      <li><strong>If engine-related symptoms exist, think PEL / nearest suitable field</strong></li>
+      <li><strong>Minimize unnecessary configuration changes</strong></li>
+      <li><strong>If imbalance exists, use the appropriate balancing procedure / tank selection logic per checklist</strong></li>
+      <li><strong>Recheck trend</strong> ว่า imbalance ดีขึ้นหรือแย่ลง</li>
+      <li><strong>Plan recovery / landing before the problem becomes an engine problem</strong></li>
+    </ol></div>
+    <div class="note"><strong>ข้อคิดสำคัญ:</strong> ถ้า fuel issue มาพร้อมอาการ engine roughness, power loss, surging หรือ abnormal fuel flow ให้เปลี่ยน mindset ไปทาง “impending engine failure” ทันที</div>
+    <div class="mem">จำง่าย: “Fuel มีไหม — Feed ดีไหม — Balance หรือยัง — ถ้าเริ่มกระทบ engine ให้รีบลง”</div>
+  </section>
+
+  <section class="card" id="hyd">
+    <h2>๑.๒ Hydraulic System Failure</h2><span class="tag">Gear</span><span class="tag">Flap</span><span class="tag">Brake/NWS effect</span><span class="tag">Emergency extension</span>
+    <p>ระบบไฮดรอลิกใน T-6C มีผลกับอุปกรณ์หลายอย่างที่เกี่ยวข้องกับการลงจอดและการควบคุมภาคพื้น เช่น landing gear actuation, flap operation, nosewheel steering และ braking characteristics บางส่วน ดังนั้นเมื่อ hydraulic system fail ประเด็นใหญ่ไม่ใช่ “บินต่อได้ไหม” อย่างเดียว แต่คือ “จะลงอย่างไร”</p>
+    <div class="logic">Mental model: <strong>Hydraulic failure = คิดถึง landing configuration ทันที: gear จะลงปกติไหม, flap ใช้ได้ไหม, braking/NWS จะเป็นอย่างไร</strong></div>
+    <div class="three">
+      <div class="step"><b>1. Aviate</b>รักษา aircraft control และประเมินว่ามีผลต่อ controllability ระหว่างบินหรือไม่</div>
+      <div class="step"><b>2. Diagnose</b>ดู indications, affected systems และ secondary effects เช่น gear/flap indications</div>
+      <div class="step"><b>3. Configure late and deliberately</b>อย่ารีบเปลี่ยน configuration ถ้ายังไม่พร้อม เพราะอาจเสีย option</div>
+      <div class="step"><b>4. Plan the landing</b>เลือกสนามยาวพอ, ลมเหมาะ, emergency services พร้อม</div>
+      <div class="step"><b>5. Brief the technique</b>no flap / emergency gear / directional control / brake use</div>
+      <div class="step"><b>6. Prepare for follow-on problems</b>gear unsafe, high landing speed, long roll, steering issues</div>
+    </div>
+    <table>
+      <tr><th>ระบบย่อยที่อาจได้รับผล</th><th>ผลที่นักบินจะรู้สึก</th><th>สิ่งที่ต้องคิดต่อ</th></tr>
+      <tr><td>Landing gear</td><td>gear อาจไม่ลงปกติ หรือ indication ไม่สมบูรณ์</td><td>เตรียมใช้ emergency extension / gear unsafe landing plan</td></tr>
+      <tr><td>Flaps</td><td>flap อาจค้างหรือใช้ไม่ได้</td><td>landing speed สูงขึ้น, touchdown distance ยาวขึ้น</td></tr>
+      <tr><td>Steering / braking</td><td>การคุมทิศทางบน runway อาจยากขึ้น</td><td>เลือก runway กว้าง/ยาว และใช้ brakes อย่างระมัดระวัง</td></tr>
+    </table>
+    <div class="danger"><strong>หลุมพรางที่พบบ่อย:</strong> รอวางแผน landing ช้าเกินไป ทั้งที่ hydraulic malfunction ส่วนใหญ่ “บทหนักสุด” จะมาในช่วง approach/landing มากกว่าระหว่าง cruise</div>
+    <div class="good"><strong>สนามที่เหมาะ:</strong> runway ยาว, crosswind ต่ำ, surface ดี, rescue พร้อม และมีเวลา setup straight-in approach</div>
+    <div class="mem">จำง่าย: “Hydraulic fail = คิดถึง gear, flap, brake, steering แล้วเลือกสนามให้ดี”</div>
+  </section>
+
+  <section class="card" id="obogs">
+    <h2>๑.๓ OBOGS Failure</h2><span class="tag">Oxygen</span><span class="tag">Physiological symptoms</span><span class="tag">Emergency oxygen</span><span class="tag">Descend</span>
+    <p><strong>OBOGS</strong> คือ On-Board Oxygen Generating System ทำหน้าที่สร้างออกซิเจนจาก conditioned bleed air ให้กับนักบินทั้งสอง ถ้า OBOGS fail นักบินยังอาจหายใจอากาศใน cockpit ได้ผ่าน anti-suffocation valve แต่ความเข้มข้นออกซิเจนจะไม่เพียงพอเมื่ออยู่ที่ความสูงสูง ๆ ดังนั้นหัวข้อนี้ต้องคิดเป็นทั้ง <strong>system failure</strong> และ <strong>physiological emergency</strong></p>
+    <div class="logic">Mental model: <strong>OBOGS failure = เชื่อร่างกายมากกว่าแค่ไฟเตือน ถ้ามีอาการ hypoxia ให้แก้เหมือน physiological emergency ทันที</strong></div>
+    <div class="two">
+      <div class="subcard"><h4>Indications</h4><ul>
+        <li><span class="red">OBOGS FAIL</span> warning / caution indications</li>
+        <li>Flow indicator/blinker ผิดปกติ</li>
+        <li>หายใจลำบาก, เวียนหัว, มึนงง, tunnel vision</li>
+        <li>white dust / respiratory irritation ซึ่งอาจบ่งชี้ concentrator malfunction</li>
+      </ul></div>
+      <div class="subcard"><h4>Action mindset</h4><ul>
+        <li>Secure mask and regulator connection ก่อน</li>
+        <li>ใช้ emergency oxygen source ถ้าจำเป็น</li>
+        <li>descend to safe altitude</li>
+        <li>terminate mission / land as required</li>
+      </ul></div>
+    </div>
+    <div class="checklist"><h3>Study logic</h3><ol>
+      <li><strong>Check mask fit and oxygen connections</strong> <span class="dim">บางครั้ง fault เกิดจาก mask down/loose</span></li>
+      <li><strong>If symptoms persist, treat as real oxygen problem</strong></li>
+      <li><strong>Select / activate emergency oxygen as required</strong></li>
+      <li><strong>Descend</strong> ไป altitude ที่ลดความต้องการออกซิเจน</li>
+      <li><strong>Communicate and terminate the sortie</strong></li>
+    </ol></div>
+    <div class="danger"><strong>ข้อสำคัญ:</strong> inflight engine failure หรือ total electrical power loss อาจทำให้ bleed air supply ไป OBOGS หาย และกลายเป็น OBOGS failure ตามมาได้</div>
+    <div class="note"><strong>อย่าหลงเชื่อแค่อาการชั่วคราว:</strong> hypoxia มักทำให้ judgment แย่ลง ดังนั้นถ้ารู้สึก “แปลก” ให้ลงมือแก้ก่อนคิดนาน</div>
+    <div class="mem">จำง่าย: “Mask — Emergency oxygen — Descend — Land”</div>
+  </section>
+
+  <section class="card" id="elec">
+    <h2>๑.๔ Electrical Failure</h2><span class="tag">Battery/Generator</span><span class="tag">Load shedding</span><span class="tag">Essential systems</span><span class="tag">Avionics impact</span>
+    <p>Electrical failure คือหัวข้อใหญ่เพราะมันไม่ใช่แค่ไฟหาย แต่หมายถึง <strong>หลายระบบจะล้มตาม bus ที่ดับ</strong> เช่น displays, radios, avionics, lights, sensors หรือ systems support อื่น ๆ ความเข้าใจหลักคือแยกก่อนว่าเป็น <strong>generator problem</strong>, <strong>battery problem</strong> หรือ <strong>total electrical failure</strong></p>
+    <div class="logic">Mental model: <strong>Electrical problem = รู้ว่า bus ไหนยังอยู่, ของสำคัญอะไรยังมี, battery จะอยู่ได้นานแค่ไหน และต้องลงเมื่อไร</strong></div>
+    <table>
+      <tr><th>ชนิดปัญหา</th><th>ผลที่เป็นไปได้</th><th>แนวคิด</th></tr>
+      <tr><td>Generator / charging problem</td><td>ระบบยังทำงานจาก battery ได้ชั่วคราว แต่ endurance จำกัด</td><td>ลด electrical load และรีบไปสนาม</td></tr>
+      <tr><td>Battery / bus issue</td><td>บาง display/annunciations อาจหายหรือ reset</td><td>monitor essential indications และเตรียม partial panel/standby use</td></tr>
+      <tr><td>Total electrical failure</td><td>สูญเสีย avionics/display หลายรายการ, radios อาจใช้ไม่ได้</td><td>ใช้ standby references, วางแผนลงเร็ว และคาด OBOGS impact</td></tr>
+    </table>
+    <div class="three">
+      <div class="step"><b>1. Confirm</b>ดู volt/amp, cautions, GEN/BAT indications และสิ่งที่หลุดไป</div>
+      <div class="step"><b>2. Shed load</b>ตัดอุปกรณ์ที่ไม่จำเป็นเพื่อยืด battery life</div>
+      <div class="step"><b>3. Preserve essentials</b>เหลือเฉพาะสิ่งที่จำเป็นต่อ navigate / communicate / land</div>
+      <div class="step"><b>4. Plan for degraded avionics</b>คาดว่า MFD, HUD, radios หรือ nav aids บางส่วนอาจหายตาม bus</div>
+      <div class="step"><b>5. Consider follow-on failures</b>โดยเฉพาะ OBOGS/bleed-support implications ในบางสถานการณ์</div>
+      <div class="step"><b>6. Land before battery is gone</b>อย่ารอให้กลายเป็น total failure โดยไม่ตั้งใจ</div>
+    </div>
+    <div class="good"><strong>Priority checklist ในหัว:</strong> flight path → standby references → one good comm if available → nearest suitable field</div>
+    <div class="danger"><strong>หลุมพราง:</strong> พยายาม keep everything on ไว้หมดเพราะกลัวเสีย situational awareness สุดท้าย battery หมดเร็วกว่าเดิม</div>
+    <div class="mem">จำง่าย: “รู้ว่าอะไรยังมี — ลดโหลด — เก็บไฟไว้ให้ของจำเป็น — ลงก่อนมืดหมดทั้งลำ”</div>
+  </section>
+
+  <section class="card" id="avionics">
+    <h2>๑.๕ Avionic Failure</h2><span class="tag">IAC</span><span class="tag">Display reversion</span><span class="tag">Loss of HUD/MFD function</span><span class="tag">Mission impact</span>
+    <p>Avionic failure แตกต่างจาก electrical failure ตรงที่ไฟอาจยังมี แต่ <strong>computer/display chain</strong> บางส่วน fail เช่น IAC, MFD, ADC inputs, navigation integration หรือ display processor ส่งผลให้ข้อมูลบางอย่างหาย, ซ้ำซ้อน หรือถูก reversion ไปแสดงที่อื่น</p>
+    <div class="logic">Mental model: <strong>Avionics fail = ไม่ได้แปลว่าบินไม่ได้ทันที แต่ต้องรู้ว่าจะดูข้อมูลอะไรจากที่ไหนแทน</strong></div>
+    <div class="two">
+      <div class="subcard"><h4>สิ่งที่มักเกิดเมื่อ avionics fail</h4><ul>
+        <li>HUD หายหรือ repeater mode เปลี่ยน</li>
+        <li>MFD หนึ่งจอหรือหลายจอ blank / freeze / degraded</li>
+        <li>NAV/Map/Sensor integration ผิดปกติ</li>
+        <li>บาง reversion mode แสดงข้อมูลจำเป็นแบบจำกัด</li>
+      </ul></div>
+      <div class="subcard"><h4>สิ่งที่นักบินต้องทำ</h4><ul>
+        <li>cross-check standby instruments</li>
+        <li>reconfigure display ให้เหลือข้อมูล primary flight / engine / nav ที่จำเป็น</li>
+        <li>ลด task loading</li>
+        <li>brief crew ว่าใคร monitor อะไรจากจอไหน</li>
+      </ul></div>
+    </div>
+    <table>
+      <tr><th>Failure type</th><th>ผลต่อการใช้งาน</th><th>แนวคิด</th></tr>
+      <tr><td>Single display failure</td><td>ข้อมูลบางหน้าเรียกไม่ได้ที่จอนั้น</td><td>ย้าย page ไปจออื่น และลด nonessential pages</td></tr>
+      <tr><td>IAC / processing failure</td><td>HUD, repeat mode, integrated navigation หรือ symbol generation อาจหายหลายส่วน</td><td>บินด้วย remaining displays/standby และ terminate mission</td></tr>
+      <tr><td>Sensor/data source failure</td><td>ข้อมูล air data / nav / heading อาจไม่ตรง</td><td>identify bad source แล้วใช้ source ที่เชื่อถือได้กว่า</td></tr>
+    </table>
+    <div class="note"><strong>CRM สำคัญมาก:</strong> ในเครื่องสองที่นั่งต้องแบ่งหน้าที่ให้ชัด เช่น front คุม aircraft, rear จัด display/COM/navigation troubleshooting</div>
+    <div class="mem">จำง่าย: “Avionics fail = หา source ที่ยังเชื่อถือได้ แล้วบินจากตรงนั้น”</div>
+  </section>
+
+  <section class="card" id="hud">
+    <h2>๑.๖ HUD Symbology</h2><span class="tag">Flight path</span><span class="tag">Airspeed/Altitude</span><span class="tag">Pitch ladder</span><span class="tag">Scan discipline</span>
+    <p>หัวข้อนี้ไม่ใช่ emergency โดยตรง แต่เป็น “พื้นฐานที่ต้องรู้” เพราะถ้าเข้าใจ HUD symbology ดี นักบินจะบริหาร energy, attitude และ flight path ได้แม่นขึ้น โดยเฉพาะในช่วง takeoff, rejoin, aerobatics entry, instrument references และ landing</p>
+    <div class="logic">Mental model: <strong>HUD ไม่ได้แทนสมองนักบิน — มันแค่เอาข้อมูลสำคัญมาไว้ใน line of sight เพื่อให้ scan สั้นลง</strong></div>
+    <div class="three">
+      <div class="step"><b>Waterline / reference line</b>ใช้เป็น reference attitude ของเครื่อง ไม่ใช่ flight path จริงเสมอไป</div>
+      <div class="step"><b>Flight Path Marker (FPM)</b>บอกว่า aircraft “กำลังไปทางไหน” บนโลกจริง ถ้า crosswind/side slip จะไม่ตรงกับหัวเครื่อง</div>
+      <div class="step"><b>Pitch ladder</b>ช่วยประเมิน pitch attitude และ bank relation</div>
+      <div class="step"><b>Airspeed tape / cue</b>ช่วยคุม energy โดยไม่ต้องก้มลงดูตลอด</div>
+      <div class="step"><b>Altitude / VSI / heading data</b>เป็น core information สำหรับ scan แบบ outside-inside</div>
+      <div class="step"><b>Steering / mode-dependent symbology</b>บาง symbol จะขึ้นตาม nav/approach/training mode ที่เลือกอยู่</div>
+    </div>
+    <table>
+      <tr><th>Symbol / กลุ่มข้อมูล</th><th>ใช้ดูอะไร</th><th>ข้อคิดเวลาใช้งาน</th></tr>
+      <tr><td>FPM</td><td>flight path จริง, approach aim, climb path</td><td>ถ้าต้องการให้เครื่องไปที่ไหน พยายามวาง FPM ไปที่นั่น</td></tr>
+      <tr><td>Pitch ladder</td><td>attitude awareness</td><td>อย่าใช้แทน outside references ทั้งหมด</td></tr>
+      <tr><td>Airspeed / Altitude</td><td>energy control และ trend</td><td>ต้องอ่าน trend ร่วมกับ attitude ไม่ใช่ดูตัวเลขอย่างเดียว</td></tr>
+      <tr><td>Heading / steering cues</td><td>navigation / intercept</td><td>รู้ว่า cue นั้นมาจาก mode อะไร เพื่อไม่ตีความผิด</td></tr>
+    </table>
+    <div class="good"><strong>เทคนิคการจำ HUD:</strong> แยกเป็น 3 กลุ่ม — “Where the nose is” (attitude), “Where the jet is going” (FPM), และ “How the energy is changing” (airspeed/altitude/trend)</div>
+    <div class="danger"><strong>ข้อผิดพลาดที่พบบ่อย:</strong> fixation กับ HUD จนไม่ scan outside/standby หรืออ่าน FPM กับ waterline สลับความหมายกัน</div>
+    <div class="mem">จำง่าย: “HUD = Attitude + Flight Path + Energy”</div>
+  </section>
+
+  <section class="card">
+    <h2>สรุปจำเร็วทั้ง C104</h2>
+    <div class="flow">
+      <div class="mini"><strong>Fuel</strong>ดู quantity, feed, flow และ imbalance — ถ้ากระทบ engine ให้คิด nearest suitable field</div>
+      <div class="mini"><strong>Hydraulic</strong>อย่ามองแค่ตอนบิน ให้คิด landing gear / flap / steering / brake ตั้งแต่ต้น</div>
+      <div class="mini"><strong>OBOGS</strong>เช็ค mask, ใช้ emergency oxygen ถ้าจำเป็น, descend และ land</div>
+      <div class="mini"><strong>Electrical</strong>รู้ว่าอะไรยังมี, shed load, เก็บไฟให้ของจำเป็น และลงก่อน battery หมด</div>
+      <div class="mini"><strong>Avionics</strong>หา source/display ที่ยังเชื่อถือได้ แล้วจัด scan ใหม่</div>
+      <div class="mini"><strong>HUD</strong>เข้าใจ FPM, attitude และ energy เพื่อใช้เป็นเครื่องมือ ไม่ใช่เป็นสิ่งรบกวน</div>
+    </div>
+  </section>
+</main>
+<footer>
+  สรุปนี้จัดทำเพื่อการทบทวนเท่านั้น • ให้ยึด T-6C Flight Manual, checklist และ SOP หน่วยเป็นหลักในการใช้งานจริง
+</footer>
+</body>
+</html>

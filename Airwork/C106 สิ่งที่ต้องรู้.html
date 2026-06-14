@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C106 สิ่งที่ต้องรู้ — T-6C Engine / Trim / Fuel Study Notes</title>
+<style>
+:root{
+  --bg:#f6f8fc;--card:#ffffff;--ink:#172033;--muted:#596579;--line:#dbe2ee;
+  --blue:#1d4ed8;--navy:#0f172a;--red:#dc2626;--amber:#b45309;--green:#047857;--violet:#6d28d9;
+  --soft-blue:#eaf1ff;--soft-red:#fff1f2;--soft-yellow:#fffbeb;--soft-green:#ecfdf5;--soft-violet:#f3e8ff;
+  --shadow:0 10px 30px rgba(15,23,42,.08);--radius:22px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,"Noto Sans Thai",Arial,sans-serif;background:linear-gradient(180deg,#eaf2ff 0%,var(--bg) 320px);color:var(--ink);line-height:1.75}
+header{padding:48px 20px 24px;text-align:center}
+header .eyebrow{display:inline-block;background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe;border-radius:999px;padding:6px 14px;font-weight:900;margin-bottom:14px}
+header h1{margin:0 auto 12px;max-width:1040px;font-size:clamp(30px,5vw,54px);line-height:1.08;letter-spacing:-.035em}
+header p{margin:0 auto;max-width:960px;color:var(--muted);font-size:18px}
+main{max-width:1160px;margin:0 auto;padding:16px 20px 62px}
+footer{max-width:1160px;margin:0 auto 50px;padding:0 20px;color:var(--muted);font-size:14px;text-align:center}
+a{color:var(--blue)}
+.notice,.logic,.danger,.good,.note,.callout{border-radius:17px;padding:16px 18px;margin:18px 0;border:1px solid var(--line);box-shadow:0 4px 16px rgba(15,23,42,.04)}
+.notice{background:var(--soft-yellow);border-color:#fde68a;border-left:7px solid var(--amber)}
+.logic{background:var(--soft-blue);border-color:#bfdbfe;border-left:7px solid var(--blue);font-weight:800}
+.danger{background:var(--soft-red);border-color:#fecdd3;border-left:7px solid var(--red)}
+.good{background:var(--soft-green);border-color:#bbf7d0;border-left:7px solid var(--green)}
+.note{background:#f8fafc;border-color:#cbd5e1;border-left:7px solid #64748b}.callout{background:var(--soft-violet);border-color:#ddd6fe;border-left:7px solid var(--violet)}
+.toc,.mini,section.card{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}
+.toc{border-radius:var(--radius);padding:20px;margin:20px 0 28px}.toc h2{margin:0 0 12px;font-size:22px}.toc-grid,.summary,.flow,.two,.three{display:grid;gap:12px}.toc-grid{grid-template-columns:repeat(auto-fit,minmax(255px,1fr))}.summary{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:24px 0}.flow,.two{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin:14px 0}.three{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin:14px 0}
+.toc a{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:14px;color:var(--blue);text-decoration:none;background:#fbfdff;font-weight:800}.toc a:hover{background:var(--soft-blue)}
+.mini{border-radius:18px;padding:16px}.mini strong{display:block;color:var(--blue);font-size:18px;margin-bottom:6px}.mini small{color:var(--muted)}
+section.card{border-radius:26px;padding:26px;margin:24px 0}section.card h2{margin:0 0 14px;font-size:clamp(24px,3vw,34px);line-height:1.25;letter-spacing:-.02em}h3{margin:22px 0 10px;color:#111827;font-size:21px}h4{margin:0 0 8px;color:#0f2e6e;font-size:17px}p{margin:10px 0}ul,ol{padding-left:26px;margin:10px 0}li{margin:6px 0}.tag{display:inline-block;border-radius:999px;padding:4px 10px;margin:0 4px 8px 0;background:#eef2ff;color:#3730a3;font-size:14px;font-weight:800}
+.step,.subcard{background:#fbfdff;border:1px solid var(--line);border-radius:16px;padding:14px}.step b{display:block;color:#123d86;font-size:17px;margin:0 0 4px}.subcard h4{display:block;color:#123d86;font-size:17px;margin:0 0 4px}
+.checklist{background:#0f172a;color:#e5e7eb;border-radius:18px;padding:18px 20px;margin:16px 0;overflow:auto}.checklist h3{color:#fff;margin-top:0}.checklist strong{color:#fff}.checklist .dim{color:#cbd5e1}
+.mem{font-size:20px;font-weight:900;text-align:center;background:#f8fafc;border:1px dashed #94a3b8;border-radius:16px;padding:14px;margin-top:18px}table{width:100%;border-collapse:collapse;margin:16px 0;border-radius:14px;border:1px solid var(--line);overflow:hidden}th,td{border-bottom:1px solid var(--line);padding:12px 14px;vertical-align:top;text-align:left}th{background:#f1f5f9;color:#0f172a}tr:last-child td{border-bottom:none}
+@media print{body{background:white;color:black}.toc,.mini,section.card,.notice,.logic,.danger,.good,.note,.callout{box-shadow:none;break-inside:avoid}a{color:black;text-decoration:none}.checklist{background:white;color:black;border:1px solid #222}.checklist h3,.checklist strong{color:black}}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">C106 สิ่งที่ต้องรู้</div>
+  <h1>T-6C Engine / Trim / Fuel Study Notes</h1>
+  <p>สรุปเพื่อเข้าใจ logic ของ 4 หัวข้อ: Uncommanded Prop Feather, Uncommanded Power Change, Trim System Malfunction และ Suspected Fuel Leak</p>
+</header>
+<main>
+  <div class="notice"><strong>Training aid only:</strong> เอกสารนี้ใช้เพื่อทบทวนแนวคิดและลำดับการคิด ไม่ใช้แทน Flight Manual, checklist, SOP หรือคำสั่งหน่วย ในสถานการณ์จริงให้ยึดเอกสารทางการเป็นหลัก</div>
+
+  <nav class="toc"><h2>สารบัญ</h2><div class="toc-grid">
+    <a href="#prop">๑.๑ Uncommanded Prop Feather</a>
+    <a href="#power">๑.๒ Uncommanded Power Change</a>
+    <a href="#trim">๑.๓ Trim System Malfunction</a>
+    <a href="#fuelleak">๑.๔ Suspected Fuel Leak</a>
+  </div></nav>
+
+  <div class="summary">
+    <div class="mini"><strong>Aviate first</strong>ทุกหัวข้อต้องเริ่มจากคุม attitude, airspeed, flight path และหาทางลงก่อน</div>
+    <div class="mini"><strong>PCL discipline</strong>ใน engine malfunction หลายอย่าง ตำแหน่ง PCL ที่เหมาะสมช่วยทั้งการวินิจฉัยและลดความเสียหาย</div>
+    <div class="mini"><strong>System logic matters</strong>ต้องรู้ว่าปัญหามาจาก PMU, propeller control, trim motor หรือ fuel balancing/feed</div>
+    <div class="mini"><strong>Plan the landing early</strong>หลายเหตุยังบินได้ แต่ไม่ควรฝืน sortie ต่อ ให้คิด nearest suitable field และ landing limitations ทันที</div>
+  </div>
+
+  <section class="card" id="prop">
+    <h2>๑.๑ Uncommanded Prop Feather</h2><span class="tag">Loss of thrust</span><span class="tag">NP decrease</span><span class="tag">High torque</span><span class="tag">PROP SYS CB</span>
+    <p>Uncommanded Prop Feather คือกรณีที่ใบพัดเข้าสู่ทิศทาง feather โดยไม่ได้สั่ง ทำให้ thrust หายไปอย่างชัดเจน ทั้งที่ engine บางส่วนอาจยังทำงานอยู่ สาเหตุหนึ่งที่คู่มืออธิบายคือ <strong>feather dump solenoid ได้รับสัญญาณไฟฟ้าผิดพลาด</strong> ทำให้น้ำมันไปควบคุมกลไก pitch ของใบพัดลดลง แล้วใบพัดไหลไปทาง feather</p>
+    <div class="logic">Mental model: <strong>Prop feather โดยไม่ตั้งใจ = thrust หายเพราะ prop ไม่ bite อากาศแล้ว เป้าหมายคือเอา prop ออกจาก feather และคง controllability ให้ได้</strong></div>
+    <div class="two">
+      <div class="subcard"><h4>Indications ที่เด่น</h4><ul>
+        <li>NP ลดลงอย่างรวดเร็ว</li>
+        <li>Torque สูงผิดสัดส่วน</li>
+        <li>Propeller noise เพิ่มขึ้น</li>
+        <li>สูญเสีย thrust อย่างเห็นได้ชัด</li>
+        <li>อาจมี vibration ของเครื่อง/airframe</li>
+      </ul></div>
+      <div class="subcard"><h4>ถ้า PMU หลุด offline</h4><ul>
+        <li><strong>PMU FAIL</strong> warning และ <strong>PMU STATUS</strong> caution จะติด</li>
+        <li>อาจเกิด step change ของ power เมื่อ fuel metering unit revert ไป manual nominal condition</li>
+        <li>ยังต้องคิดเรื่อง landing distance เพิ่ม เพราะ ground idle ไม่พร้อมเมื่อ PMU OFF</li>
+      </ul></div>
+    </div>
+    <div class="checklist"><h3>Core checklist logic</h3><ol>
+      <li><strong>PCL - MID RANGE</strong> <span class="dim">ตำแหน่งประมาณกึ่งกลางระหว่าง IDLE กับ MAX</span></li>
+      <li><strong>PMU switch - OFF</strong></li>
+      <li><strong>PROP SYS circuit breaker - PULL, if NP stable below 40%</strong></li>
+      <li><strong>PCL - As required</strong></li>
+    </ol></div>
+    <table>
+      <tr><th>ขั้นตอน</th><th>ทำไปทำไม</th><th>ข้อควรระวัง</th></tr>
+      <tr><td>PCL ที่ mid range</td><td>ช่วยให้เครื่องมีโอกาส recover ดีขึ้น และลดความเสี่ยง overtorque/overtemp ตอน PMU OFF</td><td>ต่ำเกินไปอาจไม่มีโอกาส recover, สูงเกินไปเสี่ยงเกิน limits</td></tr>
+      <tr><td>PMU OFF</td><td>เพิ่ม oil pressure/volume ไป prop pitch control ใน manual mode อาจพอเอาชนะ localized oil pressure loss ได้</td><td>ถ้า ITT ≥ 820°C มีโอกาส exceed ITT limits เมื่อ switch OFF</td></tr>
+      <tr><td>Pull PROP SYS CB</td><td>ตัดไฟไป feather dump solenoid ถ้าสาเหตุเกิดจากสัญญาณไฟฟ้าผิดพลาด</td><td>ทำเมื่อ NP stable below 40% ตามเกณฑ์</td></tr>
+    </table>
+    <div class="note"><strong>คู่มือระบุ:</strong> เมื่อ pull PROP SYS circuit breaker แล้ว ใบพัดควรเริ่มออกจาก feather ภายในประมาณ 15-20 วินาที</div>
+    <div class="danger"><strong>ข้อจำกัดภาคพื้น:</strong> เมื่อ PMU OFF, ground idle จะไม่ available ระหว่าง landing rollout / taxi จึงต้องวางแผน landing distance เพิ่มจาก idle N1 ที่สูงกว่าเดิม</div>
+    <div class="mem">จำง่าย: “Mid range — PMU OFF — NP ต่ำคงที่ค่อย pull PROP SYS — แล้วคุม PCL ต่อ”</div>
+  </section>
+
+  <section class="card" id="power">
+    <h2>๑.๒ Uncommanded Power Change</h2><span class="tag">Rollback</span><span class="tag">Loss of expected power</span><span class="tag">PMU scheduling</span><span class="tag">Possible engine/prop/fuel issue</span>
+    <p>หัวข้อนี้ใช้เมื่อเครื่องมี <strong>power change ที่ไม่ได้สั่ง</strong> หรือ engine ไม่ให้กำลังตามที่ควรได้ ปัญหาอาจมาจาก PMU scheduling, faulty sensor inputs, oil/engine/fuel contamination, propeller dump solenoid failure หรือ propsleeve touchdown ซึ่งบางกรณีก็ลามไปเป็น uncommanded prop feather ได้</p>
+    <div class="logic">Mental model: <strong>อย่าด่วนสรุปว่าเป็น engine flameout อย่างเดียว — ให้คิดเป็นกลุ่ม “power available ไม่ตรงกับที่ควรเป็น” แล้วใช้ procedure เดียวกันเพื่อลดความเสียหายและเอา power กลับมา</strong></div>
+    <div class="three">
+      <div class="step"><b>1. Recognize</b>สังเกต thrust ลด, fuel flow ต่ำกว่าคาด, N1 ลดโดยไม่สั่ง หรือมี surges / uncontrollable high power</div>
+      <div class="step"><b>2. Stabilize</b>คุม airspeed, aircraft attitude และพิจารณา nearest suitable field ทันที</div>
+      <div class="step"><b>3. Use the checklist</b>procedure นี้ครอบคลุม uncommanded power changes, loss of power และ uncommanded prop feather</div>
+      <div class="step"><b>4. Think PEL</b>ถ้า power ไม่น่าเชื่อถือ ให้คิดแบบ impending engine failure</div>
+      <div class="step"><b>5. Monitor trend</b>ดู NP, torque, ITT, N1, fuel flow และ vibrations ตลอดเวลา</div>
+      <div class="step"><b>6. Decide early</b>ถ้า power ไม่พอให้คง descent rate ที่ต้องการ ให้เตรียม PCL OFF / forced landing / eject ตามสถานการณ์</div>
+    </div>
+    <div class="good"><strong>สิ่งที่ช่วยแยกโรค:</strong> ถ้ามีเสียงดังผิดปกติ, backfire, flames หรือ smoke อาจไปทาง compressor stall มากกว่า ส่วน uncommanded power change มักเด่นที่ power/thrust ไม่สัมพันธ์กับการสั่งและ engine indications</div>
+    <div class="note"><strong>จากคู่มือ:</strong> ถ้า stabilized at 125 KIAS, gear/flaps/speed brake retracted และ 4-6% torque แล้ว VSI ยังมากกว่า 1500 ft/min ให้เพิ่ม torque ตามจำเป็น (สูงสุดถึง 131%) เพื่อพยายามคงประมาณ 1350-1500 ft/min; ถ้ายังไม่พอให้ set PCL OFF</div>
+    <div class="danger"><strong>จุดอันตราย:</strong> ถ้า PMU problem ทำให้ power change แปลก ๆ อย่าพยายาม reset แบบสุ่มโดยไม่ลด power ก่อน เพราะอาจทำให้เกิด step change ที่รุนแรงกว่าเดิม</div>
+    <div class="mem">จำง่าย: “Power ไม่มาตามสั่ง = บินให้ได้ก่อน, คิด PEL, monitor trend, ตัดสินใจลงเร็ว”</div>
+  </section>
+
+  <section class="card" id="trim">
+    <h2>๑.๓ Trim System Malfunction</h2><span class="tag">Trim runaway / stuck</span><span class="tag">Trim interrupt</span><span class="tag">TRIM DISCONNECT</span><span class="tag">TAD</span>
+    <p>Trim system malfunction คือกรณีที่ trim ไม่ทำงาน, ค้าง, หรือทำงานผิดปกติ ทำให้แรงที่นักบินต้องถือควบคุมเพิ่มขึ้น แม้จะไม่ใช่ emergency ใหญ่แบบ engine failure แต่ถ้าปล่อยไว้จะเพิ่ม workload มาก โดยเฉพาะช่วง approach/landing</p>
+    <div class="logic">Mental model: <strong>Trim เสีย = เครื่องยังบินได้ แต่ pilot ต้อง “เอาอำนาจกลับมาอยู่ในมือ” โดยตัด trim ที่มีปัญหาออก แล้วบินด้วยแรงถือแทน</strong></div>
+    <div class="two">
+      <div class="subcard"><h4>สิ่งที่ควรรู้เรื่องระบบ</h4><ul>
+        <li>กด trim interrupt button หรือ set trim disconnect switch ไป disconnect จะตัด trim systems ทั้งหมดและตัด TAD ด้วย</li>
+        <li>ถ้าดึง circuit breaker ของ trim ใด trim นั้นจะใช้ไม่ได้</li>
+        <li>ถ้าดึง rudder trim CB จะเสีย automatic TAD correction inputs ไปด้วย</li>
+      </ul></div>
+      <div class="subcard"><h4>Stuck/Failed Trim checklist</h4><ol>
+        <li><strong>TRIM DISCONNECT switch - NORM</strong></li>
+        <li><strong>AIL/EL TRIM หรือ RUD TRIM circuit breaker(s) - Check, reset if open</strong></li>
+      </ol></div>
+    </div>
+    <table>
+      <tr><th>ชนิดปัญหา</th><th>ผลที่เกิด</th><th>แนวคิดแก้</th></tr>
+      <tr><td>Elevator trim fail</td><td>stick force เพิ่ม โดยเฉพาะหลังลดความเร็วลง</td><td>ถือแรงด้วยมือและวางแผน approach/landing อย่างรู้ตัว</td></tr>
+      <tr><td>Aileron trim fail</td><td>แรง lateral ถือเพิ่มขึ้น</td><td>บินด้วยมือ, trim ไม่ช่วย แต่ยังควบคุมได้</td></tr>
+      <tr><td>Rudder trim / TAD fail</td><td>ต้องใช้ rudder เองมากขึ้นเมื่อ power/configuration เปลี่ยน</td><td>เพิ่ม pilot workload แต่ยังไม่ทำให้ mission impossible ทันที</td></tr>
+    </table>
+    <div class="note"><strong>ตัวเลขที่คู่มือบอก:</strong> ถ้า elevator trim fail ระหว่าง high-speed cruise/descent พอลดความเร็วเพื่อ approach/landing stick force จะขึ้นประมาณ 10 ปอนด์; aileron trim ประมาณ 5 ปอนด์; rudder trim ประมาณ 20 ปอนด์</div>
+    <div class="good"><strong>ถ้าเป็น TAD FAIL:</strong> หมายถึง automatic rudder trim correction หายไป ภาระนักบินเพิ่มขึ้น แต่ไม่มีผลอื่นต่อ mission capability มากนัก และอาจลอง reset TAD circuit breaker ตาม procedure ได้</div>
+    <div class="mem">จำง่าย: “Trim เสีย = ตัดระบบที่เพี้ยน, ถือเครื่องด้วยมือ, บริหาร workload ให้ดี”</div>
+  </section>
+
+  <section class="card" id="fuelleak">
+    <h2>๑.๔ Suspected Fuel Leak</h2><span class="tag">Leaking Fuel from Wing</span><span class="tag">Fuel balance</span><span class="tag">To non-leaking tank</span><span class="tag">Land ASAP</span>
+    <p>หัวข้อนี้ใน manual ใกล้เคียงกับ <strong>Leaking Fuel from Wing</strong> ใช้เมื่อต้องสงสัยว่ามีน้ำมันรั่วจากปีก ไม่ว่าจะจาก birdstrike หรือ system failure เป้าหมายคือ <strong>ลดการสูญเสียน้ำมันรวม</strong> และกันไม่ให้ระบบยัง feed น้ำมันไปยังฝั่งที่รั่วต่อไป</p>
+    <div class="logic">Mental model: <strong>Fuel leak = ต้องหาว่ารั่วจริงไหม, รั่วฝั่งไหน, แล้วสั่งให้ระบบไปใช้ tank ที่ไม่รั่วเพื่อลดการสูญเสีย total usable fuel</strong></div>
+    <div class="three">
+      <div class="step"><b>1. Suspect it</b>สงสัยได้จากเห็นการรั่วด้วยตา, fuel quantity ลดผิดปกติ, imbalance เพิ่ม หรือ FUEL BAL caution ร่วมกับลักษณะการใช้ fuel แปลก ๆ</div>
+      <div class="step"><b>2. Inspect</b>visual inspect aircraft structure ถ้าสถานการณ์อำนวย ว่ามี sign ของ leakage หรือไม่</div>
+      <div class="step"><b>3. Reconfigure fuel balance</b>เข้าระบบ manual fuel balance เพื่อให้ feed ไปฝั่ง non-leaking tank</div>
+      <div class="step"><b>4. Monitor</b>ดู fuel gauges, trend การลดลงของ fuel และ controllability จาก imbalance</div>
+      <div class="step"><b>5. Stop transfer when leaking tank empty</b>เมื่อฝั่งรั่ว empty แล้วให้ OFF manual balance</div>
+      <div class="step"><b>6. Land as soon as possible</b>เพราะ usable fuel กำลังหายอย่างควบคุมไม่ได้</div>
+    </div>
+    <div class="checklist"><h3>Core checklist logic (Leaking Fuel from Wing)</h3><ol>
+      <li><strong>Aircraft structure - Visually inspect for signs of leakage</strong></li>
+      <li><strong>If leaking fuel overboard:</strong> FUEL BAL switch - MAN/RESET</li>
+      <li><strong>MANUAL FUEL BAL switch - To non-leaking tank</strong></li>
+      <li><strong>When leaking tank is empty: MANUAL FUEL BAL switch - OFF</strong></li>
+      <li><strong>Land as soon as possible</strong></li>
+    </ol></div>
+    <table>
+      <tr><th>ประเด็น</th><th>สิ่งที่ต้องเข้าใจ</th></tr>
+      <tr><td>ทำไมต้องไปที่ non-leaking tank</td><td>เพื่อหยุดส่ง fuel เพิ่มไปยังฝั่งที่กำลังรั่ว และเก็บ usable fuel ที่เหลือไว้ให้มากที่สุด</td></tr>
+      <tr><td>ทำไมยังต้อง monitor balance</td><td>เพราะ full lateral imbalance ยังบินได้ แต่ stick force จะเพิ่มขึ้น โดยเฉพาะถ้า crosswind</td></tr>
+      <tr><td>ทำไมต้องลงเร็ว</td><td>เพราะ fuel quantity และ fuel planning ปกติจะเชื่อถือได้น้อยลงเมื่อมี leak จริง</td></tr>
+    </table>
+    <div class="note"><strong>เกี่ยวข้องกับ Fuel Imbalance:</strong> ก่อนจะพยายาม balance fuel ด้วยตนเอง ควร verify imbalance และ check for fuel leaks ก่อนเสมอ เพราะถ้ารั่วจริง การ balance ผิดทิศจะยิ่งทำให้สูญเสียน้ำมันเร็วขึ้น</div>
+    <div class="danger"><strong>อย่าสับสนกับ FP FAIL:</strong> ถ้า FP FAIL caution ติด ไม่ควรพยายาม manual balance แบบเดาสุ่ม เพราะ probe failure อาจทำให้ข้อความ imbalance ไม่ถูกต้อง และ manual balancing อาจทำให้ปัญหาแย่ลง</div>
+    <div class="mem">จำง่าย: “Fuel leak = หาให้เจอว่ารั่วข้างไหน แล้ว feed ไปข้างที่ไม่รั่ว จากนั้นรีบลง”</div>
+  </section>
+
+  <section class="card">
+    <h2>สรุปจำเร็วทั้ง C106</h2>
+    <div class="flow">
+      <div class="mini"><strong>Uncommanded Prop Feather</strong>ดู NP ลด + thrust หาย + torque สูง → PCL mid range, PMU OFF, pull PROP SYS CB เมื่อเข้าเงื่อนไข</div>
+      <div class="mini"><strong>Uncommanded Power Change</strong>คิดเป็นกลุ่ม engine/PMU/prop/fuel malfunction → บินให้ได้ก่อนแล้วเข้า PEL mindset</div>
+      <div class="mini"><strong>Trim Malfunction</strong>ตัด trim/TAD ที่มีปัญหา แล้วเตรียมถือแรงควบคุมด้วยมือเพิ่ม</div>
+      <div class="mini"><strong>Suspected Fuel Leak</strong>ยืนยันฝั่งที่รั่ว → feed ไป non-leaking tank → รีบลง</div>
+      <div class="mini"><strong>Common thread</strong>ทุกข้อคือ “Recognize early — Don’t worsen the system — Plan the landing now”</div>
+    </div>
+  </section>
+</main>
+<footer>
+  สรุปนี้จัดทำเพื่อการทบทวนเท่านั้น • ให้ยึด T-6C Flight Manual, checklist และ SOP หน่วยเป็นหลักในการใช้งานจริง
+</footer>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C107/C108 สิ่งที่ต้องรู้ — T-6C Landing / Brake / Emergency Landing Notes</title>
+<style>
+:root{
+  --bg:#f6f8fc;--card:#ffffff;--ink:#172033;--muted:#596579;--line:#dbe2ee;
+  --blue:#1d4ed8;--navy:#0f172a;--red:#dc2626;--amber:#b45309;--green:#047857;--violet:#6d28d9;
+  --soft-blue:#eaf1ff;--soft-red:#fff1f2;--soft-yellow:#fffbeb;--soft-green:#ecfdf5;--soft-violet:#f3e8ff;
+  --shadow:0 10px 30px rgba(15,23,42,.08);--radius:22px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,"Noto Sans Thai",Arial,sans-serif;background:linear-gradient(180deg,#eaf2ff 0%,var(--bg) 320px);color:var(--ink);line-height:1.75}
+header{padding:48px 20px 24px;text-align:center}
+header .eyebrow{display:inline-block;background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe;border-radius:999px;padding:6px 14px;font-weight:900;margin-bottom:14px}
+header h1{margin:0 auto 12px;max-width:1040px;font-size:clamp(30px,5vw,54px);line-height:1.08;letter-spacing:-.035em}
+header p{margin:0 auto;max-width:960px;color:var(--muted);font-size:18px}
+main{max-width:1160px;margin:0 auto;padding:16px 20px 62px}
+footer{max-width:1160px;margin:0 auto 50px;padding:0 20px;color:var(--muted);font-size:14px;text-align:center}
+a{color:var(--blue)}
+.notice,.logic,.danger,.good,.note,.callout{border-radius:17px;padding:16px 18px;margin:18px 0;border:1px solid var(--line);box-shadow:0 4px 16px rgba(15,23,42,.04)}
+.notice{background:var(--soft-yellow);border-color:#fde68a;border-left:7px solid var(--amber)}
+.logic{background:var(--soft-blue);border-color:#bfdbfe;border-left:7px solid var(--blue);font-weight:800}
+.danger{background:var(--soft-red);border-color:#fecdd3;border-left:7px solid var(--red)}
+.good{background:var(--soft-green);border-color:#bbf7d0;border-left:7px solid var(--green)}
+.note{background:#f8fafc;border-color:#cbd5e1;border-left:7px solid #64748b}.callout{background:var(--soft-violet);border-color:#ddd6fe;border-left:7px solid var(--violet)}
+.toc,.mini,section.card{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}
+.toc{border-radius:var(--radius);padding:20px;margin:20px 0 28px}.toc h2{margin:0 0 12px;font-size:22px}.toc-grid,.summary,.flow,.two,.three{display:grid;gap:12px}.toc-grid{grid-template-columns:repeat(auto-fit,minmax(255px,1fr))}.summary{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:24px 0}.flow,.two{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin:14px 0}.three{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin:14px 0}
+.toc a{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:14px;color:var(--blue);text-decoration:none;background:#fbfdff;font-weight:800}.toc a:hover{background:var(--soft-blue)}
+.mini{border-radius:18px;padding:16px}.mini strong{display:block;color:var(--blue);font-size:18px;margin-bottom:6px}.mini small{color:var(--muted)}
+section.card{border-radius:26px;padding:26px;margin:24px 0}section.card h2{margin:0 0 14px;font-size:clamp(24px,3vw,34px);line-height:1.25;letter-spacing:-.02em}h3{margin:22px 0 10px;color:#111827;font-size:21px}h4{margin:0 0 8px;color:#0f2e6e;font-size:17px}p{margin:10px 0}ul,ol{padding-left:26px;margin:10px 0}li{margin:6px 0}.tag{display:inline-block;border-radius:999px;padding:4px 10px;margin:0 4px 8px 0;background:#eef2ff;color:#3730a3;font-size:14px;font-weight:800}
+.step,.subcard{background:#fbfdff;border:1px solid var(--line);border-radius:16px;padding:14px}.step b{display:block;color:#123d86;font-size:17px;margin:0 0 4px}.subcard h4{display:block;color:#123d86;font-size:17px;margin:0 0 4px}
+.checklist{background:#0f172a;color:#e5e7eb;border-radius:18px;padding:18px 20px;margin:16px 0;overflow:auto}.checklist h3{color:#fff;margin-top:0}.checklist strong{color:#fff}.checklist .dim{color:#cbd5e1}
+.mem{font-size:20px;font-weight:900;text-align:center;background:#f8fafc;border:1px dashed #94a3b8;border-radius:16px;padding:14px;margin-top:18px}table{width:100%;border-collapse:collapse;margin:16px 0;border-radius:14px;border:1px solid var(--line);overflow:hidden}th,td{border-bottom:1px solid var(--line);padding:12px 14px;vertical-align:top;text-align:left}th{background:#f1f5f9;color:#0f172a}tr:last-child td{border-bottom:none}.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#eef2ff;color:#3730a3;border-radius:8px;padding:1px 6px;font-weight:800}.red{color:#b91c1c;font-weight:900}.amber{color:#92400e;font-weight:900}.green{color:#047857;font-weight:900}.formula{background:#111827;color:#f9fafb;border-radius:16px;padding:16px;font-weight:800;overflow:auto}.formula code{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+@media print{body{background:white;color:black}.toc,.mini,section.card,.notice,.logic,.danger,.good,.note,.callout{box-shadow:none;break-inside:avoid}a{color:black;text-decoration:none}.checklist{background:white;color:black;border:1px solid #222}.checklist h3,.checklist strong{color:black}}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">C107/C108 สิ่งที่ต้องรู้</div>
+  <h1>T-6C Brake / Hydroplaning / Emergency Landing Study Notes</h1>
+  <p>สรุปเพื่อเข้าใจ logic ของ 4 หัวข้อ: Brake Failure, Hot Brake, Hydroplane และ Discuss Case of Emergency Landing เช่น Forced Landing, Straight-in Landing และ Emergency Landing Pattern</p>
+</header>
+<main>
+  <div class="notice"><strong>Training aid only:</strong> เอกสารนี้ใช้เพื่อทบทวนแนวคิดและลำดับความคิด ไม่ใช้แทน Flight Manual, checklist, SOP หรือคำสั่งหน่วย ในสถานการณ์จริงให้ยึดเอกสารทางการและคำสั่ง instructor/หน่วยเป็นหลัก</div>
+
+  <nav class="toc"><h2>สารบัญ</h2><div class="toc-grid">
+    <a href="#brake">๑.๑ Brake Failure</a>
+    <a href="#hotbrake">๑.๒ Hot Brake</a>
+    <a href="#hydro">๑.๓ Hydroplane / Hydroplaning</a>
+    <a href="#emergencylanding">๑.๔ Discuss Case of Emergency Landing</a>
+  </div></nav>
+
+  <div class="summary">
+    <div class="mini"><strong>Landing rollout = directional control first</strong>เบรก, ยาง, hydroplane ทุกเรื่องต้องคุมทิศทางก่อนคิดหยุดสั้น</div>
+    <div class="mini"><strong>No anti-skid mindset</strong>T-6C ไม่มี anti-skid/anti-lock protection ดังนั้น brake technique สำคัญมาก</div>
+    <div class="mini"><strong>Wet runway = long runway thinking</strong>hydroplaning ทำให้ brake/NWS/crosswind control ลดลงมาก ต้องเผื่อระยะ</div>
+    <div class="mini"><strong>Emergency landing = energy management</strong>ELP/forced landing ไม่ใช่แค่ checklist แต่คือการบริหาร altitude, airspeed และ configuration</div>
+  </div>
+
+  <section class="card" id="brake">
+    <h2>๑.๑ Brake Failure</h2><span class="tag">Landing without brakes</span><span class="tag">Directional control</span><span class="tag">Rudder/Aileron</span><span class="tag">Prepared surface</span>
+    <p><strong>Brake Failure</strong> คือการที่ wheel brake ข้างหนึ่งหรือทั้งสองข้างไม่ให้ braking effect ตามที่คาด อาจรู้ก่อน landing หรือเกิดขึ้นระหว่าง landing rollout จุดสำคัญคืออย่าโฟกัสแค่หยุดเครื่อง แต่ต้องโฟกัส <strong>directional control</strong> และ runway remaining ด้วย</p>
+    <div class="logic">Mental model: <strong>Brake failure = หยุดยาวขึ้น + asymmetric yaw risk → ใช้ runway, rudder, aileron และ brake ที่เหลือให้ไม่เสียทิศทาง</strong></div>
+    <table>
+      <tr><th>สถานการณ์</th><th>แนวคิดหลัก</th><th>เหตุผล</th></tr>
+      <tr><td>รู้ก่อน landing ว่า brake fail หนึ่งล้อ</td><td>ลงด้าน runway ที่ตรงกับ <strong>failed brake</strong></td><td>ช่วยให้มีพื้นที่และ geometry ที่เหมาะเมื่อใช้ brake อีกข้าง/คุมทิศทาง</td></tr>
+      <tr><td>รู้ก่อน landing ว่า brake fail ทั้งสองล้อ</td><td>วางแผน firm, on-speed touchdown กลาง runway</td><td>ใช้ runway ให้เต็มและลดการลอย/แตะช้า</td></tr>
+      <tr><td>brake fail หลัง touchdown หนึ่งข้าง</td><td>ใช้ brake อีกข้างร่วมกับ rudder/ailerons เพื่อคุมทิศทาง</td><td>ป้องกัน yaw/ออกนอก runway</td></tr>
+      <tr><td>สอง cockpit มีคนอยู่</td><td>pilot ที่มี effective brakes รับ braking authority</td><td>ลดการ input ซ้อนและใช้ระบบที่ยังทำงานได้จริง</td></tr>
+    </table>
+    <div class="checklist"><h3>Core procedure logic</h3><ol>
+      <li><strong>Maintain directional control</strong> <span class="dim">rudder และ ailerons เป็น primary tools ช่วงความเร็วสูง</span></li>
+      <li><strong>Use available brake carefully</strong> <span class="dim">ถ้าเหลือ brake ข้างเดียว ใช้อย่างนุ่มและพร้อม release ถ้า yaw เกิน</span></li>
+      <li><strong>If directional control cannot be maintained</strong> หรือ runway ไม่พอให้ coast to stop: continue straight ahead และ execute Aircraft Departs Prepared Surface procedure</li>
+      <li><strong>After stopping</strong> ประเมิน hot brake, tire, gear และ ground egress risk</li>
+    </ol></div>
+    <div class="danger"><strong>ข้อควรระวังสำคัญ:</strong> การพยายามหยุดสั้นด้วย brake ที่เหลือเพียงข้างเดียว อาจทำให้เสีย directional control มากกว่าช่วยให้ปลอดภัย โดยเฉพาะช่วงความเร็วสูง</div>
+    <div class="good"><strong>ถ้ารู้ก่อนลง:</strong> เลือก runway ยาว/กว้าง, crosswind ต่ำ, surface ดี, rescue พร้อม และ brief ว่าจะใช้ brake / rudder / runway exit อย่างไร</div>
+    <div class="mem">จำง่าย: “Brake fail = คุมทางก่อน หยุดทีหลัง ถ้าคุมไม่ได้ให้ straight ahead”</div>
+  </section>
+
+  <section class="card" id="hotbrake">
+    <h2>๑.๒ Hot Brake</h2><span class="tag">Maximum effort braking</span><span class="tag">Overheated brake</span><span class="tag">No parking brake</span><span class="tag">Clear congested area</span>
+    <p><strong>Hot Brake</strong> คือสภาวะที่เบรกมีความร้อนสูงจากการใช้ braking มาก เช่น maximum effort braking, rejected takeoff, long/high-speed landing rollout หรือ repeated braking ความเสี่ยงคือ brake fade, tire damage, wheel/tire fire หรือการระเบิดของยาง/ล้อจากความร้อน</p>
+    <div class="logic">Mental model: <strong>Hot brake = อย่าไปจอดติดคน/เครื่องบินอื่น และอย่าตั้ง parking brake เพราะจะขังความร้อน/แรงกดไว้ที่ระบบ</strong></div>
+    <div class="two">
+      <div class="subcard"><h4>เมื่อไหร่ควรสงสัย hot brakes</h4><ul>
+        <li>ใช้ maximum effort braking</li>
+        <li>abort takeoff หรือ landing ที่ต้อง brake หนัก</li>
+        <li>brake fade / brake response แปลก</li>
+        <li>มีกลิ่นไหม้ ควัน หรือ ground crew แจ้งความร้อน/ไฟ</li>
+      </ul></div>
+      <div class="subcard"><h4>ผลที่อาจตามมา</h4><ul>
+        <li>brake fade ทำให้หยุดยากขึ้น</li>
+        <li>tire blowout หรือ wheel damage</li>
+        <li>ไฟบริเวณ wheel/brake</li>
+        <li>อันตรายต่อคน/อากาศยานใกล้เคียงถ้า taxi เข้า congested area</li>
+      </ul></div>
+    </div>
+    <div class="checklist"><h3>Core procedure logic</h3><ol>
+      <li><strong>Clear runway if safe</strong> และหยุดในพื้นที่ที่ไม่หนาแน่น</li>
+      <li><strong>Do not taxi into or park in a congested area</strong> จนกว่า brakes จะเย็นพอ</li>
+      <li><strong>Do not set parking brake</strong> เมื่อสงสัย hot brakes</li>
+      <li><strong>Coordinate with ground / fire crew</strong> และรอการตรวจจากภายนอกถ้าจำเป็น</li>
+      <li><strong>Prepare for emergency ground egress</strong> ถ้ามี fire, smoke, tire/wheel hazard หรือ crew สั่งให้ออก</li>
+    </ol></div>
+    <div class="danger"><strong>ห้ามจำสลับ:</strong> หลังลงจอดปกติอาจ set parking brake ตาม checklist ได้ แต่ถ้า <strong>suspect hot brakes</strong> ต้องไม่ตั้ง parking brake</div>
+    <div class="note"><strong>Brake technique ที่เกี่ยวข้อง:</strong> T-6C ไม่มี anti-skid/anti-lock protection ถ้าล้อล็อก โดยเฉพาะก่อนน้ำหนักลงเต็มล้อ อาจนำไปสู่ blown tire และ directional control problem ได้</div>
+    <div class="mem">จำง่าย: “Hot brake = ไม่เข้าที่แออัด ไม่ใส่ parking brake รอให้เย็น/ให้ช่างดู”</div>
+  </section>
+
+  <section class="card" id="hydro">
+    <h2>๑.๓ Hydroplane / Hydroplaning</h2><span class="tag">Wet runway</span><span class="tag">Standing water/slush</span><span class="tag">Reduced braking</span><span class="tag">Reduced steering</span>
+    <p><strong>Hydroplaning</strong> เกิดเมื่อยางกลิ้งหรือไถลบน runway ที่มีน้ำ/slush แล้วไม่สามารถรีดน้ำออกจาก footprint ได้เร็วพอ ทำให้ยางสัมผัส runway น้อยลงหรือแทบไม่สัมผัสเลย ผลคือ braking, nose wheel steering และ crosswind control ลดลงอย่างมาก</p>
+    <div class="logic">Mental model: <strong>Hydroplane = ยางไม่ได้เกาะพื้นเต็มที่ ต่อให้เหยียบเบรกเพิ่มก็อาจไม่ช่วย เพราะ friction หายไปแล้ว</strong></div>
+    <div class="two">
+      <div class="subcard"><h4>Hydroplaning effects</h4><ul>
+        <li>coefficient of friction ลดลงมาก</li>
+        <li>wheel braking effectiveness ลดหรือหาย</li>
+        <li>nose wheel steering effectiveness ลด</li>
+        <li>crosswind control แย่ลง</li>
+        <li>stopping distance เพิ่มอย่างมาก</li>
+      </ul></div>
+      <div class="subcard"><h4>ปัจจัยที่ทำให้เกิด</h4><ul>
+        <li>ground speed สูง</li>
+        <li>standing water/slush แม้ไม่ลึกมาก</li>
+        <li>tire tread depth/design</li>
+        <li>runway smooth/non-grooved/ไม่มี crown</li>
+        <li>tire inflation pressure</li>
+      </ul></div>
+    </div>
+    <table>
+      <tr><th>ประเด็นจาก manual</th><th>ความหมายสำหรับ pilot</th></tr>
+      <tr><td>Hydroplaning อาจเกิดได้แม้น้ำ/Slush น้อยกว่า 0.1 inch</td><td>อย่าประเมิน runway เปียกว่า “ไม่เป็นไร” เพียงเพราะน้ำดูไม่ลึก</td></tr>
+      <tr><td>บน wet runway ที่ high ground speed braking effect อาจเหลือประมาณ 1/3 ของ dry runway</td><td>ต้องเผื่อ runway และหลีกเลี่ยง touchdown long/fast</td></tr>
+      <tr><td>ใน slush braking effect อาจตกเหลือประมาณ 1/5 ของ dry runway</td><td>slush อันตรายมากและควรคาดว่า hydroplaning จะเกิดง่าย</td></tr>
+      <tr><td>Hydroplaning can occur above 85 kt nose tire / 115 kt main tires ที่ nominal pressure</td><td>ช่วงความเร็วสูงหลัง touchdown ยังเป็นช่วงเสี่ยงมาก</td></tr>
+    </table>
+    <div class="formula"><code>Minimum total hydroplaning speed ≈ 9 × √tire pressure (mph)
+Convert mph to knots: divide by 1.15</code></div>
+    <div class="good"><strong>Technique idea:</strong> หลัง touchdown บน runway เปียก/Slush การ select flaps UP ทันทีอาจเพิ่ม weight on wheels และช่วยให้ braking ดีขึ้นตามที่ manual กล่าวไว้ แต่ต้องทำตาม checklist/SOP และไม่เสีย aircraft control</div>
+    <div class="danger"><strong>อย่าเหยียบเบรกค้างเพราะคิดว่าเดี๋ยวดีขึ้น:</strong> ถ้าล้อช้าหรือหยุดหมุนจาก hydroplaning การเพิ่ม brake pressure ไม่ได้เพิ่ม friction; ควรลด input ที่ทำให้ล้อล็อกและรอให้ยางกลับมาเกาะ runway</div>
+    <div class="mem">จำง่าย: “Hydroplane = friction หาย เบรกหาย steering หาย ระยะหยุดยาวมาก”</div>
+  </section>
+
+  <section class="card" id="emergencylanding">
+    <h2>๑.๔ Discuss Case of Emergency Landing</h2><span class="tag">Forced Landing</span><span class="tag">Straight-in Landing</span><span class="tag">ELP</span><span class="tag">Energy management</span>
+    <p>Emergency Landing ในบริบทนี้ควรคุยเป็น case-based discussion ไม่ใช่จำชื่อ procedure อย่างเดียว เพราะแต่ละ case ต่างกันที่ <strong>power available, runway/landing area, altitude, configuration, controllability และเวลา</strong></p>
+    <div class="logic">Mental model: <strong>Emergency landing = เลือก landing option ที่ยังควบคุม energy ได้ และไม่เอา aircraft ไปอยู่ใน configuration ที่แก้กลับไม่ได้เร็วเกินไป</strong></div>
+
+    <h3>ภาพรวม 3 แบบที่ต้องแยกให้ออก</h3>
+    <table>
+      <tr><th>แบบ</th><th>ใช้เมื่อไร</th><th>แนวคิด</th></tr>
+      <tr><td><strong>Forced Landing</strong></td><td>engine unavailable และ airstart ไม่ทำ/ไม่สำเร็จ</td><td>บินเข้า ELP/landing area ด้วยพลังงานที่เหลือและ config เท่าที่จำเป็น</td></tr>
+      <tr><td><strong>Precautionary Emergency Landing (PEL)</strong></td><td>มี indication ว่า engine อาจ fail หรือ checklist สั่งให้ทำ</td><td>ใช้ power ที่เหลือ, ลด drag, climb/accelerate เพื่อ intercept ELP</td></tr>
+      <tr><td><strong>Straight-in Emergency Landing</strong></td><td>มี runway/field อยู่หน้าเครื่อง หรือสถานการณ์ไม่เหมาะกับ pattern</td><td>ลด maneuvering, ลด workload, วาง aircraft ตรง final ให้เร็วและคุม speed/config</td></tr>
+    </table>
+
+    <h3>Forced Landing: สิ่งที่ต้องรู้</h3>
+    <div class="checklist"><h3>Critical action table logic</h3><ol>
+      <li><strong>Airspeed - 125 KIAS prior to extending landing gear</strong></li>
+      <li><strong>EMER LDG GR handle - Pull as required</strong></li>
+      <li><strong>Airspeed - 120 KIAS minimum until intercepting final; 110 KIAS minimum on final</strong></li>
+      <li><strong>Flaps - As required</strong></li>
+    </ol></div>
+    <div class="danger"><strong>ข้อสำคัญ:</strong> Do not lower flaps LDG until landing is assured เพราะ drag จะเพิ่มอย่างมากเมื่อ LDG flaps ลงแล้ว</div>
+    <div class="note"><strong>Propeller feathered effect:</strong> aircraft อาจ float มากกว่าตอน practice forced landing ที่ set 4-6% torque ดังนั้น energy management สำคัญมาก และ landing ground roll อาจเพิ่มเมื่อ prop feathered</div>
+
+    <h3>Emergency Landing Pattern (ELP): Key numbers</h3>
+    <div class="three">
+      <div class="step"><b>Enter</b>ประมาณ 125 KIAS</div>
+      <div class="step"><b>High key</b>2500-3000 ft AGL recommended, ประมาณ one-third point on runway</div>
+      <div class="step"><b>Low key</b>1500 ft AGL abeam touchdown point</div>
+      <div class="step"><b>Base key</b>600-800 ft AGL</div>
+      <div class="step"><b>Descent</b>120 KIAS minimum</div>
+      <div class="step"><b>Final</b>110 KIAS minimum, aim touchdown within first one-third of runway</div>
+    </div>
+    <div class="callout"><strong>ELP ไม่ใช่รูปทรงตายตัว:</strong> manual ระบุให้ปรับ pattern ตาม altitude, airspeed, configuration และ wind โดยไม่จำกัดสิทธิ์ pilot ที่จะปรับ airspeed, ground track และ configuration ให้เข้ากับสภาพจริง</div>
+
+    <h3>Straight-in Landing: ใช้เมื่อไรและคิดอย่างไร</h3>
+    <div class="two">
+      <div class="subcard"><h4>เหมาะเมื่อ</h4><ul>
+        <li>runway อยู่หน้าเครื่องหรืออยู่ในตำแหน่งที่ intercept final ได้ง่าย</li>
+        <li>altitude/energy ไม่พอทำ full ELP pattern</li>
+        <li>มี flight control/gear/flap issue ที่ต้องลด maneuvering</li>
+        <li>มี smoke/fumes, OBOGS/physiological issue หรือ workload สูง</li>
+      </ul></div>
+      <div class="subcard"><h4>ต้องระวัง</h4><ul>
+        <li>อย่า high/fast จน touchdown long</li>
+        <li>อย่า low/slow ต่ำกว่า final minimum</li>
+        <li>ต้องตัดสินใจ gear/flap เมื่อ landing assured</li>
+        <li>brief go/no-go หรือ ejection/egress decision ก่อนถึงจุดที่แก้ไม่ได้</li>
+      </ul></div>
+    </div>
+
+    <h3>Unprepared surface / Ditching discussion</h3>
+    <div class="danger"><strong>Unprepared surface / ditching ไม่ใช่ option ปกติที่อยากเลือก:</strong> manual ระบุว่า landing on an unprepared surface และ ditching ไม่ recommended และถ้าจำเป็นเพราะ eject ไม่ได้/ระบบ eject malfunction ต้องหลีกเลี่ยงการ extend gear/flaps เพื่อไม่ให้ aircraft tumble หรือ cartwheel</div>
+    <p>ถ้าต้อง forced landing นอก runway ให้เลือกพื้นที่เรียบ กว้าง ไม่มีสิ่งกีดขวาง เช่น cultivated field ดีกว่า swamp, boggy ground, shallow lakes หรือ forested area และต้องคิดต่อเรื่อง canopy/CFS/egress เพราะโครงสร้างอาจเสียหายจนเปิด canopy หรือใช้ CFS ยาก</p>
+
+    <div class="mem">จำง่าย: “Emergency landing = Field first, Energy second, Configuration only when assured”</div>
+  </section>
+
+  <section class="card">
+    <h2>สรุปจำเร็วทั้ง C107/C108</h2>
+    <div class="flow">
+      <div class="mini"><strong>Brake Failure</strong>คุมทิศทางก่อน ใช้ brake ที่เหลืออย่างระวัง ถ้าคุมไม่ได้ให้ตรงไป Aircraft Departs Surface</div>
+      <div class="mini"><strong>Hot Brake</strong>ไม่เข้าพื้นที่แออัด ไม่ตั้ง parking brake และเตรียม ground/fire support</div>
+      <div class="mini"><strong>Hydroplane</strong>friction หาย ทำให้ brake/NWS/crosswind control ลดลงมาก ระยะหยุดเพิ่ม</div>
+      <div class="mini"><strong>Forced Landing</strong>125 ก่อน gear, 120 ถึง final, 110 final minimum, flap as required</div>
+      <div class="mini"><strong>ELP</strong>High key 2500-3000, Low key 1500, Base key 600-800, touchdown first one-third</div>
+      <div class="mini"><strong>Straight-in</strong>ลด maneuvering แต่ต้องคุม energy ไม่ high/fast หรือ low/slow</div>
+    </div>
+  </section>
+</main>
+<footer>
+  สรุปนี้จัดทำเพื่อการทบทวนเท่านั้น • ให้ยึด T-6C Flight Manual, checklist และ SOP หน่วยเป็นหลักในการใช้งานจริง
+</footer>
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>T-6C Emergency Ground / Takeoff / Crew Coordination Study Notes</title>
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --ink:#172033;
+      --muted:#5d667a;
+      --line:#d9deea;
+      --accent:#1d4ed8;
+      --accent2:#ef4444;
+      --ok:#047857;
+      --warn:#b45309;
+      --soft-blue:#eaf1ff;
+      --soft-red:#fff1f2;
+      --soft-green:#ecfdf5;
+      --soft-yellow:#fffbeb;
+      --shadow:0 8px 28px rgba(23,32,51,.08);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,"Noto Sans Thai",Arial,sans-serif;
+      background:linear-gradient(180deg,#eef4ff 0%,var(--bg) 260px);
+      color:var(--ink);
+      line-height:1.7;
+    }
+    header{
+      padding:44px 20px 22px;
+      text-align:center;
+    }
+    header h1{
+      margin:0 auto 12px;
+      max-width:980px;
+      font-size:clamp(28px,5vw,48px);
+      line-height:1.15;
+      letter-spacing:-.03em;
+    }
+    header p{
+      margin:0 auto;
+      max-width:900px;
+      color:var(--muted);
+      font-size:18px;
+    }
+    main{
+      max-width:1100px;
+      margin:0 auto;
+      padding:18px 20px 60px;
+    }
+    .notice{
+      background:var(--soft-yellow);
+      border:1px solid #fde68a;
+      border-left:7px solid var(--warn);
+      border-radius:16px;
+      padding:18px 20px;
+      margin:18px 0 22px;
+      box-shadow:var(--shadow);
+    }
+    .toc{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:20px;
+      margin:20px 0 28px;
+      box-shadow:var(--shadow);
+    }
+    .toc h2{margin:0 0 12px;font-size:22px}
+    .toc-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:10px;
+    }
+    .toc a{
+      display:block;
+      padding:12px 14px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      color:var(--accent);
+      text-decoration:none;
+      background:#fbfdff;
+      font-weight:650;
+    }
+    .toc a:hover{background:var(--soft-blue)}
+    .summary{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:14px;
+      margin:24px 0;
+    }
+    .mini{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+    .mini strong{display:block;color:var(--accent);font-size:18px;margin-bottom:6px}
+    section.card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:26px;
+      margin:24px 0;
+      box-shadow:var(--shadow);
+    }
+    section.card h2{
+      margin:0 0 16px;
+      font-size:clamp(24px,3vw,34px);
+      line-height:1.25;
+      letter-spacing:-.02em;
+    }
+    h3{
+      margin:22px 0 10px;
+      color:#111827;
+      font-size:21px;
+    }
+    p{margin:10px 0}
+    ul,ol{padding-left:26px;margin:10px 0}
+    li{margin:6px 0}
+    .logic{
+      background:var(--soft-blue);
+      border:1px solid #bfdbfe;
+      border-left:7px solid var(--accent);
+      border-radius:16px;
+      padding:16px 18px;
+      margin:18px 0;
+      font-weight:650;
+    }
+    .danger{
+      background:var(--soft-red);
+      border:1px solid #fecdd3;
+      border-left:7px solid var(--accent2);
+      border-radius:16px;
+      padding:16px 18px;
+      margin:18px 0;
+    }
+    .good{
+      background:var(--soft-green);
+      border:1px solid #bbf7d0;
+      border-left:7px solid var(--ok);
+      border-radius:16px;
+      padding:16px 18px;
+      margin:18px 0;
+    }
+    .tag{
+      display:inline-block;
+      border-radius:999px;
+      padding:4px 10px;
+      margin:0 4px 8px 0;
+      background:#eef2ff;
+      color:#3730a3;
+      font-size:14px;
+      font-weight:700;
+    }
+    .checklist{
+      background:#0f172a;
+      color:#e5e7eb;
+      border-radius:18px;
+      padding:18px 20px;
+      margin:16px 0;
+      overflow:auto;
+    }
+    .checklist h3{color:#fff;margin-top:0}
+    .checklist ol{margin-bottom:0}
+    .checklist li{margin:8px 0}
+    .mem{
+      font-size:20px;
+      font-weight:800;
+      text-align:center;
+      background:#f8fafc;
+      border:1px dashed #94a3b8;
+      border-radius:16px;
+      padding:14px;
+      margin-top:18px;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:16px 0;
+      overflow:hidden;
+      border-radius:14px;
+      border:1px solid var(--line);
+    }
+    th,td{
+      border-bottom:1px solid var(--line);
+      padding:12px 14px;
+      vertical-align:top;
+      text-align:left;
+    }
+    th{background:#f1f5f9;color:#0f172a}
+    tr:last-child td{border-bottom:none}
+    footer{
+      max-width:1100px;
+      margin:0 auto 50px;
+      padding:0 20px;
+      color:var(--muted);
+      font-size:14px;
+      text-align:center;
+    }
+    @media print{
+      body{background:white;color:black}
+      header{padding-top:20px}
+      .toc,.mini,section.card,.notice{box-shadow:none;break-inside:avoid}
+      a{color:black;text-decoration:none}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>T-6C Emergency Ground / Takeoff / Crew Coordination</h1>
+  <p>สรุปเพื่อช่วยทำความเข้าใจ 9 หัวข้อสำคัญ: Ground Egress, Fire on Ground, Abort Start, Emergency Shutdown, Takeoff Brief, Ejection, Control Transfer, Firewall Shutoff และ Intercom Failure</p>
+</header>
+
+<main>
+  <div class="notice">
+    <strong>หมายเหตุสำคัญ:</strong> เอกสารนี้เป็น study aid เพื่อทำความเข้าใจ logic เท่านั้น ไม่ใช้แทน Flight Manual, Checklist, Dash-1, SOP หรือคำสั่งหน่วยในการปฏิบัติจริง
+  </div>
+
+  <nav class="toc">
+    <h2>สารบัญ</h2>
+    <div class="toc-grid">
+      <a href="#egress">๑. Emergency Ground Egress</a>
+      <a href="#fire-ground">๒. Fire Warning on Ground</a>
+      <a href="#abort-start">๓. Abort Start</a>
+      <a href="#shutdown">๔. Emergency Engine Shutdown</a>
+      <a href="#takeoff-brief">๕. Takeoff Emergency Brief</a>
+      <a href="#ejection">๖. Premeditated Ejection Procedure</a>
+      <a href="#handover">๗. Hand Over / Take Over</a>
+      <a href="#firewall">๘. Use of Firewall Shutoff Handle</a>
+      <a href="#intercom">๙. Intercom Failure</a>
+    </div>
+  </nav>
+
+  <div class="summary">
+    <div class="mini"><strong>Recognize</strong>เห็นอาการผิดปกติ เช่น fire light, ITT สูง, engine abnormal, ICS หาย</div>
+    <div class="mini"><strong>Control</strong>ควบคุม aircraft / directional control / crew coordination ก่อน</div>
+    <div class="mini"><strong>Stop / Isolate</strong>หยุด engine หรือ start sequence และตัด fuel / hydraulic / bleed ถ้าจำเป็น</div>
+    <div class="mini"><strong>Communicate / Escape</strong>สื่อสาร, brief, transfer control, egress หรือ eject เมื่อจำเป็น</div>
+  </div>
+
+  <section class="card" id="egress">
+    <h2>๑. Emergency Ground Egress</h2>
+    <span class="tag">Ground</span><span class="tag">Escape</span><span class="tag">Ejection Seat Safety</span>
+    <p><strong>ความหมาย:</strong> การออกจากเครื่องแบบฉุกเฉินขณะอยู่บนพื้น หลังเครื่องหยุดหรือจำเป็นต้องรีบออกจาก cockpit เช่น ไฟไหม้, crash landing, prop strike, aircraft damage หรือ canopy เปิดไม่ได้</p>
+    <div class="logic">Logic: ทำให้ seat ปลอดภัย → เปิดทางออก → ปลดตัวเอง → ตัดไฟ → ออกจากเครื่อง</div>
+    <div class="checklist">
+      <h3>ลำดับจำง่าย</h3>
+      <ol>
+        <li><strong>ISS mode selector - SOLO</strong> ป้องกัน seat อีกตำแหน่งถูก command โดยไม่ตั้งใจ</li>
+        <li><strong>Seat safety pin - Install</strong> ใส่ pin ให้ seat ที่มีคนอยู่</li>
+        <li><strong>Parking brake - As required</strong> ป้องกันเครื่องเคลื่อน ถ้าสถานการณ์ทำได้</li>
+        <li><strong>Canopy - Open</strong> ใช้ทางออกปกติ</li>
+        <li><strong>CFS - Use if required</strong> ถ้า canopy เปิดไม่ได้หรือจำเป็นต้องออกทางขวา</li>
+        <li><strong>Release straps / belt / fittings / leg restraints</strong> ปลดทุกอย่างที่ยึดตัว</li>
+        <li><strong>BAT / GEN / AUX BAT - OFF</strong> ตัด electrical power</li>
+        <li><strong>Evacuate aircraft</strong> ออกจากเครื่อง</li>
+      </ol>
+    </div>
+    <div class="danger"><strong>ระวัง:</strong> ถ้าใช้ Canopy Fracturing System ควรเข้าใจว่ามีเศษ canopy และ fragments กระเด็น ต้องป้องกันใบหน้า/ตา และทำตาม procedure ของหน่วย</div>
+    <div class="mem">จำเร็ว: SOLO → PIN → BRAKE → CANOPY/CFS → STRAPS → POWER OFF → OUT</div>
+  </section>
+
+  <section class="card" id="fire-ground">
+    <h2>๒. Fire Warning on Ground <br><small>(Fire annunciator illuminated)</small></h2>
+    <span class="tag">Fire</span><span class="tag">Ground Operation</span><span class="tag">Shutdown</span>
+    <p><strong>ความหมาย:</strong> มีหลักฐานว่าเกิด engine fire ขณะอยู่บนพื้น เช่น ตอน start, taxi, run-up หรือ ground operation</p>
+    <h3>สิ่งที่เห็นได้</h3>
+    <ul>
+      <li><strong>FIRE annunciator illuminated</strong> เป็น primary indication</li>
+      <li>เห็น smoke หรือ fire</li>
+      <li>Engine indication ผิดปกติ เช่น ITT สูง, fuel flow ผิดปกติ</li>
+      <li>Ground crew / tower / aircraft อื่นแจ้งว่ามีไฟ</li>
+    </ul>
+    <div class="logic">Logic: Fire on ground ไม่ใช่ troubleshooting ยาว เป้าหมายคือ shutdown → isolate → egress ถ้าจำเป็น</div>
+    <h3>ระบบที่เกี่ยวข้อง</h3>
+    <table>
+      <tr><th>ระบบ</th><th>เกี่ยวข้องอย่างไร</th></tr>
+      <tr><td>Fire Detection</td><td>ตรวจจับความร้อน/ไฟและแจ้งเตือน FIRE annunciator</td></tr>
+      <tr><td>Fuel System</td><td>fuel เป็นแหล่งพลังงานของไฟ ต้องตัดเมื่อมี fire</td></tr>
+      <tr><td>Firewall Shutoff</td><td>ใช้ isolate fuel, hydraulic fluid และ bleed air บริเวณ engine/firewall</td></tr>
+    </table>
+    <div class="mem">จำเร็ว: Fire on ground = Shutdown + Isolate + Egress if required</div>
+  </section>
+
+  <section class="card" id="abort-start">
+    <h2>๓. Abort Start</h2>
+    <span class="tag">Start</span><span class="tag">Hot Start</span><span class="tag">Hung Start</span><span class="tag">No Start</span>
+    <p><strong>ความหมาย:</strong> การยกเลิก engine start เมื่อ start กำลังผิดปกติ เช่น hot start, hung start, no start หรือมีปัญหา battery/PMU/start sequence</p>
+    <h3>เมื่อไหร่ควร Abort Start</h3>
+    <ul>
+      <li>ITT เพิ่มเร็วและมีแนวโน้มเกิน limit</li>
+      <li>ITT สูงผิดปกติค้างอยู่นานเกินเกณฑ์</li>
+      <li>N1 เพิ่มแล้วหยุดหรือไม่เพิ่มต่อ เป็นลักษณะ hung start</li>
+      <li>มี fuel flow แล้ว แต่ ITT ไม่ rise ในเวลาที่ควร เป็นลักษณะ no start</li>
+      <li>เกิด red BATT BUS warning ระหว่าง start</li>
+      <li>PCL ถูกขยับหรือ start sequence condition เปลี่ยนผิดจังหวะ</li>
+    </ul>
+    <div class="logic">Logic: ถ้า start ไม่ปลอดภัย ให้หยุดการจ่าย fuel / หยุด sequence แล้วทำ motoring run ถ้ามี fuel เข้าเครื่อง</div>
+    <h3>Motoring Run คืออะไร</h3>
+    <p>คือการหมุน engine โดยไม่ให้เกิด combustion เพื่อ clear residual fuel, ลด ITT และลดโอกาส fire หรือ hot restart</p>
+    <div class="danger"><strong>ข้อควรระวัง:</strong> ถ้า abort เพราะ hot/hung/no start โดยใช้ external power ไม่ควรดันทุรัง start ซ้ำด้วยอุปกรณ์เดิมโดยไม่วิเคราะห์สาเหตุ</div>
+    <div class="mem">จำเร็ว: Start ผิดปกติ → Stop fuel/start → Motor to clear</div>
+  </section>
+
+  <section class="card" id="shutdown">
+    <h2>๔. Emergency Engine Shutdown on the Ground</h2>
+    <span class="tag">Engine</span><span class="tag">Ground Emergency</span><span class="tag">Firewall</span>
+    <p><strong>ความหมาย:</strong> การ shutdown เครื่องยนต์แบบฉุกเฉินบนพื้น ไม่ใช่ normal shutdown</p>
+    <h3>ใช้เมื่อไหร่</h3>
+    <ul>
+      <li>Engine fire</li>
+      <li>Prop strike</li>
+      <li>Chip light</li>
+      <li>Aircraft กำลังจะออกนอก prepared surface</li>
+      <li>Ground emergency ที่ต้องหยุด engine ทันที</li>
+    </ul>
+    <div class="checklist">
+      <h3>ลำดับคิด</h3>
+      <ol>
+        <li><strong>PCL - OFF</strong> หยุด command fuel/combustion</li>
+        <li><strong>Firewall Shutoff Handle - PULL</strong> isolate fuel, hydraulic fluid และ bleed air</li>
+        <li><strong>Emergency Ground Egress - As required</strong> ออกจากเครื่องถ้าอยู่ต่อไม่ปลอดภัย</li>
+      </ol>
+    </div>
+    <p><strong>ทำไม PCL OFF ก่อน firewall?</strong> PCL OFF คือสั่งเครื่องหยุด ส่วน firewall shutoff คือการตัดแหล่งของไหล/bleed ที่อาจเลี้ยงไฟหรือความเสียหายต่อ</p>
+    <div class="mem">จำเร็ว: OFF → PULL → OUT if required</div>
+  </section>
+
+  <section class="card" id="takeoff-brief">
+    <h2>๕. Takeoff Emergency Brief</h2>
+    <span class="tag">Briefing</span><span class="tag">Takeoff</span><span class="tag">Decision</span>
+    <p><strong>ความหมาย:</strong> การ brief ก่อน takeoff ว่า ถ้าเกิดเหตุระหว่าง takeoff roll หรือหลัง liftoff จะทำอะไร ใครทำอะไร และใช้เกณฑ์อะไรตัดสินใจ</p>
+    <div class="logic">Logic: ตอน takeoff เวลาคิดน้อยมาก ต้องตกลง “Stop / Go / Eject” ก่อนเริ่ม roll</div>
+    <h3>ควรครอบคลุมอะไร</h3>
+    <ul>
+      <li>Abort criteria และ Max Abort Speed</li>
+      <li>ใครเป็น Pilot Flying / Pilot Monitoring</li>
+      <li>Loss of power ก่อน liftoff / หลัง liftoff</li>
+      <li>Runway remaining พอหรือไม่พอ</li>
+      <li>Emergency fuel / divert field / radio หรือ ICS failure</li>
+      <li>Ejection decision, command และ ISS mode</li>
+    </ul>
+    <h3>คิดเป็น 3 ช่วง</h3>
+    <table>
+      <tr><th>ช่วง</th><th>แนวคิด</th></tr>
+      <tr><td>ก่อน Max Abort Speed</td><td>ถ้าควบคุมทิศทางไม่ได้หรือมี emergency ที่กระทบ safety ให้ abort</td></tr>
+      <tr><td>หลัง liftoff แต่ runway ยังพอ</td><td>เน้น land straight ahead และรักษา airspeed ที่ปลอดภัย</td></tr>
+      <tr><td>ไม่มี runway / aircraft ไม่ controllable</td><td>คิด ejection early ไม่รอจน altitude/airspeed หมด</td></tr>
+    </table>
+    <div class="mem">จำเร็ว: Brief ให้ชัดว่า Stop / Go / Eject ยังไง</div>
+  </section>
+
+  <section class="card" id="ejection">
+    <h2>๖. Premeditated Ejection Procedure</h2>
+    <span class="tag">Ejection</span><span class="tag">Controlled</span><span class="tag">Survival</span>
+    <p><strong>ความหมาย:</strong> การ ejection แบบมีเวลาคิดและเตรียม เช่น เครื่องยังควบคุมได้บางส่วน แต่รู้ว่า landing ไม่ปลอดภัยหรือไปต่อไม่ได้</p>
+    <div class="logic">Logic: แจ้ง crew → ตั้ง aircraft ให้เหมาะ → ลดอันตรายต่อคนบนพื้น → เตรียมร่างกาย → ดึง handle</div>
+    <h3>ต่างจาก immediate ejection อย่างไร</h3>
+    <p>ถ้า aircraft uncontrollable ต้อง eject ทันที เพราะการรออาจทำให้เสีย altitude, airspeed และ attitude จนโอกาสรอดลดลง แต่ถ้ายังมีเวลาให้ทำ controlled/premeditated ejection เพื่อเพิ่ม survival chance</p>
+    <div class="checklist">
+      <h3>ลำดับ controlled ejection ที่ควรเข้าใจ</h3>
+      <ol>
+        <li>Notify crewmember ว่าจะ eject</li>
+        <li>พยายามให้มี altitude และ airspeed ที่เหมาะสมตาม manual/SOP</li>
+        <li>Transmit distress call และ set transponder ตาม procedure</li>
+        <li>Stow loose equipment</li>
+        <li>Visor down, mask/helmet/chin strap tight</li>
+        <li>Check leg restraints และ harness locked</li>
+        <li>Turn aircraft ไปพื้นที่ไม่ใช่ชุมชนถ้าทำได้</li>
+        <li>PCL OFF</li>
+        <li>จัดท่า: head back, back/shoulders against seat, elbows in, legs flat</li>
+        <li>Pull ejection handle</li>
+      </ol>
+    </div>
+    <div class="danger"><strong>จุดสำคัญ:</strong> อย่ารอจน sink rate สูงหรือ altitude ต่ำเกินไป เพราะ seat performance และ survival margin จะลดลงมาก</div>
+    <div class="mem">จำเร็ว: Tell → Turn → Tighten → Throttle OFF → Position → Pull</div>
+  </section>
+
+  <section class="card" id="handover">
+    <h2>๗. Hand Over / Take Over Procedure</h2>
+    <span class="tag">Crew Coordination</span><span class="tag">Flight Controls</span><span class="tag">ICS</span>
+    <p><strong>ความหมาย:</strong> การส่งมอบ/รับมอบ control ระหว่างนักบินสองคนให้ชัดเจน เพื่อป้องกัน “ไม่มีใครบิน” หรือ “สองคนแย่งกันบิน”</p>
+    <div class="logic">Logic: ต้องมี positive transfer of control ทั้งคำพูดและการกระทำ</div>
+    <h3>รูปแบบ verbal 3-way</h3>
+    <ol>
+      <li>คนส่ง: <strong>“You have control.”</strong></li>
+      <li>คนรับ: <strong>“I have control.”</strong></li>
+      <li>คนส่งยืนยัน: <strong>“You have control.”</strong></li>
+    </ol>
+    <h3>ถ้า ICS ใช้ไม่ได้</h3>
+    <ul>
+      <li>คนที่ต้องการ control: shake control stick</li>
+      <li>คนที่ relinquish control: raise both hands</li>
+    </ul>
+    <p>การ coordinate ไม่ใช่แค่ flight controls แต่รวมถึง canopy, brakes, radios, avionics และ subsystem actions ด้วย</p>
+    <div class="mem">จำเร็ว: Say it → Confirm it → Show it</div>
+  </section>
+
+  <section class="card" id="firewall">
+    <h2>๘. Use of Firewall Shutoff Handle</h2>
+    <span class="tag">Fuel</span><span class="tag">Hydraulic</span><span class="tag">Bleed Air</span><span class="tag">Engine Fire</span>
+    <p><strong>ความหมาย:</strong> Handle ที่ใช้ isolate engine compartment โดยตัดของไหลและ bleed air ที่อาจเลี้ยงไฟหรือความเสียหาย</p>
+    <h3>เมื่อดึงแล้วตัดอะไร</h3>
+    <ul>
+      <li>Fuel ไป engine</li>
+      <li>Hydraulic fluid ไป engine area</li>
+      <li>Bleed air จาก engine</li>
+    </ul>
+    <h3>ใช้เมื่อไหร่</h3>
+    <ul>
+      <li>Engine fire</li>
+      <li>Emergency engine shutdown</li>
+      <li>Prop strike หรือ chip light</li>
+      <li>Ground emergency ที่ต้อง isolate engine</li>
+    </ul>
+    <div class="logic">Logic: ถ้า fire/damage อยู่หน้า firewall แล้ว fuel/hydraulic/bleed ยัง feed อยู่ ปัญหาอาจลามหรือรุนแรงขึ้น Firewall shutoff คือการตัดเสบียง</div>
+    <div class="mem">จำเร็ว: Firewall handle = isolate engine from fuel / hydraulic / bleed</div>
+  </section>
+
+  <section class="card" id="intercom">
+    <h2>๙. Intercom Failure</h2>
+    <span class="tag">ICS</span><span class="tag">Audio</span><span class="tag">Crew Coordination</span>
+    <p><strong>ความหมาย:</strong> ระบบสื่อสารระหว่าง cockpit หรือ audio system ใช้ไม่ได้ ทำให้ crew coordination เสี่ยงทันที โดยเฉพาะการส่งมอบ control และ emergency coordination</p>
+    <h3>ICS ทำหน้าที่อะไร</h3>
+    <ul>
+      <li>คุยระหว่าง front/rear cockpit</li>
+      <li>ฟัง radio และ nav audio</li>
+      <li>คุยกับ ground crew</li>
+      <li>ปรับ audio/volume ผ่าน audio control panel</li>
+    </ul>
+    <div class="checklist">
+      <h3>ลำดับแก้ไขที่ควรเข้าใจ</h3>
+      <ol>
+        <li><strong>Switch COMM lead to auxiliary cord</strong> ใช้สายสำรองใน cockpit ที่ affected</li>
+        <li><strong>Check AUDIO circuit breaker</strong> ถ้า open ให้ reset ตามข้อกำหนด</li>
+        <li><strong>EMR/NRM switch - EMR</strong> ถ้ายังไม่ได้ audio ให้ใช้ emergency/raw audio path ตาม procedure</li>
+        <li><strong>ใช้ non-verbal transfer</strong> ถ้าต้อง hand over/take over control</li>
+      </ol>
+    </div>
+    <div class="danger"><strong>ข้อจำกัดของ EMR:</strong> เป็น alternate/raw audio path และอาจทำให้ audio บางช่องไม่ได้ยินหรือไม่ได้ amplify ต้องเข้าใจข้อจำกัดก่อนใช้</div>
+    <div class="mem">จำเร็ว: Cord → CB → EMR → Non-verbal control transfer</div>
+  </section>
+
+  <section class="card">
+    <h2>สรุปจำเร็วทั้ง 9 หัวข้อ</h2>
+    <table>
+      <tr><th>หัวข้อ</th><th>แก่นที่ต้องจำ</th></tr>
+      <tr><td>Emergency Ground Egress</td><td>Safe seat, open/fracture canopy, release, power off, out</td></tr>
+      <tr><td>Fire Warning on Ground</td><td>Fire indication → shutdown + isolate + egress if required</td></tr>
+      <tr><td>Abort Start</td><td>Hot/hung/no start → stop start + motoring run</td></tr>
+      <tr><td>Emergency Engine Shutdown</td><td>PCL OFF → firewall pull → egress if required</td></tr>
+      <tr><td>Takeoff Emergency Brief</td><td>ตกลง Stop / Go / Eject ก่อน takeoff</td></tr>
+      <tr><td>Premeditated Ejection</td><td>Notify, configure, tighten, position, pull</td></tr>
+      <tr><td>Hand Over / Take Over</td><td>Positive verbal transfer; ICS fail ใช้ stick shake / hands up</td></tr>
+      <tr><td>Firewall Shutoff Handle</td><td>ตัด fuel / hydraulic / bleed air ที่ firewall</td></tr>
+      <tr><td>Intercom Failure</td><td>Aux cord → AUDIO CB → EMR → non-verbal backup</td></tr>
+    </table>
+  </section>
+</main>
+
+<footer>
+  Study aid generated for T-6C emergency topic review. Use official publications and unit SOP for actual operations.
+</footer>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C103 สิ่งที่ต้องรู้ — T-6C Emergency Study Notes</title>
+<style>
+:root{
+  --bg:#f6f8fc;--card:#ffffff;--ink:#172033;--muted:#596579;--line:#dbe2ee;
+  --blue:#1d4ed8;--navy:#0f172a;--red:#dc2626;--amber:#b45309;--green:#047857;--violet:#6d28d9;
+  --soft-blue:#eaf1ff;--soft-red:#fff1f2;--soft-yellow:#fffbeb;--soft-green:#ecfdf5;--soft-violet:#f3e8ff;
+  --shadow:0 10px 30px rgba(15,23,42,.08);--radius:22px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,"Noto Sans Thai",Arial,sans-serif;background:linear-gradient(180deg,#eaf2ff 0%,var(--bg) 320px);color:var(--ink);line-height:1.75}
+header{padding:48px 20px 24px;text-align:center}
+header .eyebrow{display:inline-block;background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe;border-radius:999px;padding:6px 14px;font-weight:900;margin-bottom:14px}
+header h1{margin:0 auto 12px;max-width:1040px;font-size:clamp(30px,5vw,54px);line-height:1.08;letter-spacing:-.035em}
+header p{margin:0 auto;max-width:960px;color:var(--muted);font-size:18px}
+main{max-width:1160px;margin:0 auto;padding:16px 20px 62px}
+footer{max-width:1160px;margin:0 auto 50px;padding:0 20px;color:var(--muted);font-size:14px;text-align:center}
+a{color:var(--blue)}
+.notice,.logic,.danger,.good,.note,.callout{border-radius:17px;padding:16px 18px;margin:18px 0;border:1px solid var(--line);box-shadow:0 4px 16px rgba(15,23,42,.04)}
+.notice{background:var(--soft-yellow);border-color:#fde68a;border-left:7px solid var(--amber)}
+.logic{background:var(--soft-blue);border-color:#bfdbfe;border-left:7px solid var(--blue);font-weight:800}
+.danger{background:var(--soft-red);border-color:#fecdd3;border-left:7px solid var(--red)}
+.good{background:var(--soft-green);border-color:#bbf7d0;border-left:7px solid var(--green)}
+.note{background:#f8fafc;border-color:#cbd5e1;border-left:7px solid #64748b}.callout{background:var(--soft-violet);border-color:#ddd6fe;border-left:7px solid var(--violet)}
+.toc,.mini,section.card{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}
+.toc{border-radius:var(--radius);padding:20px;margin:20px 0 28px}.toc h2{margin:0 0 12px;font-size:22px}.toc-grid,.summary,.flow,.two,.three{display:grid;gap:12px}.toc-grid{grid-template-columns:repeat(auto-fit,minmax(255px,1fr))}.summary{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:24px 0}.flow,.two{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin:14px 0}.three{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin:14px 0}
+.toc a{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:14px;color:var(--blue);text-decoration:none;background:#fbfdff;font-weight:800}.toc a:hover{background:var(--soft-blue)}
+.mini{border-radius:18px;padding:16px}.mini strong{display:block;color:var(--blue);font-size:18px;margin-bottom:6px}.mini small{color:var(--muted)}
+section.card{border-radius:26px;padding:26px;margin:24px 0}section.card h2{margin:0 0 14px;font-size:clamp(24px,3vw,34px);line-height:1.25;letter-spacing:-.02em}h3{margin:22px 0 10px;color:#111827;font-size:21px}h4{margin:0 0 8px;color:#0f2e6e;font-size:17px}p{margin:10px 0}ul,ol{padding-left:26px;margin:10px 0}li{margin:6px 0}.tag{display:inline-block;border-radius:999px;padding:4px 10px;margin:0 4px 8px 0;background:#eef2ff;color:#3730a3;font-size:14px;font-weight:800}
+.step,.subcard{background:#fbfdff;border:1px solid var(--line);border-radius:16px;padding:14px}.step b{display:block;color:#123d86;font-size:17px;margin:0 0 4px}.subcard h4{display:block;color:#123d86;font-size:17px;margin:0 0 4px}
+.checklist{background:#0f172a;color:#e5e7eb;border-radius:18px;padding:18px 20px;margin:16px 0;overflow:auto}.checklist h3{color:#fff;margin-top:0}.checklist strong{color:#fff}.checklist .dim{color:#cbd5e1}
+.mem{font-size:20px;font-weight:900;text-align:center;background:#f8fafc;border:1px dashed #94a3b8;border-radius:16px;padding:14px;margin-top:18px}table{width:100%;border-collapse:collapse;margin:16px 0;border-radius:14px;border:1px solid var(--line);overflow:hidden}th,td{border-bottom:1px solid var(--line);padding:12px 14px;vertical-align:top;text-align:left}th{background:#f1f5f9;color:#0f172a}tr:last-child td{border-bottom:none}.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#eef2ff;color:#3730a3;border-radius:8px;padding:1px 6px;font-weight:800}.red{color:#b91c1c;font-weight:900}.amber{color:#92400e;font-weight:900}.green{color:#047857;font-weight:900}details{background:#fbfdff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:10px 0}summary{cursor:pointer;font-weight:800;color:#123d86}.hr{height:1px;background:var(--line);margin:20px 0}.formula{background:#111827;color:#f9fafb;border-radius:16px;padding:16px;font-weight:800;overflow:auto}.formula code{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+@media print{body{background:white;color:black}.toc,.mini,section.card,.notice,.logic,.danger,.good,.note,.callout{box-shadow:none;break-inside:avoid}a{color:black;text-decoration:none}.checklist{background:white;color:black;border:1px solid #222}.checklist h3,.checklist strong{color:black}}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">C103 สิ่งที่ต้องรู้</div>
+  <h1>T-6C Emergency / Abnormal Study Notes</h1>
+  <p>สรุปเพื่อเข้าใจ logic ของ 8 หัวข้อ: PMU Failure, Chip Detector Warning, Oil System Malfunction/Low Oil, Mayday/Pan-Pan, EFATO, Enroute Abort/Emergency Airfield, Lost Procedure และ Brake Failure Procedure</p>
+</header>
+<main>
+  <div class="notice"><strong>Training aid only:</strong> เอกสารนี้ใช้ช่วยทบทวนแนวคิดและลำดับความคิดเท่านั้น ไม่ใช้แทน Flight Manual, Checklist, Dash-1, SOP หรือคำสั่งหน่วยในการปฏิบัติจริง โดยเฉพาะ emergency ให้ยึดเอกสารทางการและคำสั่ง instructor/หน่วยเสมอ</div>
+
+  <nav class="toc"><h2>สารบัญ</h2><div class="toc-grid">
+    <a href="#pmu">๑.๑ PMU Failure</a>
+    <a href="#chip">๑.๒ Chip Detector Warning</a>
+    <a href="#oil">๑.๓ Oil System Malfunction / Low Oil</a>
+    <a href="#mayday">๑.๔ Composition of Mayday & Pan-Pan</a>
+    <a href="#efato">๑.๕ Engine Failure After Takeoff (EFATO)</a>
+    <a href="#enroute">๑.๖ Enroute Abort / Emergency Airfield</a>
+    <a href="#lost">๑.๗ Lost Procedure</a>
+    <a href="#brake">๑.๘ Brake Failure Procedure</a>
+  </div></nav>
+
+  <div class="summary">
+    <div class="mini"><strong>Aviate first</strong>คุม attitude / airspeed / flight path ก่อน troubleshoot ทุกครั้ง</div>
+    <div class="mini"><strong>Energy = survival</strong>altitude, airspeed, runway remaining และ configuration คือ margin ใน emergency</div>
+    <div class="mini"><strong>Abnormal engine = PEL mindset</strong>PMU, chip, oil มักพาไปสู่ nearest suitable field / ELP</div>
+    <div class="mini"><strong>Communicate early</strong>Mayday/Pan-Pan, 7700, position, intention ช่วยให้ ATC/crew ช่วยได้เร็ว</div>
+  </div>
+
+  <section class="card" id="pmu">
+    <h2>๑.๑ PMU Failure</h2><span class="tag">Power Management Unit</span><span class="tag">Manual mode</span><span class="tag">PMU FAIL + PMU STATUS</span>
+    <p><strong>PMU</strong> คือสมองควบคุม power/engine management หลัก ช่วยให้ PCL movement มีความ linear, ควบคุม acceleration/deceleration, monitor engine start, และช่วยจำกัด torque, ITT, N1 ในโหมดปกติ เมื่อ PMU fail ระบบจะ revert ไป manual control มากขึ้น นักบินต้อง monitor engine limits เองมากขึ้น</p>
+    <div class="logic">Mental model: <strong>PMU Fail = automatic limiting หาย → PCL ต้องละเอียดขึ้น → reset ถ้าเหมาะสม → ถ้าไม่ clear ให้ land as soon as practical</strong></div>
+    <table>
+      <tr><th>Indication</th><th>ความหมาย</th><th>ผลกับ pilot</th></tr>
+      <tr><td><span class="red">PMU FAIL</span> + <span class="amber">PMU STATUS</span></td><td>PMU inoperative / manual mode</td><td>อาจมี step change ของ engine power; automatic torque, ITT, N1 control/lmiting ไม่พร้อม ต้องคุมด้วย PCL และ scan engine instruments</td></tr>
+      <tr><td><span class="amber">PMU STATUS</span> อย่างเดียว</td><td>PMU fault แต่ PMU ยัง online</td><td>ใน flight อาจเกี่ยวกับ weight-on-wheels discrepancy; reset อาจไม่สามารถทำได้ ต้องวางแผน landing</td></tr>
+      <tr><td>Ground idle ไม่ available หลัง touchdown</td><td>PMU อาจไม่ revert เป็น ground mode</td><td>idle N1 สูงประมาณ flight idle; landing roll/taxi distance เพิ่ม ต้องวางแผน runway/brake</td></tr>
+    </table>
+    <div class="checklist"><h3>Core procedure logic</h3><ol>
+      <li><strong>PCL - Minimum practical for flight</strong> <span class="dim">ลด power ก่อน เพื่อ minimize power shift</span></li>
+      <li><strong>PMU switch - OFF</strong></li>
+      <li><strong>To reset PMU:</strong> IGN, START, PMU circuit breakers - check/reset if necessary</li>
+      <li><strong>PMU switch - NORM</strong> <span class="dim">attempt second reset if necessary</span></li>
+      <li><strong>If reset unsuccessful:</strong> PMU switch - OFF; <strong>Land as soon as practical</strong></li>
+    </ol></div>
+    <div class="danger"><strong>ห้าม reset แบบไม่คิด:</strong> ถ้า PMU failure มี uncommanded power changes ที่มากกว่าการ step change ที่คาดไว้ ให้ไป procedure ที่เกี่ยวข้องกับ Uncommanded Power Changes/Loss of Power/Uncommanded Propeller Feather ไม่ใช่ฝืน reset PMU</div>
+    <div class="good"><strong>สิ่งที่ต้อง monitor:</strong> Torque, ITT, N1, NP, fuel flow, trend ของ power และ response ต่อ PCL เพราะ automatic protection ลดลง</div>
+    <div class="mem">จำง่าย: “ลด power ก่อน — PMU OFF — reset อย่างระวัง — ไม่หายให้ PMU OFF และกลับสนาม”</div>
+  </section>
+
+  <section class="card" id="chip">
+    <h2>๑.๒ Chip Detector Warning</h2><span class="tag">CHIP warning</span><span class="tag">Oil contamination</span><span class="tag">PEL</span>
+    <p><strong>CHIP warning</strong> หมายถึง engine chip detector ตรวจพบความเป็นไปได้ของโลหะปนเปื้อนใน engine oil supply โดยเฉพาะบริเวณ reduction gearbox/oil system ถ้า contamination รุนแรง engine อาจ fail โดยมี warning เพิ่มน้อยมากหรือไม่มีเลย</p>
+    <div class="logic">Mental model: <strong>CHIP = เครื่องยนต์อาจกำลังเสียภายใน → ลด stress → หลีกเลี่ยง power movement → เข้า PEL</strong></div>
+    <div class="checklist"><h3>Core checklist logic</h3><ol>
+      <li><strong>PCL - Minimum necessary to intercept ELP; avoid unnecessary PCL movements</strong></li>
+      <li><strong>PEL - Execute</strong></li>
+    </ol></div>
+    <table>
+      <tr><th>ทำไมต้องลด/คุม PCL</th><th>เหตุผล</th></tr>
+      <tr><td>ลด engine load</td><td>power สูงอาจ aggravate condition ที่มี metal contamination</td></tr>
+      <tr><td>หลีกเลี่ยง movement ที่ไม่จำเป็น</td><td>การเปลี่ยน power ไปมาเพิ่ม stress และ workload</td></tr>
+      <tr><td>รักษา energy เข้า ELP</td><td>ยังต้องใช้ power เท่าที่จำเป็นเพื่อไปสนาม/ELP ไม่ใช่ shutdown ทันทีทุกกรณี</td></tr>
+    </table>
+    <div class="danger"><strong>มุมคิดที่ถูก:</strong> CHIP ไม่ใช่ “ไฟไหม้” แต่คือสัญญาณว่าเครื่องยนต์อาจ fail ได้เร็ว จึงต้อง terminate mission และ recover ด้วย PEL mindset</div>
+    <div class="mem">จำง่าย: “CHIP = Cut stress, Hold profile, Execute PEL”</div>
+  </section>
+
+  <section class="card" id="oil">
+    <h2>๑.๓ Oil System Malfunction or Low Oil</h2><span class="tag">OIL PX</span><span class="tag">Oil pressure</span><span class="tag">Oil temperature</span><span class="tag">Oil leak</span>
+    <p>Oil system ของ T-6C มีหน้าที่ส่ง filtered oil ไปเลี้ยง engine bearings, reduction gears, accessory drives และ propeller ตลอด normal/aerobatic flight เมื่อ oil pressure ต่ำ, oil temperature เกิน limit, pressure fluctuate หรือมี oil leak ที่เห็นได้ ต้องมองว่า engine health กำลังเสี่ยง</p>
+    <div class="logic">Mental model: <strong>Oil abnormal = lubrication/cooling เสี่ยง → engine may fail → ลด power stress → PEL</strong></div>
+    <div class="two">
+      <div class="subcard"><h4>ใช้ procedure นี้เมื่อ</h4><ul>
+        <li><span class="red">red OIL PX</span> annunciator illuminated</li>
+        <li><span class="amber">amber OIL PX</span> illuminated ต่อเนื่อง/ไม่หายตามเกณฑ์</li>
+        <li>oil pressure fluctuations</li>
+        <li>oil temperature out of limits</li>
+        <li>visibly confirmed leaking oil from aircraft</li>
+      </ul></div>
+      <div class="subcard"><h4>OIL PX warning/caution idea</h4><ul>
+        <li>Red OIL PX เกี่ยวกับ oil pressure ต่ำกว่าเกณฑ์</li>
+        <li>Amber OIL PX อาจเกิดชั่วขณะระหว่าง maneuver ได้ แต่ถ้าค้าง/ซ้ำต้องถือว่าสำคัญ</li>
+        <li>Red + amber แต่ gauge normal อาจบ่งชี้ signal conditioning issue</li>
+      </ul></div>
+    </div>
+    <div class="checklist"><h3>Core checklist logic</h3><ol>
+      <li><strong>PCL - Minimum necessary to intercept ELP; avoid unnecessary PCL movements</strong></li>
+      <li><strong>PEL - Execute</strong></li>
+    </ol></div>
+    <div class="note"><strong>CB note:</strong> ถ้า OIL PX warning illuminate และ oil pressure แสดงน้อยกว่า 5 psi ให้ตรวจ OIL TRX circuit breaker ตาม manual; ถ้า CB open อาจ reset ได้ตาม checklist/เงื่อนไข</div>
+    <div class="danger"><strong>อย่า side-slip โดยไม่จำเป็น:</strong> ถ้ามี engine/oil malfunction การ yaw/side slip อาจทำให้น้ำมันที่รั่ว spray ไปที่ windshield และลด visibility</div>
+    <div class="mem">จำง่าย: “OIL = ลด stress, อย่า move PCL เล่น, เข้า PEL”</div>
+  </section>
+
+  <section class="card" id="mayday">
+    <h2>๑.๔ Composition of Mayday and Pan-Pan</h2><span class="tag">Distress</span><span class="tag">Urgency</span><span class="tag">ATC communication</span>
+    <p><strong>MAYDAY</strong> ใช้เมื่อมี distress: ภัยร้ายแรง/ฉุกเฉินที่ต้องการความช่วยเหลือทันที เช่น engine failure, fire confirmed, ejection/forced landing imminent, loss of control risk. <strong>PAN-PAN</strong> ใช้เมื่อมี urgency: สถานการณ์เร่งด่วนกระทบ safety แต่ยังไม่ใช่ immediate danger เช่น system malfunction, lost with fuel margin, medical/technical issue ที่ยังควบคุมได้</p>
+    <div class="logic">Mental model: <strong>Aviate → Navigate → Communicate: บอก “เราเป็นใคร อยู่ไหน เกิดอะไร ต้องการอะไร จะทำอะไรต่อ”</strong></div>
+    <div class="formula"><code>MAYDAY, MAYDAY, MAYDAY / PAN-PAN, PAN-PAN, PAN-PAN
+[Station called] [Callsign]
+Nature of emergency
+Intentions / request
+Position
+Altitude
+Heading / route / nearest field
+Fuel remaining / endurance
+Persons on board
+Other useful information</code></div>
+    <table>
+      <tr><th>ส่วนประกอบ</th><th>ตัวอย่างภาษาอังกฤษ</th><th>ทำไมสำคัญ</th></tr>
+      <tr><td>Prefix</td><td>“MAYDAY MAYDAY MAYDAY” หรือ “PAN-PAN PAN-PAN PAN-PAN”</td><td>ทำให้ทุกฝ่ายรู้ระดับความเร่งด่วนทันที</td></tr>
+      <tr><td>Callsign</td><td>“Siam 23”</td><td>ATC รู้ว่าต้องช่วย aircraft ลำไหน</td></tr>
+      <tr><td>Nature</td><td>“engine failure”, “oil pressure warning”, “lost”, “brake failure”</td><td>ช่วย ATC เลือก runway/vector/priority</td></tr>
+      <tr><td>Intentions</td><td>“request vectors to nearest suitable field”, “executing PEL”, “landing straight ahead”</td><td>บอกสิ่งที่ pilot จะทำและต้องการจาก ATC</td></tr>
+      <tr><td>Position/Altitude</td><td>“10 miles north of… at 4,500 feet”</td><td>ช่วย separation, rescue, vector</td></tr>
+      <tr><td>Fuel/POB</td><td>“fuel 40 minutes, two souls on board”</td><td>ช่วย rescue planning และ priority</td></tr>
+    </table>
+    <div class="two">
+      <div class="subcard"><h4>ตัวอย่าง MAYDAY</h4><p>“MAYDAY MAYDAY MAYDAY, Korat Tower, Trainer 12, engine failure after takeoff, landing straight ahead runway remaining, two persons on board.”</p></div>
+      <div class="subcard"><h4>ตัวอย่าง PAN-PAN</h4><p>“PAN-PAN PAN-PAN PAN-PAN, Approach, Trainer 34, CHIP warning, executing PEL, request vectors to nearest suitable field, position five miles east of field, altitude six thousand feet, fuel one hour, two persons on board.”</p></div>
+    </div>
+    <div class="note"><strong>Transponder / ELT:</strong> ใช้ 7700, ELT หรือ distress call ตาม checklist, ATC instruction และสถานการณ์ เช่น forced landing/ejection/emergency recovery</div>
+    <div class="mem">จำง่าย: “Callsign — Problem — Intention — Position — Altitude — Fuel — Souls”</div>
+  </section>
+
+  <section class="card" id="efato">
+    <h2>๑.๕ Engine Failure After Takeoff (EFATO)</h2><span class="tag">Low altitude</span><span class="tag">Runway remaining</span><span class="tag">110 KIAS minimum</span><span class="tag">Ejection decision</span>
+    <p>EFATO เป็น emergency ที่ critical มาก เพราะ altitude ต่ำ เวลาแก้น้อย และ airspeed ลดเร็ว Indication หลักคือ loss of power และ rapid reduction in airspeed ต้องมี nose-down pitch change เพื่อรักษา flying airspeed</p>
+    <div class="logic">Mental model: <strong>Nose down for airspeed → runway? land straight ahead → no runway? decide early: recover vs eject</strong></div>
+    <div class="danger"><strong>สองข้อที่ต้องจำ:</strong> ถ้า runway ไม่พอให้ land straight ahead ให้ consider immediate ejection และอย่า sacrifice aircraft control เพื่อ troubleshoot หรือพยายาม lower gear</div>
+    <div class="checklist"><h3>Engine failure immediately after takeoff — sufficient runway remaining straight ahead</h3><ol>
+      <li><strong>AIRSPEED - 110 KNOTS (MINIMUM)</strong></li>
+      <li><strong>PCL - AS REQUIRED</strong> <span class="dim">IDLE เพื่อใช้ drag ของ prop ที่ยังไม่ feather หรือ OFF เพื่อลด sink rate ตามสถานการณ์</span></li>
+      <li><strong>EMER LDG GR HANDLE - PULL (AS REQUIRED)</strong></li>
+      <li><strong>Flaps - As required</strong></li>
+    </ol></div>
+    <table>
+      <tr><th>สถานการณ์</th><th>แนวคิด</th><th>สิ่งที่ห้ามลืม</th></tr>
+      <tr><td>Runway remaining sufficient</td><td>Land straight ahead โดยรักษา safe airspeed</td><td>brake sensitivity เพิ่มเมื่อ braking above 80 KIAS</td></tr>
+      <tr><td>Runway insufficient / terrain ไม่ปลอดภัย</td><td>ตัดสินใจ recover/eject เร็วมาก</td><td>delay ทำให้ altitude/airspeed/sink rate แย่ลง</td></tr>
+      <tr><td>Hydraulic pressure loss</td><td>gear/flaps อาจ lower normal ไม่ได้</td><td>ใช้ emergency gear ตาม checklist เมื่อ required แต่อย่าเสีย aircraft control</td></tr>
+    </table>
+    <div class="good"><strong>Low-altitude engine failure mindset:</strong> ถ้ามี excess airspeed ให้แลกเป็น altitude เมื่อเหมาะสม แต่ต่ำมากหลัง takeoff ต้อง prioritize airspeed/attitude/runway decision ก่อน</div>
+    <div class="mem">จำง่าย: “Airspeed 110 min — PCL as required — Gear if required — Flaps as required — Decide early”</div>
+  </section>
+
+  <section class="card" id="enroute">
+    <h2>๑.๖ Enroute Abort / Emergency Airfield</h2><span class="tag">PEL</span><span class="tag">Nearest suitable field</span><span class="tag">Energy management</span>
+    <p>Enroute abort คือการ terminate mission ระหว่างทางเพราะ aircraft/engine/system ไม่อยู่ในสภาพที่ควรบินต่อ การเลือก emergency airfield ต้องคิดทั้งความเร่งด่วนของ emergency, weather, runway, terrain, lighting, support, fuel และ energy profile</p>
+    <div class="logic">Mental model: <strong>Field first → Energy profile → Diagnose only as time permits → Intercept ELP</strong></div>
+    <div class="checklist"><h3>PEL / emergency airfield core logic</h3><ol>
+      <li><strong>Turn to nearest suitable field</strong></li>
+      <li><strong>Climb or accelerate to intercept ELP</strong></li>
+      <li><strong>Gear, flaps, speed brake - UP</strong></li>
+      <li><strong>Conduct systematic check</strong> for additional signs of impending engine failure</li>
+      <li><strong>BOOST PUMP / IGNITION - As required</strong> <span class="dim">แต่ไม่ใช่สำหรับ oil/chip/fire/FOD ตาม note</span></li>
+      <li><strong>Plan to intercept ELP</strong> at or below high key, appropriate configuration, minimum 120 KIAS</li>
+    </ol></div>
+    <div class="danger"><strong>สำคัญ:</strong> สำหรับ engine malfunctions เช่น oil system, chip light, fire หรือ FOD อย่าตั้ง boost pump/ignition ON แบบอัตโนมัติ เพราะอาจทำให้เกิด undesirable immediate relight ตาม note ใน manual</div>
+    <table>
+      <tr><th>เลือก field โดยดูอะไร</th><th>เหตุผล</th></tr>
+      <tr><td>Runway length/width/surface</td><td>เผื่อ no flap, brake issue, high idle, heavy aircraft, crosswind</td></tr>
+      <tr><td>Weather / ceiling / visibility</td><td>ต้อง intercept ELP/straight-in ได้อย่างปลอดภัย</td></tr>
+      <tr><td>Distance vs glide/engine condition</td><td>ไม่ควรเลือกสนามที่ไกลจน energy margin หมด</td></tr>
+      <tr><td>Crash/rescue/support</td><td>ช่วย response หาก fire, hot brake, egress, forced landing</td></tr>
+    </table>
+    <div class="note"><strong>Land as soon as possible vs practical:</strong> “Possible” = emergency รุนแรง ต้องลง nearest suitable landing area; “Practical” = terminate mission แต่ยังพอเลือกสนามที่เหมาะสมกว่าได้ตามสถานการณ์</div>
+    <div class="mem">จำง่าย: “Nearest suitable field — Clean up drag — Build energy — Check engine — Intercept ELP”</div>
+  </section>
+
+  <section class="card" id="lost">
+    <h2>๑.๗ Lost Procedure</h2><span class="tag">Navigation</span><span class="tag">Fuel</span><span class="tag">ATC assistance</span>
+    <p>Lost procedure ใช้เมื่อ aircraft ไม่มั่นใจ position หรือไม่สามารถนำทางต่อได้อย่างมั่นใจ เป้าหมายไม่ใช่ “เดาสุ่มต่อ” แต่คือหยุดสถานการณ์ไม่ให้แย่ลง เพิ่ม margin แล้วขอความช่วยเหลือเร็ว</p>
+    <div class="logic">Mental model: <strong>Aviate → Climb if safe → Conserve fuel → Communicate/confess → Comply with vectors</strong></div>
+    <div class="three">
+      <div class="step"><b>1. Aviate</b>Maintain aircraft control, safe airspeed, safe altitude, terrain/traffic clearance</div>
+      <div class="step"><b>2. Climb</b>ถ้าปลอดภัย ให้ climb เพื่อเพิ่ม radio/navigation reception และ terrain clearance</div>
+      <div class="step"><b>3. Conserve</b>ตั้ง power/fuel profile ที่เหมาะสม ตรวจ fuel/time remaining และ divert options</div>
+      <div class="step"><b>4. Communicate</b>ติดต่อ ATC/formation/guard แจ้ง lost, position ล่าสุด, altitude, fuel, intention</div>
+      <div class="step"><b>5. Confess early</b>อย่ารอจน fuel ต่ำหรือ weather แย่ ให้ขอ vector/nearest field ตั้งแต่ยังมี margin</div>
+      <div class="step"><b>6. Comply</b>ทำตาม ATC vectors/clearance และ cross-check navigation display/standby references</div>
+    </div>
+    <div class="formula"><code>PAN-PAN PAN-PAN PAN-PAN, [ATC], [Callsign], lost, last known position [xxx], altitude [xxx], heading [xxx], fuel [time], request vectors to nearest suitable airfield.</code></div>
+    <table>
+      <tr><th>เครื่องมือช่วย</th><th>ใช้ทำอะไร</th></tr>
+      <tr><td>GPS/FMS/nearest function</td><td>หา nearest airfield/waypoint และ bearing/distance</td></tr>
+      <tr><td>VOR/TACAN/DME/ADF ถ้ามี</td><td>cross-check radial/bearing/distance ไม่พึ่ง source เดียว</td></tr>
+      <tr><td>ATC radar vectors</td><td>วิธีที่เร็วและปลอดภัยเมื่อ position uncertainty สูง</td></tr>
+      <tr><td>Fuel calculation</td><td>กำหนด latest divert, declare urgency/emergency เมื่อ fuel margin ลด</td></tr>
+    </table>
+    <div class="danger"><strong>ห้ามทำ:</strong> อย่าบินต่อแบบเดาสุ่มใน low altitude, poor weather, high terrain หรือ fuel margin ต่ำ หากเริ่มไม่แน่ใจ position ให้ communicate ตั้งแต่เนิ่น ๆ</div>
+    <div class="mem">จำง่าย: “Climb — Conserve — Communicate — Confess — Comply”</div>
+  </section>
+
+  <section class="card" id="brake">
+    <h2>๑.๘ Brake Failure Procedure</h2><span class="tag">Independent brake system</span><span class="tag">No anti-skid</span><span class="tag">Directional control</span>
+    <p>Brake system ของ T-6C เป็น non-boosted, mechanically actuated, hydraulically operated system และ independent จาก aircraft hydraulic system ดังนั้น hydraulic system failure ของ aircraft ไม่ได้แปลว่า wheel brakes ใช้ไม่ได้โดยตรง แต่ brake failure/fade ยังเกิดได้จากระบบ brake เองหรือความร้อนสูง</p>
+    <div class="logic">Mental model: <strong>Brake problem = directional control first → release/reapply if fade → use remaining controls → ถ้าคุมไม่ได้ให้ straight ahead / departs prepared surface procedure</strong></div>
+    <div class="notice"><strong>Brake fade / not responding:</strong> ถ้า brake pressure เหมือน fade หรือ brakes ไม่ตอบสนองตามคาด ให้ fully release brakes แล้ว re-apply; ถ้ามีสอง cockpit ทั้งสองคนต้อง fully release brakes เพื่อให้ได้ผล</div>
+    <table>
+      <tr><th>สถานการณ์</th><th>Action concept</th><th>เหตุผล</th></tr>
+      <tr><td>Known one-wheel brake failure before landing</td><td>Land on side of runway corresponding to failed brake; use remaining brake + rudder/ailerons</td><td>เผื่อ aircraft yaw/drag จาก brake ข้างที่ยังดี และให้มี lateral room</td></tr>
+      <tr><td>Known both-wheel brake failure</td><td>Firm, on-speed touchdown centerline; use rudder/ailerons for directional control</td><td>ต้อง maximize runway remaining และใช้ aerodynamic control ให้นานที่สุด</td></tr>
+      <tr><td>One brake fails after touchdown</td><td>Use other brake + rudder/ailerons; pilot with effective brakes assumes braking authority</td><td>ป้องกัน cross-control/dual input และรักษาทิศทาง</td></tr>
+      <tr><td>Directional control cannot be maintained</td><td>Execute Aircraft Departs Prepared Surface procedure as applicable</td><td>อย่าพยายามหักกลับจน loss of control/ground loop</td></tr>
+    </table>
+    <div class="danger"><strong>Runway insufficient / directional control lost:</strong> ถ้าคุมทิศทางไม่ได้ หรือ runway ไม่พอให้ coast to stop ให้ continue straight ahead และ execute Aircraft Departs Prepared Surface procedure ตาม manual/checklist</div>
+    <div class="good"><strong>Crew coordination:</strong> ถ้ามีสองคนใน cockpit ให้ประกาศชัดเจนว่าใครมี effective brakes และใคร assume braking authority เพื่อลด input ซ้อน</div>
+    <div class="note"><strong>Parking brake / hot brake:</strong> หลัง maximum effort braking หรือสงสัย overheated brakes อย่าตั้ง parking brake และอย่า taxi/park ในพื้นที่แออัดจน brake เย็นพอ</div>
+    <div class="mem">จำง่าย: “Release–Reapply, Use remaining brake, Rudder/Aileron, Straight ahead if no control”</div>
+  </section>
+
+  <section class="card" id="quiz">
+    <h2>Quick Check Quiz</h2>
+    <details><summary>1) PMU FAIL + PMU STATUS พร้อมกันบอกอะไร?</summary><p>PMU inoperative/manual mode; automatic torque/ITT/N1 control/limiting ไม่พร้อม ต้องคุม PCL และ monitor engine parameters เองมากขึ้น</p></details>
+    <details><summary>2) CHIP warning ทำไมต้อง avoid unnecessary PCL movements?</summary><p>เพราะอาจมี metal contamination ใน oil supply และ power change/engine load อาจ aggravate condition หรือเร่ง engine failure</p></details>
+    <details><summary>3) Oil abnormal พาไป procedure อะไรโดยทั่วไป?</summary><p>ลด PCL เท่าที่จำเป็นเพื่อ intercept ELP และ execute PEL ตาม checklist</p></details>
+    <details><summary>4) Mayday กับ Pan-Pan ต่างกันอย่างไร?</summary><p>Mayday = distress มีอันตรายร้ายแรงและต้องการ immediate assistance; Pan-Pan = urgency ยังควบคุมได้บ้างแต่มี safety concern เร่งด่วน</p></details>
+    <details><summary>5) EFATO หลัง takeoff ต้องจำ airspeed ขั้นต่ำอะไร?</summary><p>Engine failure immediately after takeoff checklist ระบุ AIRSPEED 110 KNOTS MINIMUM</p></details>
+    <details><summary>6) PEL เริ่มด้วยอะไร?</summary><p>Turn to nearest suitable field แล้ว climb/accelerate เพื่อ intercept ELP; gear/flaps/speed brake UP</p></details>
+    <details><summary>7) Lost แล้วควรรอให้ fuel ต่ำก่อนแจ้ง ATC ไหม?</summary><p>ไม่ควร ต้อง communicate/confess early เพื่อขอ vectors/assistance ขณะที่ยังมี fuel และ altitude margin</p></details>
+    <details><summary>8) ถ้า brake pressure fade ควรทำอะไร?</summary><p>Fully release brakes แล้ว re-apply; ถ้ามีสอง cockpit ทั้งสองคนต้อง release เต็มเพื่อให้ได้ผล</p></details>
+  </section>
+</main>
+<footer>Source basis: T-6C Flight Manual excerpts and standard aviation communication concepts. จัดทำเพื่อการเรียนรู้ภาษาไทย — Training aid only. Refer to official manual/checklist/SOP for operation.</footer>
+</body>
+</html>
