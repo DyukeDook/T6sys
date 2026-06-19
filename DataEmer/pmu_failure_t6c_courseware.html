@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>T-6C PMU Failure Courseware</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --paper: #ffffff;
+      --ink: #162033;
+      --muted: #5d6b82;
+      --line: #dbe3ef;
+      --navy: #0f2747;
+      --blue: #1f65d6;
+      --blue-soft: #eaf2ff;
+      --amber: #b7791f;
+      --amber-soft: #fff7df;
+      --red: #bf2f2f;
+      --red-soft: #fff0f0;
+      --green: #16794f;
+      --green-soft: #e9f8f1;
+      --violet: #6b46c1;
+      --violet-soft: #f3efff;
+      --shadow: 0 10px 30px rgba(15, 39, 71, 0.12);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans Thai", "Tahoma", "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(31,101,214,.12), transparent 32rem),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 45%, #eef3fa 100%);
+      line-height: 1.72;
+    }
+
+    a { color: var(--blue); }
+
+    header {
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(15,39,71,.96), rgba(31,101,214,.88)),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,.22), transparent 26rem);
+      padding: 56px 22px 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 6px 12px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      color: #eaf2ff;
+      font-size: .9rem;
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3, h4 { line-height: 1.25; margin: 0 0 14px; }
+    h1 { font-size: clamp(2rem, 5vw, 4.4rem); letter-spacing: -.04em; }
+    h2 { font-size: clamp(1.55rem, 2.5vw, 2.2rem); color: var(--navy); }
+    h3 { font-size: 1.25rem; color: #17345b; }
+    h4 { font-size: 1.05rem; color: #17345b; }
+    p { margin: 0 0 12px; }
+    strong { color: #0f2747; }
+
+    .subtitle {
+      max-width: 880px;
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      color: #dbeafe;
+      margin-bottom: 22px;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,.14);
+      color: #f8fbff;
+      border: 1px solid rgba(255,255,255,.22);
+      font-size: .92rem;
+    }
+
+    nav.toc {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,.84);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav.toc .wrap {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 0;
+      scrollbar-width: thin;
+    }
+
+    nav.toc a {
+      text-decoration: none;
+      white-space: nowrap;
+      color: var(--navy);
+      font-size: .92rem;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    main { padding: 30px 0 70px; }
+    section { margin: 26px 0; scroll-margin-top: 86px; }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(18px, 2.5vw, 30px);
+      box-shadow: 0 6px 20px rgba(15,39,71,.06);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+
+    .fact {
+      border-radius: 16px;
+      padding: 18px;
+      background: linear-gradient(180deg, #fff, #f8fbff);
+      border: 1px solid var(--line);
+      height: 100%;
+    }
+
+    .fact .num {
+      font-weight: 800;
+      color: var(--blue);
+      font-size: 1.7rem;
+      line-height: 1;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .fact .label {
+      display: block;
+      color: var(--muted);
+      font-size: .92rem;
+      margin-bottom: 6px;
+    }
+
+    .leadbox {
+      border-radius: 22px;
+      padding: 24px;
+      background: linear-gradient(135deg, #ffffff, #edf5ff);
+      border: 1px solid #cfe0f7;
+    }
+
+    .callout {
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      padding: 16px 18px;
+      margin: 14px 0;
+      background: #fff;
+      position: relative;
+    }
+
+    .callout::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 14px;
+      bottom: 14px;
+      width: 5px;
+      border-radius: 0 99px 99px 0;
+      background: var(--blue);
+    }
+
+    .callout .tag {
+      display: inline-block;
+      font-weight: 800;
+      font-size: .82rem;
+      letter-spacing: .04em;
+      border-radius: 999px;
+      padding: 3px 9px;
+      margin-bottom: 8px;
+    }
+
+    .note { background: var(--blue-soft); border-color: #c8dcff; }
+    .note::before { background: var(--blue); }
+    .note .tag { background: #d7e6ff; color: #164fa5; }
+
+    .caution { background: var(--amber-soft); border-color: #f4d889; }
+    .caution::before { background: var(--amber); }
+    .caution .tag { background: #ffe8a3; color: #8a560f; }
+
+    .warning { background: var(--red-soft); border-color: #ffc4c4; }
+    .warning::before { background: var(--red); }
+    .warning .tag { background: #ffd4d4; color: #9e1c1c; }
+
+    .success { background: var(--green-soft); border-color: #bfe8d3; }
+    .success::before { background: var(--green); }
+    .success .tag { background: #ccf2dd; color: #126a45; }
+
+    .violet { background: var(--violet-soft); border-color: #d8ccff; }
+    .violet::before { background: var(--violet); }
+    .violet .tag { background: #e5dcff; color: #5634a4; }
+
+    ul, ol { padding-left: 1.4rem; margin-top: 6px; }
+    li { margin: 6px 0; }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      margin: 14px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 12px 14px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #f0f5fb;
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .flow .step {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 15px;
+      position: relative;
+      min-height: 138px;
+    }
+
+    .flow .step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 900;
+      color: var(--blue);
+      background: #f8fbff;
+      width: 24px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .step .kicker {
+      font-size: .8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      font-weight: 800;
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .checklist {
+      counter-reset: item;
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .checkitem {
+      counter-increment: item;
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .checkitem::before {
+      content: counter(item);
+      display: grid;
+      place-items: center;
+      height: 42px;
+      width: 42px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.2rem;
+    }
+
+    .action {
+      font-size: 1.08rem;
+      font-weight: 900;
+      color: #10294a;
+      margin-bottom: 5px;
+    }
+
+    .why {
+      background: #f7fbff;
+      border: 1px dashed #c7d7ee;
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-top: 10px;
+    }
+
+    .why strong { color: var(--blue); }
+
+    .decision {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .decision .path {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: #fff;
+    }
+
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: .8rem;
+      font-weight: 800;
+      color: #fff;
+      background: var(--navy);
+      margin-right: 6px;
+    }
+
+    .badge.red { background: var(--red); }
+    .badge.amber { background: var(--amber); }
+    .badge.green { background: var(--green); }
+    .badge.blue { background: var(--blue); }
+    .badge.violet { background: var(--violet); }
+
+    .memory {
+      font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+      font-weight: 900;
+      color: var(--navy);
+      background: linear-gradient(135deg, #ffffff, #eaf2ff);
+      border: 1px solid #c7d9f4;
+      border-radius: 22px;
+      padding: 22px;
+      text-align: center;
+      margin: 14px 0;
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 0;
+      background: #fff;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 800;
+      padding: 14px 16px;
+      background: #f7fbff;
+      color: var(--navy);
+    }
+
+    details .answer { padding: 14px 16px 18px; }
+
+    .source {
+      font-size: .92rem;
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      background: #0f2747;
+      color: #dbeafe;
+      padding: 28px 22px;
+    }
+
+    footer strong { color: #fff; }
+
+    .two-col-list {
+      columns: 2;
+      column-gap: 28px;
+    }
+
+    @media (max-width: 920px) {
+      .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
+      .flow { grid-template-columns: 1fr; }
+      .flow .step:not(:last-child)::after {
+        content: "↓";
+        right: 50%;
+        top: auto;
+        bottom: -18px;
+        transform: translateX(50%);
+      }
+      .decision { grid-template-columns: 1fr; }
+      .two-col-list { columns: 1; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      nav.toc { position: static; }
+      .card, .fact, .callout, .checkitem { box-shadow: none; break-inside: avoid; }
+      a { color: inherit; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">T-6C Flight Manual Courseware • Emergency / Abnormal System Review</div>
+      <h1>PMU Failure</h1>
+      <p class="subtitle">สรุปแบบละเอียดสำหรับการเรียนระบบและ checklist logic: PMU ทำหน้าที่อะไร, failure แล้วระบบ revert ไป mode ไหน, checklist ให้ทำอะไร, และแต่ละหัวข้อมีผลอย่างไรต่อเครื่องยนต์/ใบพัด/การลงจอด</p>
+      <div class="meta-row">
+        <span class="pill">Source: T-6C Flight Manual</span>
+        <span class="pill">Main References: Section I 1-17 ถึง 1-19, Section III 3-21 ถึง 3-22</span>
+        <span class="pill">Training aid only</span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="wrap">
+      <a href="#safety">ข้อจำกัดการใช้</a>
+      <a href="#summary">ภาพรวมเร็ว</a>
+      <a href="#objectives">Learning Objectives</a>
+      <a href="#normal">PMU ปกติ</a>
+      <a href="#systems">ระบบที่เกี่ยวข้อง</a>
+      <a href="#failure">PMU Failure คืออะไร</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#fault">PMU Fault</a>
+      <a href="#landing">Landing / Taxi Impact</a>
+      <a href="#memory">Memory Aid</a>
+      <a href="#quiz">Quick Check</a>
+      <a href="#references">References</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="safety" class="card">
+      <h2>ข้อจำกัดการใช้เอกสารนี้</h2>
+      <div class="callout warning">
+        <span class="tag">WARNING / TRAINING USE ONLY</span>
+        <p>หน้านี้เป็น courseware เพื่อช่วยเข้าใจระบบและ logic ของ checklist เท่านั้น ไม่ใช้แทน Flight Manual, checklist ฉบับทางการ, SOP ของหน่วย, หรือคำสั่งของครูการบิน/ผู้ควบคุมการบิน ในการบินจริงให้ใช้เอกสารทางการที่เป็น current version เสมอ</p>
+      </div>
+      <div class="callout caution">
+        <span class="tag">CAUTION</span>
+        <p>เนื้อหานี้อธิบายเหตุผลเชิงระบบของ procedure แต่ไม่ได้เพิ่มขั้นตอนใหม่ให้ checklist และไม่ได้เปลี่ยนความหมายของ warning/caution/note จาก manual</p>
+      </div>
+    </section>
+
+    <section id="summary" class="grid">
+      <div class="span-8 card leadbox">
+        <h2>One-line Summary</h2>
+        <p><strong>PMU Failure</strong> คือสถานการณ์ที่ <strong>Power Management Unit</strong> ใช้งานไม่ได้หรือถูกตัดออกจาก automatic control ทำให้ระบบ engine/propeller บางส่วนเข้าสู่ <strong>manual mode</strong> นักบินต้องควบคุม power และ monitor engine limits เองมากขึ้น โดยเฉพาะ <strong>torque, ITT และ N1</strong></p>
+        <p>Aircraft อาจยังบินได้และ engine ไม่ได้ดับทันที แต่ protection/automatic limiting สำคัญหายไป จึงต้องลด power เท่าที่ทำได้อย่างปลอดภัย, isolate PMU ที่ไม่น่าเชื่อถือ, reset ตามเงื่อนไขของ manual และถ้า reset ไม่สำเร็จให้ยุติภารกิจและลงจอดเมื่อเหมาะสม</p>
+      </div>
+      <div class="span-4 card">
+        <h2>Indications หลัก</h2>
+        <ul>
+          <li><span class="badge red">PMU FAIL</span> Power Management Unit failure</li>
+          <li><span class="badge amber">PMU STATUS</span> PMU detected/accommodated a fault หรือ WOW switch failure</li>
+          <li>อาจมี <strong>step change in engine power</strong></li>
+          <li>สูญเสีย automatic control/limiting ของ <strong>torque, ITT, N1</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="span-3 fact">
+        <span class="num">60–61%</span>
+        <span class="label">Ground mode idle N1 ปกติ</span>
+        <p>เมื่อ PMU อยู่ ground mode โดยอาศัย weight-on-wheels logic</p>
+      </div>
+      <div class="span-3 fact">
+        <span class="num">67%</span>
+        <span class="label">Flight idle N1 ขั้นต่ำ</span>
+        <p>ถ้า PMU/WOW ไม่ revert เป็น ground mode หลัง landing จะมี idle สูงขึ้นประมาณนี้</p>
+      </div>
+      <div class="span-3 fact">
+        <span class="num">+280 / -550 shp</span>
+        <span class="label">Possible power step change</span>
+        <p>Manual ระบุ maximum increase ประมาณ 280 shp และ maximum decrease ประมาณ 550 shp เมื่อเข้าสู่ manual mode</p>
+      </div>
+      <div class="span-3 fact">
+        <span class="num">98–102% NP</span>
+        <span class="label">Mechanical governor range</span>
+        <p>เมื่อ PMU OFF mechanical overspeed governor อาจ allow NP range ประมาณ 98% ถึง 102%</p>
+      </div>
+    </section>
+
+    <section id="objectives" class="card">
+      <h2>Learning Objectives</h2>
+      <p>เมื่อเรียนจบหน้านี้ ผู้เรียนควรสามารถ:</p>
+      <ul class="two-col-list">
+        <li>อธิบายหน้าที่ของ PMU ใน normal operation ได้</li>
+        <li>อธิบายความต่างระหว่าง <strong>PMU Failure</strong> และ <strong>PMU Fault</strong> ได้</li>
+        <li>ระบุระบบที่เกี่ยวข้อง ได้แก่ PMU, FMU, PCL, PIU, propeller governor, PMA/battery bus และ WOW switches ได้</li>
+        <li>บอก indications บน EICAS/CAS ที่เกี่ยวข้องได้</li>
+        <li>อธิบายว่าทำไมต้องตั้ง PCL ไปที่ minimum practical ก่อน switch/reset PMU ได้</li>
+        <li>อธิบายว่าทำไม reset PMU ไม่ควรทำเมื่อมี uncommanded power changes ที่ไม่ใช่ anticipated step change ได้</li>
+        <li>อธิบายผลต่อ landing rollout/taxi จากการไม่มี ground idle ได้</li>
+        <li>ใช้ memory aid เพื่อจำ logic ของ checklist ได้</li>
+      </ul>
+    </section>
+
+    <section id="normal" class="card">
+      <h2>PMU Normal Operation: ปกติ PMU ทำอะไร</h2>
+      <p><strong>Power Management Unit (PMU)</strong> เป็น controller สำคัญที่ช่วยจัดการ engine power และ propeller control ให้สัมพันธ์กับตำแหน่งของ <strong>PCL</strong> และสภาพการบิน โดยมีหน้าที่หลัก 4 กลุ่มใหญ่</p>
+
+      <div class="grid">
+        <div class="span-6 fact">
+          <h3>1. Schedule power ตาม PCL</h3>
+          <p>Manual อธิบายว่า power setting มีลักษณะเป็น linear กับตำแหน่ง PCL ภายใน operating envelope เช่น ถ้า max power available ณ สภาพนั้นคือ 1000 SHP ที่ max PCL และ PCL อยู่ครึ่งทางระหว่าง idle กับ max ระบบจะ schedule ประมาณ 500 SHP</p>
+          <p><strong>ความหมาย:</strong> นักบินควบคุม power ด้วย PCL แต่ PMU ช่วยแปลคำสั่ง PCL ให้เป็น fuel/propeller behavior ที่เหมาะสม</p>
+        </div>
+        <div class="span-6 fact">
+          <h3>2. ควบคุม acceleration / deceleration</h3>
+          <p>PMU ช่วยควบคุมการเร่งและลดรอบของเครื่องยนต์ ทำให้สามารถขยับ PCL ได้รวดเร็วตามต้องการใน altitude ต่าง ๆ โดยลด propeller effects และหลีกเลี่ยง thrust surge ขนาดใหญ่ขณะ engine acceleration</p>
+          <p><strong>ความหมาย:</strong> เมื่อ PMU ปกติ นักบินมี workload ต่ำกว่า เพราะ PMU ช่วยทำให้ response smooth และช่วยป้องกัน limit</p>
+        </div>
+        <div class="span-6 fact">
+          <h3>3. ควบคุม propeller ผ่าน PIU</h3>
+          <p>PMU ร่วมกับ <strong>Propeller Interface Unit (PIU)</strong> ควบคุม blade angle/pitch และ propeller speed <strong>NP</strong> โดยใช้ oil pressure ไปยัง propeller pitch change piston เพื่อ maintain propeller speed ประมาณ 2000 RPM หรือ 100% NP ใน flight condition ส่วนใหญ่</p>
+          <p><strong>ความหมาย:</strong> PMU ไม่ได้คุมแค่ fuel แต่ยังเกี่ยวกับ propeller governing และการลดผลกระทบจาก propeller ต่อ aircraft handling</p>
+        </div>
+        <div class="span-6 fact">
+          <h3>4. ช่วย start sequencing และ protection บางส่วน</h3>
+          <p>ระหว่าง ground auto start, PMU monitor N1, ITT และ fuel flow และสามารถ abort start เพื่อหลีกเลี่ยง no start, hung start หรือ hot start ตามเงื่อนไขที่ manual กำหนด</p>
+          <p><strong>ข้อจำกัด:</strong> ระหว่าง airstart PMU ให้ sequencing ได้ แต่ manual ระบุว่า automatic N1, ITT และ torque limit protection ไม่ available นักบินต้อง monitor parameter เอง</p>
+        </div>
+      </div>
+
+      <h3>PMU Power Source</h3>
+      <p>PMU ใช้ไฟจาก <strong>Permanent Magnet Alternator (PMA)</strong> ที่ติดตั้งบน reduction gearbox โดย PMA จ่าย 32 VAC แล้ว PMU แปลงเป็น DC หาก propeller RPM ต่ำกว่า 40–50% NP หรือ PMA fail ระบบจะ switch ไปใช้ <strong>28 VDC battery bus</strong> อัตโนมัติ</p>
+
+      <div class="flow" aria-label="PMU normal flow diagram">
+        <div class="step"><span class="kicker">Input</span><strong>PCL position</strong><br>นักบินสั่ง power ผ่าน PCL</div>
+        <div class="step"><span class="kicker">Controller</span><strong>PMU</strong><br>คำนวณ power, limit, mode และ prop command</div>
+        <div class="step"><span class="kicker">Fuel path</span><strong>FMU</strong><br>จัด fuel flow ไป engine ตาม schedule</div>
+        <div class="step"><span class="kicker">Prop path</span><strong>PIU / Governor</strong><br>ปรับ oil pressure เพื่อเปลี่ยน blade pitch</div>
+        <div class="step"><span class="kicker">Output</span><strong>Torque / ITT / N1 / NP</strong><br>engine power และ propeller speed ที่ควบคุมได้</div>
+      </div>
+    </section>
+
+    <section id="systems" class="card">
+      <h2>ระบบที่เกี่ยวข้องกับ PMU Failure</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ระบบ / Component</th>
+              <th>ทำหน้าที่อะไรในภาวะปกติ</th>
+              <th>เกี่ยวข้องกับ PMU Failure อย่างไร</th>
+              <th>ผลที่นักบินต้องสนใจ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>PMU</strong><br>Power Management Unit</td>
+              <td>ควบคุม power schedule, acceleration/deceleration, engine limit logic และ propeller command ร่วมกับ PIU</td>
+              <td>เมื่อ fault รุนแรงจนไม่สามารถ set requested power หรือ respect engine limits ได้ ระบบ revert เป็น manual mode หรือ pilot อาจ switch OFF เอง</td>
+              <td>automatic limiting ของ torque/ITT/N1 ไม่ available ต้อง monitor engine parameters เอง</td>
+            </tr>
+            <tr>
+              <td><strong>PCL</strong><br>Power Control Lever</td>
+              <td>เป็น primary pilot input สำหรับ engine power เชื่อมกับ FMU ผ่าน cable/rod system</td>
+              <td>ใน manual mode PCL schedules fuel directly to engine through FMU</td>
+              <td>ต้องขยับอย่างระมัดระวัง หลีกเลี่ยง overshoot ของ torque, ITT, N1 และระวัง power shift</td>
+            </tr>
+            <tr>
+              <td><strong>FMU</strong><br>Fuel Management Unit</td>
+              <td>จ่าย fuel ที่ต้องการไป flow divider และคืน excess fuel ไป pump</td>
+              <td>เมื่อ PMU manual mode, fuel management revert ไป nominal/manual control และ PCL มีผลโดยตรงมากขึ้น</td>
+              <td>engine ยังตอบสนองได้ แต่ไม่มี PMU protection แบบเดิม</td>
+            </tr>
+            <tr>
+              <td><strong>PIU</strong><br>Propeller Interface Unit</td>
+              <td>เพิ่ม/จัดการ oil pressure ไป propeller pitch change mechanism ตามคำสั่ง PMU</td>
+              <td>PMU failure ทำให้ propeller governing ไม่อยู่ภายใต้ electronic control ปกติ</td>
+              <td>propeller protection ไปพึ่ง mechanical overspeed governor</td>
+            </tr>
+            <tr>
+              <td><strong>Mechanical Overspeed Governor</strong></td>
+              <td>เป็น mechanical backup ที่ modulate oil pressure เพื่อจำกัด NP</td>
+              <td>เมื่อ PMU lost/deactivated governor นี้รักษา NP ที่ประมาณ 100±2%</td>
+              <td>อาจเห็น NP range 98–102% และอาจมี torque surge เมื่อ propeller accelerate จาก low power</td>
+            </tr>
+            <tr>
+              <td><strong>PMA / Battery Bus</strong></td>
+              <td>PMA power PMU; battery bus เป็น backup เมื่อ prop RPM ต่ำหรือ PMA fail</td>
+              <td>failure อาจเกี่ยวกับ PMU power/control path จึงมี checklist ให้ check/reset IGN, START, PMU circuit breakers</td>
+              <td>ต้องเข้าใจว่า PMU เป็นระบบ electrical/control system ไม่ใช่ mechanical fuel control อย่างเดียว</td>
+            </tr>
+            <tr>
+              <td><strong>Weight-on-Wheels Switches</strong></td>
+              <td>ให้ PMU แยก flight mode กับ ground mode</td>
+              <td>PMU STATUS in flight เกี่ยวข้องกับ discrepancy/mismatch ของ WOW switches ได้</td>
+              <td>ถ้า PMU ไม่ revert เป็น ground mode หลัง landing, ground idle จะไม่ available และ landing distance เพิ่มขึ้น</td>
+            </tr>
+            <tr>
+              <td><strong>EICAS / CAS</strong></td>
+              <td>แสดง warning/caution/advisory</td>
+              <td>แสดง PMU FAIL และ PMU STATUS เพื่อบอก failure/fault state</td>
+              <td>ต้องแยก PMU Failure กับ PMU Fault จาก combination ของ annunciations</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="failure" class="card">
+      <h2>PMU Failure / PMU Inoperative เกิดอะไรขึ้น</h2>
+      <p>Manual ระบุว่า PMU self-monitoring อยู่ตลอดเวลาและสามารถ identify/accommodate fault ได้หลายแบบ แต่ถ้า fault ทำให้ PMU ไม่สามารถ set requested power หรือ respect engine limits ได้ หรือ pilot switch PMU OFF ระบบจะ revert ไป <strong>manual mode</strong></p>
+
+      <div class="callout warning">
+        <span class="tag">KEY FAILURE EFFECT</span>
+        <p>เมื่อเข้าสู่ PMU Failure / manual mode จะสูญเสีย automatic control ของ <strong>torque, ITT และ N1</strong> นักบินต้องควบคุมและ monitor parameters เหล่านี้เอง</p>
+      </div>
+
+      <div class="grid">
+        <div class="span-6 fact">
+          <h3>Indication ที่บอก manual mode</h3>
+          <p>Manual ระบุว่า illumination พร้อมกันของ <strong>PMU FAIL warning</strong> และ <strong>PMU STATUS caution</strong> บน EICAS แสดงว่าระบบอยู่ใน manual mode</p>
+        </div>
+        <div class="span-6 fact">
+          <h3>Power step change</h3>
+          <p>อาจเกิด step change in engine power เมื่อ FMU revert ไป nominal/manual setting โดย transition โดยทั่วไป smooth และ controllable. ปกติ step change มักไป lower power แต่ใน low altitude/cold condition อาจเพิ่ม power ได้</p>
+        </div>
+        <div class="span-6 fact">
+          <h3>ตัวเลข power step change</h3>
+          <p>Manual ให้ maximum increase ประมาณ <strong>280 shp</strong> และ maximum decrease ประมาณ <strong>550 shp</strong></p>
+        </div>
+        <div class="span-6 fact">
+          <h3>NP ไม่ควร step change</h3>
+          <p>Manual ระบุว่า no step change in NP occurs เพราะ overspeed governor ถูก reset ไปที่ 100%</p>
+        </div>
+      </div>
+
+      <h3>Engine / Propeller Behavior หลัง PMU OFF หรือ PMU Failure</h3>
+      <ul>
+        <li><strong>Fuel side:</strong> PCL schedules fuel directly to engine through FMU</li>
+        <li><strong>Limit side:</strong> pilot ต้องระวังไม่ให้ N1, temperature/ITT และ torque เกิน limits</li>
+        <li><strong>Response side:</strong> engine acceleration/deceleration characteristics โดยพื้นฐานยังใกล้เคียงเดิม แต่ต้องใช้ความระมัดระวังมากขึ้น</li>
+        <li><strong>Propeller side:</strong> propeller operating on mechanical overspeed governor</li>
+        <li><strong>Surge risk:</strong> manual ระบุว่า torque surge can be expected anytime the propeller is accelerated to governing speed from low power setting เช่น takeoff roll หรือ go-around</li>
+      </ul>
+    </section>
+
+    <section id="checklist" class="card">
+      <h2>PMU Failure Checklist Logic</h2>
+      <p>ใช้ procedure นี้เมื่อ <strong>PMU becomes inoperative and reset is desired</strong> หรือเมื่อ <strong>PMU FAIL warning illuminates</strong> โดย indications อาจรวมถึง PMU FAIL + PMU STATUS และ possible step change in engine power</p>
+
+      <div class="callout caution">
+        <span class="tag">BEFORE RESET / SWITCHING PMU OFF</span>
+        <p>Manual เน้นให้ set power ที่ lowest practical setting ก่อน resetting PMU หรือ switching PMU OFF เพื่อ minimize power shift</p>
+      </div>
+
+      <div class="checklist">
+        <div class="checkitem">
+          <div>
+            <div class="action">PCL — Minimum practical for flight</div>
+            <p>ลด PCL ไปที่ power ต่ำที่สุดที่ยังคงปลอดภัยต่อการบิน ควบคุม aircraft ได้ และไม่ทำให้สถานการณ์แย่ลง</p>
+            <div class="why">
+              <strong>ทำเพื่ออะไร:</strong>
+              <ul>
+                <li>ลดขนาดของ power shift ถ้า PMU ถูก switch OFF หรือ reset แล้ว fuel schedule เปลี่ยน</li>
+                <li>ลดโอกาสเกิด torque/ITT/N1 overshoot เพราะ automatic limiting หายไป</li>
+                <li>ลด thrust surprise และช่วยให้ aircraft controllability ดีขึ้น</li>
+                <li>สร้างสภาพที่ปลอดภัยกว่าในการ isolate/reset controller</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkitem">
+          <div>
+            <div class="action">PMU switch — OFF</div>
+            <p>ตัด PMU ออกจาก automatic control และยอมรับ manual mode เพื่อหยุด controller ที่ไม่น่าเชื่อถือไม่ให้มีผลต่อ engine/propeller command</p>
+            <div class="why">
+              <strong>ทำเพื่ออะไร:</strong>
+              <ul>
+                <li>เอา PMU ที่ malfunction หรือไม่สามารถ respect limits ได้ออกจาก control loop</li>
+                <li>ให้ fuel management อยู่ใน manual/nominal setting ที่ predictable มากกว่า PMU ที่ fault</li>
+                <li>ทำให้ pilot คุม power ผ่าน PCL/FMU โดยตรงมากขึ้น</li>
+                <li>propeller governing ถูก provide โดย mechanical overspeed governor</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout warning">
+        <span class="tag">DO NOT RESET PMU IN THIS CASE</span>
+        <p>ถ้า PMU failure มาพร้อม <strong>uncommanded power changes</strong> ที่ไม่ใช่ anticipated step change จากการ revert เป็น manual mode, manual ระบุว่า <strong>do not reset PMU</strong> และให้ refer ไป procedure ที่เกี่ยวข้องกับ Uncommanded Power Changes / Loss of Power / Uncommanded Propeller Feather</p>
+      </div>
+
+      <div class="callout note">
+        <span class="tag">NOTE</span>
+        <p>Pilot ควรพิจารณาขยับ PCL ผ่าน full range of motion เพื่อ determine power available. ความหมายเชิงการบินคือ ต้องรู้ว่า power ที่เหลือพอสำหรับรักษาระดับ, climb, approach, waveoff/go-around หรือ profile ที่ต้องบินต่อไปหรือไม่</p>
+      </div>
+
+      <h3>To Reset PMU</h3>
+      <div class="checklist">
+        <div class="checkitem">
+          <div>
+            <div class="action">IGN, START, and PMU circuit breakers — Check and reset if necessary</div>
+            <p>ตรวจ circuit breakers ที่เกี่ยวข้องกับ ignition, start และ PMU บริเวณ left front console และ reset หากจำเป็นตามแนวทางของ manual/SOP</p>
+            <div class="why">
+              <strong>ทำเพื่ออะไร:</strong>
+              <ul>
+                <li>ตรวจว่าปัญหาอาจเกิดจาก electrical/control circuit ที่ตัดออกหรือไม่</li>
+                <li>restore power/control path ที่จำเป็นต่อ PMU/starting/ignition logic</li>
+                <li>ถ้า CB trip เป็นสาเหตุ การ reset อาจทำให้ PMU กลับมา online ได้</li>
+              </ul>
+              <p><strong>ข้อควรระวัง:</strong> การ reset CB ต้องทำตามนโยบายหน่วยและ current checklist เท่านั้น เพราะการ reset faulted circuit โดยไม่เข้าใจเหตุผลอาจเพิ่มความเสี่ยงทางไฟฟ้า/ระบบ</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkitem">
+          <div>
+            <div class="action">PMU switch — NORM</div>
+            <p>นำ PMU กลับเข้าตำแหน่ง normal เพื่อพยายาม reset. Manual ระบุว่า attempt second reset if necessary</p>
+            <div class="why">
+              <strong>ทำเพื่ออะไร:</strong>
+              <ul>
+                <li>ให้ PMU reboot/reinitialize และกลับมาทำ automatic control ถ้า fault clear แล้ว</li>
+                <li>ถ้าสำเร็จ PMU FAIL/PMU STATUS ควร clear ตามสถานการณ์</li>
+                <li>ถ้าไม่ clear ต้องถือว่า automatic torque/ITT/N1 limiting ยังไม่ available</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout caution">
+        <span class="tag">IF ANNUNCIATORS DO NOT CLEAR</span>
+        <p>ถ้าการกระทำข้างต้นไม่ clear annunciator(s), pilot ต้องตระหนักว่า automatic torque, ITT และ N1 limiting ไม่ available</p>
+      </div>
+
+      <h3>If PMU Reset Is Unsuccessful</h3>
+      <div class="checklist">
+        <div class="checkitem">
+          <div>
+            <div class="action">PMU switch — OFF</div>
+            <p>กลับไป manual mode และไม่ใช้ PMU ที่ยังมี fault เป็น controller</p>
+            <div class="why">
+              <strong>ทำเพื่ออะไร:</strong>
+              <ul>
+                <li>ป้องกัน PMU ที่ fault ส่ง command ที่ไม่น่าเชื่อถือ</li>
+                <li>ทำให้สภาพระบบ predictable ภายใต้ manual mode มากขึ้น</li>
+                <li>บังคับให้ pilot mindset เปลี่ยนไป monitor engine limits เองตลอดเวลา</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkitem">
+          <div>
+            <div class="action">Land as soon as practical</div>
+            <p>ยุติภารกิจและลงจอดเมื่อสถานการณ์เหมาะสม โดยไม่ลาก mission ต่อโดยไม่จำเป็น</p>
+            <div class="why">
+              <strong>ทำเพื่ออะไร:</strong>
+              <ul>
+                <li>ลด exposure time กับ engine/propeller system ที่ไม่มี PMU automatic limiting</li>
+                <li>ลดโอกาสต้องทำ power changes จำนวนมากภายใต้ manual mode</li>
+                <li>ให้ crew เตรียม landing ด้วย idle N1 ที่สูงขึ้นและ braking/rollout distance ที่เปลี่ยนไป</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="decision">
+        <div class="path">
+          <h3><span class="badge green">RESET OK</span> ถ้า annunciations clear</h3>
+          <p>PMU อาจกลับมา online และ automatic control/limiting อาจกลับมาทำงานตามปกติ แต่ยังควร monitor parameters อย่างใกล้ชิดและปฏิบัติตาม SOP/maintenance guidance หลัง flight</p>
+        </div>
+        <div class="path">
+          <h3><span class="badge red">RESET FAIL</span> ถ้า annunciations ไม่ clear</h3>
+          <p>ให้ PMU OFF, ถือว่า torque/ITT/N1 automatic limiting ไม่ available, plan landing as soon as practical และคำนึงถึง increased landing distance เพราะ ground idle ไม่ available</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="fault" class="card">
+      <h2>PMU Failure vs PMU Fault: ต้องแยกให้ชัด</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>สถานะ</th>
+              <th>Annunciation</th>
+              <th>ความหมาย</th>
+              <th>Action / Implication</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>PMU Failure / Manual Mode</strong></td>
+              <td><span class="badge red">PMU FAIL</span> + <span class="badge amber">PMU STATUS</span></td>
+              <td>PMU inoperative หรือถูกตัดออกจาก automatic mode. Automatic control/limiting ของ torque, ITT, N1 lost</td>
+              <td>ทำ PMU Failure procedure. ถ้า reset ไม่สำเร็จ PMU OFF และ land as soon as practical</td>
+            </tr>
+            <tr>
+              <td><strong>PMU Fault</strong></td>
+              <td><span class="badge amber">PMU STATUS</span> โดย <span class="badge red">PMU FAIL</span> extinguished</td>
+              <td>PMU detected/accommodated a fault แต่ PMU remains online และ continues to function</td>
+              <td>ขึ้นกับ ground/inflight condition. ต้องพิจารณา WOW switch discrepancy และ ground idle issue</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>PMU Fault — On Ground</h3>
+      <ul>
+        <li>ถ้า PMU STATUS caution illuminates after landing: notify maintenance</li>
+        <li>Action: <strong>PMU switch — OFF, then NORM</strong></li>
+        <li>ถ้า PMU STATUS caution ยัง illuminated: confirm source of fault prior to flight</li>
+      </ul>
+
+      <h3>PMU Fault — Inflight</h3>
+      <p>Manual ระบุว่า PMU detected a discrepancy in the weight-on-wheels switch และ <strong>a reset is not possible</strong></p>
+      <div class="callout caution">
+        <span class="tag">LANDING IMPLICATION</span>
+        <p>Ground idle จะไม่ available ระหว่าง landing rollout และ taxi. ต้อง plan increased landing distances เนื่องจาก idle N1 สูงขึ้นประมาณ 67%</p>
+      </div>
+      <div class="callout note">
+        <span class="tag">NOTE</span>
+        <p>เมื่อ landing gear ถูก extend แล้ว weight-on-wheels circuit malfunction อาจป้องกันไม่ให้ gear retract ได้</p>
+      </div>
+    </section>
+
+    <section id="landing" class="card">
+      <h2>Landing / Rollout / Taxi Impact</h2>
+      <p>ผลกระทบสำคัญหลัง PMU reset ไม่สำเร็จหรือกรณี PMU STATUS ที่เกี่ยวข้องกับ WOW switch คือ <strong>ground idle may not be available</strong></p>
+
+      <div class="grid">
+        <div class="span-6 fact">
+          <h3>ทำไม idle สูงขึ้นจึงสำคัญ</h3>
+          <p>ปกติ PMU ใช้ WOW switches เพื่อเปลี่ยนระหว่าง flight mode กับ ground mode. Ground mode idle ประมาณ 60–61% N1 ส่วน flight mode idle ขั้นต่ำประมาณ 67% N1. ถ้า PMU ไม่ revert เป็น ground mode หลัง touchdown, engine idle thrust จะสูงกว่าปกติ</p>
+        </div>
+        <div class="span-6 fact">
+          <h3>ผลต่อ landing distance</h3>
+          <p>idle N1 สูงขึ้นทำให้ residual thrust สูงขึ้น ส่งผลให้ aircraft มีแนวโน้ม float/roll ยาวขึ้นหรือ braking demand สูงขึ้น ต้อง plan increased landing distance และใช้ runway/landing technique ตาม manual/SOP</p>
+        </div>
+      </div>
+
+      <div class="callout warning">
+        <span class="tag">DO NOT UNDERESTIMATE</span>
+        <p>แม้ engine ยังทำงานได้ แต่การไม่มี ground idle เปลี่ยน energy state หลัง touchdown อย่างมีนัยสำคัญ โดยเฉพาะ runway สั้น, contaminated runway, tailwind, high gross weight หรือ landing ที่ต้องหยุดระยะจำกัด</p>
+      </div>
+
+      <h3>Go-around / Power Change Consideration</h3>
+      <p>Manual ระบุว่าเมื่อ PMU OFF และ propeller อยู่บน overspeed governor อาจเกิด torque surge ได้เมื่อ propeller accelerate ไป governing speed จาก low power setting เช่น takeoff roll หรือ go-around ดังนั้นการขยับ PCL ต้อง smooth, deliberate และ monitor parameters อย่างใกล้ชิด</p>
+    </section>
+
+    <section id="memory" class="card">
+      <h2>Pilot Mental Model / Memory Aid</h2>
+      <div class="memory">ลดก่อน → ตัดก่อน → อย่า reset ถ้า power เปลี่ยนเองผิดปกติ → Check CB → ลอง NORM → ไม่หาย OFF → Land practical</div>
+
+      <div class="grid">
+        <div class="span-4 fact">
+          <h3>1. ลดก่อน</h3>
+          <p>ตั้ง PCL minimum practical เพื่อลด power shift และลดโอกาสเกิน limit</p>
+        </div>
+        <div class="span-4 fact">
+          <h3>2. ตัดก่อน</h3>
+          <p>PMU OFF เพื่อเอา controller ที่ไม่น่าไว้ใจออกจาก loop</p>
+        </div>
+        <div class="span-4 fact">
+          <h3>3. ค่อย reset</h3>
+          <p>check CB แล้ว PMU NORM เพื่อดูว่าระบบกลับมาได้หรือไม่</p>
+        </div>
+        <div class="span-4 fact">
+          <h3>4. ไม่หาย = manual mindset</h3>
+          <p>PMU OFF และ monitor torque/ITT/N1 เอง</p>
+        </div>
+        <div class="span-4 fact">
+          <h3>5. ลงเมื่อ practical</h3>
+          <p>ลด exposure และเตรียม landing distance เพิ่มขึ้น</p>
+        </div>
+        <div class="span-4 fact">
+          <h3>6. แยก fault/failure</h3>
+          <p>PMU STATUS อย่างเดียวไม่เท่ากับ PMU FAIL + STATUS</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz" class="card">
+      <h2>Quick Check / Oral Exam Style</h2>
+      <details>
+        <summary>1. PMU Failure indication หลักคืออะไร?</summary>
+        <div class="answer">PMU FAIL warning illuminates และโดยปกติ simultaneous PMU STATUS caution บน EICAS บ่งชี้ว่า system อยู่ใน manual mode. อาจมี step change in engine power ด้วย</div>
+      </details>
+      <details>
+        <summary>2. ทำไมขั้นแรกต้อง PCL — Minimum practical for flight?</summary>
+        <div class="answer">เพื่อลด power shift ระหว่าง PMU OFF/reset, ลดโอกาส torque/ITT/N1 overshoot และช่วยให้ aircraft controllability ดีขึ้นก่อน isolate/reset controller</div>
+      </details>
+      <details>
+        <summary>3. เมื่อ PMU อยู่ manual mode ใคร schedule fuel?</summary>
+        <div class="answer">PCL schedules fuel directly to the engine through the FMU. PMU automatic limiting ของ torque/ITT/N1 ไม่ available นักบินต้อง monitor เอง</div>
+      </details>
+      <details>
+        <summary>4. Propeller governing หลัง PMU failure พึ่งอะไร?</summary>
+        <div class="answer">พึ่ง mechanical overspeed governor ซึ่งจะ provide propeller governing/overspeed protection โดย NP อาจอยู่ประมาณ 100±2% หรือ 98–102% เมื่อ PMU OFF</div>
+      </details>
+      <details>
+        <summary>5. ถ้ามี uncommanded power changes ที่ไม่ใช่ anticipated step change ควร reset PMU หรือไม่?</summary>
+        <div class="answer">ไม่ควร reset PMU. Manual ให้ refer procedure ที่เกี่ยวข้องกับ Uncommanded Power Changes / Loss of Power / Uncommanded Propeller Feather</div>
+      </details>
+      <details>
+        <summary>6. PMU STATUS อย่างเดียวใน flight สำคัญอย่างไร?</summary>
+        <div class="answer">บ่งชี้ discrepancy/mismatch ใน weight-on-wheels switch และ reset is not possible. ต้อง plan ว่า ground idle จะไม่ available หลัง landing และ landing distance อาจเพิ่มขึ้นเพราะ idle N1 ประมาณ 67%</div>
+      </details>
+      <details>
+        <summary>7. ถ้า PMU reset ไม่สำเร็จ checklist ไปทางไหน?</summary>
+        <div class="answer">PMU switch OFF แล้ว land as soon as practical พร้อม awareness ว่า automatic torque/ITT/N1 limiting ไม่ available และ ground idle จะไม่ available ระหว่าง landing rollout/taxi</div>
+      </details>
+    </section>
+
+    <section id="references" class="card">
+      <h2>Source / Reference Notes</h2>
+      <p class="source">จัดทำจากข้อมูลใน <strong>T-6C Flight Manual</strong> ที่ผู้ใช้แนบมา โดยเนื้อหาหลักอ้างอิงจาก:</p>
+      <ul class="source">
+        <li>Section I: <strong>Power Management Unit (PMU) Operation</strong>, หน้า 1-17 ถึง 1-18</li>
+        <li>Section I: <strong>PMU Inoperative (Manual Mode)</strong>, หน้า 1-19</li>
+        <li>Section I: Propeller / PIU / Mechanical Overspeed Governor description, หน้า 1-12 ถึง 1-16</li>
+        <li>Section III: <strong>PMU Failure</strong>, หน้า 3-21 ถึง 3-22</li>
+        <li>Section III: <strong>PMU Fault</strong>, หน้า 3-22</li>
+        <li>Crew Alert System / Message Cause and Reference Table: PMU FAIL และ PMU STATUS definitions</li>
+      </ul>
+      <div class="callout note">
+        <span class="tag">TRAINING NOTE</span>
+        <p>เอกสารนี้ตั้งใจทำให้ผู้เรียนเข้าใจระบบก่อนกลับไปอ่าน manual/checklist ตัวจริงได้มีประสิทธิภาพขึ้น ไม่ใช่การแทนที่ checklist ที่ต้องใช้ใน cockpit</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p><strong>T-6C PMU Failure Courseware</strong> • Created for training review • Generated 6 June 2026</p>
+      <p>Use official, current Flight Manual, checklist, SOP, and instructor guidance for actual aircraft operation.</p>
+    </div>
+  </footer>
+</body>
+</html>

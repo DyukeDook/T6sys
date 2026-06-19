@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>T6Sys / T6Emer / Airwork Study Library</title>
+  <title>T6Sys / T6Emer / Airwork / 11-248 Trick Study Library</title>
   <script src="library-data.js"></script>
   <style>
     :root {
@@ -18,6 +18,7 @@
       --accent-soft: #e2f4f1;
       --warning-soft: #fff4dc;
       --warning-line: #f1c65a;
+      --trick-soft: #f1f5f9;
       --airwork-soft: #eaf5ff;
       --shadow: 0 12px 28px rgba(23, 32, 42, .08);
       --radius: 8px;
@@ -156,6 +157,11 @@
       background: var(--airwork-soft);
     }
 
+    .category-card[data-category-id="trick-11-248"] {
+      border-left-color: #475569;
+      background: var(--trick-soft);
+    }
+
     .category-card:hover,
     .category-card:focus-visible,
     .category-card.is-active {
@@ -224,6 +230,11 @@
     .category-group[data-category-id="airwork"] .category-heading {
       border-left-color: #0369a1;
       background: var(--airwork-soft);
+    }
+
+    .category-group[data-category-id="trick-11-248"] .category-heading {
+      border-left-color: #475569;
+      background: var(--trick-soft);
     }
 
     .category-title {
@@ -397,8 +408,8 @@
     <section class="hero" aria-label="เมนูหลัก">
       <div class="hero-top">
         <div>
-          <h1>T6Sys / T6Emer / Airwork Study Library</h1>
-          <p class="lead">เลือกอ่านไฟล์ HTML โดยแยกเป็น T6Sys สำหรับระบบทั่วไป, T6Emer สำหรับ emergency/abnormal และ Airwork สำหรับบทเรียนการบินและ maneuver</p>
+          <h1>T6Sys / T6Emer / Airwork / 11-248 Trick Study Library</h1>
+          <p class="lead">เลือกอ่านไฟล์ HTML โดยแยกเป็น T6Sys สำหรับระบบทั่วไป, T6Emer สำหรับ emergency/abnormal, Airwork สำหรับบทเรียนการบินและ maneuver และ 11-248 Trick สำหรับ takeoff/landing technique</p>
         </div>
         <div class="stats" aria-live="polite">
           <span class="pill" id="fileCount">0 ไฟล์</span>
@@ -428,7 +439,7 @@
     <section class="topic-list" id="topicList" aria-label="รายการหัวข้อทั้งหมด"></section>
 
     <p class="footer-note">
-      เพิ่มไฟล์ทั่วไปลงใน <b>Data</b>, ไฟล์ Emer ลงใน <b>DataEmer</b> และไฟล์ Airwork ลงใน <b>Airwork</b> จากนั้นเปิด <b>Open-Reader.cmd</b> อีกครั้ง
+      เพิ่มไฟล์ทั่วไปลงใน <b>Data</b>, ไฟล์ Emer ลงใน <b>DataEmer</b>, ไฟล์ Airwork ลงใน <b>Airwork</b> และไฟล์ 11-248 ลงใน <b>11-248 trick</b> จากนั้นเปิด <b>Open-Reader.cmd</b> อีกครั้ง
     </p>
   </main>
 
@@ -463,6 +474,9 @@
         },
         airwork: {
           description: "บทเรียน Contact, maneuver และการฝึก Airwork"
+        },
+        "trick-11-248": {
+          description: "Takeoff, landing และ 11-248 technique"
         }
       };
 
@@ -697,7 +711,7 @@
           el.topicList.innerHTML = `
             <div class="empty">
               <b>ยังไม่มีรายการไฟล์</b><br>
-              วางไฟล์ HTML ใน Data, DataEmer หรือ Airwork แล้วรัน Update-Reader.ps1 หรือเปิด Open-Reader.cmd
+              วางไฟล์ HTML ใน Data, DataEmer, Airwork หรือ 11-248 trick แล้วรัน Update-Reader.ps1 หรือเปิด Open-Reader.cmd
             </div>`;
           return;
         }

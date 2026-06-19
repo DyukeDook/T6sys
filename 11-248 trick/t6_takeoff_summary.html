@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>T-6 Takeoff Summary | AETCMAN 11-248</title>
+  <style>
+    :root{
+      --bg:#07111f; --panel:#0e1c31; --panel2:#12243d; --ink:#e8f1ff;
+      --muted:#9fb3ce; --accent:#5dd6ff; --accent2:#ffd166; --danger:#ff6b6b; --ok:#70e000;
+      --line:rgba(255,255,255,.12);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;background:
+      radial-gradient(circle at 10% 0%, rgba(93,214,255,.18), transparent 36%),
+      radial-gradient(circle at 90% 12%, rgba(255,209,102,.10), transparent 30%),
+      var(--bg);color:var(--ink);line-height:1.65}
+    .wrap{max-width:1180px;margin:auto;padding:28px 18px 60px}
+    header{border:1px solid var(--line);background:linear-gradient(135deg,rgba(14,28,49,.94),rgba(18,36,61,.78));border-radius:24px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.28);position:relative;overflow:hidden}
+    header:after{content:"";position:absolute;right:-80px;top:-70px;width:260px;height:260px;border:2px solid rgba(93,214,255,.25);border-radius:50%}
+    h1{font-size:clamp(32px,5vw,60px);line-height:1.05;margin:0 0 10px;letter-spacing:.4px}
+    h2{font-size:28px;margin:36px 0 14px;border-left:6px solid var(--accent);padding-left:12px}
+    h3{font-size:20px;margin:18px 0 8px;color:#dff7ff}
+    .subtitle{font-size:18px;color:var(--muted);max-width:850px;margin:0}
+    .badge-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .badge{border:1px solid var(--line);background:rgba(255,255,255,.06);border-radius:999px;padding:7px 12px;color:#cfe3ff;font-weight:700}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:18px}
+    .card{grid-column:span 4;background:rgba(14,28,49,.88);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 12px 38px rgba(0,0,0,.18)}
+    .card.wide{grid-column:span 6}.card.full{grid-column:1/-1}
+    .kpi{font-size:38px;font-weight:900;color:var(--accent);line-height:1}
+    .muted{color:var(--muted)}
+    .callout{background:linear-gradient(90deg,rgba(255,209,102,.16),rgba(93,214,255,.08));border:1px solid rgba(255,209,102,.3);border-radius:18px;padding:16px;margin:16px 0}
+    .danger{background:rgba(255,107,107,.12);border-color:rgba(255,107,107,.35)}
+    .ok{background:rgba(112,224,0,.11);border-color:rgba(112,224,0,.35)}
+    .flow{counter-reset:step}
+    .step{display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:start;background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;padding:14px;margin:12px 0}
+    .step:before{counter-increment:step;content:counter(step);width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#001522;font-weight:900}
+    ul{padding-left:22px;margin:8px 0}
+    li{margin:5px 0}
+    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:16px;border:1px solid var(--line);margin:12px 0;background:rgba(255,255,255,.035)}
+    th,td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+    th{background:rgba(93,214,255,.12);color:#dff7ff}
+    tr:last-child td{border-bottom:none}
+    .timeline{position:relative;margin:12px 0}
+    .phase{border-left:3px solid var(--accent);padding:0 0 18px 18px;margin-left:12px;position:relative}
+    .phase:before{content:"";position:absolute;left:-9px;top:4px;width:15px;height:15px;border-radius:50%;background:var(--accent)}
+    .small{font-size:13px;color:var(--muted)}
+    .ref{font-size:12px;color:#b9c9df;border-top:1px solid var(--line);margin-top:28px;padding-top:16px}
+    .print{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#001522;border:0;border-radius:999px;padding:12px 18px;font-weight:900;box-shadow:0 12px 30px rgba(0,0,0,.35);cursor:pointer}
+    @media(max-width:850px){.card,.card.wide{grid-column:1/-1}.wrap{padding:18px 12px 70px}header{padding:20px}table{font-size:14px}}
+    @media print{body{background:#fff;color:#000}.card,header{box-shadow:none;background:#fff;color:#000}.print{display:none}.badge{color:#000}.muted,.small{color:#444}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>สรุป Takeoff ทั้งหมด<br/>T‑6 Primary Flying</h1>
+      <p class="subtitle">สรุปแบบอ่านก่อนบิน/Chair-fly จาก AETCMAN 11‑248 Chapter 4 เป็นหลัก และเติม Instrument, Formation, Night และ Abnormal ที่เกี่ยวกับ takeoff</p>
+      <div class="badge-row">
+        <span class="badge">Lineup → Roll → Rotate → Airborne → Climb</span>
+        <span class="badge">Static / Rolling / Crosswind / ITO / Formation</span>
+        <span class="badge">ใช้ประกอบการศึกษา ไม่แทน Checklist หรือ T.O.</span>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <div class="kpi">85</div>
+        <b>KIAS Rotate</b>
+        <p class="muted">No-wind rotation ประมาณ 85 KIAS; ถ้าลมกระโชกเพิ่ม 1/2 gust สูงสุด +10 kt</p>
+      </div>
+      <div class="card">
+        <div class="kpi">MAX</div>
+        <b>Takeoff Power</b>
+        <p class="muted">ใช้ MAX power หลัง brake release/rolling advance และเช็ก engine instruments เมื่อ stabilize</p>
+      </div>
+      <div class="card">
+        <div class="kpi">7–10°</div>
+        <b>Pitch at Rotation</b>
+        <p class="muted">Pitch picture: spinner อยู่บน/ต่ำกว่า horizon เล็กน้อย หรือ “cut ground picture in half”</p>
+      </div>
+    </section>
+
+    <h2>1) Big Picture — ลำดับ Takeoff</h2>
+    <div class="timeline">
+      <div class="phase"><b>Before runway</b> — คิดก่อนว่า “พร้อม takeoff + departure + emergency return” หรือยัง</div>
+      <div class="phase"><b>Lineup Check</b> — Clear final, เข้า runway, align runway, ทำ TP PLAN</div>
+      <div class="phase"><b>Takeoff Roll</b> — PCL, rudder, aileron, elevator neutral/slightly aft, eyes to end of runway</div>
+      <div class="phase"><b>Rotate</b> — ประมาณ 85 KIAS, smooth back stick, set 7–10° nose high</div>
+      <div class="phase"><b>Airborne</b> — positive climb, engine stable, gear/flaps retract consciously, trim</div>
+      <div class="phase"><b>Climb / Departure</b> — accelerate 140–180 KIAS, pitch normally 10–15°, follow local/DP/ATC</div>
+    </div>
+
+    <h2>2) Lineup Check — TP PLAN</h2>
+    <div class="card full">
+      <table>
+        <tr><th>ตัวช่วยจำ</th><th>ความหมาย</th><th>สิ่งที่ต้องระวัง</th></tr>
+        <tr><td><b>T</b>AS</td><td>Set TAS to NORM ถ้า applicable</td><td>ช่วย SA เรื่อง traffic</td></tr>
+        <tr><td><b>P</b>robes</td><td>Anti-ice probes ON</td><td>ทำตาม checklist/T.O.</td></tr>
+        <tr><td><b>P</b>anel</td><td>CWS panel normal lights</td><td>อย่ากดข้ามโดยไม่ดูจริง</td></tr>
+        <tr><td><b>L</b>ights</td><td>Exterior lights ON</td><td>เพิ่มการมองเห็น</td></tr>
+        <tr><td><b>A</b>LT</td><td>Transponder mode ถูกต้อง</td><td>ตาม clearance/local</td></tr>
+        <tr><td><b>N</b>WS</td><td>Deselect NWS หลัง align runway</td><td>ก่อน takeoff roll ต้องพร้อมใช้ rudder ล้วน</td></tr>
+      </table>
+    </div>
+
+    <h2>3) Takeoff แบบ Single-ship</h2>
+    <section class="grid">
+      <div class="card wide">
+        <h3>Static Takeoff</h3>
+        <ul>
+          <li>ใช้บ่อยช่วงเริ่มฝึก, instrument status, night, solo student หรือเมื่อต้องการเวลาตรวจระบบ</li>
+          <li>Align runway → stop → NWS OFF</li>
+          <li>Brake pressure พอไม่ให้ aircraft creep; PNF guard brakes</li>
+          <li>Elevator neutral/off front stop, advance PCL 25–30% torque</li>
+          <li>เช็ก engine instruments → release brakes → smoothly advance PCL to MAX</li>
+          <li>หลัง PCL MAX ประมาณ 3 วินาที เช็ก engine instruments อีกครั้ง</li>
+        </ul>
+      </div>
+      <div class="card wide">
+        <h3>Rolling Takeoff</h3>
+        <ul>
+          <li>ช่วย traffic flow และลื่นจาก taxi เข้า takeoff roll</li>
+          <li>Align runway/nose wheel centered → NWS OFF</li>
+          <li>Smoothly advance PCL to MAX</li>
+          <li>เช็ก engine instruments เมื่อ maximum power stabilize</li>
+          <li>มีผลต่อ TOLD น้อยมาก ไม่ต้อง recalc ตาม manual</li>
+        </ul>
+      </div>
+    </section>
+
+    <h2>4) Takeoff Roll — Control Inputs สำคัญ</h2>
+    <div class="flow">
+      <div class="step"><div><b>PCL / Power</b><br/>เพิ่ม power แบบ smooth เพราะ power ทำให้ T‑6 yaw ซ้าย ต้องเตรียม right rudder counteract</div></div>
+      <div class="step"><div><b>Feet</b><br/>หลังเริ่ม roll ให้สไลด์ส้นเท้าลงพื้น บอลเท้าอยู่ล่าง rudder pedals เพื่อกันเผลอเหยียบ brake</div></div>
+      <div class="step"><div><b>Rudder</b><br/>ใช้ rudder คุม centerline/ทิศหัวเครื่องตลอด takeoff roll; input จะน้อยลงเมื่อ airspeed เพิ่มเพราะ control effective มากขึ้น</div></div>
+      <div class="step"><div><b>Aileron</b><br/>No-wind อาจต้อง stick ขวาเล็กน้อยชดเชย torque; ถ้ามี crosswind ให้ aileron into wind</div></div>
+      <div class="step"><div><b>Elevator</b><br/>ประมาณ neutral เพื่อไม่ให้ nose gear “dig in”; หลัง brake release neutral ถึง slightly aft</div></div>
+      <div class="step"><div><b>Eyes</b><br/>โฟกัสปลาย runway เพื่อจับ drift/misalignment และคุม aircraft ไปตาม runway</div></div>
+    </div>
+
+    <div class="callout danger">
+      <b>Abort trigger สำคัญ:</b> ก่อน 60 KIAS ต้องเช็กว่า actual torque อย่างน้อยเท่ากับ minimum power ที่คำนวณไว้ใน Before Takeoff checklist. ถ้าไม่ถึงภายใน 60 KIAS ให้ abort ตาม T.O.
+    </div>
+
+    <h2>5) Rotation และ Pitch Picture</h2>
+    <section class="grid">
+      <div class="card wide">
+        <h3>Rotation</h3>
+        <ul>
+          <li>No wind: rotate ประมาณ 85 KIAS</li>
+          <li>Gusty wind: เพิ่ม 1/2 gust factor สูงสุด +10 knots</li>
+          <li>Smooth back stick → establish 7–10° nose high</li>
+          <li>อย่ากระชาก เพราะเสี่ยง over-rotate, directional issue, หรือเสีย energy</li>
+        </ul>
+      </div>
+      <div class="card wide">
+        <h3>Visual Picture</h3>
+        <ul>
+          <li>FCP reference: spinner อยู่บน horizon หรือใต้ horizon เล็กน้อย</li>
+          <li>จำภาพง่าย ๆ: “ตัด ground picture ครึ่งหนึ่ง”</li>
+          <li>หลัง airborne ใช้ pressure ถือ attitude แล้วค่อย trim</li>
+        </ul>
+      </div>
+    </section>
+
+    <h2>6) Crosswind Takeoff</h2>
+    <div class="card full">
+      <p><b>หลักคือ aileron into wind + rudder keep straight.</b> ปีกด้าน upwind จะมีแนวโน้ม lift ก่อน ถ้า aileron ไม่พออาจเกิด skipping คือ aircraft เหมือนพยายามบินด้วยปีกเดียวแล้วเด้ง/ไถลข้างบน runway ทำให้ stress กับ landing gear เพิ่มขึ้น</p>
+      <table>
+        <tr><th>ช่วง</th><th>สิ่งที่ทำ</th><th>เหตุผล</th></tr>
+        <tr><td>ก่อน roll</td><td>ประเมิน crosswind และ pre-position aileron into wind ตามเหมาะสม</td><td>กัน upwind wing ยกก่อน</td></tr>
+        <tr><td>ระหว่าง roll</td><td>ใช้ rudder ให้หัวเครื่องชี้ตรง runway ไม่ให้ weathercock เข้าลม</td><td>รักษา centerline และลด side-load</td></tr>
+        <tr><td>เมื่อเร็วขึ้น</td><td>ค่อย ๆ ลด control input ตาม effectiveness ที่เพิ่มขึ้น</td><td>กัน overcontrol</td></tr>
+        <tr><td>หลัง airborne</td><td>Smoothly release crosswind input แล้วปล่อยให้ aircraft crab into wind</td><td>รักษา ground track/runway alignment โดยไม่ต้อง wing-low มากเกินไป</td></tr>
+      </table>
+    </div>
+
+    <h2>7) After Becoming Airborne</h2>
+    <div class="card full">
+      <ul>
+        <li>เป้าหมายคือเปลี่ยนจาก takeoff roll → climb อย่าง stable</li>
+        <li>Airspeed: accelerate ไป climb airspeed 140–180 KIAS</li>
+        <li>Power: MAX</li>
+        <li>Pitch: normally 10–15° หรือตามต้องการเพื่อ climb/accelerate</li>
+        <li>Retract gear/flaps เมื่อ safely airborne ตาม T.O.; ต้อง positive climb, engine stable, engine instruments within limits</li>
+        <li>ก่อน raise gear: PF call “gear clear” แล้ว pause; gear/flaps retraction ต้อง deliberate ไม่ใช่ reflex</li>
+        <li>หลัง retract: confirm gear warning lights extinguished และ flaps up ก่อนถึง limiting speed; trim nose-down เมื่อ airspeed เพิ่ม</li>
+      </ul>
+      <div class="callout ok"><b>First turn after takeoff:</b> โดยทั่วไป climb straight ahead จนอย่างน้อย 140 KIAS และ 400 ft above departure end of runway elevation ก่อนเลี้ยว เว้นแต่ published procedure/local guidance/ATC ต้องการให้เลี้ยวก่อน; minimum 140 KIAS ยังใช้ และ 400 ft restriction ไม่ใช้กับ VFR pattern</div>
+    </div>
+
+    <h2>8) Climb และ Level-off หลัง Takeoff</h2>
+    <section class="grid">
+      <div class="card wide">
+        <h3>Climb</h3>
+        <ul>
+          <li>Power normally MAX</li>
+          <li>Pitch normally 10–15° เพื่อ maintain climb airspeed</li>
+          <li>Reference: engine exhaust stacks on horizon ≈ 12° nose high สำหรับ 160 KIAS climb</li>
+          <li>ต่ำกว่า 160 KIAS ทำได้ตาม flight manual แต่ไม่แนะนำเป็นปกติ เพราะ pitch สูง บัง forward visibility และเสี่ยง spatial disorientation ใน IMC</li>
+        </ul>
+      </div>
+      <div class="card wide">
+        <h3>Level-off</h3>
+        <ul>
+          <li>เริ่ม level-off ด้วย lead point ประมาณ 10% ของ VSI</li>
+          <li>ตัวอย่าง VSI 2,000 fpm → เริ่มลด pitch ก่อน altitude เป้าหมาย 200 ft</li>
+          <li>ปล่อย PCL ที่ climb power เพื่อ accelerate แล้วค่อย adjust power ตาม target airspeed</li>
+          <li>Trim ต่อเนื่องตลอด climb และ level-off</li>
+        </ul>
+      </div>
+    </section>
+
+    <h2>9) Instrument Takeoff (ITO) และ Night Takeoff</h2>
+    <section class="grid">
+      <div class="card wide">
+        <h3>Instrument Takeoff / transition to IMC</h3>
+        <ul>
+          <li>ทำ normal takeoff ด้วย visual cues แล้ว transition เข้า instruments ตาม rate ที่ visual cues หายไป</li>
+          <li>หลัง lift-off ใช้ outside references + EADI คุม attitude</li>
+          <li>Initial EADI pitch 7–10° nose high เพื่อให้มี definite rate of climb</li>
+          <li>Trim และ verify climb ด้วย altimeter/VSI</li>
+          <li>ถ้ามี obstacle factor: rotate 15° nose high และ climb 140 KIAS</li>
+          <li>พิจารณา static takeoff เพื่อเช็กระบบละเอียดก่อน brake release เข้า IMC</li>
+        </ul>
+      </div>
+      <div class="card wide">
+        <h3>Night Takeoff</h3>
+        <ul>
+          <li>Manual ระบุ static takeoff required at night</li>
+          <li>ระวัง pitch/elevator illusion: acceleration + rotation อาจทำให้รู้สึก over-pitch แล้วเผลอกดหัวลง</li>
+          <li>ใช้ instruments มากขึ้นเมื่อ horizon/visual cues ลดลง</li>
+          <li>หลัง takeoff สามารถค่อย ๆ transition จาก instruments ไป outside references เมื่อ above 500 ft AGL ใน night VFR</li>
+        </ul>
+      </div>
+    </section>
+
+    <h2>10) Formation Takeoff / Formation Departures</h2>
+    <div class="card full">
+      <p>Formation departure มี 3 options: <b>Wing takeoff</b>, <b>Interval takeoff</b>, และ <b>Instrument trail departure</b>. Number 1 ต้องทำให้ทุกคนเข้าใจ option ที่จะ execute และดู restriction ตาม AFMAN 11‑2T‑6V3</p>
+      <table>
+        <tr><th>แบบ</th><th>สาระสำคัญ</th><th>Key Numbers / Callouts</th></tr>
+        <tr>
+          <td><b>Wing Takeoff</b></td>
+          <td>No.2 อยู่ fingertip line, lateral wingtip clearance อย่างน้อย 20 ft. ทั้งคู่ run-up ประมาณ 30% torque. Lead ให้สัญญาณ 3 taps บน helmet แล้ว nod release brake. No.1 target 85–95% torque เพื่อให้ No.2 มี power advantage.</td>
+          <td>Gear/flaps retract เมื่อ formation safely airborne และอย่างน้อย 110 KIAS; No.2 ไม่ควร raise gear ก่อน No.1</td>
+        </tr>
+        <tr>
+          <td><b>Interval Takeoff</b></td>
+          <td>ทำได้ทั้ง static หรือ rolling. ถ้า crosswind >5 kt ให้ No.2 อยู่ upwind side เพื่อลด wake risk.</td>
+          <td>Static interval: No.2 รออย่างน้อย 6 sec หลัง lead แล้ว MAX power takeoff. Lead airborne min 160 KIAS แล้วลด power 85–95%/ตามต้องการ</td>
+        </tr>
+        <tr>
+          <td><b>Instrument Trail Departure</b></td>
+          <td>ใช้เมื่อ weather ceiling/visibility ไม่พอสำหรับ interval/formation takeoff.</td>
+          <td>เน้น spacing, climb gradient, และการสื่อสาร attitude เพื่อช่วยลด spatial disorientation</td>
+        </tr>
+      </table>
+    </div>
+
+    <h2>11) Abnormal / Abort ที่ต้องจำ</h2>
+    <section class="grid">
+      <div class="card wide">
+        <h3>Single-ship Abort</h3>
+        <ul>
+          <li>ก่อน abort speed ถ้ามี valid reason เช่น engine malfunction ให้ abort</li>
+          <li>PNF เห็น hazard ให้แจ้ง PF; ถ้า time-critical และ AC ไม่ได้บิน อาจ take control แล้วทำ procedure</li>
+          <li>หลักใหญ่: maintain aircraft control, directional control, runway remaining, communication เมื่อ practical</li>
+        </ul>
+      </div>
+      <div class="card wide">
+        <h3>Wake Turbulence / Prop Wash</h3>
+        <ul>
+          <li>ระวังหลัง aircraft อื่นบน runway เดียว/ขนาน โดยเฉพาะลมสงบหรือตรง runway</li>
+          <li>Plan takeoff ก่อนจุด rotation ของ aircraft ก่อนหน้า หรือหลัง touchdown point ของเขา</li>
+          <li>T‑6 susceptible ต่อ rolling motion ถ้าเข้า wake/prop wash</li>
+        </ul>
+      </div>
+      <div class="card wide">
+        <h3>Formation Abnormal</h3>
+        <ul>
+          <li>No.2 overrun No.1: No.2 MAX power, separate takeoff, maintain side of runway</li>
+          <li>No.2 fall behind: cross-check engine/airspeed; abort ถ้ามีปัญหา หรือ separate takeoff</li>
+          <li>One aircraft abort: maintain respective side, radio call เช่น “Texan 2 aborting”</li>
+        </ul>
+      </div>
+      <div class="card wide">
+        <h3>Element Abort</h3>
+        <ul>
+          <li>โดยปกติไม่มี sympathetic abort หลัง brake release</li>
+          <li>ถ้าจะให้ทั้ง formation abort: Lead call “Texan Flight: abort, abort, abort!”</li>
+          <li>คิด centerline เหมือน “brick wall” แต่ละลำรักษาฝั่งตัวเอง</li>
+        </ul>
+      </div>
+    </section>
+
+    <h2>12) Chair-fly Script สั้น ๆ</h2>
+    <div class="card full">
+      <p><b>“Cleared for takeoff… line up, clear final, TP PLAN complete. Static/rolling as briefed. NWS off. PCL set/advance, engine instruments good. Brake release. Right rudder for left yaw, aileron as required, eyes end of runway. Check torque by 60 KIAS. Rotate 85 plus gust correction, set 7–10 nose high. Positive climb, engine stable, gear clear… gear/flaps up. Confirm lights out/flaps up, trim, accelerate 140–180, no turn until 140 and 400 ft unless directed.”</b></p>
+    </div>
+
+    <div class="ref">
+      Source: สรุปจาก AETCMAN 11‑248, 13 August 2025, Chapter 4 Takeoff/Climb/Level Off, Chapter 7 Instrument Takeoff, Chapter 9 Formation Departures/Abnormalities, Chapter 10 Night Flying. ใช้เพื่อการศึกษาและ chair-fly เท่านั้น ให้ยึด T.O. 1T‑6A‑1, checklist, SOP/local procedures และ IP เป็นหลักเสมอ.
+    </div>
+  </div>
+  <button class="print" onclick="window.print()">Print / Save PDF</button>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>T-6 Landing Summary | AETCMAN 11-248 Ch.5</title>
+<style>
+  :root{
+    --bg:#07111f; --card:#0d1b2d; --card2:#11243a; --text:#edf6ff; --muted:#9fb3c8;
+    --line:#243b57; --accent:#5cc8ff; --warn:#ffcd6b; --danger:#ff7b7b; --good:#89e6a3;
+  }
+  *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 20% 0%,#173a5c 0,#07111f 40%,#050912 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;line-height:1.65}
+  header{padding:44px 22px 28px;text-align:center;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(92,200,255,.12),rgba(0,0,0,0))}
+  h1{font-size:clamp(30px,6vw,64px);margin:0;letter-spacing:.5px}.sub{color:var(--muted);margin-top:10px;font-size:16px}.badge{display:inline-block;border:1px solid var(--accent);color:var(--accent);border-radius:999px;padding:5px 12px;margin:10px 4px 0;font-weight:700;font-size:13px}
+  main{max-width:1180px;margin:0 auto;padding:24px 16px 80px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{grid-column:span 12;background:linear-gradient(180deg,var(--card),rgba(13,27,45,.88));border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 10px 35px rgba(0,0,0,.25)}
+  @media(min-width:860px){.span6{grid-column:span 6}.span4{grid-column:span 4}.span8{grid-column:span 8}}
+  h2{margin:0 0 12px;color:#dff5ff;font-size:26px}.eyebrow{color:var(--accent);font-size:12px;text-transform:uppercase;letter-spacing:1.2px;font-weight:800;margin-bottom:6px}.muted{color:var(--muted)}
+  ul{padding-left:22px;margin:8px 0} li{margin:5px 0}.pill{display:inline-block;background:#102b44;border:1px solid #22577b;border-radius:999px;padding:3px 10px;margin:3px;color:#d9f4ff;font-size:13px}
+  table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:14px;border:1px solid var(--line);font-size:14px} th,td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top} th{background:#142b45;color:#dff5ff;text-align:left} tr:last-child td{border-bottom:0}.num{font-weight:800;color:var(--warn)}
+  .flow{display:flex;gap:10px;flex-wrap:wrap}.step{flex:1 1 130px;min-width:130px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:12px}.step b{color:var(--accent)}
+  .runway{position:relative;min-height:350px;background:linear-gradient(90deg,#0a1728,#0d2135);border-radius:18px;overflow:hidden;border:1px solid var(--line)}.rw{position:absolute;left:47%;top:18px;width:70px;height:310px;background:#303a47;border:3px solid #d3dbe6;border-radius:8px}.centerline{position:absolute;left:50%;top:36px;width:4px;height:275px;background:repeating-linear-gradient(to bottom,#fff 0 20px,transparent 20px 42px)}.path{position:absolute;border:3px solid var(--accent);border-left-color:transparent;border-bottom-color:transparent;border-radius:50%;width:260px;height:260px;left:22%;top:52px;transform:rotate(-38deg)}.label{position:absolute;background:rgba(7,17,31,.86);border:1px solid var(--line);border-radius:999px;padding:4px 9px;font-size:13px}.l1{left:48%;top:8px}.l2{left:23%;top:45px}.l3{left:12%;top:165px}.l4{left:40%;top:300px}.l5{right:13%;top:165px}
+  .warn{border-color:#74511d;background:linear-gradient(180deg,#2c2110,#15120a)}.danger{border-color:#6d2a2a;background:linear-gradient(180deg,#2a1111,#140a0a)}.good{border-color:#245b35;background:linear-gradient(180deg,#122a1a,#08150d)}
+  .callout{border-left:5px solid var(--accent);padding:10px 14px;background:rgba(92,200,255,.08);border-radius:10px}.callout.warn{border-left-color:var(--warn)}.callout.danger{border-left-color:var(--danger)}
+  footer{text-align:center;color:var(--muted);font-size:13px;margin-top:28px}.small{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <h1>สรุป Landing ทั้งหมด</h1>
+  <div class="sub">T-6 Traffic Patterns & Landings — AETCMAN 11-248 Chapter 5</div>
+  <span class="badge">Pattern</span><span class="badge">Final</span><span class="badge">Flare</span><span class="badge">Crosswind</span><span class="badge">ELP</span>
+</header>
+<main>
+  <section class="grid">
+    <div class="card span8">
+      <div class="eyebrow">Big Picture</div><h2>แนวคิดหลักของการ Landing</h2>
+      <p>ให้มอง Landing เป็น “การจัดพลังงาน” ตั้งแต่เข้า pattern จนถึงหยุดบน runway: <b>ตำแหน่ง</b> ต้องถูก, <b>ความเร็ว/AOA</b> ต้องถูก, <b>glidepath</b> ต้องคงที่, และ <b>aim point</b> ต้องนิ่ง ก่อนเข้าสู่ roundout–flare–touchdown.</p>
+      <div class="flow">
+        <div class="step"><b>1. Entry</b><br>เข้า pattern ตาม local procedures, monitor ATIS, clear, ทำ GUTS</div>
+        <div class="step"><b>2. Downwind</b><br>จัด speed/spacing/config, trim ให้เบา, checklist complete</div>
+        <div class="step"><b>3. Perch</b><br>เริ่ม final turn ด้วย bank ~30°, ไม่เกิน 45°</div>
+        <div class="step"><b>4. Final</b><br>maintain centerline, 3–4° glidepath, speed/AOA</div>
+        <div class="step"><b>5. Flare</b><br>Crack–Shift–Idle–Flare, touchdown attitude 7–10° NH</div>
+        <div class="step"><b>6. Roll</b><br>keep centerline, lower nose smoothly, brake straight, NWS only taxi speed</div>
+      </div>
+    </div>
+    <div class="card span4 good">
+      <div class="eyebrow">Memory Cues</div><h2>คำจำเร็ว</h2>
+      <p><span class="pill">GUTS</span> GPS / UHF-VHF / TAS / Squawk</p>
+      <p><span class="pill">3 S’s</span> Speed / Spacing / Speak</p>
+      <p><span class="pill">4 T’s</span> Torque / Track / Talk / Trim</p>
+      <p><span class="pill">Perch</span> Torque–Turn–Trim–Talk</p>
+      <p><span class="pill">Crosswind</span> RAP = Rudder / Aileron / Power</p>
+      <p><span class="pill">Roundout</span> Crack–Shift–Idle–Flare</p>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card span6">
+      <div class="eyebrow">Configuration</div><h2>Flap Configuration และ Speed</h2>
+      <table>
+        <tr><th>Config</th><th>Final Turn / Maneuver</th><th>Final</th><th>Touchdown Target / Range</th><th>ใช้เมื่อไหร่</th></tr>
+        <tr><td><b>LDG</b></td><td>110 KIAS หรือ on-speed AOA ที่สูงกว่า</td><td>100 KIAS หรือ on-speed AOA ที่สูงกว่า</td><td>80 / 75–90</td><td>ปกติใช้ full stop; drag มาก, pitch ต่ำ, power สูง, landing distance สั้นสุด</td></tr>
+        <tr><td><b>TO</b></td><td>115 KIAS หรือ on-speed AOA ที่สูงกว่า</td><td>105 KIAS หรือ on-speed AOA ที่สูงกว่า</td><td>85 / 80–95</td><td>ปกติใช้ touch-and-go; แนะนำ full stop เมื่อ crosswind ≥ 10 kt</td></tr>
+        <tr><td><b>UP</b></td><td>120 KIAS หรือ on-speed AOA ที่สูงกว่า</td><td>110 KIAS หรือ on-speed AOA ที่สูงกว่า</td><td>90 / 85–100</td><td>ใช้ได้กับ full stop crosswind &gt; 20 kt ถ้า landing distance ไม่เป็นปัจจัย</td></tr>
+      </table>
+      <p class="small">หมายเหตุ: gusty wind ให้เพิ่ม 1/2 gust factor สูงสุด 10 KIAS ให้ final approach และ touchdown speed. น้ำหนักมาก/ fuel มากกว่า ~700 lb อาจต้องเพิ่ม 3–5 KIAS เพื่อรักษา on-speed AOA.</p>
+    </div>
+    <div class="card span6">
+      <div class="eyebrow">Visual Flow</div><h2>ภาพรวม Overhead Pattern</h2>
+      <div class="runway">
+        <div class="rw"></div><div class="centerline"></div><div class="path"></div>
+        <div class="label l1">Initial 200 KIAS</div><div class="label l2">Break 45–60°</div><div class="label l3">Inside Downwind 120 min</div><div class="label l4">Perch / Final Turn 30°</div><div class="label l5">Final 3–4° GP</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card span4">
+      <div class="eyebrow">Initial & Break</div><h2>1) Initial → Break</h2>
+      <ul>
+        <li><b>Initial:</b> 200 KIAS, align runway centerline, altitude 1,000–1,500 ft AGL หรือตาม local.</li>
+        <li><b>Power:</b> ประมาณ 50% + 1% ต่อ 1,000 ft MSL สำหรับ level flight.</li>
+        <li><b>Break:</b> 180° level decelerating turn จาก 200 ไป 120–150 KIAS, bank ประมาณ 45–60°, power ประมาณ 10%.</li>
+        <li>เป้าหมายคือ rollout เป็น inside downwind ด้วย spacing ถูกและยัง level อยู่.</li>
+      </ul>
+    </div>
+    <div class="card span4">
+      <div class="eyebrow">Downwind</div><h2>2) Inside / Closed Downwind</h2>
+      <ul>
+        <li>รักษา ground track ขนาน runway และแก้ drift ตามลม.</li>
+        <li>เป้าหมาย: ถึง perch ด้วย <b>120 KIAS minimum</b>, configured, trimmed, checklist complete.</li>
+        <li>ต่ำกว่า 150 KIAS ให้ “gear clear”, pause แล้ว lowering gear/flaps ตาม config.</li>
+        <li>หลัง configure ใช้ power ประมาณ 30–45% ตาม flap setting เพื่อคง altitude และ 120 KIAS min.</li>
+        <li>No-wind spacing ประมาณ 0.7–1.0 NM; crosswind อาจต้องขยับ ground track.</li>
+      </ul>
+    </div>
+    <div class="card span4">
+      <div class="eyebrow">Perch</div><h2>3) Perch & Final Turn</h2>
+      <ul>
+        <li>No-wind perch คือ runway threshold ประมาณ 45° off shoulder.</li>
+        <li>เริ่ม turn เพื่อ rollout final ที่ 1/2–3/4 NM, 3–4° glidepath.</li>
+        <li>Power ตาม config, roll ประมาณ 30° bank, lower nose, trim.</li>
+        <li>Plan ใช้ไม่เกิน 30° bank; <b>ห้ามเกิน 45°</b>. ถ้าต้องเกิน 45° เพื่อเอา final ให้ go-around.</li>
+        <li>ครึ่งทางใน final turn ควรประมาณ 600 ft AGL ใน pattern 1,000 ft: “halfway around, halfway down”.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card span6">
+      <div class="eyebrow">Final</div><h2>4) Final — Stabilize ก่อน Landing</h2>
+      <ul>
+        <li>Final เริ่มเมื่อ wings level หลัง final turn และจบเมื่อเริ่ม flare.</li>
+        <li>Cross-check หลัก: <b>aim point + airspeed + AOA</b>.</li>
+        <li>Glidepath ปกติ <b>3–4°</b>, aim point ปกติคือ threshold หรือจุดประมาณ 500 ft ก่อน touchdown point.</li>
+        <li>เริ่มลดจาก final-turn speed ไป final speed ตอน roll out โดย “crack wings, crack power” ลด power ประมาณ 5–10%.</li>
+        <li>ถ้ามี crosswind: final แรกอาจ crab เพื่อรักษา alignment แต่ <b>ห้าม land ด้วย crab</b>; ต้อง transition เป็น wing-low ก่อน flare.</li>
+      </ul>
+      <div class="callout warn">Final ที่ดีคือ “ภาพนิ่ง”: aim point ไม่ไหลขึ้น/ลง, centerline ไม่ drift, speed/AOA อยู่เป้า. ถ้า spacing ไม่พอหรือไม่ stable — go-around.</div>
+    </div>
+    <div class="card span6">
+      <div class="eyebrow">Straight-in</div><h2>Straight-in Approach</h2>
+      <ul>
+        <li>ใช้เมื่อต้องการ landing ด้วย maneuver น้อย เช่น flight control malfunction, pitot-static problem, structural damage, unlocked canopy.</li>
+        <li>Descend 500 ft AGL ก่อน 5-mile point หรือตาม local.</li>
+        <li>Configure ก่อน 2-mile point.</li>
+        <li>Slow to final approach speed หลัง configure และก่อนเริ่ม descent บน glidepath.</li>
+        <li>ด้วย LDG/TO flaps เริ่ม descent เมื่อ threshold อยู่ lower one-third ของ windscreen; flaps UP เริ่มเมื่อ spinner ถึง threshold.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card span8">
+      <div class="eyebrow">Normal Landing</div><h2>5) Roundout → Flare → Touchdown → Roll</h2>
+      <div class="flow">
+        <div class="step"><b>Roundout</b><br>ใช้ back pressure เล็กน้อยลด descent rate และเริ่มลด power. ที่ threshold speed ควรต่ำกว่า final ประมาณ 10 KIAS.</div>
+        <div class="step"><b>Flare</b><br>เพิ่ม back pressure ช้า ๆ, ลด power ไป idle, ใช้ peripheral vision ประเมิน height/drift.</div>
+        <div class="step"><b>Touchdown</b><br>attitude ประมาณ spinner on horizon / 7–10° nose high, speed ประมาณ final minus 20 KIAS, PCL idle.</div>
+        <div class="step"><b>Landing roll</b><br>maintain landing attitude, ต่ำกว่า ~80 KIAS ค่อย relax back pressure lowering nose gear.</div>
+        <div class="step"><b>Brake</b><br>balls of feet on top pedals หลัง nose gear on runway, brake แบบ single smooth application เพิ่มตาม speed ลด.</div>
+      </div>
+      <h3>เทคนิค “Crack–Shift–Idle–Flare”</h3>
+      <ul>
+        <li><b>Crack:</b> 500–1,000 ft ก่อน aim point ลด power เบา ๆ จาก final power setting; อย่าลดแรงเกินไป.</li>
+        <li><b>Shift:</b> เพิ่ม back pressure เล็กน้อย ลด sink และเลื่อนสายตาไปไกลขึ้น เช่น end of runway/horizon.</li>
+        <li><b>Idle:</b> ลด power ต่อเมื่อ aim point shift ลง runway และ landing assured.</li>
+        <li><b>Flare:</b> เหนือ threshold ประมาณ 5–10 ft AGL shift สายตาไป EOR และ establish near-level picture.</li>
+      </ul>
+    </div>
+    <div class="card span4 danger">
+      <div class="eyebrow">Don’t Do</div><h2>ข้อห้าม/จุดระวัง</h2>
+      <ul>
+        <li>อย่าจ้องจุด touchdown ใกล้ ๆ ระหว่าง flare เพราะจะทำให้ ground rush หลอก.</li>
+        <li>อย่า touchdown ด้วย nose attitude สูงเกินไป; tail strike อาจเกิดประมาณ 13–15° nose high.</li>
+        <li>ถ้า hard landing เกิดขึ้น <b>อย่า raise gear</b>.</li>
+        <li>อย่า brake while turning; brake ในแนวตรงเท่านั้น.</li>
+        <li>อย่า select NWS จนกว่าจะถึง normal taxi speed และ rudder pedals centered.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card span6">
+      <div class="eyebrow">Crosswind</div><h2>Crosswind Landing</h2>
+      <p>Short final ให้ transition จาก crab เป็น wing-low: rudder จัด nose ให้ขนาน runway, aileron into wind หยุด drift, power เพิ่มเล็กน้อยถ้า drag/sink เพิ่ม.</p>
+      <ul>
+        <li><b>R — Rudder:</b> align nose กับ runway.</li>
+        <li><b>A — Aileron:</b> into wind เพื่อ prevent drift / prevent upwind wing rising.</li>
+        <li><b>P — Power:</b> compensate drag จาก uncoordinated flight.</li>
+        <li>ถือ crosswind controls ผ่าน touchdown และ landing roll; crosswind มาก อาจ touchdown ด้วย upwind main gear ก่อน.</li>
+        <li>เมื่อ speed ลด ต้องเพิ่ม control deflection; ถ้า rudder effectiveness ลด อาจต้องใช้ full aileron.</li>
+      </ul>
+      <div class="callout warn">Crosswind &gt; 10 kt: plan ใช้ TO flaps หรือ flaps UP และ touchdown ที่ final speed minus 10 kt. เครื่องอาจ float ไกลกว่าปกติจาก extra airspeed.</div>
+    </div>
+    <div class="card span6">
+      <div class="eyebrow">Touch-and-go / Closed</div><h2>Touch-and-go และ Closed Traffic</h2>
+      <ul>
+        <li><b>Touch-and-go:</b> หลัง main gear touchdown ให้ smoothly apply MAX power, lower nose เล็กน้อยไป takeoff pitch, keep nose gear off runway ด้วย back pressure พอเหมาะ.</li>
+        <li>อย่า pull aircraft off runway ต่ำกว่า normal takeoff speed; liftoff ประมาณ 85 KIAS.</li>
+        <li>ต้องใช้ rudder เพิ่มเพราะ torque เพิ่มแล้ว nose yaw left; crosswind control ต้องเปลี่ยนต่อเนื่องตาม speed/power/weight-on-wheels.</li>
+        <li><b>Closed pull-up:</b> ที่ 140 KIAS minimum, request/clear แล้วทำ climbing turn; bank max 90°, ปกติเริ่มด้วย 45–60° เพื่อ displacement.</li>
+        <li>Approach pattern altitude ลด power, lower nose เพื่อไม่ให้ accelerate, แล้วเข้า closed downwind 140–150 KIAS หรือตาม local.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card span6 good">
+      <div class="eyebrow">Go-around</div><h2>Go-around — ทางเลือกที่ถูกเสมอถ้าไม่ชัวร์</h2>
+      <ul>
+        <li>Go-around เป็น acceptable เมื่อ final/landing ไม่ stable หรือ safety ไม่มั่นใจ.</li>
+        <li>โดยหลัก: <b>MAX power</b>, establish safe pitch/takeoff attitude, maintain directional control, แล้วจัด configuration ตาม checklist/procedure เมื่อปลอดภัย.</li>
+        <li>ใช้ทันทีถ้า final ต้องแก้ bank เกิน 45°, spacing ไม่พอ, sink rate สูงเกิน, slow/low เกิน, balloon/bounce severe, หรือไม่สามารถ align crosswind controls ก่อน touchdown.</li>
+      </ul>
+    </div>
+    <div class="card span6 warn">
+      <div class="eyebrow">Final Irregularities</div><h2>Final ผิดรูป แก้ยังไง</h2>
+      <table>
+        <tr><th>อาการ</th><th>สาเหตุหลัก</th><th>แก้</th></tr>
+        <tr><td><b>Low / Drug-in</b></td><td>descend เร็ว, long perch, diving final turn, glidepath ต่ำ</td><td>add power, level off, intercept glidepath; ถ้าต่ำ/ช้าเกิน go-around</td></tr>
+        <tr><td><b>Steep final</b></td><td>downwind ใกล้ runway, early perch, level final turn</td><td>ถ้า sink สูงหรือ intercept ปกติไม่ได้ go-around; ถ้ายังแก้ได้ ใช้ descent rate สูงเล็กน้อยและ power คุม speed</td></tr>
+        <tr><td><b>Slow final</b></td><td>power/glidepath ไม่ถูก</td><td>add power สูงพอให้ regain speed/attitude; ถ้า altitude ไม่พอ go-around</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card span12 danger">
+      <div class="eyebrow">Landing Irregularities</div><h2>Landing ผิดรูป — Recognition & Recovery</h2>
+      <table>
+        <tr><th>Irregularity</th><th>ภาพที่เห็น/สาเหตุ</th><th>Recovery จำง่าย</th></tr>
+        <tr><td><b>High Flare</b></td><td>roundout เร็ว/ดึงมาก, speed decay, เสี่ยง hard/long landing</td><td>ถ้า speed/runway พอ release back pressure เล็กน้อยแล้ว re-flare; ถ้าต้อง pitch change รุนแรง ให้ go-around</td></tr>
+        <tr><td><b>Late/Rapid Roundout</b></td><td>misjudge altitude หรือ sink rate สูง, ดึงเร็วเกิน เสี่ยง accelerated stall/tail strike โดยเฉพาะ no-flap</td><td>takeoff attitude + MAX power + go-around</td></tr>
+        <tr><td><b>Porpoising</b></td><td>nose gear แตะก่อน main gear, oscillation nose-main</td><td>hold takeoff attitude + MAX power + go-around; อย่าไล่แก้แต่ละ bounce; อย่า raise gear</td></tr>
+        <tr><td><b>Floating</b></td><td>power reduction ช้า, speed เกิน, flap ไม่เหมาะ ทำให้ long landing</td><td>float เล็กน้อยค่อยเพิ่ม pitch ตาม speed ลด; ถ้า long landing inevitable go-around</td></tr>
+        <tr><td><b>Ballooning</b></td><td>roundout/flare เร็ว, aircraft climb</td><td>balloon เล็กน้อย hold landing attitude; pronounced balloon = go-around</td></tr>
+        <tr><td><b>Bounce</b></td><td>firm/hard touchdown หรือแตะก่อน landing attitude</td><td>slight bounce อาจ continue; severe bounce = MAX power, safe pitch, go-around; hard landing อย่า raise gear</td></tr>
+        <tr><td><b>Drift/Crab Touchdown</b></td><td>crosswind correction ไม่พอ</td><td>ถ้า align ไม่ทันก่อน touchdown ให้ go-around</td></tr>
+        <tr><td><b>Wing Rising</b></td><td>crosswind ยก upwind wing หลัง touchdown</td><td>ใช้ aileron keep wings level, rudder/asymmetric braking คุม direction</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card span12">
+      <div class="eyebrow">Emergency Landing Pattern</div><h2>ELP — Forced / Precautionary Emergency Landing</h2>
+      <p>ELP คือ 360° pattern เพื่อพาเครื่องเข้าจอดเมื่อ power loss มีโอกาสเกิด, power ไม่พอ, หรือ power unavailable. มี 2 แบบหลัก: <b>Forced Landing (FL)</b> = engine inoperative/no power; <b>PEL</b> = ยังมี power แต่ engine failure อาจ imminent หรือ power ไม่ปกติ. Training SFL/PEL ใช้ 4–6% torque เพื่อ simulate feathered prop/on-profile.</p>
+      <div class="flow">
+        <div class="step"><b>TCCC + BIP</b><br>Turn, Climb, Clean, Check + Boost Pump, Ignition, Plan</div>
+        <div class="step"><b>Glide</b><br>Clean 125 KIAS min, ประมาณ 2 NM / 1,000 ft, VSI ~1,350–1,500 fpm</div>
+        <div class="step"><b>ORM 3-2-1</b><br>FL ไม่ลงต่ำกว่า 2,000 AGL เว้นแต่ On profile, Runway in sight, Maneuver to land ได้</div>
+        <div class="step"><b>Decision</b><br>300 AGL final decision continue/eject, 200 gear confirmed, 100 centerline</div>
+      </div>
+      <h3>ELP Checkpoints</h3>
+      <table>
+        <tr><th>Checkpoint</th><th>Altitude</th><th>Speed / Config</th><th>Position</th></tr>
+        <tr><td><b>High Key</b></td><td>3,000 ft AGL ideal; ต่ำได้ถึง 2,500</td><td>120 KIAS min หรือ on-speed AOA; gear down</td><td>ประมาณ 1/3 runway, 1/4 WTD abeam หรือ over runway, align landing direction</td></tr>
+        <tr><td><b>Cross Key</b></td><td>2,200–2,300 ft AGL</td><td>120 KIAS min; gear down</td><td>ครึ่งทางจาก high key ไป low key, perpendicular runway</td></tr>
+        <tr><td><b>Low Key</b></td><td>1,500 ft AGL</td><td>120 KIAS min; gear down, TO flaps as required</td><td>2/3 WTD abeam intended touchdown point, fuel cap on runway</td></tr>
+        <tr><td><b>Base Key</b></td><td>600–800 ft AGL</td><td>120 KIAS min; gear down, LDG flaps as required</td><td>ครึ่งทางระหว่าง low key และ final</td></tr>
+        <tr><td><b>Final</b></td><td>N/A</td><td>110 KIAS min; gear down, LDG flaps as required</td><td>อย่างน้อย 1,000 ft final ก่อน touchdown point</td></tr>
+      </table>
+      <div class="callout warn">ELP wind correction สำคัญมาก: headwind ทำให้ final สั้น/ชันขึ้น, อาจต้อง move high key into wind, turn low key เร็วขึ้น, และ delay full flaps. ถ้า energy สูง ใช้ ground track, slip, gear/flaps early; ถ้า energy ต่ำ delay drag devices หรือ cut corner. PEL ใช้ power แก้ low energy ถ้าสถานการณ์ engine อนุญาต.</div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card span12">
+      <div class="eyebrow">Chair-fly Script</div><h2>สคริปต์ Chair-fly สั้น ๆ</h2>
+      <p><b>Initial:</b> “200 knots, align centerline, radio call.” → <b>Break:</b> “Clear, 45–60 bank, power ~10%, level decel to 120–150.” → <b>Downwind:</b> “Speed, spacing, speak/track/trim; below 150 gear clear; gear/flaps; before landing checklist complete.” → <b>Perch:</b> “Runway 45 off shoulder, clear, torque-turn-trim-talk, 30 bank, gear down call.” → <b>Final:</b> “Rollout centerline, 3–4 degree GP, aimpoint-speed-AOA, crab then wing-low.” → <b>Roundout/Flare:</b> “Crack-shift-idle-flare, eyes to EOR, spinner on horizon, touchdown main gear, PCL idle.” → <b>Roll:</b> “Hold attitude, below 80 lower nose smoothly, brake straight, NWS taxi speed.”</p>
+    </div>
+  </section>
+
+  <footer>Source summarized from AETCMAN 11-248, 13 Aug 2025, Chapter 5 “Traffic Patterns and Landings.” ใช้เพื่อทบทวนเท่านั้น; ให้ยึด T.O., AFMAN, SOP/local directives และ IP เป็นหลักเสมอ.</footer>
+</main>
+</body>
+</html>

@@ -1,6 +1,6 @@
 Link Open = https://dyukedook.github.io/T6sys/
 
-# T6Sys / T6Emer / Airwork Study Library
+# T6Sys / T6Emer / Airwork / 11-248 Trick Study Library
 
 หน้านี้ใช้รวมไฟล์บทเรียน `.html` และแยกเป็น 3 หมวดใหญ่:
 
@@ -32,7 +32,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Update-Reader.ps1
 
 ```powershell
 git status
-git add Data DataEmer Airwork library-data.js index.html Update-Reader.ps1 README.md
+git add Data DataEmer Airwork "11-248 trick" library-data.js index.html Update-Reader.ps1 README.md
 git commit -m "Update study library"
 git push origin main
 ```
